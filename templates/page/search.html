@@ -1,0 +1,37 @@
+
+<section style="margin-top:-60px;position:sticky">
+<div class="w3-row-padding">
+  <div class="w3-padding w3-col l2 m1 s0 w3-hide-small">&nbsp;</div>
+<div class="w3-padding-small w3-col l8 m10 s12">
+  <div class="w3-container w3-green">
+    <h3><i class="fa fa-bed"></i> {% trans %} available {% endtrans %}</h3>
+  </div>
+  <div class="w3-container w3-white w3-padding-16 w3-card">
+    <form action="/action_page.php" target="_blank">
+      <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-col l4 m12 s12 w3-margin-bottom">
+          <label><i class="fa fa-calendar-o"></i> {% trans %} events {% endtrans %}</label>
+          <select class="w3-input w3-border w3-select" name="tour">
+             {% for category in categories %}
+             <option value="{{category.id}}">{{category.namePt}}</option>
+             {% endfor %}
+          </select>
+        </div>
+        <div class="w3-col l3 m4 s12 w3-margin-bottom">
+          <label><i class="fa fa-male"></i> Adultos</label>
+          <input class="w3-input w3-border" type="number" value="1" name="Adults" min="1" max="6">
+        </div>
+        <div class="w3-col l3 m4 s12">
+          <label><i class="fa fa-child"></i> Crianças</label>
+        <input class="w3-input w3-border" type="number" value="0" name="Kids" min="0" max="6">
+        </div>
+        <div class="w3-col l2 m4 s12">
+          <label>&nbsp;</label>
+           <button class="w3-button w3-block w3-dark-grey" type="submit"><i class="fa fa-search"></i> {% trans %} search {% endtrans %}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+<section>

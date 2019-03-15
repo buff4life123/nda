@@ -1,0 +1,45 @@
+<div class="w3-large w3-card" style="z-index:100">
+  <div class="w3-bar w3-white w3-card">
+    <a href="#home"><img src="{{ asset('upload/gallery/') }}{{company.logo}}" style="height:48px;position:absolute;"></a>
+    <!-- Right-sided navbar links -->
+  {% if locales %}
+  <span class="w3-button w3-right w3-hover-pale-green" style="z-index:100" onclick="w3_open('locale-bar')"><i class="fa fa-globe"></i></span>
+  
+  <nav class="w3-sidebar w3-card-2 w3-white w3-animate-right w3-large w3-opacity-min locale-bar" style="right:0px;display:none;padding-top:48px;z-index:99;width:86px">
+    <a href="javascript:void(0)" onclick="w3_close('locale-bar')" class="w3-button w3-left w3-transparent w3-large w3-padding w3-display-topleft w3-hover-pale-green" style="padding:6px 24px">
+      <i class="fa fa-remove"></i>
+    </a>
+    <div class="w3-bar-block w3-left">
+      {% for local in locales %}
+      {% set ch = app.request.locale != local.name ? 'w3-grayscale w3-opacity-min' : '' %}
+        <a href='{{ path("index_translate", {"local": local.name}) }}' class=" {{ ch }} w3-bar-item w3-padding-small w3-border-bottom w3-hover-pale-green">
+        <img style="cursor:pointer;height:36px;width:36px" class="w3-round w3-border" src='{{local.filename}}' title="{{local.name}}"> {%set l = local.name | split('_') %}{{l[1]}}</a>
+      {% endfor %}
+    </div>
+  </nav>      
+  {% endif %}
+    <div class="w3-right w3-hide-small">
+  {% if menus %}
+    {% for menu in menus %}
+    <a href="#nav-{{menu.id}}" class="w3-bar-item w3-button w3-hover-pale-green">{{menu.menuTranslation.name}}</a>
+    {% endfor %}
+    {% endif %}
+  </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-left w3-hide-large w3-hide-medium w3-hover-pale-green" onclick="w3_open('menu-bar')" style="margin-left:64px">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large w3-large menu-bar w3-opacity-min" style="display:none;width:164px">
+  <a href="javascript:void(0)" onclick="w3_close('menu-bar')" class="w3-bar-item w3-button w3-padding-16 w3-hover-pale-green">
+    <i class="fa fa-remove"></i>
+  </a>
+  {% if menus %}
+    {% for menu in menus %}
+    <a href="#nav-{{menu.id}}" onclick="w3_close('menu-bar')" class="w3-bar-item w3-button w3-hover-pale-green">{{menu.menuTranslation.name}}</a>
+    {% endfor %}
+    {% endif %}
+</nav>

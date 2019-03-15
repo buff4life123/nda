@@ -1,0 +1,59 @@
+<script>
+function w3_open(cl) {
+  $('.'+cl).css('display','block')
+}
+
+function w3_close(cl) {
+   $('.'+cl).css('display','none')
+}
+
+function openWindow(url){window.open(url, "_blank")}
+
+function myMap() {
+    
+  var myCenter = new google.maps.LatLng({{company.CoordsGoogleMaps}})
+  var mapCanvas = document.getElementById("themap")
+  var mapOptions = {
+    center: myCenter,
+    scrollwheel: false,
+    draggable: false,    
+    zoom: 13,
+    panControl: true,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    overviewMapControl: false,
+    rotateControl: false,
+  }
+
+  var map = new google.maps.Map(mapCanvas, mapOptions)
+
+  var marker = new google.maps.Marker({position:myCenter})
+
+  marker.setMap(map)
+
+google.maps.event.addListener(marker,"click",function() {
+  map.setZoom(17)
+  map.setCenter(marker.getPosition())
+  })
+  var infowindow = new google.maps.InfoWindow({
+    content: "{{company.name}}"
+  })
+  infowindow.open(map,marker)
+}
+
+$(function() {
+ $('#ei-slider').eislideshow({
+  easing    : 'easeOutExpo',
+  titleeasing : 'easeOutExpo',
+  titlespeed  : 1200,
+  animation           : 'center',
+  autoplay            : true,
+  slideshow_interval  : 6000,
+  titlesFactor        : 0
+})
+})
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{company.GoogleMapsApiKey}}&callback=myMap"></script>

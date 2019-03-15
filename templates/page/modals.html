@@ -1,0 +1,235 @@
+<!-- loader e fundo -->
+<div class="w3-overlay" onclick="w3_close()" id="myOverlay">
+ <div class="w3-display-middle" id="loader-cont">
+  <span class="w3-center w3-hide-small">
+   <div class="loader"></div>
+  </span>
+  <span class="w3-center w3-hide-large w3-hide-medium">
+   <div class="loader loader-mob"></div>
+  </span>
+ </div>
+</div>
+
+<div id="modal-resolution-center" class="w3-modal" style="padding-top:100px" onclick="$(this).hide()">
+  <span class="w3-closebtn w3-text-white w3-opacity w3-hover-opacity-off w3-xlarge w3-container w3-display-topright">
+    <i class="fa fa-remove"></i>
+  </span>
+  <div class="w3-modal-content w3-animate-zoom w3-center w3-white w3-padding-32 w3-padding-small">
+    <img style="width:31px" src="{{ asset('images/center.png') }}">&nbsp;
+    <span class="w3-large ARBITRARY_CENTER"> {% trans %}arbitrary.name{% endtrans %} </span>
+    <div class="ARBITRARY w3-left-align">{% trans %}arbitrary.txt{% endtrans %}</div>
+  </div>
+</div>
+
+<div id="modal-available-dates" class="w3-modal" style="z-index:9999;padding-top:12px;padding-bottom:32px">
+  <div class="w3-modal-content w3-animate-zoom" style="max-width:450px">
+    <div class="w3-container w3-blue w3-padding">
+      <span onclick="closeModalEvents()" class="w3-padding w3-button w3-display-topright">
+        <i class="w3-xlarge fa fa-times"></i>
+      </span>
+      <h2>
+        <i class="fa fa-calendar"></i>
+        <span class="DATE_HOUR"> {% trans %}info.choose_date_hour{% endtrans %}</span>
+      </h2>
+    </div>
+    
+    <form id="get-available-datetime">
+    
+    <div class="w3-container w3-padding">
+      <div class="w3-row w3-padding-4">
+        <div class="w3-col s12 w3-xlarge w3-margin-bottom">
+          <input class="w3-input w3-padding-16 CHOOSE_DATE_CALENDAR get-dates" name="date" readonly placeholder="{% trans %}info.choose_date_calendar{% endtrans %} *" type="text">
+          <span class="w3-large w3-hide REQUIRED date required w3-text-red w3-animate-zoom">{% trans %}required{% endtrans %} </span>
+        </div>
+        <div class="w3-col s12 w3-large">
+          <div style="position:relative;min-height:224px" class="w3-border w3-sand">
+            <input class="w3-input w3-border order_available" readonly type="hidden">
+          </div>
+        </div>
+        <div class="w3-col s12 w3-xlarge">
+          <select class="w3-input w3-padding-16 HOURS set-hours" name="time" onchange="changeEventGetHour(this.value)">
+          </select>
+          <span class="w3-large w3-hide REQUIRED hour required w3-text-red w3-animate-zoom">{% trans %}required{% endtrans %} </span>
+        </div>
+      </div>
+    </div>
+
+    </form>
+    <div class="w3-row-padding w3-xlarge w3-padding-large">
+      <span class="w3-col s6 w3-block w3-btn w3-white w3-left" onclick="closeModalEvents()">
+        <i class="fa fa-times"></i>
+      </span>
+      <span class="w3-col s6 w3-block w3-btn w3-green" onclick="saveModalEvents()">
+        <i class="fa fa-check"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ERROR MODAL -->
+
+<div id="modal-error" class="w3-modal" style="z-index:9999;padding-top:60px; padding-bottom: 32px">
+  <div class="w3-modal-content w3-animate-zoom" style="max-width:400px">
+    <div class="w3-col s12">
+      <div class="w3-row">
+        <div class="w3-panel w3-leftbar w3-col s12 w3-pale-red w3-border-red w3-left-align w3-large">
+          <span class="w3-closebtn w3-padding-small" onclick="$('#modal-error').hide()">
+            <i class="fa fa-times"></i>
+          </span>
+          <h2>
+            <i class="fa fa-exclamation-triangle"></i>
+            <span class="ERROR">{% trans %}error{% endtrans %} </span>
+          </h2>
+          <div class="w3-large w3-padding-small WIFIERROR">{% trans %}wifi_error{% endtrans %}
+            <div class="w3-margin-bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+
+<div id="modal-success" class="w3-modal" style="z-index:9999;padding-top:60px; padding-bottom: 32px">
+  <div class="w3-modal-content w3-animate-zoom" style="max-width:400px">
+    <div class="w3-col s12">
+      <div class="w3-row">
+        <div class="w3-panel w3-leftbar w3-col s12 w3-white w3-border-green w3-left-align w3-large">
+          <span class="w3-closebtn w3-padding-small" onclick="$('#modal-success').hide()">
+            <i class="fa fa-times"></i>
+          </span>
+          <h2 class="w3-text-green">
+            <i class="fa fa-check"></i>
+            <span class="SUCCESS">{% trans %}success{% endtrans %}</span>
+          </h2>
+          <span class="w3-center w3-large w3-padding-small ORDER">{% trans %}order{% endtrans %}</span>
+            <span class="set-order-id w3-xlarge"></span>
+            <div class='SPAM_TXT w3-large w3-center w3-text-deep-orange'>{% trans %}part_seven.spam_txt{% endtrans %}</div>
+            <div class="THANKYOU">{% trans %}thank_you{% endtrans %}</div>
+            <div class="w3-margin-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--REQUIRED FIELDS  MODAL -->
+
+<div id="modal-info" class="w3-modal" style="z-index:9999;padding-top:60px; padding-bottom: 32px">
+  <div class="w3-modal-content w3-animate-zoom" style="max-width:400px">
+    <div class="w3-col s12">
+      <div class="w3-row">
+        <div class="w3-panel w3-leftbar w3-col s12 w3-pale-yellow w3-border-amber w3-left-align w3-large">
+          <span class="w3-closebtn w3-padding-small" onclick="$('#modal-info').hide()">
+            <i class="fa fa-times"></i>
+          </span>
+          <h2>
+            <i class="fa fa-warning"></i>
+            <span class="CHECK">{% trans %}part_two.check{% endtrans %}</span>
+          </h2>
+          <div class="TOUR w3-hide required">{% trans %}part_seven.tour{% endtrans %}</div>
+          <div class="ADULT w3-hide required">{% trans %}part_seven.adult{% endtrans %}</div>
+          <div class="CHILDREN w3-hide required">{% trans %}part_seven.children{% endtrans %}</div>
+          <div class="BABY w3-hide required">{% trans %}part_seven.baby{% endtrans %}</div>
+          <div class="NAME w3-hide required">{% trans %}part_seven.name{% endtrans %}</div>
+          <div class="NAME_INVALID w3-hide required">{% trans %}part_seven.name_invalid{% endtrans %}</div>
+          <div class="CVV w3-hide required">CVV *</div>
+          <div class="CVV_INVALID w3-hide required">{% trans %}part_seven.cvv_invalid{% endtrans %}</div>
+          <div class="CREDIT_CARD_NAME w3-hide required">{% trans %}info.name_credit_card{% endtrans %}</div>
+          <div class="NO_MATCH_NAMES w3-hide required">{% trans %}part_seven.no_match_names{% endtrans %}</div>
+          <div class="EMAIL w3-hide required">{% trans %}part_seven.email{% endtrans %}</div>
+          <div class="EMAIL_INVALID w3-hide required">{% trans %}part_seven.email_invalid{% endtrans %}</div>
+          <div class="CREDIT_CARD_NR w3-hide required">{% trans %}info.credit_card_nr{% endtrans %}</div>
+          <div class="CREDIT_CARD_DATE w3-hide required">{% trans %}info.date_credit_card{% endtrans %}</div>
+          <div class="CARD_NR_INVALID w3-hide required">{% trans %}part_seven.card_nr_invalid{% endtrans %}</div>
+          <div class="ZERO w3-hide required">{% trans %}part_seven.zero{% endtrans %}</div>
+          <div class="TELEPHONE w3-hide required">{% trans %}part_seven.telephone{% endtrans %}</div>
+          <div class="TELEPHONE_INVALID w3-hide required">{% trans %}part_seven.telephone_invalid{% endtrans %}</div>
+          <div class="ADDRESS w3-hide required">{% trans %}part_seven.address{% endtrans %}</div>
+          <div class="RGPD w3-hide required">{% trans %}part_seven.rgpd{% endtrans %}</div>
+          <div class="OTHER_BUY_IT w3-hide required">{% trans %}part_seven.other_buy_it{% endtrans %}</div>
+          <div class="WP_SET_NO_CC_DATA w3-hide required">{% trans %}info.wp_set_no_cc_data{% endtrans %}</div>
+          <div class="DATE_CARD_INVALID w3-hide required">{% trans %}info.date_card_invalid{% endtrans %}</div>
+          <div class="w3-margin-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modal-no-stock" class="w3-modal" style="z-index:9999;padding-top:60px; padding-bottom: 32px">
+  <div class="w3-modal-content w3-animate-zoom" style="max-width:400px">
+    <div class="w3-col s12">
+      <div class="w3-row">
+        <div class="w3-panel w3-leftbar w3-col s12 w3-pale-yellow w3-border-amber w3-left-align w3-large">
+          <span class="w3-closebtn w3-padding-small" onclick="$('#modal-no-stock').hide()">
+            <i class="fa fa-times"></i>
+          </span>
+          <h2>
+            <i class="fa fa-warning"></i>
+            <span class="SORRY">{% trans %}part_seven.sorry{% endtrans %}</span>
+          </h2>
+          <div class="NO_STOCK w3-hide required">{% trans %}part_seven.no_stock{% endtrans %}</div>
+          <div class="MAX w3-center"></div>
+          <div class="w3-margin-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--SESSION END MODAL -->
+
+<div id="modal-check" class="w3-modal" style="z-index:9999;padding-top:60px; padding-bottom: 32px">
+  <div class="w3-modal-content w3-animate-zoom" style="max-width:400px">
+    <div class="w3-col s12">
+      <div class="w3-row">
+        <div class="w3-panel w3-leftbar w3-col s12 w3-pale-yellow w3-border-amber w3-left-align">
+          <span class="w3-closebtn w3-padding-small" onclick="$('#modal-check').hide()">
+            <i class="fa fa-times"></i>
+          </span>
+          <h2>
+            <i class="fa fa-warning"></i>
+            <span class="CHECK">{% trans %}check{% endtrans %}</span>
+          </h2>
+          <p class="SESSION w3-center w3-xlarge w3-padding-small">{% trans %}session{% endtrans %}</p>
+          <div class="SESSION_INFO">{% trans %}session_info{% endtrans %}</div>
+          <div class="w3-margin-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-no-storage" class="w3-modal" style="z-index:9999;padding-top:60px; padding-bottom: 32px">
+  <div class="w3-modal-content w3-animate-zoom" style="max-width:400px">
+    <div class="w3-col s12">
+      <div class="w3-row">
+        <div class="w3-panel w3-leftbar w3-col s12 w3-pale-yellow w3-border-amber w3-left-align">
+          <span class="w3-closebtn w3-padding-small" onclick="$('#modal-no-storage').hide()">
+            <i class="fa fa-times"></i>
+          </span>
+          <h2>
+            <i class="fa fa-warning"></i>
+            <span class="CHECK">{% trans %}check{% endtrans %}</span>
+          </h2>
+          <div class="NO_WEB_STORAGE">{% trans %}info.no_webstorage{% endtrans %}</div>
+          <div class="w3-margin-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-rgpd" class="w3-modal" style="padding-top:100px;z-index:9999" onclick="$(this).hide()">
+  <div class="w3-modal-content w3-animate-zoom w3-white w3-padding-32 w3-padding-small w3-margin-bottom">
+      <span class="w3-xlarge w3-container w3-btn w3-white w3-display-topright" onclick="$('#modal-rgpd').hide()">
+    <i class="fa fa-times"></i>
+  </span>
+    <h2 class="w3-center rgpd-title"></h2>
+    <div class="w3-white w3-padding-32 w3-padding-small w3-border-top rgpd-text">
+    </div>
+  </div>
+</div>

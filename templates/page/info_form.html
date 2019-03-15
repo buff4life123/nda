@@ -1,0 +1,37 @@
+
+<div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
+    <h2>Get the best offers first!</h2>
+    <p>Join our newsletter.</p>
+    <label>E-mail</label>
+    <input class="w3-input w3-border" type="text" placeholder="Your Email address">
+    <button type="button" class="w3-button w3-red w3-margin-top">Subscribe</button>
+</div>
+
+<div class="w3-content w3-padding-16" style="max-width:1532px;">
+  <div class="w3-padding">
+    <h2 class="w3-xxxlarge w3-text-green"><b>{{menus[4].menuTranslation.name}}</b></h2>
+    <hr style="width:50px;border:5px solid #4CAF50" class="w3-round">
+  
+    <p>{%trans%}need_info_contast_us{%endtrans%}</p>
+    <i class="fa fa-map-marker w3-text-red" style="width:30px"></i> {{company.address}}, {{company.city}}, {{company.country.name}}<br>
+    <i class="fa fa-phone w3-text-red" style="width:30px"></i> {{company.telephone}}<br>
+    <i class="fa fa-envelope w3-text-red" style="width:30px"> </i> {{company.email}}<br>
+    <form action="/action_page.php" target="_blank">
+      
+      <div class="w3-row-padding">
+        <div class="w3-col l6 m12 s12">
+          <input class="w3-input w3-padding-16 w3-border w3-margin-bottom" type="text" placeholder="{%trans%}name{%endtrans%}" name="name">
+        </div>
+        <div class="w3-col l6 m12 s12">
+          <input class="w3-input w3-padding-16 w3-border w3-margin-bottom" type="text" placeholder="Email" required name="email">
+        </div>
+        <div class="w3-col s12">
+          <textarea class="w3-input w3-padding-16 w3-border w3-margin-bottom" placeholder="{%trans%}message{%endtrans%}" name="message"></textarea>
+        </div> 
+        <p>
+          <button class="w3-button w3-black w3-padding-large" type="submit">{%trans%}send_message{%endtrans%}</button>
+        </p>
+    </div>
+    </form>
+  </div>
+</div>

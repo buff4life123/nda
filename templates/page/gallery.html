@@ -1,0 +1,31 @@
+<div class="w3-content w3-padding-16" style="max-width:1532px;">
+
+  <div class="w3-padding">
+    <h2 class="w3-xxxlarge w3-text-green"><b>{{menus[3].menuTranslation.name}}</b></h2>
+    <hr style="width:50px;border:5px solid #4CAF50" class="w3-round">
+  </div>
+  
+  <div class="w3-row-padding">
+  {% if galleries %}
+    <div style="margin-left:14px" class="w3-padding-32" id="ngy2p" data-nanogallery2='{
+      "thumbnailHeight": 320,
+      "thumbnailWidth":  "auto",
+      "thumbnailBorderVertical": 6,
+      "thumbnailBorderHorizontal": 6,
+      "galleryDisplayMode": "rows",
+      "galleryMaxRows": 1,
+      "galleryDisplayMode": "pagination",
+      "galleryLastRowFull": true,
+      "gallerySorting": "random",
+      "thumbnailDisplayTransition": "flipUp",
+      "thumbnailDisplayInterval": 150,
+      "thumbnailAlignment": "left"
+      }'>
+      {% for gallery in galleries %}
+        <a href="/upload/gallery/{{gallery.image}}"data-ngthumb="/upload/gallery/{{gallery.image}}" data-ngdesc="{{gallery.namePt}}">
+        </a>
+      {% endfor %}   
+
+    </div>
+  {% endif %}
+  </div>

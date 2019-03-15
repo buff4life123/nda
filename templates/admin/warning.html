@@ -1,0 +1,72 @@
+<style type="text/css">
+.w3-input {border-bottom: 0px solid #05788d}
+</style>
+
+<header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-exclamation-triangle"></i> Aviso</b></h5>
+</header>
+
+<div class="w3-container">
+  
+  {{ form_start(form, {'attr': {'id': 'warning-form'}})}}
+    <div class="w3-padding-16 w3-row-padding w3-sand w3-border">
+      <div class="w3-col l12">
+        {{ form_widget(form.visible)}}
+        <label title="Mostrar o aviso no site aos clientes">Visivel ?</label>
+      </div>
+      <div class="w3-col l6 m12 s12">
+        <label>Aviso (PT)</label>
+        {{ form_widget(form.info_pt) }}
+      </div>
+      <div class="w3-col l6 m12 s12">
+       <label>Aviso (EN)</label>
+        {{ form_widget(form.info_en)}}
+      </div>
+      <div class="w3-hide">
+        {{ form_widget(form.submit)}}
+      </div>
+    </div>
+
+    <div class="w3-row-padding w3-border-top">
+      <div class="w3-col s12 w3-margin-top w3-margin-bottom">
+        <span class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green" onclick="$('#warning-form').trigger('submit')">
+           <i class="fa fa-check"></i> Guardar
+        </span>
+      </div>
+    </div>
+
+  {{ form_end(form) }}
+
+</div>
+      
+<script>
+
+  $('#warning-form').on('submit',function(e){
+    e.preventDefault()
+    $('.w3-overlay').show()
+    $('.required').addClass('w3-hide')
+    setTimeout(function(){
+      $.ajax({  
+        url:'{{ path('admin_warning_edit') }}',
+        type: "POST",
+        data: $('#warning-form').serialize(),
+        success: function(data){
+          $('.w3-overlay').hide()
+            if (data.message != 'success'){
+              obj=''
+              for(i=0;i<data.data.length;i++)
+                obj+= data.data[i]+'<br>'
+              $('#set-fields').html(obj)
+              $('#modal-fields').show()
+            }
+        },
+        error:function(data){
+          $('.w3-overlay').hide()
+          $('#modal-error').show()
+        }
+      })
+    }, 500)
+  })
+
+</script>
+
