@@ -23,6 +23,13 @@ class MenuTranslation
     */
     private $name;
 
+    /** @ORM\ManyToOne(targetEntity="Menu") */
+    private $menu;
+    /**
+     *@ORM\ManyToOne(targetEntity="Locales") */
+    private $locales;
+
+
     public function getId()
     {
         return $this->id;
@@ -36,6 +43,26 @@ class MenuTranslation
     public function setName($name)
     {
         $this->name = $name;
+    }    
+
+    public function getMenu()
+    {
+        return $this->menu;
+    }
+
+    public function setMenu(Menu $menu) {
+        $this->menu = $menu;
     }
     
+    public function getLocales()
+    {
+        return $this->locales;
+    }
+
+    public function setLocales(Locales $locales)
+    {
+        $this->locales = $locales;
+    }
+
+
 }

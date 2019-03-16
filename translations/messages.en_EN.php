@@ -1,6 +1,5 @@
 <?php
 return array(
-
     'available' => 'Available',
     'events' => 'Events',
     'search' => 'Search',
@@ -8,6 +7,7 @@ return array(
     'success' => 'Success',
     'close' =>'Close',
     'sorry'=>'Sorry',
+    'save' => 'Save',
     'required'=>'Required *',
     'wifi_error' =>'Please check Wi-fi/Internet connection, and try again!',
     'check' => 'Check',
@@ -16,15 +16,53 @@ return array(
     'send_message' => 'Send Message',
     'name' => 'Name',
     'message' => 'Message',
-
+    'submit' => 'Submit',
+    'clear' => 'Clear',
+    'acess' => 'Acess',
+    'order' => 'Order',
+    'image' => 'Image',
+    'active' => 'Active',
+    'text_active' => 'Text Active',
+    'actions' => 'Actions',
+    'show' => 'Show',
+    'search' => 'Search',
+    'next' => 'Next',
+    'previous' => 'Previous', 
+    'per_page' => 'per page',
+    'of' => ' of ',
+    'results' => 'results',
+    'without' => 'No',
+    'ordering_not possible' => 'Something happened, ordering error, try again!',
+    'hello' => 'Hello',
+    'dash' => 'Dashboard',
+    'product_23' => 'Product Max Time 24h',
+    'showcase' => 'Showcase',
+    'available' => 'Available',
+    'easy_text' => 'Easy Text',
+    'warning' => 'Warning',
+    'users' => 'Users',
+    'company' => 'Company',
+    'bookings' => 'Bookings',
+    'view_home' => 'See Homepage',
+    'exit' => 'Exit',
+    'new' => 'New',
+    'list' => 'List/Edit',
+    'edit' => 'Edit',
+    'pending' => 'Pending',
+    'canceled' => 'Canceled',
+    'confirmed' => 'Confirmed',
+    'today' => 'Today',
+    'tomorrow' => 'Tomorrow',
+    'terms_cond' => 'Terms & Conditions',
+    'demograph' => 'Demographic',
+    'system' => 'System',
+    'about_us' => 'About us',
+    'gdpr' => 'G.D.P.R.',
 
     'cookies' => array(
         'txt'=>'This website uses cookies to ensure you get the best experience on our website.',
         'link'=>'Know more about cookies.',
         'btn' =>'Got It!'
     ),
-
-
-
 
 );

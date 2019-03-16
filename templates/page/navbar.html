@@ -21,7 +21,7 @@
     <div class="w3-right w3-hide-small">
   {% if menus %}
     {% for menu in menus %}
-    <a href="#nav-{{menu.id}}" class="w3-bar-item w3-button w3-hover-pale-green">{{menu.menuTranslation.name}}</a>
+    <a href="#nav-{{menu.id}}" class="w3-bar-item w3-button w3-hover-pale-green">{{menu.text}}</a>
     {% endfor %}
     {% endif %}
   </div>
@@ -39,7 +39,7 @@
   </a>
   {% if menus %}
     {% for menu in menus %}
-    <a href="#nav-{{menu.id}}" onclick="w3_close('menu-bar')" class="w3-bar-item w3-button w3-hover-pale-green">{{menu.menuTranslation.name}}</a>
+    <a href="#nav-{{menu.id}}" onclick="w3_close('menu-bar')" class="w3-bar-item w3-button w3-hover-pale-green">{{menu.text}}</a>
     {% endfor %}
     {% endif %}
 </nav>

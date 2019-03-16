@@ -17,11 +17,11 @@
 </style>
 
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fas fa-tachometer-alt"></i> Painel Controlo</b></h5>
+    <h5><b><i class="fas fa-tachometer-alt"></i> {%trans%}dash{%endtrans%}</b></h5>
   </header>
 
   <header class="w3-container">
-    <h5><b>Hoje {{ "now"|date("d/m/Y") }}</b></h5>
+    <h5><b>{%trans%}today{%endtrans%} {{ "now"|date("d/m/Y") }}</b></h5>
   </header>
   
   <div class="w3-row-padding w3-opacity-min">
@@ -38,7 +38,7 @@
           </h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Pendentes</h4>
+        <h4>{%trans%}pending{%endtrans%}</h4>
       </div>
     </div>
     <div class="w3-col l3 m6 s6 w3-margin-bottom">
@@ -54,7 +54,7 @@
           </h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Canceladas</h4>
+        <h4>{%trans%}canceled{%endtrans%}</h4>
       </div>
     </div>
     <div class="w3-col l3 m6 s6 w3-margin-bottom">
@@ -70,7 +70,7 @@
           </h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Confirmadas</h4>
+        <h4>{%trans%}confirmed{%endtrans%}</h4>
       </div>
     </div>
     <div class="w3-col l3 m6 s6 w3-margin-bottom">
@@ -92,7 +92,7 @@
   </div>
 
    <header class="w3-container">
-    <h5><b>Amanhã {{ "now"|date_modify("+1 day")|date("d/m/Y") }}</b></h5>
+    <h5><b>{%trans%}tomorrow{%endtrans%} {{ "now"|date_modify("+1 day")|date("d/m/Y") }}</b></h5>
   </header>
   <div class="w3-row-padding w3-opacity">
     <div class="w3-col l3 m6 s6 w3-margin-bottom">
@@ -108,7 +108,7 @@
           </h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Pendentes</h4>
+        <h4>{%trans%}pending{%endtrans%}</h4>
       </div>
     </div>
     <div class="w3-col l3 m6 s6 w3-margin-bottom">
@@ -124,7 +124,7 @@
           </h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Canceladas</h4>
+        <h4>{%trans%}cenceled{%endtrans%}</h4>
       </div>
     </div>
     <div class="w3-col l3 m6 s6 w3-margin-bottom">
@@ -140,7 +140,7 @@
           </h3>
         </div>
         <div class="w3-clear"></div>
-        <h4>Confirmadas</h4>
+        <h4>{%trans%}confirmed{%endtrans%}</h4>
       </div>
     </div>
     <div class="w3-col l3 m6 s6 w3-margin-bottom">

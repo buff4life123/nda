@@ -69,17 +69,28 @@ class HomeController extends AbstractController
 
         foreach ($banners as $banner) {
             $b []= array( 
-                'text' => $banner->getBannerCurrentTranslation($userLocale),
+                'text' => $banner->getCurrentTranslation($userLocale),
                 'image' => $banner->getImage(),
                 'text_active' => $banner->getTextActive(),
             );
         }
 
-        $menu = $em->getRepository(Menu::class)->findBy(['locales' => $userLocale, 'link_active' => 'true']);
+        $menus = $em->getRepository(Menu::class)->findAll(['link_active' => 'true']);
+
+        $m = array();
+
+        foreach ($menus as $menu) {
+            $m []= array( 
+                'text' => $menu->getCurrentTranslation($userLocale),
+                'id' => $menu->getId()
+            );
+        }
+
         $about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $userLocale]);
         $category = $em->getRepository(Category::class)->findBy(['isActive' => 1],['orderBy' => 'ASC']);
         $categoryHl = $em->getRepository(Category::class)->findOneBy(['highlight' => 1],['orderBy' => 'ASC']);
         $gallery = $em->getRepository(Gallery::class)->findBy(['isActive' => 1],['namePt' => 'DESC']);
+        
         $cH = array(
             'adultAmount' => $moneyFormatter->format($categoryHl->getAdultPrice()),
             'childrenAmount'  => $moneyFormatter->format($categoryHl->getChildrenPrice()),
@@ -137,7 +148,7 @@ class HomeController extends AbstractController
                 'locales' => $locales, 
                 'company' => $company,
                 'about' => $about,
-                'menus' => $menu,
+                'menus' => $m,
                 'banners' => $b
                 )
             );

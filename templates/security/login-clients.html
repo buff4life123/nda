@@ -9,25 +9,18 @@
 :-moz-placeholder {opacity: 0.3}
 </style>
 
-<section class="" style="min-height:400px;height:100vh">
-  <div class="w3-padding-32"> 
-    <div class="w3-row-padding">
-      <div class="w3-col l3 m1 s0">&nbsp;</div>
-    </div>
-  </div>
-
-  <div class="w3-modal-content w3-card-8 w3-border" style="max-width:600px">
-    <div class="w3-white w3-center">
+ <div class="w3-col l6 m8 s11 w3-card w3-display-middle w3-border w3-opacity-min">
+    <div class="w3-white">
       <form action="{{ path('login_clients') }}" method="post">
-        <div class="w3-padding-8 w3-sand w3-padding-small w3-xlarge w3-border-bottom">Acesso Clientes</div>
+        <div class="w3-padding-8 w3-pale-blue w3-padding-small w3-xlarge w3-border-bottom"><i class="fa fa-unlock"></i> {%trans%}acess{%endtrans%}</div>
         <div class="w3-content w3-padding-16 w3-row-padding w3-large">
           <div class="w3-col m6 s12 w3-left-align w3-large">
-            <label for="username">Nome *</label>
-            <input type="text" id="username" placeholder="Nome *" class="w3-input w3-padding-16" autofocus value="{{ last_username }}" name="username"/>
+            <label for="username">{%trans%}name{%endtrans%} *</label>
+            <input type="text" id="username" placeholder="{%trans%}name{%endtrans%} *" class="w3-input w3-border" autofocus value="{{ last_username }}" name="username"/>
           </div>
           <div class="w3-col m6 s12 w3-left-align w3-large">
             <label for="password">Password *</label>
-            <input type="password" id="password" class="w3-input w3-padding-16" placeholder="Password *" name="_password" />
+            <input type="password" id="password" class="w3-input w3-border" placeholder="Password *" name="_password" />
           </div>
           {% if error %}
           <div class="w3-col s12">
@@ -35,10 +28,10 @@
           </div>
           {% endif %}
           <div class="w3-col s6 w3-margin-top">
-            <button type="reset" class="w3-btn-block w3-button w3-border w3-white"><i class="fa fa-eraser"></i> Limpar</button>
+            <button type="reset" class="w3-left w3-btn-block w3-button w3-border w3-white"><i class="fa fa-eraser"></i> {%trans%}clear{%endtrans%}</button>
           </div>
           <div class="w3-col s6 w3-margin-top">
-            <button type="submit" class="w3-btn-block w3-button w3-border w3-green"><i class="fa fa-check"></i> Login</button>
+            <button type="submit" class="w3-right w3-btn-block w3-button w3-border w3-green"><i class="fa fa-check"></i> {%trans%}submit{%endtrans%}</button>
           </div>
         </div>
         <input type="hidden" name="_target_path" value="/admin/" />
@@ -46,7 +39,6 @@
       </form>
     </div>
   </div>
-</section>
 
 {% endblock %}
 

@@ -2,6 +2,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table(name="menu")
@@ -16,40 +17,32 @@ class Menu
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    /**
-     *@ORM\ManyToOne(targetEntity="Locales") */
-    private $locales;
     
     /**
-     *@ORM\ManyToOne(targetEntity="MenuTranslation") */
+     *@ORM\OneToMany(targetEntity="MenuTranslation", mappedBy="menu") */
     private $menuTranslation;
 
-    /** @ORM\Column(type="boolean", name="link_active",nullable=true)*/
-    private $link_active = false;
+    /** @ORM\Column(type="boolean", name="link_active", options={"default":0})*/
+    private $link_active;
+
+    public function __construct()
+    {       
+        $this->menuTranslation = new ArrayCollection();   
+    }
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getMenuTranslation()
+    public function getTranslation()
     {
         return $this->menuTranslation;
     }
 
-    public function setMenuTranslation(MenuTranslation $menuTranslation)
+    public function setTranslation(MenuTranslation $menuTranslation)
     {
         $this->menuTranslation = $menuTranslation;
-    }
-
-    public function getLocales()
-    {
-        return $this->locales;
-    }
-
-    public function setLocales(Locales $locales)
-    {
-        $this->locales = $locales;
     }
 
     public function getLinkActive()
@@ -61,4 +54,19 @@ class Menu
     {
         $this->link_active = $link_active;
     }
+
+    public function getCurrentTranslation(Locales $locales)
+    {
+        $txt = '';
+        
+        if($this->getTranslation()){
+
+            foreach ($this->getTranslation() as $translation){
+                if( $locales->getName() == $translation->getLocales()->getName())
+                    $txt = $translation->getName();
+            }
+        }
+        return $txt;
+    }
+
 }

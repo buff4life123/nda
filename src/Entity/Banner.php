@@ -31,7 +31,7 @@ class Banner
     /** @ORM\Column(type="boolean", name="text_active", options={"default":0}) */
     private $text_active;
 
-      public function __construct()
+    public function __construct()
     {       
         $this->bannerTranslation = new ArrayCollection();   
     }
@@ -77,23 +77,23 @@ class Banner
         $this->orderBy = $orderBy;
     }
 
-    public function getBannerTranslation()
+    public function getTranslation()
     {
         return $this->bannerTranslation;
     }
 
-    public function setBannerTranslation(BannerTranslation $bannerTranslation)
+    public function setTranslation(BannerTranslation $bannerTranslation)
     {
         $this->bannerTranslation = $bannerTranslation;
     }
 
-    public function getBannerCurrentTranslation(Locales $locales)
+    public function getCurrentTranslation(Locales $locales)
     {
         $txt = '';
         
-        if($this->getBannerTranslation()){
+        if($this->getTranslation()){
 
-            foreach ($this->getBannerTranslation() as $translation){
+            foreach ($this->getTranslation() as $translation){
                 if( $locales->getName() == $translation->getLocales()->getName())
                     if($this->getTextActive())
                         $txt = $translation->getName();
