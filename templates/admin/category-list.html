@@ -21,7 +21,7 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
 </style>
 
 <header class="w3-container" style="padding-top:22px">
-   <h5><b><i class="far fa-edit fa-fw"></i> Categorias</b></h5>
+   <h5><b><i class="far fa-edit fa-fw"></i> {%trans%}product_23{%endtrans%}</b></h5>
 </header>
 <div class="w3-row-padding">
   <div class="w3-col s12">
@@ -31,17 +31,17 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
   <table id="dataTable" class="w3-border table table-striped centered hover table-bordered" style="width:100%">
     <thead class="w3-sand">
       <tr>
-      <th class="w3-center">Ord</th>
+      <th class="w3-center">{%trans%}order{%endtrans%}</th>
       <th class="">#</th>
-      <th class="w3-center">Acções</th>    
+      <th class="w3-center" style="width:120px">{%trans%}actions{%endtrans%}</th>    
       <th class="w3-center">Nome PT</th>    
       <th class="w3-center">Nome EN</th>    
       <th class="w3-center">Preço Adulto</th>    
       <th class="w3-center">Preço Criança</th>    
       <th class="w3-center">Descriçao PT</th>    
       <th class="w3-center">Descriçao EN</th>    
-      <th class="w3-center">Horas</th>    
-      <th class="w3-center">Activo</th>
+      <th class="w3-center">{%trans%}hour{%endtrans%}</th>    
+      <th class="w3-center">{%trans%}active{%endtrans%}</th>
       <th class="w3-center">Destaque</th>
       <th class="w3-center">Lotação</th>
       <th class="w3-center">Duração</th>
@@ -58,24 +58,26 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
         <td>{{category.order}}</td>
         <td>{{category.id}}</td>
         <td>
+          <div style="width:149px">
           <span class="w3-tooltip">
-            <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">Editar a categoria</span>
+            <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}edit{%endtrans%} {%trans%}product_23{%endtrans%}</span>
             <button class="w3-btn w3-border w3-blue w3-tooltip" style="width: 13px" onclick="editCategory({{category.id}},'{{ category.namePt}}')"> 
               <i class="far fa-edit fa-fw"></i>
             </button>
           </span>
           <span class="w3-tooltip">
-            <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">Apagar a categoria</span>
+            <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}delete{%endtrans%} {%trans%}product_23{%endtrans%}</span>
           <button class="w3-btn w3-border w3-red" style="width: 13px" onclick="deleteCategoryConfirm({{category.id}},'{{ category.namePt }}')">
             <i class="fas fa-trash-alt"></i>
           </button>
         </span>
         <span class="w3-tooltip">
-            <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">Adicionar disponibilidade</span>
+            <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}add{%endtrans%} {%trans%}availability{%endtrans%}</span>
             <button class="w3-btn w3-border w3-indigo" onclick="addAvailable({{category.id}},'{{ category.namePt}}')">
               <i class="far fa-calendar-check"></i>
             </button>
           </span>
+        </div>
         </td>
         <td>{{ category.namePt }}</td>
         <td>{{ category.nameEn }}</td>
@@ -291,15 +293,15 @@ $(function(){
     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
       responsive: false,
       searching: true,
-      language: {
-        "lengthMenu": "Mostrar _MENU_ por pagina",
-        "zeroRecords": "0 Resultados",
-        "info": "Mostrar _PAGE_ de _PAGES_",
-        "infoEmpty": "Sem resultados",
-        "search": "Pesquisar",
+         language: {
+        "lengthMenu": "{%trans%}show{%endtrans%} _MENU_ {%trans%}per_page{%endtrans%}",
+        "zeroRecords": "0 {%trans%}results{%endtrans%}",
+        "info": "{%trans%}show{%endtrans%} _PAGE_ {%trans%}of{%endtrans%} _PAGES_",
+        "infoEmpty": "{%trans%}without{%endtrans%} {%trans%}results{%endtrans%}",
+        "search": "{%trans%}search{%endtrans%}",
         "paginate": {
-        "previous": "Anterior",
-        "next": "Seguinte",
+        "previous": "{%trans%}previous{%endtrans%}",
+        "next": "{%trans%}next{%endtrans%}",
       }
     }
   })
@@ -326,8 +328,8 @@ $(function(){
           //console.log(data)
           if (data.status != 1){
             $('#info-client').show()                
-            $('#info-client-head').removeClass('w3-green w3-red w3-amber').addClass('w3-blue').html('<span onclick="$(\'#info-client\').hide()" class="w3-button w3-display-topright w3-large"><i class="fa fa-times"></i></span><h1><i class="fa fa-info-circle"></i> Verifique</h1>')
-          $('#client-txt').html('Não foi possivel mudar a ordem. Tente novamente!')
+            $('#info-client-head').removeClass('w3-green w3-red w3-amber').addClass('w3-blue').html('<span onclick="$(\'#info-client\').hide()" class="w3-button w3-display-topright w3-large"><i class="fa fa-times"></i></span><h1><i class="fa fa-info-circle"></i> {%trans%}check{%endtrans%}</h1>')
+          $('#client-txt').html('{%trans%}ordering_not_possible{%endtrans%}')
           }
         },
         error:function(data){

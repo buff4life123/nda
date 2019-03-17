@@ -196,7 +196,7 @@ class BannerController extends AbstractController
 
             $t = array();
 
-           foreach($banner->getBannerTranslation() as $translated){
+           foreach($banner->getTranslation() as $translated){
                 $t[] = array(
                     'local' => $translated->getLocales()->getName(),
                     'name' => $translated->getName(),
@@ -374,7 +374,7 @@ class BannerController extends AbstractController
 
             $t = array();
 
-           foreach($banner->getBannerTranslation() as $translated){
+           foreach($banner->getTranslation() as $translated){
                 $t[] = array(
                     'local' => $translated->getLocales()->getName(),
                     'name' => $translated->getName(),

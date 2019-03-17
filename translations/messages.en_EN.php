@@ -1,5 +1,12 @@
 <?php
 return array(
+    'availability' => 'Availability',
+    'delete' => 'Delete',
+    'hour' => 'Hour',
+    'hours_take_place'=>'Hours takes place*',
+    'add' => 'Add',
+    'status' => 'Status',
+    'text' => 'Text',
     'available' => 'Available',
     'events' => 'Events',
     'search' => 'Search',

@@ -12,7 +12,7 @@ input, select, textarea {color: #000!important}
 
 </style>
 <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-tags"></i> Categoria <i class="far fa-plus-square fa-fw"></i></b></h5>
+    <h5><b><i class="fa fa-tags"></i> {%trans%}product_23{%endtrans%} <i class="far fa-plus-square fa-fw"></i></b></h5>
 </header>
 
 <div class="w3-container w3-padding-16">
@@ -97,16 +97,16 @@ input, select, textarea {color: #000!important}
     <div class="w3-col l3 m1 s0 w3-hide-small">&nbsp;</div>
 
     <div class="w3-col l6 m10 s12">
-        <label for="category_name_pt">Horas a q se realiza* </label>
+        <label for="category_name_pt">{%trans%}hours_take_place{%endtrans%}</label>
         <textarea class="w3-input w3-border" required readonly id="receive-hour" placeholder="Escolha as horas, no relógio, de quando se realiza o evento" rows="2"></textarea>
       
         <div class="w3-row-padding w3-margin-top">
           <div class="w3-col s6">
-            <span class="w3-btn w3-border w3-block w3-white" id="clear-hour"><i class="fa fa-eraser"></i> Limpar</span>
+            <span class="w3-btn w3-border w3-block w3-white" id="clear-hour"><i class="fa fa-eraser"></i> {%trans%}clear{%endtrans%}</span>
           </div>
           <div class="w3-col s6">
             <span class="w3-btn w3-block w3-border w3-light-green" id="add-hour">
-              <i class="fa fa-check"></i> <span class="w3-hide-small">Adicionar</span> Hora
+              <i class="fa fa-check"></i> <span class="w3-hide-small"> {%trans%}add{%endtrans%}</span> {%trans%}hour{%endtrans%}
             </span>
           </div>
         </div>
@@ -127,7 +127,7 @@ input, select, textarea {color: #000!important}
 
       <div class="w3-col s12 w3-margin-top w3-margin-bottom w3-border-top">
         <span class="w3-btn w3-border w3-green w3-right w3-margin-top" onclick="$('#category-form').trigger('submit')">
-            <i class="fa fa-check"></i> Guardar
+            <i class="fa fa-check"></i> {%trans%}save{%endtrans%}
           </span>
       </div>
 

@@ -1,5 +1,12 @@
 <?php
 return array(
+    'availability' => 'disponibilidade',
+    'delete' => 'Apagar',
+    'hour' => 'Hora',
+    'hours_take_place'=>'Horas a que se realiza*',
+    'add' => 'Adicionar',
+    'status' => 'Estados',
+    'text' => 'Texto',
     'available' => 'Disponibilidade',
     'events' => 'Eventos',
     'search' => 'Procurar',

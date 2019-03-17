@@ -1,7 +1,3 @@
-<style type="text/css">
-.w3-input {border-bottom: 0px solid #05788d}
-</style>
-
 <header class="w3-container" style="padding-top:22px">
     <h5><b><i class="fa fa-exclamation-triangle"></i> {%trans%}warning{%endtrans%}</b></h5>
 </header>
@@ -11,17 +7,35 @@
   {{ form_start(form, {'attr': {'id': 'warning-form'}})}}
     <div class="w3-padding-16 w3-row-padding w3-sand w3-border">
       <div class="w3-col l12">
-        {{ form_widget(form.visible)}}
+        {{ form_widget(form.is_active)}}
         <label>{%trans%}active{%endtrans%}</label>
       </div>
       <div class="w3-col l6 m12 s12">
-        <label>Aviso (PT)</label>
-        {{ form_widget(form.info_pt) }}
+       
       </div>
-      <div class="w3-col l6 m12 s12">
-       <label>Aviso (EN)</label>
-        {{ form_widget(form.info_en)}}
+
+   {% for locale in locales%}
+
+    <div class="w3-col s12 l12 m12">
+
+      <label>Texto {{locale.name}}</label>
+      <div class="w3-row">
+        <div class="w3-col" style="width:45px">
+          <img src="{{locale.filename}}" style="height:45px" class="w3-border w3-opacity-min" title="{{locale.name}}">
+        </div>
+        <div class="w3-rest">
+        {% for translated in warning.locales_translated%}
+          {%if locale.id == translated.locale_id%}
+          <input type="text" data-locale-id="{{locale.id}}" name="locale" class="w3-input w3-border w3-white" value="{{translated.name}}" placeholder="{{locale.name}}">
+          {%endif%}
+        {% endfor %}
+
+        <input type="hidden" name="translated">
+        <input type="hidden" name="id" value="{{warning.id}}">
+        </div>
       </div>
+    </div>
+    {% endfor %}
       <div class="w3-hide">
         {{ form_widget(form.submit)}}
       </div>
@@ -43,6 +57,11 @@
 
   $('#warning-form').on('submit',function(e){
     e.preventDefault()
+    arr = []
+    $('input[name=locale]').each(function( index ) {
+      arr.push({name:$(this).val(), locale_id:$(this).attr('data-locale-id')})
+    })
+    $('input[name=translated]').val(JSON.stringify(arr))
     $('.w3-overlay').show()
     $('.required').addClass('w3-hide')
     setTimeout(function(){
@@ -52,13 +71,15 @@
         data: $('#warning-form').serialize(),
         success: function(data){
           $('.w3-overlay').hide()
-            if (data.message != 'success'){
-              obj=''
-              for(i=0;i<data.data.length;i++)
+          if(data.status ==1)
+            ajaxUpload('warning')
+          else{
+            var obj=''
+            for(i=0;i<data.data.length;i++)
                 obj+= data.data[i]+'<br>'
-              $('#set-fields').html(obj)
-              $('#modal-fields').show()
-            }
+            $('#set-fields').html(obj)
+            $('#modal-fields').show()
+          }
         },
         error:function(data){
           $('.w3-overlay').hide()

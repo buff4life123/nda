@@ -2,7 +2,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="warning")
@@ -18,54 +17,55 @@ class Warning
      */
     private $id;
     /**
-     * @ORM\Column(type="string", length=250)
+    * @ORM\Column(type="boolean", name="is_active", options={"default":0})
      */
-    private $infoPt;
+    private $is_active;
     /**
-     * @ORM\Column(type="string", length=250)
-     */
-    private $infoEn;
+     *@ORM\OneToMany(targetEntity="WarningTranslation", mappedBy="warning", cascade={"persist", "remove"}) */
+    private $warningTranslation;
 
-    /**
-    * @ORM\Column(type="boolean", name="visible", options={"default":0})
-     */
-    private $visible;
+    public function __construct()
+    {       
+        $this->warningTranslation = new ArrayCollection();   
+    }
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getInfoPt()
+    public function getIsActive()
     {
-        return $this->infoPt;
+        return $this->is_active;
     }
 
-    public function setInfoPt($infoPt)
+    public function setIsActive($is_active)
     {
-        $this->infoPt = str_replace("'","’",$infoPt);
+        $this->is_active = $is_active;
+    }
+    
+    public function getTranslation()
+    {
+        return $this->warningTranslation;
     }
 
-    public function getInfoEn()
+    public function setTranslation(WarningTranslation $warningTranslation)
     {
-        return $this->infoEn;
+        $this->warningTranslation = $warningTranslation;
     }
 
-    public function setInfoEn($infoEn)
+    public function getCurrentTranslation(Locales $locales)
     {
-        $this->infoEn = str_replace("'","’",$infoEn);
+        $txt = '';
+        
+        if($this->getTranslation()){
+
+            foreach ($this->getTranslation() as $translation){
+                if( $locales->getName() == $translation->getLocales()->getName())
+                    $txt = $translation->getName();
+            }
+        }
+        return $txt;
     }
-
-
-    public function getVisible()
-    {
-        return $this->visible;
-    }
-
-    public function setVisible($visible)
-    {
-        $this->visible = $visible;
-    }
-
 
 }

@@ -60,7 +60,7 @@ class HomeController extends AbstractController
         $cS = array();
 
         $locales = $em->getRepository(Locales::class)->findAll();
-        $warning = $em->getRepository(Warning::class)->find(10);
+        $warning = array();//$em->getRepository(Warning::class)->find(10);
         $company = $em->getRepository(Company::class)->find(1);
 
         $banners = $em->getRepository(Banner::class)->findBy(['isActive' => 'true']);
