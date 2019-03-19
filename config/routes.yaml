@@ -231,7 +231,6 @@ index_about_us:
     controller: App\Controller\AboutUsController::aboutUsShow
     #condition: 'request.isXmlHttpRequest()'
 
-
 ##
 # TERMS CONDITIONS
 ##
@@ -253,7 +252,6 @@ index_terms:
     path: /index-terms/
     controller: App\Controller\TermsConditionsController::termsShow
     #condition: 'request.isXmlHttpRequest()'
-
 
 ##
 # BLOCK DATES
@@ -279,7 +277,6 @@ admin_warning:
 admin_warning_edit:
     path: /admin-warning-edit/
     controller: App\Controller\WarningController::adminWarningEdit
-
 
 ##
 # GALLERY
@@ -315,6 +312,11 @@ admin_gallery_edit:
     path: /admin-gallery-edit/
     controller: App\Controller\GalleryController::galleryEdit
     #condition: 'request.isXmlHttpRequest()'
+
+admin_gallery_order:
+    path: /admin-gallery-order/
+    controller: App\Controller\GalleryController::galleryOrder
+
 ##
 # BANNER
 ##
@@ -353,7 +355,6 @@ admin_banner_edit:
 admin_banner_order:
     path: /admin-banner-order/
     controller: App\Controller\BannerController::bannerOrder
-
 
 ##
 # USERS

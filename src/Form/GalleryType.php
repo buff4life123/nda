@@ -24,30 +24,19 @@ class GalleryType extends AbstractType
         $builder
             ->add('image', FileType::class, array(
                 'data_class' => null,
-                'label' => false,
+                'label' => 'image',
                 'required' => false,
                 'attr' => ['class' => 'w3-hide set-image','onchange' => 'loadFile(event)']
             ))
-            ->add('name_pt', TextType::class,
-            array(
-                'required' => false,
-                'label' => 'Nome (PT)*',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Nome (PT)*',]
-            ))
-            ->add('name_en', TextType::class, array(
-                'required' => false,
-                'label' => 'Nome (EN)*',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Nome (EN)*']
-            ))
             ->add('is_active', CheckboxType::class, array(
-                'label'    => 'Ativa?',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('submit', SubmitType::class,
             array(
-                'label' => 'part_seven.submit',
-                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top SAVE']
+                'label' => 'save',
+                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
             ))
         ;
     }

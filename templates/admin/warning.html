@@ -18,7 +18,7 @@
 
     <div class="w3-col s12 l12 m12">
 
-      <label>Texto {{locale.name}}</label>
+      <label>{% trans %}text{% endtrans %} {% set k = locale.name|split('_') %} {{ k[1] }}</label>
       <div class="w3-row">
         <div class="w3-col" style="width:45px">
           <img src="{{locale.filename}}" style="height:45px" class="w3-border w3-opacity-min" title="{{locale.name}}">

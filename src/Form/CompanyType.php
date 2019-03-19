@@ -42,45 +42,38 @@ class CompanyType extends AbstractType
             ->add('name', TextType::class,
             array(
                 'required' => false,
-                'label' => 'Empresa *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Empresa *']
-            ))
-
-            ->add('name', TextType::class,
-            array(
-                'required' => false,
-                'label' => 'Empresa *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Empresa *']
+                'label' => 'company',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'company']
             ))
             ->add('address', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Morada *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Morada *']
+                'label' => 'address',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'address']
             ))
             ->add('p_code', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Cod.Postal *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Cod.Postal *']
+                'label' => 'postal_code',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'postal_code']
             ))
             ->add('city', TextType::class, array(
                 'required' => true,
-                'label' => 'Cidade *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Cidade *']
+                'label' => 'city',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'city']
             ))
             ->add('country', EntityType::class, array(
                 'class' => Countries::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Pais *',
-                'label' => 'Pais *',
+                'placeholder' => 'country',
+                'label' => 'country',
                 'attr' => ['class' => 'w3-select w3-border w3-white']   
             ))
             ->add('email', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Email *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email *']
+                'label' => 'Email',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email']
             ))
             ->add('email_smtp', TextType::class,
             array(
@@ -97,26 +90,26 @@ class CompanyType extends AbstractType
             ->add('email_port', IntegerType::class,
             array(
                 'required' => true,
-                'label' => 'Porta Email *',
+                'label' => 'email_port',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'465, 143']
             ))
             ->add('email_certificade', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Email Certificado *',
+                'label' => 'email_cert',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'ssl, tls']
             ))
             ->add('telephone', TextType::class,
             array(
                 'required' => false,
-                'label' => 'Telefone',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Telefone']
+                'label' => 'phone',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'phone']
             ))
             ->add('fiscal_number', IntegerType::class,
             array(
                 'required' => true,
-                'label' => 'Nº Fiscal *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Nº Fiscal *']
+                'label' => 'fiscal_n',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'fiscal_n']
             ))
             ->add('coords_google_maps', TextType::class, array(
                 'required' => true,
@@ -136,8 +129,8 @@ class CompanyType extends AbstractType
             ->add('currency', EntityType::class, array(
                 'class' => Currency::class,
                 'choice_label' => 'entity',
-                'placeholder' => 'Moeda *',
-                'label' => 'Moeda *',
+                'placeholder' => 'currency',
+                'label' => 'currency',
                 'attr' => ['class' => 'w3-select w3-border w3-white']   
             ))
             ->add('link_facebook', TextType::class, array(
@@ -148,13 +141,13 @@ class CompanyType extends AbstractType
 
             ->add('link_my_domain', TextType::class, array(
                 'required' => false,
-                'label' => 'O meu Dominio Url ',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'https://o meu dominio']
+                'label' => 'my_domain',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'https://dominio']
             ))
 
             ->add('link_youtube', TextType::class, array(
                 'required' => false,
-                'label' => 'YouTube',
+                'label' => 'YouTube Url',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'https://youtube']
             ))
 
@@ -192,48 +185,48 @@ class CompanyType extends AbstractType
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'https://snapchat']
             ))
             ->add('link_facebook_active', CheckboxType::class, array(
-                'label'    => 'Ativo',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('link_twitter_active', CheckboxType::class, array(
-                'label'    => 'Ativo',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
              ->add('link_youtube_active', CheckboxType::class, array(
-                'label'    => 'Ativo',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('link_behance_active', CheckboxType::class, array(
-                'label'    => 'Ativo',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('link_instagram_active', CheckboxType::class, array(
-                'label'    => 'Ativo',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('link_linken_active', CheckboxType::class, array(
-                'label'    => 'Ativo',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('link_pinterest_active', CheckboxType::class, array(
-                'label'    => 'Ativo',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('link_snapchat_active', CheckboxType::class, array(
-                'label'    => 'Ativo',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('submit', SubmitType::class,
             array(
-                'label' => 'Gravar',
+                'label' => 'save',
                 'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
             ))
         ;

@@ -202,7 +202,7 @@ function editCategory(id, name){
 
 
 function deleteCategoryConfirm(id,n){
-  $('#delete-category').html('<p class="w3-center w3-large">Tem a certeza que pretende apagar a categoria, <b>'+n+'</b> ?</p>')
+  $('#delete-category').html('<p class="w3-center w3-large">{%trans%}sure_delete{%endtrans%}<b>'+n+'</b> ?</p>')
   $('#delete-id').val(id)
   $('#modal-delete-category').show()
 }
@@ -340,9 +340,5 @@ $(function(){
     }
   })
 })
-
-
-
-
 
 </script>

@@ -18,17 +18,12 @@ class Gallery
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    /**
-     * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="NAME_PT")
-     */
-    private $namePt;
-    /**
-     * @Assert\NotBlank(message="NAME_EN")
-     * @ORM\Column(type="string", length=50)
-     */
-    private $nameEn;
 
+    /** @ORM\Column(type="integer", name="order_by", nullable=true)*/
+    private $orderBy;
+    /**
+     *@ORM\OneToMany(targetEntity="GalleryTranslation", mappedBy="gallery", cascade={"persist", "remove"}) */
+    private $galleryTranslation;
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $isActive;
     /**
@@ -36,6 +31,11 @@ class Gallery
      * @Assert\File(mimeTypes={"image/gif", "image/png", "image/jpeg"})
      */
     private $image;
+
+    public function __construct()
+    {       
+        $this->galleryTranslation = new ArrayCollection();   
+    }
 
     public function getImage()
     {
@@ -48,6 +48,17 @@ class Gallery
 
         return $this;
     }
+    
+    public function getOrderBy()
+    {
+        return $this->orderBy;
+    }
+
+    public function setOrderBy($orderBy)
+    {
+        $this->orderBy = $orderBy;
+    }
+
 
     public function getIsActive() {
         return $this->isActive;
@@ -62,23 +73,29 @@ class Gallery
         return $this->id;
     }
 
-    public function getNamePt()
+    public function getTranslation()
     {
-        return $this->namePt;
+        return $this->galleryTranslation;
     }
 
-    public function setNamePt($namePt)
+    public function setTranslation(GalleryTranslation $galleryTranslation)
     {
-        $this->namePt = str_replace("'","’", $namePt);
+        $this->galleryTranslation = $galleryTranslation;
     }
 
-    public function getNameEn()
+    public function getCurrentTranslation(Locales $locales)
     {
-        return $this->nameEn;
+        $txt = '';
+        
+        if($this->getTranslation()){
+
+            foreach ($this->getTranslation() as $translation){
+                if( $locales->getName() == $translation->getLocales()->getName())
+                    if($this->getTextActive())
+                        $txt = $translation->getName();
+            }
+        }
+        return $txt;
     }
 
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = str_replace("'","’",$nameEn);
-    }
 }

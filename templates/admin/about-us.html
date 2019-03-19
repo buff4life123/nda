@@ -6,7 +6,7 @@ textarea {color: #FFF!important}
 </style>
 
 <header class="w3-container" style="padding-top:22px">
-   <h5><b><i class="far fa-file-alt"></i> Sobre Nós</b></h5>
+   <h5><b><i class="far fa-file-alt"></i> {%trans%}about_us{%endtrans%}</b></h5>
 </header>
 
 <div class="w3-row-padding">
@@ -48,17 +48,17 @@ textarea {color: #FFF!important}
     </div>
 
     <div class="w3-col s12">
-      <label>Texto</label>
+      <label>{%trans%}text{%endtrans%}</label>
 	     <div id="summernote"></div>
     </div>
   </div>
   <div class="w3-row-padding w3-border-top">
     <div class="w3-col s12 w3-margin-top w3-margin-bottom">
       <button class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green">
-        <i class="fa fa-check"></i> Guardar
+        <i class="fa fa-check"></i> {%trans%}save{%endtrans%}
       </button>
       <span class="w3-btn-block w3-button w3-right w3-border w3-white" onclick="clearRgpd()">
-         <i class="fa fa-eraser"></i> Limpar
+         <i class="fa fa-eraser"></i> {%trans%}clear{%endtrans%}
       </span>
     </div>
   </div>
@@ -69,7 +69,7 @@ textarea {color: #FFF!important}
 <script>
 
 $('#summernote').summernote({
-  placeholder: 'Insira ....',
+  placeholder: '{%trans%}text{%endtrans%} ....',
   tabsize: 3,
   height: 400,
   fontName:'Arial'

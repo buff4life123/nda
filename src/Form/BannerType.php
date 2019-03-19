@@ -25,23 +25,23 @@ class BannerType extends AbstractType
     {
         $builder
             ->add('is_active', CheckboxType::class, array(
-                'label'    => 'Ativa?',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('text_active', CheckboxType::class, array(
-                'label'    => 'Textos Ativos?',
+                'label'    => 'text',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('image', FileType::class, array(
-                'label' => 'Imagem',
+                'label' => 'image',
                 'required' => false,
                 'attr' => ['class' => 'w3-hide set-image','onchange' => 'loadFile(event)']
             ))
             ->add('submit', SubmitType::class,
             array(
-                'label' => 'Gravar',
+                'label' => 'save',
                 'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
             ))
         ;

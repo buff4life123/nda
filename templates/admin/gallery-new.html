@@ -8,48 +8,66 @@ input, select, textarea {color: #000!important}
 
 </style>
 <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="far fa-images"></i> Galeria <i class="far fa-plus-square fa-fw"></i></b></h5>
+    <h5><b><i class="far fa-images"></i> {%trans%}showcase{%endtrans%}<i class="far fa-plus-square fa-fw"></i></b></h5>
 </header>
 
 <div class="w3-padding-16 w3-container">
   
+
+  <div class="w3-border w3-sand">  
   {{ form_start(form, {'attr': {'id': 'gallery-form'}})  }}
 
-  <div class="w3-row-padding w3-border w3-sand">
+  <div class="w3-row-padding w3-margin-top w3-border-bottom">
 
-    <div class="w3-col s3 l2 m2" title="Vamos mostrar esta imagem aos clientes no site">
-      {{ form_label(form.is_active)}}<br>
-      {{ form_widget(form.is_active)}} 
-    </div>
+    <div class="w3-col s0 l3 m2 w3-hide-small">&nbsp;</div>
 
-    <div class="w3-col s12 l6 m5 w3-center" title="Vamos meter uma imagem">
+    <div class="w3-col s12 l6 m8 w3-center" title="Vamos meter uma imagem">
       <div class="w3-white w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
         <i class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
       </div>
       {{ form_widget(form.image)}}
     </div>
+  </div>
 
-    <div class="w3-col l6 m6 s12 w3-margin-bottom">
-      {{ form_label(form.name_pt) }}
-      {{ form_widget(form.name_pt) }}
+  <div class="w3-row-padding w3-margin-top w3-border-bottom">
+    <div class="w3-col s3 l2 m2 w3-margin-bottom" title="Vamos mostrar esta imagem aos clientes no site">
+      {{ form_label(form.is_active)}}<br>
+      {{ form_widget(form.is_active)}} 
     </div>
+  </div>
+
+
+  <div class="w3-row-padding w3-margin-top w3-border-bottom">
+    {%for locale in locales %}
+    <div class="w3-col s12 l4 m6 w3-margin-bottom">
+
+      <label>{% trans %}text{% endtrans %} {% set k = locale.name|split('_') %} {{ k[1] }}</label>
       
-    <div class="w3-col l6 m6 s12 w3-margin-bottom">
-      {{ form_label(form.name_en) }}
-      {{ form_widget(form.name_en)}}
-    </div>  
+      <div class="w3-row">
+        <div class="w3-col" style="width:45px">
+          <img src="{{locale.getFilename}}" style="height:45px" class="w3-border" title="{{locale.name}}">
+        </div>
+        <div class="w3-rest">
+          <input type="text" data-local-id='{{locale.id}}' name='locale' class="w3-input w3-border w3-white" placeholder="{{locale.name}}">
+        </div>
+      </div>
+    </div>
+    
+    {% endfor %}
+
     <div class="w3-hide">
       {{ form_widget(form.submit)}}
-      </div>
-
-      <div class="w3-col s12 w3-margin-top w3-margin-bottom w3-border-top">
+    </div>
+  </div>
+    <div class="w3-row-padding w3-margin-top w3-border-bottom">
+      <div class="w3-col s12 w3-margin-bottom">
         <span class="w3-btn w3-border w3-green w3-right w3-margin-top" onclick="$('#gallery-form').trigger('submit')">
-            <i class="fa fa-check"></i> Guardar
+            <i class="fa fa-check"></i> {%trans%}save{%endtrans%}
           </span>
       </div>
-
-  </div>
+    </div>
     {{ form_end(form) }}
+  </div>
 </div>
 
 <script>
@@ -63,6 +81,17 @@ input, select, textarea {color: #000!important}
 
   $('#gallery-form').on('submit',function(e){
   obj=''
+
+  arr = []
+
+  $('input[name=locale]').each(function( index ) {
+    arr.push({id:$(this).attr('data-local-id'), name:$(this).val()})
+  })
+
+  form = new FormData($(this)[0])
+
+  form.append('locale',JSON.stringify(arr))
+
   e.preventDefault()
   $('.w3-overlay').show()
   $('.required').addClass('w3-hide')
@@ -70,17 +99,17 @@ input, select, textarea {color: #000!important}
     $.ajax({  
       url:'{{ path('admin_gallery_add') }}',
       type: "POST",
-      data: new FormData($(this)[0]),
+      data: form,
       processData: false,
       contentType: false,
       cache: false,
       success: function(data){  
         $('.w3-overlay').hide()
         console.log(data)
-        if (data.message == 'success'){
+        if (data.status == 1){
           ajaxUpload('gallery-new')
         }
-        else if (data.message=='fail'){
+        else {
           for(i=0;i<data.data.length;i++)
             obj += data.data[i]+'<br>'
           $('#set-fields').html(obj)

@@ -107,14 +107,8 @@ class BannerController extends AbstractController
                     
                     } 
                     catch(DBALException $e){
-
-                        if (preg_match("/'event'/i", $e))
-                            $a = array( "Insira pelo menos 1 hora.");
-
-                        else if (preg_match("/'children_price'/i", $e))
-                            $a = array("Preço Criança (€)* não pode ser vazio, insira 0 ou maior.");
-                        else
-                            $a = array("Contate administrador sistema sobre: ".$e->getMessage());
+                        
+                        $a = array("Contate administrador sistema sobre: ".$e->getMessage());
 
                         $response = array(
                             'status' => 0,
@@ -137,7 +131,6 @@ class BannerController extends AbstractController
                     'data' => '');
         return new JsonResponse($response);
     }
-
 
 
     public function bannerOrder(Request $request)

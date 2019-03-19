@@ -15,7 +15,7 @@ div.dataTables_length select {height: 50px}
 </div>
 
 <header class="w3-container" style="padding-top:22px">
-   <h5><b><i class="far fa-calendar-alt"></i> Reservas</b></h5>
+   <h5><b><i class="far fa-calendar-alt"></i> {%trans%}booking{%endtrans%}</b></h5>
 </header>
 
   <div class="w3-row-padding">
@@ -40,16 +40,16 @@ div.dataTables_length select {height: 50px}
 <div class="w3-row-padding w3-sand w3-padding-32 w3-border-top w3-border-bottom w3-large">
   <div class="w3-col l1 w3-hide-medium w3-hide-small">&nbsp;</div>
   <div class="w3-col l3 m6 s12 w3-margin-bottom">
-      <input class="w3-input w3-border w3-white" id='startDate' readonly type="text" placeholder="&#xF274; Inicio" style="font-family:Raleway, FontAwesome;cursor:pointer">
+      <input class="w3-input w3-border w3-white" id='startDate' readonly type="text" placeholder="&#xF274; {%trans%}start{%endtrans%}" style="font-family:Raleway, FontAwesome;cursor:pointer">
   </div>
     <div class="w3-col l3 m6 s12 w3-margin-bottom">
-      <input class="w3-input w3-border w3-white" id='endDate' readonly type="text" placeholder="&#xF273; Fim" style="font-family:Raleway, FontAwesome;cursor:pointer">
+      <input class="w3-input w3-border w3-white" id='endDate' readonly type="text" placeholder="&#xF273; {%trans%}end{%endtrans%}" style="font-family:Raleway, FontAwesome;cursor:pointer">
   </div>
   <div class="w3-col l2 m6 s6">
-    <button class="w3-white w3-border w3-btn w3-block" onclick="clearBookSearch()"><i class="fas fa-eraser"></i> <span class="w3-hide-small">Limpar</span></button>
+    <button class="w3-white w3-border w3-btn w3-block" onclick="clearBookSearch()"><i class="fas fa-eraser"></i> <span class="w3-hide-small">{%trans%}clear{%endtrans%}</span></button>
   </div>
   <div class="w3-col l2 m6 s6">
-    <button class="w3-light-green w3-border w3-btn w3-block" onclick="searchValue()"><i class="fab fa-searchengin"></i> <span class="w3-hide-small">Procurar</span></button>
+    <button class="w3-light-green w3-border w3-btn w3-block" onclick="searchValue()"><i class="fab fa-searchengin"></i> <span class="w3-hide-small">{%trans%}search{%endtrans%}</span></button>
   </div>
 
 </div>
@@ -59,11 +59,11 @@ div.dataTables_length select {height: 50px}
   <table id="dataTables" class="w3-border table table-striped centered hover table-bordered" style="width:100%">
     <thead class="w3-sand">
       <tr>
-      <th>Reserva</th>    
-      <th>Estado</th>    
+      <th>{%trans%}booking{%endtrans%}</th>    
+      <th>{%trans%}status{%endtrans%}</th>    
       <th>Tour</th>    
       <th>Data</th>    
-      <th>Hora</th>    
+      <th>{%trans%}hour{%endtrans%}</th>    
       <th>Adulto</th>    
       <th>Criança</th>    
       <th>Bébé</th>
@@ -71,8 +71,8 @@ div.dataTables_length select {height: 50px}
       <th>Notas</th>    
       <th>Cliente</th>    
       <th>Email</th>    
-      <th>Morada</th>    
-      <th>Telefone</th>
+      <th>{%trans%}address{%endtrans%}</th>    
+      <th>{%trans%}phone{%endtrans%}</th>
       <th>Compra</th>
       <th>W.P.</th>    
       </tr>
@@ -110,19 +110,19 @@ div.dataTables_length select {height: 50px}
         <i class="fa fa-times"></i>
       </span>
       <h1>
-        <i class="fa fa-info-circle"></i> Confirme
+        <i class="fa fa-info-circle"></i> {%trans%}confirm{%endtrans%}
       </h1>
     </div>
     <div class="w3-border-bottom w3-container w3-padding">
-      <p class="w3-center w3-large">Insira o email e a password, para aceder aos dados do cliente</p>
+      <p class="w3-center w3-large">{%trans%}add_email_pass{%endtrans%}</p>
         <form id="get-card-data">
           <input type="hidden" name="booking">
           <div class="w3-row">
             <div class="w3-col s12">
-              <label>Utilizador *
-                <div class="required w3-text-red w3-hide username w3-small w3-right">Utilizador *</div>
+              <label>{%trans%}user{%endtrans%}
+                <div class="required w3-text-red w3-hide username w3-small w3-right">{%trans%}user{%endtrans%} *</div>
               </label>
-              <input type="text" name="username" class="w3-input w3-border" placeholder="Utilizador *">
+              <input type="text" name="username" class="w3-input w3-border" placeholder="{%trans%}user{%endtrans%} *">
             </div>
             <label>Password *
               <div class="required w3-text-red w3-small w3-hide pass">Password *</div>
@@ -145,10 +145,10 @@ div.dataTables_length select {height: 50px}
     <div class="w3-row-padding w3-border-top">
       <div class="w3-col s12 w3-margin-top w3-margin-bottom">
         <span class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green" onclick="getCardData()">
-          <i class="fa fa-check"></i> Enviar
+          <i class="fa fa-check"></i> {%trans%}submit{%endtrans%}
         </span>
         <span class="w3-btn-block w3-button w3-left w3-border w3-white" onclick="$('#modal-data-validate').hide(); $('.show-user-info').empty()">
-          <i class="fa fa-times"></i> Fechar
+          <i class="fa fa-times"></i> {%trans%}close{%endtrans%}
         </span>
       </div>
     </div>
@@ -213,7 +213,7 @@ $('.username').removeClass('w3-hide')
         }
         else{
           $('#info-client').show()                
-          $('#info-client-head').removeClass('w3-green w3-red w3-amber').addClass('w3-blue').html('<span onclick="$(\'#info-client\').hide()" class="w3-button w3-display-topright w3-large"><i class="fa fa-times"></i></span><h1><i class="fa fa-info-circle"></i> Verifique</h1>')
+          $('#info-client-head').removeClass('w3-green w3-red w3-amber').addClass('w3-blue').html('<span onclick="$(\'#info-client\').hide()" class="w3-button w3-display-topright w3-large"><i class="fa fa-times"></i></span><h1><i class="fa fa-info-circle"></i> {%trans%}check{%endtrans%}</h1>')
           $('#client-txt').html(data.message)
 
         }
@@ -287,7 +287,7 @@ $(function(){$("#get-card-data").trigger('reset')})
         //console.log(j.data)
         $('.w3-overlay, .table-overlay').hide()
         if( j.options > 1500){
-          $('#results_txt').html('+ de 1500 resultados, restrinja a pesquisa e tente novamente.')
+          $('#results_txt').html('{%trans%}more_1500{%endtrans%}')
           $('#results').removeClass('w3-hide')
           j.data = []
           $('.set-total, .set-canceled, .set-confirmed, .set-pending').text('-/-')
@@ -376,7 +376,7 @@ $(function(){$("#get-card-data").trigger('reset')})
         extend: 'colvis',
         columns: ':gt(0)',
         text:      '<i class="far fa-eye-slash"></i>',
-        titleAttr: 'Colunas',
+        titleAttr: '{%trans%}columns_show_hide{%endtrans%}',
         exportOptions: {
          columns: ':visible'
         }
@@ -391,16 +391,16 @@ $(function(){$("#get-card-data").trigger('reset')})
           //"searchable": false
         }
     ],
-    language: {
-        "lengthMenu": "Mostrar _MENU_ por pagina",
-        "zeroRecords": "0 Resultados",
-        "info": "Mostrar _PAGE_ de _PAGES_",
-        "infoEmpty": "Sem resultados",
-        "search": "Pesquisar",
+ language: {
+        "lengthMenu": "{%trans%}show{%endtrans%} _MENU_ {%trans%}per_page{%endtrans%}",
+        "zeroRecords": "0 {%trans%}results{%endtrans%}",
+        "info": "{%trans%}show{%endtrans%} _PAGE_ {%trans%}of{%endtrans%} _PAGES_",
+        "infoEmpty": "{%trans%}without{%endtrans%} {%trans%}results{%endtrans%}",
+        "search": "{%trans%}search{%endtrans%}",
         "paginate": {
-        "previous": "Anterior",
-        "next": "Seguinte",
-        }
+        "previous": "{%trans%}previous{%endtrans%}",
+        "next": "{%trans%}next{%endtrans%}",
+      }
     },
     "footerCallback": function ( row, data, start, end, display ) {
           var api = this.api(), data

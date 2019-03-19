@@ -63,13 +63,13 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
           {% endif %}
         </td>
         {% for locale in locales%}
-        <th>
+        <td>
           {% for translated in banner.locales_translated %}
             {% if locale.id == translated.local_id %}
             {{translated.name}}
             {% endif %}
         {% endfor %}
-        </th>
+        </td>
         {% endfor %}
         <td class="w3-center">
           {% if banner.text_active == 1 %}
@@ -139,7 +139,7 @@ function editBanner(id){
 }
 
 function deleteBannerConfirm(id,n){
-  $('#delete-banner').html('<p class="w3-center w3-large">Tem a certeza que pretende apagar a Imagem, <b>'+n+'</b> ?</p>')
+  $('#delete-banner').html('<p class="w3-center w3-large">{%trans%}sure_delete{%endtrans%}, <b>'+n+'</b> ?</p>')
   $('#delete-id').val(id)
   $('#modal-delete-banner').show()
 }

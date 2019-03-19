@@ -18,19 +18,19 @@ class UserType extends AbstractType
         $builder
             ->add('email', EmailType::class,
             array(
-                'label'=>'part_seven.email',
+                'label'=>'Email',
                 'required' => true,
-                'attr' => ['class' => 'w3-input w3-border w3-white EMAIL','placeholder'=>'part_seven.email',]
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email']
             ))
             ->add('username', TextType::class, array(
-                'label'=>'part_seven.name',
+                'label'=>'name',
                 'required' => true,
-                'attr' => ['class' => 'w3-input w3-border w3-white NAME','placeholder'=>'part_seven.name','autofocus'=>'autofocus']
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'name','autofocus'=>'autofocus']
             ))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password *', 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Password *']),
-                'second_options' => array('label' => 'Repetir Password *', 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Repetir Password *'])
+                'second_options' => array('label' => 'repeat_pass', 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder' => 'repeat_pass'])
             ))
         ;
     }

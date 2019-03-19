@@ -3,7 +3,7 @@
   <div class="wrapper" style="z-index:0">
     <div id="ei-slider" class="ei-slider">
       
-      <ul class="ei-slider-thumbs" style="transform: rotate(180deg);height:0px">
+      <ul class="ei-slider-thumbs w3-hide" style="transform: rotate(180deg);height:0px">
         <li class="ei-slider-element">Current</li>
         {% for banner in banners %}
           <li><a href="#">Slide {{loop.index}}</a><img style="transform: rotate(180deg)" src="/upload/banner/{{banner.image}}" alt="thumb{{loop.index}}" /></li>
@@ -16,7 +16,6 @@
           <img src="/upload/banner/{{banner.image}}" alt="image{{loop.index}}" />
           {% if banner.text_active %}
           <div class="ei-title">
-            <h2>{{banner.text}}</h2>
             <h3>{{banner.text}}</h3>
           </div>
           {% endif %}
@@ -26,7 +25,3 @@
   </div><!-- ei-slider -->
 </div><!-- wrapper -->
 </header>
-
-
-
-

@@ -104,15 +104,15 @@ function startCalendar(data){
       resourceTimeGridTwoDay: {
         type: 'resourceTimeGrid',
         duration: { days: 2 },
-        buttonText: '2 Dias'
+        buttonText: '2 {%trans%}days{%endtrans%}'
       },
       resourceTimeGridTreeDay: {
         type: 'resourceTimeGrid',
         duration: { days: 3 },
-        buttonText: '3 Dias'
+        buttonText: '3 {%trans%}days{%endtrans%}'
       },
       dayGridMonth: {
-        buttonText: 'Mês'
+        buttonText: '{%trans%}month{%endtrans%}'
       }
     },
     eventRender: function(info) {
@@ -182,10 +182,10 @@ $('.w3-overlay').show()
         $('.w3-overlay').hide()
         $('#modal-edit-stock').hide()
         if(data.status == 1)
-         $('.evt-'+data.data.id+' .fc-title').html('Total: '+data.data.lotation+' Disponivel: '+data.data.stock).addClass('blink')
+         $('.evt-'+data.data.id+' .fc-title').html('Total: '+data.data.lotation+' {%trans%}available{%endtrans%}: '+data.data.stock).addClass('blink')
         else {
           $('#info-client').show()                
-          $('#info-client-head').removeClass('w3-green w3-red w3-amber').addClass('w3-blue').html('<span onclick="$(\'#info-client\').hide()" class="w3-button w3-display-topright w3-large"><i class="fa fa-times"></i></span><h1><i class="fa fa-info-circle"></i> Verifique</h1>')
+          $('#info-client-head').removeClass('w3-green w3-red w3-amber').addClass('w3-blue').html('<span onclick="$(\'#info-client\').hide()" class="w3-button w3-display-topright w3-large"><i class="fa fa-times"></i></span><h1><i class="fa fa-info-circle"></i> {%trans%}check{%endtrans%}</h1>')
           $('#client-txt').html(data.message)
         }
       },
@@ -237,7 +237,7 @@ function deleteAvailable(){
 <input type="hidden" id="obj">
 
 <header class="w3-container" style="padding-top:22px">
-   <h5><b><i class="far fa-calendar-check"></i> Disponibilidades</b></h5>
+   <h5><b><i class="far fa-calendar-check"></i> {%trans%}available{%endtrans%}</b></h5>
 </header>
 
 <div id='calendar'></div>

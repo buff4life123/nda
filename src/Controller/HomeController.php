@@ -60,7 +60,9 @@ class HomeController extends AbstractController
         $cS = array();
 
         $locales = $em->getRepository(Locales::class)->findAll();
-        $warning = array();//$em->getRepository(Warning::class)->find(10);
+        
+        $warning = array();
+
         $company = $em->getRepository(Company::class)->find(1);
 
         $banners = $em->getRepository(Banner::class)->findBy(['isActive' => 'true']);
@@ -89,13 +91,13 @@ class HomeController extends AbstractController
         $about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $userLocale]);
         $category = $em->getRepository(Category::class)->findBy(['isActive' => 1],['orderBy' => 'ASC']);
         $categoryHl = $em->getRepository(Category::class)->findOneBy(['highlight' => 1],['orderBy' => 'ASC']);
-        $gallery = $em->getRepository(Gallery::class)->findBy(['isActive' => 1],['namePt' => 'DESC']);
+        $gallery = $em->getRepository(Gallery::class)->findBy(['isActive' => 1], ['orderBy' => 'ASC']);
         
         $cH = array(
             'adultAmount' => $moneyFormatter->format($categoryHl->getAdultPrice()),
             'childrenAmount'  => $moneyFormatter->format($categoryHl->getChildrenPrice()),
-            'namePt' => $categoryHl->getNamePt(),
-            'nameEn' => $categoryHl->getNameEn(),
+            'namePt' => '',
+            'nameEn' => '',
             'id' => $categoryHl->getId()
         );
         
@@ -154,11 +156,6 @@ class HomeController extends AbstractController
             );
     }
 
-
-
-
-
-
     public function setBooking(Request $request, MoneyFormatter $moneyFormatter, \Swift_Mailer $mailer){
                     
         $err = array();
@@ -168,8 +165,8 @@ class HomeController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         
         //IF FIELDS IS NULL PUT IN ARRAY AND SEND BACK TO USER
-        $request->request->get('name') ? $name = $request->request->get('name') : $err[] = 'NAME';
-        $request->request->get('email') ? $email = $request->request->get('email') : $err[] = 'EMAIL';
+        $request->request->get('name') ? $name = $request->request->get('name') : $err[] = 'name';
+        $request->request->get('email') ? $email = $request->request->get('email') : $err[] = 'Email';
         $request->request->get('address') ? $address = $request->request->get('address') : $err[] = 'ADDRESS';
         $request->request->get('telephone') ? $telephone = $request->request->get('telephone') : $err[] = 'TELEPHONE';
         $request->request->get('check_rgpd') && $request->request->get('check_rgpd') !== null  ? $rgpd = true : $err[] = 'RGPD';

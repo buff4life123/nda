@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Entity\Gallery;
+use App\Entity\Locales;
+use App\Entity\GalleryTranslation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,16 +33,31 @@ class GalleryController extends AbstractController
     public function galleryNew(Request $request)
     {
         $gallery = new Gallery();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $locales = $em->getRepository(Locales::class)->findAll();
+
         $form = $this->createForm(GalleryType::class, $gallery);
+        
         $form->handleRequest($request);
         return $this->render('admin/gallery-new.html',array(
-            'form' => $form->createView()));
+            'form' => $form->createView(),
+            'locales' => $locales));
     }
 
 
     public function galleryAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer)
     {
         $gallery = new Gallery();
+
+        $s = json_decode($request->request->get('locale'));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $locales = $em->getRepository(Locales::class)->findAll();
+
+        $totals = $em->getRepository(Gallery::class)->findAll();
 
         $form = $this->createForm(GalleryType::class, $gallery);
 
@@ -65,11 +82,38 @@ class GalleryController extends AbstractController
 
                 try {
 
+                    foreach ($s as $translated) {
+
+                        $locales = $em->getRepository(Locales::class)->find($translated->id);
+                        
+                        $galleryTranslation = new GalleryTranslation();
+                        
+                        $galleryTranslation->setLocales($locales);
+                        $galleryTranslation->setName($translated->name);
+                        $galleryTranslation->setGallery($gallery);
+                        $em->persist($galleryTranslation);
+                    }
+                    
+                    $gallery->setOrderBy(count($totals)+1);
                     $em->persist($gallery);
                     $em->flush();
 
                     $response = array(
-                        'result' => 1,
+                        'status' => 1,
+                        'message' => 'success',
+                        'data' => $gallery->getId(),
+                        'form' => $request->request->get('locale'),
+                        'ff' => $s[0]->id
+                    );
+
+
+
+                    $gallery->setOrderBy(count($totals)+1);
+                    $em->persist($gallery);
+                    $em->flush();
+
+                    $response = array(
+                        'status' => 1,
                         'message' => 'success',
                         'data' => $gallery->getId());
                     } 
@@ -78,14 +122,14 @@ class GalleryController extends AbstractController
                             $a = array("Contate administrador sistema sobre: ".$e->getMessage());
 
                         $response = array(
-                            'result' => 0,
+                            'status' => 0,
                             'message' => 'fail',
                             'data' => $a);
                     }
                 }
                 else{   
                     $response = array(
-                        'result' => 0,
+                        'status' => 0,
                         'message' => 'fail',
                         'data' => $this->getErrorMessages($form)
                     );
@@ -93,12 +137,39 @@ class GalleryController extends AbstractController
             }
             else
                 $response = array(
-                    'result' => 2,
+                    'status' => 2,
                     'message' => 'fail not submitted',
                     'data' => '');
 
         return new JsonResponse($response);
     }
+
+    public function galleryOrder(Request $request)
+    {
+        $result = $request->request->get('result');
+
+        if (!$result)
+        
+           return new JsonResponse(array('status'=> 0, 'message' => 'nada para ordenar', 'data' => null));
+
+        $order = json_decode($result);
+    
+        $em = $this->getDoctrine()->getManager();  
+
+        foreach ($order as $orderBy) {
+            $gallery = $em->getRepository(Gallery::class)->find($orderBy->id);
+            $gallery->setOrderBy($orderBy->to);
+            $em->persist($gallery);
+            $em->flush();
+        }
+
+        $response = array('status'=> 1, 'message' => 'success', 'data' => count($order));
+        
+        return new JsonResponse($response);
+
+    }
+
+
 
 
 
@@ -107,22 +178,51 @@ class GalleryController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $gallery = $em->getRepository(Gallery::class)->findAll();
+        $galleries = $em->getRepository(Gallery::class)->findAll([],['orderBy' => 'ASC']);
+
+        $locales = $em->getRepository(Locales::class)->findAll();
+
+        $b = array();
+        
+        foreach ($galleries as $gallery) {
+
+            $t = array();
+
+           foreach($gallery->getTranslation() as $translated){
+                $t[] = array(
+                    'local' => $translated->getLocales()->getName(),
+                    'name' => $translated->getName(),
+                    'local_id' => $translated->getLocales()->getId(),
+                );
+           }
+            $b[] = array(
+                'id' => $gallery->getId(),
+                'image' => $gallery->getImage(),
+                'is_active' => $gallery->getIsActive(),
+                'order_by' => $gallery->getOrderBy(),
+                'locales_translated' => $t,
+            );
+        }
 
         return $this->render('admin/gallery-list.html',array(
-            'galleries' =>  $gallery));
+            'galleries' =>  $b,
+            'locales' => $locales));
     }
 
 
 
     public function galleryShowEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
     {
-
-        $galleryId = $request->request->get('id');
         
         $em = $this->getDoctrine()->getManager();
 
-        $gallery = $em->getRepository(Gallery::class)->find($galleryId);
+        $id = $request->request->get('id');
+        
+        $locales = $em->getRepository(Locales::class)->findAll();
+
+        $totals = $em->getRepository(Gallery::class)->findAll();
+
+        $gallery = $em->getRepository(Gallery::class)->find($id);
 
         if ($gallery->getImage()) {
 
@@ -139,10 +239,32 @@ class GalleryController extends AbstractController
 
         $form = $this->createForm(GalleryType::class, $gallery);
 
+        if($gallery) {
+
+            $t = array();
+
+           foreach($gallery->getTranslation() as $translated){
+                $t[] = array(
+                    'local' => $translated->getLocales()->getName(),
+                    'name' => $translated->getName(),
+                    'local_id' => $translated->getId(),
+                );
+           }
+            $b[] = array(
+                'id' => $gallery->getId(),
+                'image' => $gallery->getImage(),
+                'is_active' => $gallery->getIsActive(),
+                'order_by' => $gallery->getOrderBy(),
+                'locales_translated' => $t,
+            );
+        }
+
         return $this->render('admin/gallery-edit.html',array(
             'form' => $form->createView(),
-            'gallery' => $gallery
-        ));
+            'gallery' => $gallery,
+            'locales' => $locales,
+            'totals' => count($totals)
+            ));
     }
 
 
@@ -151,11 +273,11 @@ class GalleryController extends AbstractController
     public function galleryEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
     {
 
-        $galleryId = $request->request->get('id');
+        $id = $request->request->get('id');
         
         $em = $this->getDoctrine()->getManager();
 
-        $gallery = $em->getRepository(Gallery::class)->find($galleryId);
+        $gallery = $em->getRepository(Gallery::class)->find($id);
 
         $img = $gallery->getImage();
 
@@ -208,11 +330,37 @@ class GalleryController extends AbstractController
                     $gallery->setImage($img);
 
                 try {
+
+                    $t = json_decode($request->request->get('translated'));
+
+                    foreach ($t as $translated) {
+                    
+                        $galleryTranslation = $em->getRepository(GalleryTranslation::class)->find($translated->id);
+                    
+                        if(!$galleryTranslation){
+
+                            $locales = $em->getRepository(Locales::class)->find($translated->locale_id);
+                        
+                            $galleryTranslation = new galleryTranslation();
+                        
+                            $galleryTranslation->setLocales($locales);
+                            $galleryTranslation->setName($translated->name);
+                            $galleryTranslation->setGallery($gallery);
+                            $em->persist($galleryTranslation);
+                        }
+                        else{
+                            $galleryTranslation->setName($translated->name);
+                            $em->persist($galleryTranslation);
+                        }
+                    }
+
+
+                    $gallery->setOrderBy($request->request->get('order_by'));
                     $em->persist($gallery);
                     $em->flush();
 
                     $response = array(
-                        'result' => 1,
+                        'status' => 1,
                         'message' => 'success',
                         'image' => $deleted,
                         'data' => $gallery->getId());
@@ -222,7 +370,7 @@ class GalleryController extends AbstractController
                         $a = array("Contate administrador sistema sobre: ".$e->getMessage());
 
                     $response = array(
-                        'result' => 0,
+                        'status' => 0,
                         'message' => 'fail',
                         'data' => $a);
                 }
@@ -230,7 +378,7 @@ class GalleryController extends AbstractController
             
             else{   
                 $response = array(
-                    'result' => 0,
+                    'status' => 0,
                     'message' => 'fail',
                     'data' => $this->getErrorMessages($form)
                 );
@@ -290,20 +438,7 @@ class GalleryController extends AbstractController
         }
 
         foreach ($errors as $error) {
-            if ($error == 'NAME_PT')
-                $err [] = 'Nome (PT)*';
-            else if ($error == 'NAME_EN')
-                $err [] = 'Nome (EN)*';
-            else if ($error == 'DESCRIPTION_PT')
-                $err [] = 'Descrição (PT)*';
-            else if ($error == 'DESCRIPTION_EN')
-                $err [] = 'Descrição (EN)*';
-            else if ($error == 'ADULT_PRICE')
-                $err [] = 'Preço Adulto (€)*';
-            else if ($error == 'CHILDREN_PRICE')
-                $err [] = 'Preço Criança (€)*';
-            else 
-                $err [] = $error;
+            $err [] = $error;
         }
 
         return $err;
