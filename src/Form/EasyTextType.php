@@ -25,9 +25,9 @@ class EasyTextType extends AbstractType
             ))
             ->add('name', TextType::class,
                 array(
-                'label' => 'Titulo *', 
+                'label' => 'name', 
                 'required' => false,
-                'attr' => ['class' => 'w3-input w3-border w3-white w3-margin-bottom','placeholder'=>'Titulo *']
+                'attr' => ['class' => 'w3-input w3-border w3-white w3-margin-bottom','placeholder'=>'name']
             ))
         ;
     }

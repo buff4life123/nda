@@ -4,32 +4,20 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Money\Money;
-
 
 /**
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 
-class Category
+class Product
 {
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;   
-    /**
-     * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="NAME_PT")
-     */
-    private $namePt;
-    /**
-     * @Assert\NotBlank(message="NAME_EN")
-     * @ORM\Column(type="string", length=50)
-     */
-    private $nameEn;
+    private $id;
     /**
      * @Assert\NotBlank(message="DESCRIPTION_PT")
      * @ORM\Column(type="string", length=350)
@@ -50,21 +38,7 @@ class Category
      * @ORM\Column(type="string", length=350, name="warranty_payment_en", nullable=true)
      */
     private $warrantyPaymentEn;
-    /**
-    * @Assert\NotBlank(message="CHILDREN_PRICE")
-    * @ORM\Column(type="money", options={"unsigned"=true}) 
-    */
-    private $childrenPrice;
-    /**
-    * @Assert\NotBlank(message="ADULT_PRICE")
-    * @ORM\Column(type="money", options={"unsigned"=true})
-    */
-    private $adultPrice;
-    
-    /** @ORM\OneToMany(targetEntity="Blockdates", mappedBy="category", cascade={"persist"}) */
-    private $blockdate;
-    
-    /** @ORM\OneToMany(targetEntity="Event", mappedBy="category", cascade={"persist"}) */
+    /** @ORM\OneToMany(targetEntity="Event", mappedBy="product", cascade={"persist"}) */
     private $event;
 
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
@@ -83,9 +57,6 @@ class Category
     
     /** @ORM\Column(type="boolean", name="warranty_payment", options={"default":0}) */
     private $warrantyPayment = false;
-    
-    /** @ORM\OneToMany(targetEntity="Available", mappedBy="category") */
-    private $available;
 
      /** @ORM\Column(type="string", length=5, name="duration", options={"default":"00:00"})*/
     private $duration; 
@@ -95,10 +66,8 @@ class Category
 
     public function __construct()
     {   
-        
         $this->available = new ArrayCollection();
-        $this->event = new ArrayCollection();
-        $this->blockdate = new ArrayCollection();      
+        $this->event = new ArrayCollection();     
     }
 
     public function getWarrantyPayment()
@@ -196,26 +165,6 @@ class Category
         return $this->id;
     }
 
-    public function getNamePt()
-    {
-        return $this->namePt;
-    }
-
-    public function setNamePt($namePt)
-    {
-        $this->namePt = str_replace("'","’",$namePt);
-    }
-
-    public function getNameEn()
-    {
-        return $this->nameEn;
-    }
-
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = str_replace("'","’",$nameEn);
-    }
-
     public function getDescriptionPt()
     {
         return $this->descriptionPt;
@@ -248,7 +197,7 @@ class Category
     
     public function addEvent(Event $event)
     {
-        $event->setCategory($this);
+        $event->setProduct($this);
         $this->event->add($event);
     }
     
@@ -269,7 +218,7 @@ class Category
     
     public function addAvailable(Available $available)
     {
-        $available->setCategory($this);
+        $available->setProduct($this);
         $this->available->add($available);
     }
     
@@ -277,53 +226,4 @@ class Category
     {
         $this->available->removeElement($available);
     }
-
-    /** 
-     * @return \Money\Money
-     */
-    public function getAdultPrice()
-    {
-        return $this->adultPrice;
-    }
-
-    public function setAdultPrice(Money $adultPrice)
-    {
-        $this->adultPrice = $adultPrice;
-    }
-
-    /** 
-     * @return \Money\Money
-    */
-    public function getChildrenPrice()
-    {
-        return $this->childrenPrice;
-    }
-
-    public function setChildrenPrice(Money $childrenPrice)
-    {
-        $this->childrenPrice = $childrenPrice;
-    }
-
-
-    public function getBlockDate()
-    {
-        return $this->blockdate;
-    }
-
-    public function setBlockDate(Blockdates $blockdate)
-    {
-        $this->blockdate = $blockdate;
-    }
-    
-    public function addBlockDate(Blockdates $blockdate)
-    {
-        $blockdate->setCategory($this);
-        $this->blockdate->add($blockdate);
-    }
-    
-    public function removeBlockDate(Blockdates $blockdate)
-    {
-        $this->blockdate->removeElement($blockdate);
-    }
-
 }

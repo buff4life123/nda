@@ -10,7 +10,7 @@ use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\PessimisticLockException;
 //LockMode::PESSIMISTIC_WRITE
 use App\Entity\Booking;
-use App\Entity\Category;
+use App\Entity\Product;
 use App\Entity\Company;
 use App\Entity\Menu;
 use App\Entity\Banner;
@@ -61,21 +61,44 @@ class HomeController extends AbstractController
 
         $locales = $em->getRepository(Locales::class)->findAll();
         
-        $warning = array();
+        $warnings = $em->getRepository(Warning::class)->findOneBy(['is_active' => 'true']);
 
         $company = $em->getRepository(Company::class)->find(1);
 
         $banners = $em->getRepository(Banner::class)->findBy(['isActive' => 'true']);
 
-        $b = array();
+        $about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $userLocale]);
+        
+        $product = $em->getRepository(Product::class)->findBy(['isActive' => 1],['orderBy' => 'ASC']);
+        
+        $productHl = $em->getRepository(Product::class)->findOneBy(['highlight' => 1],['orderBy' => 'ASC']);
+        
+        $galleries = $em->getRepository(Gallery::class)->findBy(['isActive' => 1], ['orderBy' => 'ASC']);
 
+
+        $w = array();
+        if ($warnings)
+        //foreach ($warnings as $warning)
+            $w = array('text' => $warnings->getCurrentTranslation($userLocale));
+        
+        
+        $b = array();
         foreach ($banners as $banner) {
-            $b []= array( 
+            $b[] = array( 
                 'text' => $banner->getCurrentTranslation($userLocale),
                 'image' => $banner->getImage(),
                 'text_active' => $banner->getTextActive(),
             );
         }
+
+        $g = array();
+        foreach ($galleries as $gallery) {
+            $g []= array( 
+                'text' => $gallery->getCurrentTranslation($userLocale),
+                'image' => $gallery->getImage()
+            );
+        }
+
 
         $menus = $em->getRepository(Menu::class)->findAll(['link_active' => 'true']);
 
@@ -87,29 +110,24 @@ class HomeController extends AbstractController
                 'id' => $menu->getId()
             );
         }
-
-        $about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $userLocale]);
-        $category = $em->getRepository(Category::class)->findBy(['isActive' => 1],['orderBy' => 'ASC']);
-        $categoryHl = $em->getRepository(Category::class)->findOneBy(['highlight' => 1],['orderBy' => 'ASC']);
-        $gallery = $em->getRepository(Gallery::class)->findBy(['isActive' => 1], ['orderBy' => 'ASC']);
         
-        $cH = array(
-            'adultAmount' => $moneyFormatter->format($categoryHl->getAdultPrice()),
-            'childrenAmount'  => $moneyFormatter->format($categoryHl->getChildrenPrice()),
+        $cH = array(/*
+            'adultAmount' => $moneyFormatter->format($productHl->getAdultPrice()),
+            'childrenAmount'  => $moneyFormatter->format($productHl->getChildrenPrice()),
             'namePt' => '',
             'nameEn' => '',
-            'id' => $categoryHl->getId()
+            'id' => $productHl->getId()*/
         );
         
         $now = new \DateTime('tomorrow');
 
-        foreach ($category as $categories){
+        foreach ($product as $products){
 
             $flag = true;
             $ord = array();
 
-            if($categories->getAvailable()){
-                foreach ($categories->getAvailable() as $available)
+            if($products->getAvailable()){
+                foreach ($products->getAvailable() as $available)
                    array_push($ord, $available->getDatetimeStart()->format('U'));
                     
                 sort($ord);
@@ -120,33 +138,33 @@ class HomeController extends AbstractController
                 }
             }
 
-            $s = explode(":",$categories->getDuration());
+            $s = explode(":",$products->getDuration());
             $minutes = (int)$s[0]*60 + (int)$s[1];
             
-            $cS[]= array(
-                'adultAmount' => $moneyFormatter->format($categories->getAdultPrice()),
-                'childrenAmount'  => $moneyFormatter->format($categories->getChildrenPrice()),
-                'namePt' => $categories->getNamePt(),
-                'nameEn' => $categories->getNameEn(),
-                'descriptionPt' => $categories->getDescriptionPt(),
-                'descriptionEn' => $categories->getDescriptionEn(),
-                'image' => $categories->getImage(),
-                'id' => $categories->getId(),
-                'warrantyPayment' => $categories->getwarrantyPayment(),
-                'warrantyPaymentPt' => $categories->getwarrantyPaymentPt(),
-                'warrantyPaymentEn' => $categories->getwarrantyPaymentEn(),
+            $cS[]= array(/*
+                'adultAmount' => $moneyFormatter->format($products->getAdultPrice()),
+                'childrenAmount'  => $moneyFormatter->format($products->getChildrenPrice()),
+                'namePt' => $products->getNamePt(),
+                'nameEn' => $products->getNameEn(),
+                'descriptionPt' => $products->getDescriptionPt(),
+                'descriptionEn' => $products->getDescriptionEn(),
+                'image' => $products->getImage(),
+                'id' => $products->getId(),
+                'warrantyPayment' => $products->getwarrantyPayment(),
+                'warrantyPaymentPt' => $products->getwarrantyPaymentPt(),
+                'warrantyPaymentEn' => $products->getwarrantyPaymentEn(),
                 'duration' => $minutes,
-                'no_stock' => $flag,
+                'no_stock' => $flag*/
             );
         }
         return $this->render('base.html.twig', 
             array(
                 'colors'=> $this->color(),
-                'warning' => $warning,
-                'categories' => $cS,
+                'warning' => $w,
+                'products' => $cS,
                 'browser' => $ua,
-                'category' => $cH,
-                'galleries' => $gallery,
+                'product' => $cH,
+                'galleries' => $g,
                 'locales' => $locales, 
                 'company' => $company,
                 'about' => $about,
@@ -239,9 +257,9 @@ class HomeController extends AbstractController
         $amountC = Money::EUR(0);
         $total = Money::EUR(0);
 
-        $amountA = $available->getCategory()->getAdultPrice();
+        $amountA = $available->getProduct()->getAdultPrice();
         $amountA = $amountA->multiply($userEvent->adult);
-        $amountC = $available->getCategory()->getChildrenPrice();
+        $amountC = $available->getProduct()->getChildrenPrice();
         $amountC = $amountC->multiply($userEvent->children);
         $total = $amountA->add($amountC);   
 
@@ -269,14 +287,14 @@ class HomeController extends AbstractController
             $client->setLocale($locales);
 
             //wp is set check if data from client isset
-            if($available->getCategory()->getWarrantyPayment() && $wp){
+            if($available->getProduct()->getWarrantyPayment() && $wp){
                 $client->setCardName($name_card);
                 $client->setCvv($cvv);
                 $client->setCardDate($date_card);
                 $client->setCardNr($card_nr);
             }
 
-            else if($available->getCategory()->getWarrantyPayment() && !$wp){
+            else if($available->getProduct()->getWarrantyPayment() && !$wp){
 
                 $err[] = 'WP_SET_NO_CC_DATA';
                 $response = array(
@@ -345,7 +363,7 @@ class HomeController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $category = $booking->getAvailable()->getCategory();
+        $product = $booking->getAvailable()->getProduct();
 
         $company = $em->getRepository(Company::class)->find(1);
 
@@ -359,7 +377,7 @@ class HomeController extends AbstractController
             ->setUsername($company->getEmail())
             ->setPassword($company->getEmailPass());       
 
-        $locale->getName() == 'pt_PT' ? $category->getNamePt() : $category->getNameEn();
+        $locale->getName() == 'pt_PT' ? $product->getNamePt() : $product->getNameEn();
 
         $mailer = new \Swift_Mailer($transport);
                     
@@ -377,13 +395,13 @@ class HomeController extends AbstractController
                         'username' => $client->getUsername(),
                         'email' => $client->getEmail(),
                         'status' => $this->translateStatus('PENDING', $locale ->getName()),
-                        'tour' => $locale->getName() == 'pt_PT' ? $category->getNamePt() : $category->getNameEn(),
+                        'tour' => $locale->getName() == 'pt_PT' ? $product->getNamePt() : $product->getNameEn(),
                         'date' => $booking->getAvailable()->getDatetimeStart()->format('d/m/Y'),
                         'hour' =>  $booking->getAvailable()->getDatetimeStart()->format('H:i'),
                         'adult' => $booking->getAdult(),
                         'children' => $booking->getChildren(),
                         'baby' => $booking->getBaby(),
-                        'wp' => $category->getWarrantyPayment(),
+                        'wp' => $product->getWarrantyPayment(),
                         'logo' => '/upload/gallery/'.$company->getLogo(),
                         'terms' => !$terms ? '' : $terms->getName(),
                         'terms_txt' => !$terms ? '' : $terms->getTermsHtml(),

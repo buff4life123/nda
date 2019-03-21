@@ -12,8 +12,8 @@
         <div class="w3-col l4 m12 s12 w3-margin-bottom">
           <label><i class="fa fa-calendar-o"></i> {% trans %} events {% endtrans %}</label>
           <select class="w3-input w3-border w3-select" name="tour">
-             {% for category in categories %}
-             <option value="{{category.id}}">{{category.namePt}}</option>
+             {% for product in products %}
+             <option value="{{product.id}}">{{product.namePt}}</option>
              {% endfor %}
           </select>
         </div>

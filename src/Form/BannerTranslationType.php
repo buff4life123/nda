@@ -25,12 +25,12 @@ class BannerTranslationType extends AbstractType
     {
         $builder
             ->add('is_active', CheckboxType::class, array(
-                'label'    => 'Texto Ativo?',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('name', TextType::class, array(
-                'label' => 'Texto',
+                'label' => 'text',
                 'required' => false,
                 'attr' => ['class' => 'w3-input w3-border w3-white']
             ))
@@ -40,7 +40,7 @@ class BannerTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Category::class,
+            'data_class' => BannerTranslation::class,
         ));
     }*/
 }

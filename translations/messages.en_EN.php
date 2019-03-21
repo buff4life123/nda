@@ -1,5 +1,8 @@
 <?php
 return array(
+    'best_first' => 'Get the best offers first!',
+    'join_newsletter' => 'Join our newsletter.',
+    'change' => 'Change',
     'email_easy_text'=>'Email Easy Text',
     'end' => 'End',
     'start' =>'Start',

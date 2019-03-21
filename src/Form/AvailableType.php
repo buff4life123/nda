@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Available;
-use App\Entity\Category;
+use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,18 +21,18 @@ class AvailableType extends AbstractType
     {
         $builder
         ->add('datetime', TextType::class, [
-            'label' => 'Inicio'])
+            'label' => 'start'])
 
-            ->add('category', EntityType::class, array(
-                    'class' => Category::class,
+            ->add('product', EntityType::class, array(
+                    'class' => Product::class,
                     'choice_label' => 'namePt',
-                    'placeholder' => 'Categoria',
-                    'label' => 'categoria'              
+                    'placeholder' => 'product',
+                    'label' => 'product'              
             ))
             ->add('submit', SubmitType::class,
             array(
-                'label' => 'part_seven.submit',
-                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top SAVE']
+                'label' => 'submit',
+                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
             ))
         ;
     }
@@ -40,7 +40,7 @@ class AvailableType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Category::class,
+            'data_class' => Available::class,
         ));
     }*/
 }

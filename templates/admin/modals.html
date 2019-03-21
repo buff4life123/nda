@@ -36,10 +36,10 @@
   </div>
 </div>
 
-<div id="modal-delete-category" class="w3-modal" style="z-index: 9999999;padding-top: 12px; padding-bottom: 32px">
+<div id="modal-delete-product" class="w3-modal" style="z-index: 9999999;padding-top: 12px; padding-bottom: 32px">
   <div class="w3-modal-content w3-animate-zoom" style="max-width:400px">
     <div class="w3-container w3-red w3-padding">
-      <span onclick="$('#modal-delete-category').hide()" class="w3-padding w3-button w3-display-topright">
+      <span onclick="$('#modal-delete-product').hide()" class="w3-padding w3-button w3-display-topright">
         <i class="w3-xlarge fa fa-times"></i>
       </span>
       <h2>
@@ -47,14 +47,14 @@
         <span>{%trans%}delete{%endtrans%} ?<input type="hidden" id="delete-id"></span>
       </h2>
     </div>
-    <div class="w3-container w3-padding" id="delete-category">
+    <div class="w3-container w3-padding" id="delete-product">
     </div>
     <div class="w3-row-padding w3-border-top">
       <div class="w3-col s12 w3-margin-top w3-margin-bottom">
-        <span class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green" onclick="deleteCategory($('#delete-id').val())">
+        <span class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green" onclick="deleteProduct($('#delete-id').val())">
           <i class="fas fa-trash-alt"></i> {%trans%}delete{%endtrans%}
         </span>
-        <span class="w3-btn-block w3-button w3-left w3-border w3-white" onclick="$('#modal-delete-category').hide()">
+        <span class="w3-btn-block w3-button w3-left w3-border w3-white" onclick="$('#modal-delete-product').hide()">
           <i class="fa fa-times"></i> {%trans%}close{%endtrans%}
         </span>
       </div>
@@ -228,7 +228,7 @@
         <i class="w3-xlarge fa fa-times"></i>
       </span>
       <h2>
-        <i class="far fa-edit fa-fw"></i>Alterar Disponibilidade ? <br>
+        <i class="far fa-edit fa-fw"></i>{%trans%}change{%endtrans%} {%trans%}available{%endtrans%} ? <br>
       </h2>
     </div>
     <form id="set-stock">
@@ -263,10 +263,10 @@
   </div>
 </div>
 
-<div id="modal-edit-category" class="w3-modal" style="z-index:9999999;padding-top: 12px;padding-bottom:32px">
+<div id="modal-edit-product" class="w3-modal" style="z-index:9999999;padding-top: 12px;padding-bottom:32px">
   <div class="w3-modal-content w3-animate-zoom" style="min-width:95%">
     <div class="w3-container w3-blue w3-padding">
-      <span onclick="$('#modal-edit-category').hide()" class="w3-padding w3-button w3-display-topright">
+      <span onclick="$('#modal-edit-product').hide()" class="w3-padding w3-button w3-display-topright">
         <i class="w3-xlarge fa fa-times"></i>
       </span>
       <h2>
@@ -274,13 +274,13 @@
         <span id="set-id"></span>
       </h2>
     </div>
-    <div class="w3-container w3-padding" id="set-category"></div>
+    <div class="w3-container w3-padding" id="set-product"></div>
     <div class="w3-row-padding w3-border-top">
       <div class="w3-col s12 w3-margin-top w3-margin-bottom">
-        <span class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green" onclick="$('#category-form').trigger('submit')">
+        <span class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green" onclick="$('#product-form').trigger('submit')">
           <i class="fa fa-check"></i> {%trans%}save{%endtrans%}
         </span>
-        <span class="w3-btn-block w3-button w3-left w3-border w3-white" onclick="$('#modal-edit-category').hide()">
+        <span class="w3-btn-block w3-button w3-left w3-border w3-white" onclick="$('#modal-edit-product').hide()">
           <i class="fa fa-times"></i> {%trans%}close{%endtrans%}
         </span>
       </div>

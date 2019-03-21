@@ -91,8 +91,7 @@ class Gallery
 
             foreach ($this->getTranslation() as $translation){
                 if( $locales->getName() == $translation->getLocales()->getName())
-                    if($this->getTextActive())
-                        $txt = $translation->getName();
+                    $txt = $translation->getName();
             }
         }
         return $txt;

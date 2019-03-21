@@ -5,17 +5,17 @@ $(function(){
 })
 
 function ajaxUpload(block){
-    block == 'category-new' || block == 'category-list' ? false : $('#category').removeClass('w3-show')
+    block == 'product-new' || block == 'product-list' ? false : $('#product').removeClass('w3-show')
 
     switch (block){
         case 'dashboard': 
             url = '{{ path("admin_dashboard") }}' 
         break
-        case 'category-new': 
-            url = '{{ path("admin_category_new") }}' 
+        case 'product-new': 
+            url = '{{ path("admin_product_new") }}' 
         break
-        case 'category-list': 
-            url = '{{ path("admin_category_list") }}' 
+        case 'product-list': 
+            url = '{{ path("admin_product_list") }}' 
         break
         case 'gallery-new': 
             url = '{{ path("admin_gallery_new") }}' 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Category;
+use App\Entity\Product;
 use App\Entity\Booking;
 use App\Entity\BlockDates;
 use App\Entity\Event;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use App\Form\CategoryType;
+use App\Form\ProductType;
 use App\Service\FileUploader;
 use App\Service\ImageResizer;
 use Symfony\Component\Filesystem\Filesystem;
@@ -22,35 +22,35 @@ use Doctrine\DBAL\DBALException;
 use App\Service\MoneyFormatter;
 
 
-class CategoryController extends AbstractController
+class ProductController extends AbstractController
 {
 
-    private $categories_images_directory;
+    private $products_images_directory;
     
-    public function __construct($categories_images_directory)
+    public function __construct($products_images_directory)
     {
-        $this->categories_images_directory = $categories_images_directory;
+        $this->products_images_directory = $products_images_directory;
     }
     
-    public function categoryNew(Request $request)
+    public function productNew(Request $request)
     {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-        return $this->render('admin/category-new.html',array(
+        return $this->render('admin/product-new.html',array(
             'form' => $form->createView()));
     }
 
 
-    public function categoryAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer)
+    public function productAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer)
     {
-        $category = new Category();
+        $product = new Product();
         
         $em = $this->getDoctrine()->getManager();
 
-        $totals = $em->getRepository(Category::class)->findAll();
+        $totals = $em->getRepository(Product::class)->findAll();
 
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(ProductType::class, $product);
 
         $form->handleRequest($request);
 
@@ -60,31 +60,31 @@ class CategoryController extends AbstractController
 
                     $em = $this->getDoctrine()->getManager();
 
-                    $file = $category->getImage();
+                    $file = $product->getImage();
 
                     if ($file) {
                         $fileName = $fileUploader->upload($file);               
                         $imageResizer->resize($fileName);
-                        $category->setImage($fileName);
+                        $product->setImage($fileName);
                     }
                     else{
-                        $category->setImage($this->categories_images_directory.'/no-image.png');
+                        $product->setImage($this->products_images_directory.'/no-image.png');
                     }
 
                 try {
                     
-                    $category->setOrderBy(count($totals)+1);
-                    $em->persist($category);
+                    $product->setOrderBy(count($totals)+1);
+                    $em->persist($product);
                     $em->flush();
 
-                    ///$category->setOrderBy(count($totals));
-                    //$em->persist($category);
+                    ///$product->setOrderBy(count($totals));
+                    //$em->persist($product);
                     //$em->flush();
 
                     $response = array(
                         'result' => 1,
                         'message' => 'success',
-                        'data' => $category->getId());
+                        'data' => $product->getId());
                     } 
                     catch(DBALException $e){
 
@@ -119,16 +119,16 @@ class CategoryController extends AbstractController
     }
 
 
-    public function categoryList(Request $request, MoneyFormatter $moneyFormatter)
+    public function productList(Request $request, MoneyFormatter $moneyFormatter)
     {
         $em = $this->getDoctrine()->getManager();
      
         //$events = $em->getRepository(Event::class)->findAll();
-        $categories = $em->getRepository(Category::class)->findBy([],['orderBy' => 'ASC']);
+        $products = $em->getRepository(Product::class)->findBy([],['orderBy' => 'ASC']);
 
         $cA = array();
 
-        foreach ($categories as $c){
+        foreach ($products as $c){
             
             foreach ($c->getEvent() as $evt)
                 $ev = $evt->getEvent();
@@ -153,69 +153,69 @@ class CategoryController extends AbstractController
              );
 
         }    
-        return $this->render('admin/category-list.html', array(
-            'categories' =>  $cA));
+        return $this->render('admin/product-list.html', array(
+            'products' =>  $cA));
     }
 
 
 
-    public function categoryShowEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
+    public function productShowEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
     {
 
-        $categoryId = $request->request->get('id');
+        $productId = $request->request->get('id');
         
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository(Category::class)->find($categoryId);
+        $product = $em->getRepository(Product::class)->find($productId);
 
-        if ($category->getImage()) {
+        if ($product->getImage()) {
 
-            $path = file_exists($this->categories_images_directory.'/'.$category->getImage()) ?
-                $this->categories_images_directory.'/'.$category->getImage()
+            $path = file_exists($this->products_images_directory.'/'.$product->getImage()) ?
+                $this->products_images_directory.'/'.$product->getImage()
                 :
-                $this->categories_images_directory.'/no-image.png';
+                $this->products_images_directory.'/no-image.png';
 
-            $category->setImage(new File($path));
+            $product->setImage(new File($path));
         }
 
         else
-            $category->setImage(new File($this->categories_images_directory.'/no-image.png'));
+            $product->setImage(new File($this->products_images_directory.'/no-image.png'));
 
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(ProductType::class, $product);
 
-        return $this->render('admin/category-edit.html',array(
+        return $this->render('admin/product-edit.html',array(
             'form' => $form->createView(),
-            'category' => $category
+            'product' => $product
         ));
     }
 
 
-    public function categoryEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
+    public function productEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
     {
-        $categoryId = $request->request->get('id');
+        $productId = $request->request->get('id');
         
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository(Category::class)->find($categoryId);
+        $product = $em->getRepository(Product::class)->find($productId);
 
-        $img = $category->getImage();
+        $img = $product->getImage();
 
-        if ($category->getImage()) {
+        if ($product->getImage()) {
             
-            $path = file_exists($this->categories_images_directory.'/'.$category->getImage()) ?
+            $path = file_exists($this->products_images_directory.'/'.$product->getImage()) ?
 
-            $this->categories_images_directory.'/'.$category->getImage()
+            $this->products_images_directory.'/'.$product->getImage()
             :
-            $this->categories_images_directory.'/no-image.png';
+            $this->products_images_directory.'/no-image.png';
 
-            $category->setImage(new File($path));
+            $product->setImage(new File($path));
         }
 
         else
 
-            $category->setImage(new File($this->categories_images_directory.'/no-image.png'));
+            $product->setImage(new File($this->products_images_directory.'/no-image.png'));
 
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(ProductType::class, $product);
 
         $form->handleRequest($request);
             
@@ -224,13 +224,13 @@ class CategoryController extends AbstractController
             if($form->isValid()){ 
                 
                 $deleted = 1;
-                $category = $form->getData();
-                $file = $category->getImage();
+                $product = $form->getData();
+                $file = $product->getImage();
 
                 if (is_object($file)) {
                     $fileName = $fileUploader->upload($file);               
                     $imageResizer->resize($fileName);
-                    $category->setImage($fileName);
+                    $product->setImage($fileName);
                     
                     //remove from folder older image
 
@@ -238,7 +238,7 @@ class CategoryController extends AbstractController
 
                     if ($img && $img != 'no-image.png') {
                         try {
-                            $fileSystem->remove($this->categories_images_directory.'/'.$img);
+                            $fileSystem->remove($this->products_images_directory.'/'.$img);
                         } 
                         catch (IOExceptionInterface $exception) {
                             $deleted = '0 '.$exception->getPath();
@@ -246,17 +246,17 @@ class CategoryController extends AbstractController
                     }
                 }
                 else
-                    $category->setImage($img);
+                    $product->setImage($img);
 
                 try {
-                    $em->persist($category);
+                    $em->persist($product);
                     $em->flush();
 
                     $response = array(
                         'result' => 1,
                         'message' => 'success',
                         'image' => $deleted,
-                        'data' => $category->getId());
+                        'data' => $product->getId());
                 } 
                 catch(DBALException $e){
 
@@ -287,30 +287,30 @@ class CategoryController extends AbstractController
         return new JsonResponse($response);
     }
 
-    public function categoryDelete(Request $request)
+    public function productDelete(Request $request)
     {
         $deleted = 1;
         $response = array();
-        $categoryId = $request->request->get('id');
+        $productId = $request->request->get('id');
         $em = $this->getDoctrine()->getManager();
         
-        $category = $em->getRepository(Category::class)->find($categoryId);
+        $product = $em->getRepository(Product::class)->find($productId);
         
-        if (!$category) {
-            return new JsonResponse(array('status'=> 0, 'message' => 'Categoria #'.$categoryId . ' não existe.'));
+        if (!$product) {
+            return new JsonResponse(array('status'=> 0, 'message' => 'Categoria #'.$productId . ' não existe.'));
         }
         
-        //search bookings if already bought this category, DO NOT DELETE send info to user
-        $booking = $em->getRepository(Booking::class)->findDeleteCategory($category);
+        //search bookings if already bought this product, DO NOT DELETE send info to user
+        $booking = $em->getRepository(Booking::class)->findDeleteProduct($product);
         
         if (count($booking) > 0)
-            return new JsonResponse(array('status'=> 0, 'message' => $category->getNamePt() . ' não pode ser apagada. Já existem Reservas associadas'));
+            return new JsonResponse(array('status'=> 0, 'message' => $product->getNamePt() . ' não pode ser apagada. Já existem Reservas associadas'));
 
         else{
 
-            $blocked = $em->getRepository(BlockDates::class)->findOneBy(['category' => $category]);
-            $event = $em->getRepository(Event::class)->findOneBy(['category' => $category]);
-            $available = $em->getRepository(Available::class)->findAll(['category' => $category]);
+            $blocked = $em->getRepository(BlockDates::class)->findOneBy(['product' => $product]);
+            $event = $em->getRepository(Event::class)->findOneBy(['product' => $product]);
+            $available = $em->getRepository(Available::class)->findAll(['product' => $product]);
             
             if($available)
 
@@ -319,10 +319,10 @@ class CategoryController extends AbstractController
                     $em->flush();
                 }
 
-            $img = $category->getImage();
+            $img = $product->getImage();
             $em->remove($blocked);
             $em->remove($event);
-            $em->remove($category);
+            $em->remove($product);
             $em->flush();
 
             //remove from folder image
@@ -331,7 +331,7 @@ class CategoryController extends AbstractController
 
             if ($img && $img != 'no-image.png') {
                 try {
-                    $fileSystem->remove($this->categories_images_directory.'/'.$img);
+                    $fileSystem->remove($this->products_images_directory.'/'.$img);
                 } 
                 catch (IOExceptionInterface $exception) {
                     $deleted = '0 '.$exception->getPath();
@@ -344,7 +344,7 @@ class CategoryController extends AbstractController
     }
 
 
-    public function categoryOrder(Request $request)
+    public function productOrder(Request $request)
     {
         $result = $request->request->get('result');
 
@@ -357,9 +357,9 @@ class CategoryController extends AbstractController
         $em = $this->getDoctrine()->getManager();  
 
         foreach ($order as $orderBy) {
-            $category = $em->getRepository(Category::class)->find($orderBy->id);
-            $category->setOrderBy($orderBy->to);
-            $em->persist($category);
+            $product = $em->getRepository(Product::class)->find($orderBy->id);
+            $product->setOrderBy($orderBy->to);
+            $em->persist($product);
             $em->flush();
         }
 

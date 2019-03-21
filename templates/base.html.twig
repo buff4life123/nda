@@ -2,16 +2,15 @@
 <html>
 <title>{{company.name}}</title>
 <meta charset="UTF-8">
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="keywords" content="{{company.metaKeywords}}">
 <meta name="description" content="{{company.metaDescription}}">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <link rel="stylesheet" href="{{ asset('css/nanogallery2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/eislideshow.css') }}">
-<script src="{{ asset('js/jquery-1.8.0.min.js')}}"></script>
+
+<script src="{{ asset('js/jquery-2.1.1.min.js')}}"></script>
 <script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
 <script src="{{ asset('js/jquery.eislideshow.js') }}"></script>
@@ -24,11 +23,13 @@ a:link {text-decoration: none!important}
     <body class="w3-light-grey">
     	{% include 'page/styles.html' %}
 		{% include 'page/navbar.html' %}
-		{% include 'page/header.html' %}
+		{% include 'page/warning.html' %}
+		{% include 'page/banner.html' %}
 		{% include 'page/search.html' %}
 		{% include 'page/products.html' %}
 		{% include 'page/contacts.html' %}
 		{% include 'page/gallery.html' %}
+		{% include 'page/newsletter.html' %}
 		{% include 'page/info_form.html' %}
 		{% include 'page/footer.html' %}
 		{% include 'page/javascript.html' %}

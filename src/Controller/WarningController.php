@@ -120,7 +120,7 @@ class WarningController extends AbstractController
             }
             else{   
                 $response = array(
-                    'result' => 0,
+                    'status' => 0,
                     'message' => 'fail',
                     'data' => $this->getErrorMessages($form)
                 );

@@ -22,10 +22,6 @@ class Available
     * @ORM\Column(type="datetime") */
     private $datetimestart;
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="available") 
-     */
-    private $category;
-    /**
     * @ORM\Column(type="integer", name="stock", nullable=true)
     */
     private $stock;
@@ -75,14 +71,14 @@ class Available
         return $this->datetimeend;
     }
 
-    public function getCategory()
+    public function getProduct()
     {
-        return $this->category;
+        return $this->product;
     }
 
-    public function setCategory(Category $category)
+    public function setProduct(Product $product)
     {
-        $this->category = $category;
+        $this->product = $product;
     }
     public function getStock()
     {

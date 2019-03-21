@@ -29,7 +29,7 @@ set_booking:
     #methods: [POST]
 
 ###
-# GET CATEGORY BLOCKED DATES
+# GET PRODUCT BLOCKED DATES
 ###
 index_available:
     path: /index-available/
@@ -80,40 +80,40 @@ admin_company_edit:
 
 
 ##
-# CATEGORIES
+# PRODUCTS
 ##
 
-admin_category_new:
-    path: /admin-category-new/
-    controller: App\Controller\CategoryController::categoryNew
+admin_product_new:
+    path: /admin-product-new/
+    controller: App\Controller\ProductController::productNew
 
-admin_category_add:
-    path: /admin-category-add/
-    controller: App\Controller\CategoryController::categoryAdd
+admin_product_add:
+    path: /admin-product-add/
+    controller: App\Controller\ProductController::productAdd
     #condition: 'request.isXmlHttpRequest()'
 
-admin_category_list:
-    path: /admin-category-list/
-    controller: App\Controller\CategoryController::categoryList
+admin_product_list:
+    path: /admin-product-list/
+    controller: App\Controller\ProductController::productList
 
-admin_category_show_edit:
-    path: /admin-category-show-edit/
-    controller: App\Controller\CategoryController::categoryShowEdit
+admin_product_show_edit:
+    path: /admin-product-show-edit/
+    controller: App\Controller\ProductController::productShowEdit
     condition: 'request.isXmlHttpRequest()'
 
-admin_category_edit:
-    path: /admin-category-edit/
-    controller: App\Controller\CategoryController::categoryEdit
+admin_product_edit:
+    path: /admin-product-edit/
+    controller: App\Controller\ProductController::productEdit
     condition: 'request.isXmlHttpRequest()'
 
-admin_category_delete:
-    path: /admin-category-delete/
-    controller: App\Controller\CategoryController::categoryDelete
+admin_product_delete:
+    path: /admin-product-delete/
+    controller: App\Controller\ProductController::productDelete
     #condition: 'request.isXmlHttpRequest()'
 
-admin_category_order:
-    path: /admin-category-order/
-    controller: App\Controller\CategoryController::categoryOrder
+admin_product_order:
+    path: /admin-product-order/
+    controller: App\Controller\ProductController::productOrder
     #condition: 'request.isXmlHttpRequest()'
 
 ##
@@ -252,19 +252,6 @@ index_terms:
     path: /index-terms/
     controller: App\Controller\TermsConditionsController::termsShow
     #condition: 'request.isXmlHttpRequest()'
-
-##
-# BLOCK DATES
-##
-
-admin_block_date_edit:
-    path: /admin-block-date-edit/
-    controller: App\Controller\BlockDateController::adminBlockDateEdit
-
-admin_block_date_set_values:
-    path: /admin-block-date-set-values/
-    controller: App\Controller\BlockDateController::adminBlockDateSetValues
-    condition: 'request.isXmlHttpRequest()'
 
 ##
 # WARNING

@@ -1,5 +1,8 @@
 <?php
 return array(
+    'best_first' => 'Receba as melhores ofertas primeiro!',
+    'join_newsletter' => 'Receba a nossa newsletter.',
+    'change' => 'Alterar',
     'email_easy_text'=>'Email Texto Fácil',
     'end' => 'Fim',
     'start' =>'Inicio',

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Category;
+use App\Entity\Product;
 use App\Entity\Available;
 use App\Entity\Booking;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -61,12 +61,12 @@ class BookingRepository extends ServiceEntityRepository
         $stmt->execute();
         $day1 = $stmt->fetchAll();
 
-        $sql = "SELECT c.name_pt AS category, COUNT(c.name_pt) AS total 
+        $sql = "SELECT c.name_pt AS product, COUNT(c.name_pt) AS total 
             FROM booking b
             JOIN available a
             ON b.available_id = a.id
-            JOIN category c
-            ON a.category_id = c.id
+            JOIN product c
+            ON a.product_id = c.id
             GROUP BY c.name_pt";
 
         $stmt = $conn->prepare($sql);
@@ -78,7 +78,7 @@ class BookingRepository extends ServiceEntityRepository
         array_push($chart0, $tmp);
         
         foreach ($c0 as $key => $value) {
-            $tmp = array( $value['category'], (int)$value['total']); 
+            $tmp = array( $value['product'], (int)$value['total']); 
             array_push($chart0, $tmp);
         }
 
@@ -142,14 +142,14 @@ class BookingRepository extends ServiceEntityRepository
     }
 
 
-    public function findDeleteCategory($category){
+    public function findDeleteProduct($product){
 
         $query = $this->getEntityManager()->createQuery(
                 'SELECT b, a
                 FROM App\Entity\Booking b
                 JOIN b.available a
-                WHERE a.category = :category')
-                ->setParameter('category', $category);
+                WHERE a.product = :product')
+                ->setParameter('product', $product);
         return $query->getResult();
 
     }

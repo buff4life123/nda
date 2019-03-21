@@ -24,6 +24,9 @@
     <h5><b>{%trans%}today{%endtrans%} {{ "now"|date("d/m/Y") }}</b></h5>
   </header>
   
+
+{% if bookings %}
+
   <div class="w3-row-padding w3-opacity-min">
     <div class="w3-col l3 m6 s6 w3-margin-bottom">
       <div class="w3-container w3-card w3-red w3-padding-16">
@@ -181,6 +184,7 @@
       </div>
     </div>
   </div>
+{% endif %}
 
 <script type="text/javascript">
 
@@ -188,11 +192,16 @@ google.charts.load('current', {'packages':['corechart']})
 
 a = []
 
-{% for charts in booking.chart%}
+{%if bookings %}
+
+{% for charts in bookings.chart%}
 
   a.push({{ charts|json_encode|raw }})
 
 {% endfor %}
+
+{% endif %}
+
 
 google.charts.setOnLoadCallback(function() { drawChart(a[0],0) })
 google.charts.setOnLoadCallback(function() { drawChart(a[1],1) })

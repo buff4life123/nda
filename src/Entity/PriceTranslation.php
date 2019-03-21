@@ -5,11 +5,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="about_us")
- * @ORM\Entity(repositoryClass="App\Repository\AboutUsRepository")
+ * @ORM\Table(name="price_translation")
+ * @ORM\Entity(repositoryClass="App\Repository\PriceTranslationRepository")
  */
 
-class AboutUs
+class PriceTranslation
 {
     /**
      * @ORM\Column(type="integer")
@@ -18,19 +18,14 @@ class AboutUs
      */
     private $id;
     /**
-     * @ORM\Column(type="text")
-     */
-    private $rgpdHtml;
-
-    /**
     * @ORM\Column(type="string", length=50)
-    * @Assert\NotBlank(message="title")
+    * @Assert\NotBlank(message="name")
     */
     private $name;
     /**
      *@ORM\ManyToOne(targetEntity="Locales") */
     private $locales;
-    
+
     public function getId()
     {
         return $this->id;
@@ -43,9 +38,8 @@ class AboutUs
 
     public function setName($name)
     {
-        $this->name = $name;
-    }
-
+        $this->name = str_replace("'","’",$name);
+    }    
     public function getLocales()
     {
         return $this->locales;
@@ -54,15 +48,5 @@ class AboutUs
     public function setLocales(Locales $locales)
     {
         $this->locales = $locales;
-    }
-
-    public function getRgpdHtml()
-    {
-        return $this->rgpdHtml;
-    }
-
-    public function setRgpdHtml($rgpdHtml)
-    {
-        $this->rgpdHtml = $rgpdHtml;
     }
 }

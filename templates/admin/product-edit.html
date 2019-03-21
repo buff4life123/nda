@@ -6,7 +6,7 @@
  .timepicker{background:#FFF;border:1px solid #DDD;padding: 8px 0px}
 .bootstrap-datetimepicker-widget table td span {border-radius: 0px}
 .bootstrap-datetimepicker-widget table td span:hover {background: #DDD}
-#category_event_0_event{display:none}
+#product_event_0_event{display:none}
 .table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {border: 3px solid transparent!important} 
  .w3-input {border-bottom: 0px solid #05788d}
 </style>
@@ -18,9 +18,9 @@
   </h5>
 </header>
 <div class="">
-  {{ form_start(form, {'attr': {'id': 'category-form'}})  }}
+  {{ form_start(form, {'attr': {'id': 'product-form'}})  }}
 
-    <input type="hidden" name="id" value="{{ category.id }}">
+    <input type="hidden" name="id" value="{{ product.id }}">
   
     <div class="w3-padding-16 w3-row-padding w3-border w3-sand">
     <div class="w3-col s6 l2 m3" title="Em destaque no banner">
@@ -48,8 +48,8 @@
     <div class="w3-col s12 l4 m12 w3-center" title="Vamos meter uma imagem para esta categoria">
       <div class="w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
 
-        {% if category.image %}
-        {% set url=category.image|split('/public/') %}
+        {% if product.image %}
+        {% set url=product.image|split('/public/') %}
           <img id="output" src="../{{ url[1] }}" class="w3-image w3-animate-zoom">
         {% else %}
         <i class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
@@ -99,7 +99,7 @@
       <div class="w3-col l3 m1 s0 w3-hide-small">&nbsp;</div>
 
       <div class="w3-col l6 m10 s12">
-        <label for="category_name_pt">Horas a q se realiza *</label>
+        <label for="product_name_pt">Horas a q se realiza *</label>
         <textarea class="w3-input w3-border" readonly id="receive-hour" placeholder="Escolha as horas, no relógio, de quando se realiza o evento" rows="2"></textarea>
         <div class="w3-row-padding w3-margin-top">
           <div class="w3-col s6">
@@ -141,9 +141,9 @@ hours = []
 unique = []
 position = 0
 
-hours.push($('#category_event_0_event').val().split(","))    
+hours.push($('#product_event_0_event').val().split(","))    
 
-$('#category_blockdate').addClass('w3-hide')
+$('#product_blockdate').addClass('w3-hide')
 
 $('#receive-hour').text(hours)
 
@@ -151,7 +151,7 @@ $('#clear-hour').click(function(){
   hours = []
   unique = []
   $('#receive-hour').text('')
-  $('#category_event_0_event').val('')
+  $('#product_event_0_event').val('')
 })
 
 $('#add-hour').click(function(){
@@ -161,7 +161,7 @@ $('#add-hour').click(function(){
     if($.inArray(el, unique) === -1) unique.push(el)
   })  
   $('#receive-hour').text(unique)
-  $('#category_event_0_event').val(unique)
+  $('#product_event_0_event').val(unique)
 })
 
 $('#datetimepicker2').datetimepicker({keepOpen: true,format: 'H:m',stepping:5,inline: true,sideBySide:true, icons: {
@@ -173,7 +173,7 @@ $('#datetimepicker2').datetimepicker({keepOpen: true,format: 'H:m',stepping:5,in
 })
 
 
-$('#category_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,icons: {
+$('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,icons: {
   time: "fa fa-clock-o",
   date: "fa fa-calendar",
   up: "fa fa-chevron-up",
@@ -182,14 +182,14 @@ $('#category_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,ic
 })
 
 
-$('#category-form').on('submit',function(e){
+$('#product-form').on('submit',function(e){
   e.preventDefault()
   obj=''
   $('.w3-overlay').show()
   $('.required').addClass('w3-hide')
   //setTimeout(function(){
     $.ajax({
-      url:'{{ path('admin_category_edit') }}',
+      url:'{{ path('admin_product_edit') }}',
       type: "POST",
       data: new FormData($(this)[0]),
       processData: false,
@@ -199,10 +199,10 @@ $('#category-form').on('submit',function(e){
         $('.w3-overlay').hide()
         if (data.message == 'success'){
           $('#datetimepicker2').data('DateTimePicker').destroy() 
-          ajaxUpload('category-list')
-          $('#modal-edit-category').hide()
-          $('#category-form').trigger('reset')
-          $('#category_isactive').val('')
+          ajaxUpload('product-list')
+          $('#modal-edit-product').hide()
+          $('#product-form').trigger('reset')
+          $('#product_isactive').val('')
         }
         else if (data.message=='fail'){
           for(i=0;i<data.data.length;i++)

@@ -8,7 +8,7 @@
  .timepicker{background:#FFF;border:1px solid #DDD;padding: 8px 0px}
 .bootstrap-datetimepicker-widget table td span {border-radius: 0px}
 .bootstrap-datetimepicker-widget table td span:hover {background: #DDD}
-#category_event_0_event{display:none}
+#product_event_0_event{display:none}
 .table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {border: 3px solid transparent!important} 
  .w3-input {border-bottom: 0px solid #05788d}
 .w3-select{padding: 13px 5px}
@@ -29,13 +29,13 @@
       </div>
       <div class="w3-col l4 m6 s12">
         <label>Categoria</label>
-        <select name="category" class="w3-select w3-input w3-border">
-          <option selected value="{{ category.id }}"> {{ category.namePt }}</option>
+        <select name="product" class="w3-select w3-input w3-border">
+          <option selected value="{{ product.id }}"> {{ product.namePt }}</option>
         </select>
       </div>
       <div class="w3-col l4 m3 s6" name="lotation">
         <label>Lotação</label>
-        <input class="w3-input w3-border" readonly value="{{ category.availability }}">
+        <input class="w3-input w3-border" readonly value="{{ product.availability }}">
       </div>
       <div class="w3-col l4 m3 s6">
         <label>Horas</label>

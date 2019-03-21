@@ -12,7 +12,7 @@
     <span class="FILL_ALL w3-xlarge">{% trans %}info.fill_all{% endtrans %}</span>
   </h2>
 
-  {% if categories %}
+  {% if products %}
 
   <form id="get-available" class="w3-sand w3-padding-8 w3-border reservas-cont">
     <div class="w3-row-padding w3-xlarge">
@@ -20,12 +20,12 @@
     </div>
       <div class="w3-col l6 m12 s12">
         <label class="TOUR w3-small w3-text-red">{% trans %}part_seven.tour{% endtrans %}</label>
-        <select class="w3-select w3-input" name="category" onchange="updateTourData()">
+        <select class="w3-select w3-input" name="product" onchange="updateTourData()">
            <option class="TOUR w3-opacity" value="">{% trans %}part_seven.tour{% endtrans %}</option>
-          {% for category in categories %}
-          {% if category.no_stock == false %} 
-          <option class="PT" value="{{category.id}}">{{category.namePt}}</option>
-          <option class="EN w3-hide" value="{{category.id}}">{{category.nameEn}}</option>
+          {% for product in products %}
+          {% if product.no_stock == false %} 
+          <option class="PT" value="{{product.id}}">{{product.namePt}}</option>
+          <option class="EN w3-hide" value="{{product.id}}">{{product.nameEn}}</option>
           {% endif %} 
           {% endfor %}
         </select>

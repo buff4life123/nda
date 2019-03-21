@@ -53,64 +53,64 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
     <tbody>
 
 
-      {% for category in categories%}
+      {% for product in products%}
        <tr>
-        <td>{{category.order}}</td>
-        <td>{{category.id}}</td>
+        <td>{{product.order}}</td>
+        <td>{{product.id}}</td>
         <td>
           <div style="width:149px">
           <span class="w3-tooltip">
             <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}edit{%endtrans%} {%trans%}product_23{%endtrans%}</span>
-            <button class="w3-btn w3-border w3-blue w3-tooltip" style="width: 13px" onclick="editCategory({{category.id}},'{{ category.namePt}}')"> 
+            <button class="w3-btn w3-border w3-blue w3-tooltip" style="width: 13px" onclick="editProduct({{product.id}},'{{ product.namePt}}')"> 
               <i class="far fa-edit fa-fw"></i>
             </button>
           </span>
           <span class="w3-tooltip">
             <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}delete{%endtrans%} {%trans%}product_23{%endtrans%}</span>
-          <button class="w3-btn w3-border w3-red" style="width: 13px" onclick="deleteCategoryConfirm({{category.id}},'{{ category.namePt }}')">
+          <button class="w3-btn w3-border w3-red" style="width: 13px" onclick="deleteProductConfirm({{product.id}},'{{ product.namePt }}')">
             <i class="fas fa-trash-alt"></i>
           </button>
         </span>
         <span class="w3-tooltip">
             <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}add{%endtrans%} {%trans%}availability{%endtrans%}</span>
-            <button class="w3-btn w3-border w3-indigo" onclick="addAvailable({{category.id}},'{{ category.namePt}}')">
+            <button class="w3-btn w3-border w3-indigo" onclick="addAvailable({{product.id}},'{{ product.namePt}}')">
               <i class="far fa-calendar-check"></i>
             </button>
           </span>
         </div>
         </td>
-        <td>{{ category.namePt }}</td>
-        <td>{{ category.nameEn }}</td>
-        <td class="w3-center">{{ category.adultAmount}}</td>
-        <td class="w3-center">{{ category.childrenAmount}}</td>
-        <td>{{ category.descriptionPt }}</td>
-        <td>{{ category.descriptionEn }}</td>
-        <td>{{ category.event }}</td>
+        <td>{{ product.namePt }}</td>
+        <td>{{ product.nameEn }}</td>
+        <td class="w3-center">{{ product.adultAmount}}</td>
+        <td class="w3-center">{{ product.childrenAmount}}</td>
+        <td>{{ product.descriptionPt }}</td>
+        <td>{{ product.descriptionEn }}</td>
+        <td>{{ product.event }}</td>
         <td class="w3-center">
-          {% if category.isActive == 1 %}
+          {% if product.isActive == 1 %}
             <i class="w3-text-green w3-xlarge fas fa-check-circle"></i>
           {% else %}
             <i class="w3-text-red w3-xlarge fas fa-times-circle"></i>
           {% endif %}
         </td>
          <td class="w3-center">
-          {% if category.highLight == 1 %}
+          {% if product.highLight == 1 %}
             <i class="w3-text-green w3-xlarge fas fa-check-circle"></i>
           {% else %}
             <i class="w3-text-red w3-xlarge fas fa-times-circle"></i>
           {% endif %}
         </td>
-        <td class="w3-right-align">{{ category.availability }}</td>
-        <td class="w3-right-align">{{ category.duration }}</td>
+        <td class="w3-right-align">{{ product.availability }}</td>
+        <td class="w3-right-align">{{ product.duration }}</td>
         <td class="w3-center">
-          {% if category.warrantyPayment == 1 %}
+          {% if product.warrantyPayment == 1 %}
             <i class="w3-text-green w3-xlarge fas fa-check-circle"></i>
           {% else %}
             <i class="w3-text-red w3-xlarge fas fa-times-circle"></i>
           {% endif %}
         </td>
-        <td>{{ category.warrantyPaymentPt }}</td>
-        <td>{{ category.warrantyPaymentEn }}</td>
+        <td>{{ product.warrantyPaymentPt }}</td>
+        <td>{{ product.warrantyPaymentEn }}</td>
       </tr>
     {% endfor %}
     </tbody>
@@ -142,14 +142,14 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
 
 <script>
  /*
-tablecategory = [2,4,5]
+tableproduct = [2,4,5]
 
-if(!localStorage.getItem("tablecategory") ){
-  localStorage.setItem("tablecategory", JSON.stringify(tablecategory))
-  stored = JSON.parse(localStorage.getItem("tablecategory"))
+if(!localStorage.getItem("tableproduct") ){
+  localStorage.setItem("tableproduct", JSON.stringify(tableproduct))
+  stored = JSON.parse(localStorage.getItem("tableproduct"))
 }
 else
-  stored = JSON.parse(localStorage.getItem("tablecategory"))
+  stored = JSON.parse(localStorage.getItem("tableproduct"))
 */
 
 
@@ -177,20 +177,20 @@ function addAvailable(id,name){
   }, 500)
 }
 
-stored = tablecategory = [1, 4, 7, 8, 15, 16]
+stored = tableproduct = [1, 4, 7, 8, 15, 16]
 
-function editCategory(id, name){
+function editProduct(id, name){
   $('.w3-overlay').show()
   setTimeout(function(){
   $.ajax({  
-    url:'{{ path('admin_category_show_edit') }}',
+    url:'{{ path('admin_product_show_edit') }}',
     type: "POST",
     data:'id='+id,
     success: function(data){
       $('.w3-overlay').hide()
       $('#set-id').text(name)
-      $('#set-category').html(data)
-      $('#modal-edit-category').show()
+      $('#set-product').html(data)
+      $('#modal-edit-product').show()
     },
     error:function(data){
       $('.w3-overlay').hide()
@@ -201,25 +201,25 @@ function editCategory(id, name){
 }
 
 
-function deleteCategoryConfirm(id,n){
-  $('#delete-category').html('<p class="w3-center w3-large">{%trans%}sure_delete{%endtrans%}<b>'+n+'</b> ?</p>')
+function deleteProductConfirm(id,n){
+  $('#delete-product').html('<p class="w3-center w3-large">{%trans%}sure_delete{%endtrans%}<b>'+n+'</b> ?</p>')
   $('#delete-id').val(id)
-  $('#modal-delete-category').show()
+  $('#modal-delete-product').show()
 }
 
-function deleteCategory(id){
+function deleteProduct(id){
   $('.w3-overlay').show()
   setTimeout(function(){
   $.ajax({  
-    url:'{{ path('admin_category_delete') }}',
+    url:'{{ path('admin_product_delete') }}',
     type: "POST",
     data:'id='+id,
     success: function(data){
       $('.w3-overlay').hide()
       console.log(data)
-      $('#modal-delete-category').hide()
+      $('#modal-delete-product').hide()
       if (data.status == 1){
-        ajaxUpload('category-list')
+        ajaxUpload('product-list')
       }
       else{
         $('#info-client').show()                
@@ -319,7 +319,7 @@ $(function(){
     if (result.length>0){
 
       $.ajax({  
-        url:'{{ path('admin_category_order') }}',
+        url:'{{ path('admin_product_order') }}',
         type: "POST",
         data:'result='+JSON.stringify(result),
         dataType: 'json',

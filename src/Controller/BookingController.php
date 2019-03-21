@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Blockdates;
 use App\Entity\Event;
-use App\Entity\Category;
+use App\Entity\Product;
 use App\Entity\Available;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\Locales;
@@ -26,7 +26,7 @@ class BookingController extends AbstractController
 
         $err = array();
         $totalPax = 0;
-        $categoryId = $request->request->get('category') ? $request->request->get('category') : $err[] = 'TOUR';
+        $productId = $request->request->get('product') ? $request->request->get('product') : $err[] = 'TOUR';
         $adult = $request->request->get('adult') || $request->request->get('adult') === "0" ? $request->request->get('adult') : $err[] = 'ADULT';
         $children = $request->request->get('children') || $request->request->get('children') === "0" ? $request->request->get('children') : $err[] = 'CHILDREN';
         $baby = $request->request->get('baby') || $request->request->get('baby') === "0" ? $request->request->get('baby') :  $err[] = 'BABY';
@@ -47,13 +47,13 @@ class BookingController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository(Category::class)->find($categoryId);
+        $product = $em->getRepository(Product::class)->find($productId);
 
         //min date we start the search is tomorrow, so has the min date available in datepicker
         $startDt = new \DateTime('tomorrow');
         
-        //prevent if category not found, return back info
-        if(!$category){
+        //prevent if product not found, return back info
+        if(!$product){
             $response = array(
                 'status' => 2,
                 'wp' => null,
@@ -66,17 +66,17 @@ class BookingController extends AbstractController
             return new JsonResponse($response);
         }
 
-        $available = $em->getRepository(Available::class)->findByCategoryDateTomorrow($category, $startDt->format('Y-m-d H:i:s'), $totalPax);
+        $available = $em->getRepository(Available::class)->findByProductDateTomorrow($product, $startDt->format('Y-m-d H:i:s'), $totalPax);
 
         $stockAvailable = array();
 
         //user over max lotation send back info
-        if ($totalPax > $category->getAvailability()){
+        if ($totalPax > $product->getAvailability()){
             $response = array(
             'status' => 2,
             'wp' => null,
             'message' => 'NO_STOCK',
-            'max' => '(Máx: '.$category->getAvailability().' Pax)',
+            'max' => '(Máx: '.$product->getAvailability().' Pax)',
             'minDate' => null,
             'available' => null,
             'locale' => $this->session->get('_locale')->getName()
@@ -85,7 +85,7 @@ class BookingController extends AbstractController
         return new JsonResponse($response);
         }
 
-        //category has stock
+        //product has stock
         if($available){
             //send the stock back 
             foreach ($available as $stock)
@@ -101,7 +101,7 @@ class BookingController extends AbstractController
             
             $response = array(
             'status' => 1,
-            'wp' => $category->getWarrantyPayment(),
+            'wp' => $product->getWarrantyPayment(),
             'message' => count($available),
             'max'=> null,
             'minDate' => $startDt->format('Y-m-d H:i:s'),
@@ -110,7 +110,7 @@ class BookingController extends AbstractController
             );
         }
 
-        //category no stock send back info
+        //product no stock send back info
         else
             $response = array(
             'status' => 2,

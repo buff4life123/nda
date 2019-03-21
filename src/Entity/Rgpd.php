@@ -24,7 +24,7 @@ class Rgpd
 
     /**
     * @ORM\Column(type="string", length=50)
-    * @Assert\NotBlank(message="Titulo *")
+    * @Assert\NotBlank(message="name")
     */
     private $name;
     /**

@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Gallery;
-use App\Entity\Category;
+use App\Entity\Product;
 use App\Entity\Blockdates;
 use App\Entity\Booking;
 use App\Entity\Event;
@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use App\Form\CategoryType;
+use App\Form\ProductType;
 use App\Form\GalleryType;
 use App\Form\BlockdatesType;
 use App\Form\EventType;
@@ -28,18 +28,18 @@ class AdminController extends AbstractController
     public function html()
     {
         $em = $this->getDoctrine()->getManager();
-        $booking = $em->getRepository(Booking::class)->dashboardValues();
+        $booking = array();//$em->getRepository(Booking::class)->dashboardValues();
         $company = $em->getRepository(Company::class)->find(1);
         $ua = $this->getBrowser();
-        return $this->render('admin/base.html.twig',['browser' => $ua,'booking' => $booking, 'company' => $company]);
+        return $this->render('admin/base.html.twig',['browser' => $ua, 'bookings' => $booking, 'company' => $company]);
     }
 
 
 	public function adminDashboard()
 	{
         $em = $this->getDoctrine()->getManager();
-        $booking = $em->getRepository(Booking::class)->dashboardValues();
-        return $this->render('admin/dashboard.html', array('booking' => $booking));
+        $booking = array();//$em->getRepository(Booking::class)->dashboardValues();
+        return $this->render('admin/dashboard.html', array('bookings' => $booking));
     }
 
     public function adminBookingSetStatus(Request $request){
@@ -62,7 +62,7 @@ class AdminController extends AbstractController
                 'status' => $booking->getStatus(),
                 'date' => $booking->getDateEvent()->format('d/m/Y'),
                 'hour' => $booking->getTimeEvent()->format('H:i'),
-                'tour' => $booking->getAvailable()->getCategory()->getNamePt(),
+                'tour' => $booking->getAvailable()->getProduct()->getNamePt(),
                 'notes' => $booking->getNotes(),
                 'user_id' => $client->getId(),   
                 'username' => $client->getUsername(),
@@ -122,8 +122,8 @@ class AdminController extends AbstractController
         
         $em->flush();
 
-        $categoryName = $client->getLocale()->getName() =='en' ? $booking->getAvailable()->getCategory()->getNameEn() : 
-            $booking->getAvailable()->getCategory()->getNamePt();
+        $productName = $client->getLocale()->getName() =='en' ? $booking->getAvailable()->getProduct()->getNameEn() : 
+            $booking->getAvailable()->getProduct()->getNamePt();
 
         $seeBooking =
                 array(
@@ -134,7 +134,7 @@ class AdminController extends AbstractController
                 'status' => $this->translateStatus($booking->getStatus(),  $client->getLocale()->getName()),
                 'date' => $booking->getDateEvent()->format('d/m/Y'),
                 'hour' => $booking->getTimeEvent()->format('H:i'),
-                'tour' => $categoryName,
+                'tour' => $productName,
                 'notes' => $booking->getNotes(),
                 'user_id' => $client->getId(),   
                 'username' => $client->getUsername(),
@@ -227,7 +227,7 @@ class AdminController extends AbstractController
                     'status' => $bookings->getStatus(),
                     'date' => $bookings->getDateEvent()->format('d/m/Y'),
                     'hour' => $bookings->getTimeEvent()->format('H:i'),
-                    'tour' => $bookings->getAvailable()->getCategory()->getNamePt(),
+                    'tour' => $bookings->getAvailable()->getProduct()->getNamePt(),
                     'notes' => $bookings->getNotes(),
                     'user_id' => $client->getId(),   
                     'username' => $client->getUsername(),

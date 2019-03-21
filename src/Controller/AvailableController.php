@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Category;
+use App\Entity\Product;
 use App\Entity\Booking;
 use App\Entity\Event;
 use App\Entity\Logs;
@@ -25,19 +25,19 @@ class AvailableController extends AbstractController
     {
         $allEvents = array();
 
-        $categoryId = $request->request->get('id');
+        $productId = $request->request->get('id');
         
         $em = $this->getDoctrine()->getManager();
         
-        $category = $em->getRepository(Category::class)->find($categoryId);
+        $product = $em->getRepository(Product::class)->find($productId);
 
-        $event = explode(',',$category->getEvent()[0]->getEvent());
+        $event = explode(',',$product->getEvent()[0]->getEvent());
         
         foreach ($event as $ev)
             array_push($allEvents, $ev);
 
         return $this->render('admin/available-new.html',array(
-            'category' => $category,
+            'product' => $product,
             'event' => $allEvents
         ));
     }
@@ -45,9 +45,9 @@ class AvailableController extends AbstractController
     public function adminAvailableCreate(Request $request){
 
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository(Category::class)->find($request->request->get('category'));
+        $product = $em->getRepository(Product::class)->find($request->request->get('product'));
         
-        if(!$category) {
+        if(!$product) {
 
             $response = array(
                 'status' => 0,
@@ -59,7 +59,7 @@ class AvailableController extends AbstractController
 
         $eventStart = \DateTime::createFromFormat('d/m/Y H:i', $request->request->get('startDate').' '.$request->request->get('event'));
         
-        $s = explode(":",$category->getDuration());
+        $s = explode(":",$product->getDuration());
 
         $seconds = (int)$s[0]*3600 + (int)$s[1]*60;
         //duration of event
@@ -93,7 +93,7 @@ class AvailableController extends AbstractController
                 $starts = \DateTime::createFromFormat('d/m/Y H:i', $day->getStart()->format('d/m/Y').' '.$request->request->get('event'));
 
                 $eventWithSameDateAndHour = $em->getRepository(Available::class)->count(array(
-                'category' => $category,
+                'product' => $product,
                 'datetimestart' => $starts
                 ));
                 
@@ -125,9 +125,9 @@ class AvailableController extends AbstractController
             $dayEventEnd = \DateTime::createFromFormat('d/m/Y H:i', $day->getStart()->format('d/m/Y').' '.$interval->format('H:i'));
             $available = new Available();
             $available->setDatetimeStart($day->getStart());
-            $available->setCategory($category);
-            $available->setLotation($category->getAvailability());
-            $available->setStock($category->getAvailability());
+            $available->setProduct($product);
+            $available->setLotation($product->getAvailability());
+            $available->setStock($product->getAvailability());
             $available->setDatetimeEnd($dayEventEnd);
             $em->persist($available);
         }
@@ -142,9 +142,9 @@ class AvailableController extends AbstractController
             $dayEventEnd = \DateTime::createFromFormat('d/m/Y H:i', $request->request->get('startDate').' '.$interval->format('H:i'));
             $available = new Available();
             $available->setDatetimeStart($eventStart);
-            $available->setCategory($category);
-            $available->setLotation($category->getAvailability());
-            $available->setStock($category->getAvailability());
+            $available->setProduct($product);
+            $available->setLotation($product->getAvailability());
+            $available->setStock($product->getAvailability());
             $available->setDatetimeEnd($dayEventEnd);
             $em->persist($available);
             $em->flush();
@@ -152,7 +152,7 @@ class AvailableController extends AbstractController
 
         $response = array(
             'status' => 1,
-            'message' => 'Foram criadas '.$eventsCreated.' disponibilidades, na Categoria '.$category->getNamePt(),
+            'message' => 'Foram criadas '.$eventsCreated.' disponibilidades, na Categoria '.$product->getNamePt(),
             'recurrent' => $isRecurrent,
             'data' => null,
             );
@@ -173,7 +173,7 @@ class AvailableController extends AbstractController
 
         $end = \DateTime::createFromFormat('U', $request->query->get('end'));
 
-        $categories = $em->getRepository(Category::class)->findBy([],['orderBy' => 'ASC']);
+        $products = $em->getRepository(Product::class)->findBy([],['orderBy' => 'ASC']);
 
         $availables = $em->getRepository(Available::class)->findAvailableFromInterval($start, $end);
 
@@ -187,13 +187,13 @@ class AvailableController extends AbstractController
 
         $counter = 0;
 
-        foreach ($categories as $category) {
+        foreach ($products as $product) {
             $counter++;
             $data_resources[] = array(
                 'eventColor' => $rand_color[$counter],
-                'id' => $category->getId(),
-                'title' => $category->getNamePt(),
-                'order' => $category->getOrderBy()
+                'id' => $product->getId(),
+                'title' => $product->getNamePt(),
+                'order' => $product->getOrderBy()
             );
         }
 
@@ -204,11 +204,11 @@ class AvailableController extends AbstractController
 
             $data_events[] = array(
                 'id' => $available->getId(),
-                'resourceId' => $available->getCategory()->getId(),          
+                'resourceId' => $available->getProduct()->getId(),          
                 'start' => $finalStart,
                 'end' => $finalEnd,
                 'title' =>'Total: '.$available->getLotation().' Disponivel: '.$available->getStock(),
-                'textColor' => $available->getStock().'**'.$available->getLotation().'**'.$available->getCategory()->getNamePt().'<br>Data: '.$available->getDatetimeStart()->format('d/m/Y H:i'),
+                'textColor' => $available->getStock().'**'.$available->getLotation().'**'.$available->getProduct()->getNamePt().'<br>Data: '.$available->getDatetimeStart()->format('d/m/Y H:i'),
             );
         }
         
@@ -274,7 +274,7 @@ class AvailableController extends AbstractController
         
         $logTxt = 'Utilizador: '.$this->getUser()->getUsername().'Evento: #'.$available->getId().'
         Start: '.$available->getDatetimeStart()->format('d/m/Y H:i:s').' End: '.$available->getDatetimeEnd()->format('d/m/Y H:i:s').'
-        Lotação : '.$available->getLotation().' Stock : '.$available->getStock().'Categoria: '.$available->getCategory()->getNamePt();
+        Lotação : '.$available->getLotation().' Stock : '.$available->getStock().'Categoria: '.$available->getProduct()->getNamePt();
 
         $now = new \DateTime('now');
         $log = new Logs();

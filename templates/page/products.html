@@ -8,19 +8,19 @@
 
   <div class="w3-row-padding w3-padding-small">
 
- {% for category in categories %}
+ {% for product in products %}
 
-    <div class="w3-third w3-margin-bottom">
-      <h2 class="w3-text-green">{{ category.namePt }}</h2>
-      <img src="/upload/category/{{ category.image }}" onerror="this.src='/upload/category/no-image.png'" alt="{{ category.nameEn }}" style="width:100%">
+    <div class="w3-col l4 m6 s12 w3-margin-bottom">
+      <h2 class="w3-text-green">{{ product.namePt }}</h2>
+      <img src="/upload/product/{{ product.image }}" onerror="this.src='/upload/product/no-image.png'" alt="{{ product.nameEn }}" style="width:100%">
       <div class="w3-container w3-white">      
-        {% if category.adultAmount > 0 %}
-        <h6 class="w3-opacity">{{company.currency.currency}} {{ category.adultAmount}}</h6>
+        {% if product.adultAmount > 0 %}
+        <h6 class="w3-opacity">{{company.currency.currency}} {{ product.adultAmount}}</h6>
         {% else %}
         <h6 class="w3-opacity">-/-</h6>
         {% endif %}        
-        <p>{{ category.descriptionPt }}</p>
-        <!--p>Aprox: {{ category.duration}}<sup>Min</sup></p-->
+        <p>{{ product.descriptionPt }}</p>
+        <!--p>Aprox: {{ product.duration}}<sup>Min</sup></p-->
         <button class="w3-button w3-block w3-black w3-margin-bottom">Escolher Quarto</button>
       </div>
     </div>

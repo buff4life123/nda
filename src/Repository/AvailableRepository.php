@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Available;
-use App\Entity\Category;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\DBAL\LockMode;
@@ -15,14 +15,14 @@ class AvailableRepository extends ServiceEntityRepository
         parent::__construct($registry, Available::class);
     }
 
-    public function findByCategoryDateTomorrow(Category $category, $startdt, $totalPax){
+    public function findByProductDateTomorrow(Product $product, $startdt, $totalPax){
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT a
             FROM App\Entity\Available a
-            WHERE a.category = :category AND a.stock >= :stock 
+            WHERE a.product = :product AND a.stock >= :stock 
             ORDER BY a.datetimestart ASC')
-            ->setParameter('category', $category)
+            ->setParameter('product', $product)
             ->setParameter('stock', $totalPax);
         return $query->execute();
     }

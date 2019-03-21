@@ -1,0 +1,22 @@
+
+{%if warning %}
+<style>
+.marquee{
+	font-weight:bold;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    animation: marquee 50s linear infinite}
+.marquee:hover {animation-play-state: paused}
+@keyframes marquee {
+    0%   { text-indent: 100% }
+    100% { text-indent: -25% }}
+@media (max-width: 600px){.marquee {animation: marquee 25s linear infinite}}}
+
+</style>
+<section class="w3-text-white w3-padding-small w3-card" style="background:rgba(250,50,50,0.6);position:absolute;z-index:1;width:100%">
+  <p class="marquee">{{warning.text}}</p>
+</section>
+{% endif %}

@@ -14,8 +14,8 @@ class Event
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    /** @ORM\ManyToOne(targetEntity="Category", inversedBy="event") */
-    private $category;
+    /** @ORM\ManyToOne(targetEntity="Product", inversedBy="event") */
+    private $product;
     /**
     * @ORM\Column(type="string", name="event", length=150)
     */
@@ -26,13 +26,13 @@ class Event
         return $this->id;
     }
 
-    public function getCategory()
+    public function getProduct()
     {
-        return $this->category;
+        return $this->product;
     }
 
-    public function setCategory(Category $category) {
-        $this->category = $category;
+    public function setProduct(Product $product) {
+        $this->product = $product;
     }
 
     public function getEvent()
