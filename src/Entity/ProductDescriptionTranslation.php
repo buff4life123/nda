@@ -5,11 +5,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="rgpd")
- * @ORM\Entity(repositoryClass="App\Repository\RgpdRepository")
+ * @ORM\Table(name="product_description_translation")
+ * @ORM\Entity(repositoryClass="App\Repository\ProductDescriptionTranslationRepository")
  */
 
-class Rgpd
+class ProductDescriptionTranslation
 {
     /**
      * @ORM\Column(type="integer")
@@ -20,22 +20,34 @@ class Rgpd
     /**
      * @ORM\Column(type="text")
      */
-    private $rgpdHtml;
-
+    private $html;
     /**
     * @ORM\Column(type="string", length=50)
     * @Assert\NotBlank(message="name")
     */
     private $name;
     /**
-     *@ORM\ManyToOne(targetEntity="Locales", inversedBy="rgpd") */
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="product_description_translation") 
+     */
+    private $product;
+    /** 
+    * @ORM\ManyToOne(targetEntity="Locales", inversedBy="product")
+    */
     private $locales;
-    
+
     public function getId()
     {
         return $this->id;
     }
+    public function getProduct()
+    {
+        return $this->product;
+    }
 
+    public function setProduct(Product $product)
+    {
+        $this->product = $product;
+    }
     public function getName()
     {
         return $this->name;
@@ -44,18 +56,16 @@ class Rgpd
     public function setName($name)
     {
         $this->name = str_replace("'","’",$name);
-    }
-
-    public function getRgpdHtml()
+    } 
+    public function getHtml()
     {
-        return $this->rgpdHtml;
+        return $this->html;
     }
 
-    public function setRgpdHtml($rgpdHtml)
+    public function setHtml($html)
     {
-        $this->rgpdHtml = $rgpdHtml;
+        $this->html = $html;
     }
-
     public function getLocales()
     {
         return $this->locales;

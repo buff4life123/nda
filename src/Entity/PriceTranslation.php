@@ -22,6 +22,9 @@ class PriceTranslation
     * @Assert\NotBlank(message="name")
     */
     private $name;
+    
+    /** @ORM\ManyToOne(targetEntity="Price") */
+    private $price;
     /**
      *@ORM\ManyToOne(targetEntity="Locales") */
     private $locales;
@@ -48,5 +51,15 @@ class PriceTranslation
     public function setLocales(Locales $locales)
     {
         $this->locales = $locales;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function setPrice(Price $price)
+    {
+        $this->price = $price;
     }
 }

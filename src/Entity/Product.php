@@ -18,29 +18,13 @@ class Product
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    /**
-     * @Assert\NotBlank(message="DESCRIPTION_PT")
-     * @ORM\Column(type="string", length=350)
-     */
-    private $descriptionPt;
-
-    /**
-    * @Assert\NotBlank(message="DESCRIPTION_EN")
-     * @ORM\Column(type="string", length=350)
-     */
-    private $descriptionEn;
-
-    /**
-     * @ORM\Column(type="string", length=350, name="warranty_payment_pt", nullable=true)
-     */
-    private $warrantyPaymentPt;
-    /**
-     * @ORM\Column(type="string", length=350, name="warranty_payment_en", nullable=true)
-     */
-    private $warrantyPaymentEn;
     /** @ORM\OneToMany(targetEntity="Event", mappedBy="product", cascade={"persist"}) */
     private $event;
 
+    /** @ORM\OneToMany(targetEntity="Price", mappedBy="product", cascade={"persist", "remove"}) */
+    private $price;
+    /** @ORM\OneToMany(targetEntity="ProductDescriptionTranslation", mappedBy="product", cascade={"persist", "remove"}) */
+    private $product_description_translation;
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $isActive;
     /**
@@ -67,7 +51,9 @@ class Product
     public function __construct()
     {   
         $this->available = new ArrayCollection();
-        $this->event = new ArrayCollection();     
+        $this->event = new ArrayCollection();
+        $this->price = new ArrayCollection();
+        $this->product_description_translation = new ArrayCollection();  
     }
 
     public function getWarrantyPayment()
@@ -80,16 +66,6 @@ class Product
         $this->warrantyPayment = $warrantyPayment;
     }
 
-    public function getWarrantyPaymentPt()
-    {
-        return $this->warrantyPaymentPt;
-    }
-
-    public function setWarrantyPaymentPt($warrantyPaymentPt)
-    {
-        $this->warrantyPaymentPt = str_replace("'","’",$warrantyPaymentPt);
-    }
-
     public function getOrderBy()
     {
         return $this->orderBy;
@@ -98,16 +74,6 @@ class Product
     public function setOrderBy($orderBy)
     {
         $this->orderBy = $orderBy;
-    }
-
-    public function getWarrantyPaymentEn()
-    {
-        return $this->warrantyPaymentEn;
-    }
-
-    public function setWarrantyPaymentEn($warrantyPaymentEn)
-    {
-        $this->warrantyPaymentEn = str_replace("'","’",$warrantyPaymentEn);
     }
 
     public function getAvailability()
@@ -165,26 +131,6 @@ class Product
         return $this->id;
     }
 
-    public function getDescriptionPt()
-    {
-        return $this->descriptionPt;
-    }
-
-    public function setDescriptionPt($descriptionPt)
-    {
-        $this->descriptionPt = str_replace("'","’",$descriptionPt);
-    }
-
-    public function getDescriptionEn()
-    {
-        return $this->descriptionEn;
-    }
-
-    public function setDescriptionEn($descriptionEn)
-    {
-        $this->descriptionEn = str_replace("'","’",$descriptionEn);
-    }
-
     public function getEvent()
     {
         return $this->event;
@@ -199,6 +145,26 @@ class Product
     {
         $event->setProduct($this);
         $this->event->add($event);
+    }
+    
+    public function getProductDescriptionTranslation()
+    {
+        return $this->product_description_translation;
+    }
+
+    public function setProductDescriptionTranslation(ProductDescriptionTranslation $product_description_translation)
+    {
+        $this->product_description_translation = $product_description_translation;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function setPrice(Price $price)
+    {
+        $this->price = $price;
     }
     
     public function removeEvent(Event $event)
