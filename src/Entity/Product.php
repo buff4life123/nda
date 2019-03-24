@@ -20,10 +20,12 @@ class Product
     private $id;
     /** @ORM\OneToMany(targetEntity="Event", mappedBy="product", cascade={"persist"}) */
     private $event;
-
-    /** @ORM\OneToMany(targetEntity="Price", mappedBy="product", cascade={"persist", "remove"}) */
+    /** @ORM\ManyToOne(targetEntity="App\Entity\Category") 
+     */
+    private $category;
+    /** @ORM\OneToMany(targetEntity="Price", mappedBy="id", cascade={"persist", "remove"}) */
     private $price;
-    /** @ORM\OneToMany(targetEntity="ProductDescriptionTranslation", mappedBy="product", cascade={"persist", "remove"}) */
+    /** @ORM\OneToMany(targetEntity="ProductDescriptionTranslation", mappedBy="id", cascade={"persist", "remove"}) */
     private $product_description_translation;
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $isActive;
@@ -54,6 +56,14 @@ class Product
         $this->event = new ArrayCollection();
         $this->price = new ArrayCollection();
         $this->product_description_translation = new ArrayCollection();  
+    }
+
+    public function getCategory() {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category) {
+        $this->category = $category;
     }
 
     public function getWarrantyPayment()

@@ -22,11 +22,9 @@ class PriceTranslation
     * @Assert\NotBlank(message="name")
     */
     private $name;
-    
     /** @ORM\ManyToOne(targetEntity="Price") */
     private $price;
-    /**
-     *@ORM\ManyToOne(targetEntity="Locales") */
+    /** @ORM\ManyToOne(targetEntity="Locales") */
     private $locales;
 
     public function getId()

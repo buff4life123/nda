@@ -43,7 +43,7 @@ class AboutUs
 
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = str_replace("'","’",$name);
     }
 
     public function getLocales()

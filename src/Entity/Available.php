@@ -88,7 +88,7 @@ class Available
     public function setStock($stock)
     {
 
-        $this->stock = $stock;
+        $this->stock = str_replace("'","’",$stock);
     }
 
     public function getLotation()
@@ -98,7 +98,7 @@ class Available
 
     public function setLotation($lotation)
     {
-        $this->lotation = $lotation;
+        $this->lotation = str_replace("'","’",$lotation);
     }
 
 }

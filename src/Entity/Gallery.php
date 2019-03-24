@@ -23,7 +23,7 @@ class Gallery
     private $orderBy;
     /**
      *@ORM\OneToMany(targetEntity="GalleryTranslation", mappedBy="gallery", cascade={"persist", "remove"}) */
-    private $galleryTranslation;
+    private $translation;
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $isActive;
     /**
@@ -34,7 +34,7 @@ class Gallery
 
     public function __construct()
     {       
-        $this->galleryTranslation = new ArrayCollection();   
+        $this->translation = new ArrayCollection();   
     }
 
     public function getImage()
@@ -75,12 +75,12 @@ class Gallery
 
     public function getTranslation()
     {
-        return $this->galleryTranslation;
+        return $this->translation;
     }
 
-    public function setTranslation(GalleryTranslation $galleryTranslation)
+    public function setTranslation(GalleryTranslation $translation)
     {
-        $this->galleryTranslation = $galleryTranslation;
+        $this->translation = $translation;
     }
 
     public function getCurrentTranslation(Locales $locales)

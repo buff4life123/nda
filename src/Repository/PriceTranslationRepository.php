@@ -2,15 +2,15 @@
 
 namespace App\Repository;
 
-use App\Entity\Blockdates;
+use App\Entity\PriceTranslation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class BlockdatesRepository extends ServiceEntityRepository
+class PriceTranslationRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Blockdates::class);
+        parent::__construct($registry, PriceTranslation::class);
     }
 
     /*

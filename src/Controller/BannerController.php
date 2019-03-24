@@ -298,12 +298,12 @@ class BannerController extends AbstractController
 
                     foreach ($t as $translated) {
                     
-                        $bannerTranslation = $em->getRepository(BannerTranslation::class)->find($translated->id);
+                        $locales = $em->getRepository(Locales::class)->find($translated->locale_id);
+
+                        $bannerTranslation = $em->getRepository(BannerTranslation::class)->findOneBy(['locales' => $locales, 'banner'=> $banner]);
                     
                         if(!$bannerTranslation){
 
-                            $locales = $em->getRepository(Locales::class)->find($translated->locale_id);
-                        
                             $bannerTranslation = new BannerTranslation();
                         
                             $bannerTranslation->setLocales($locales);

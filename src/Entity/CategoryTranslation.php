@@ -5,11 +5,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="warning_translation")
- * @ORM\Entity(repositoryClass="App\Repository\WarningTranslationRepository")
+ * @ORM\Table(name="category_translation")
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryTranslationRepository")
  */
 
-class WarningTranslation
+class CategoryTranslation
 {
     /**
      * @ORM\Column(type="integer")
@@ -19,13 +19,12 @@ class WarningTranslation
     private $id;
     /**
     * @ORM\Column(type="string", length=50)
-    * @Assert\NotBlank(message="Texto *")
+    * @Assert\NotBlank(message="name")
     */
     private $name;
-    /** @ORM\ManyToOne(targetEntity="Warning") */
-    private $warning;
-    /**
-     *@ORM\ManyToOne(targetEntity="Locales") */
+    /** @ORM\ManyToOne(targetEntity="Category") */
+    private $category;
+    /** @ORM\ManyToOne(targetEntity="Locales") */
     private $locales;
 
     public function getId()
@@ -41,17 +40,7 @@ class WarningTranslation
     public function setName($name)
     {
         $this->name = str_replace("'","’",$name);
-    }
-    
-    public function getWarning()
-    {
-        return $this->warning;
-    }
-
-    public function setWarning(Warning $warning) {
-        $this->warning = $warning;
-    }
-    
+    }    
     public function getLocales()
     {
         return $this->locales;
@@ -62,4 +51,13 @@ class WarningTranslation
         $this->locales = $locales;
     }
 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+    }
 }

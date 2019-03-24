@@ -42,7 +42,7 @@ class MenuTranslation
 
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = str_replace("'","’",$name);
     }    
 
     public function getMenu()

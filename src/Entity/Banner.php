@@ -27,13 +27,13 @@ class Banner
     private $orderBy;
     /**
      *@ORM\OneToMany(targetEntity="BannerTranslation", mappedBy="banner", cascade={"persist", "remove"}) */
-    private $bannerTranslation;
+    private $translation;
     /** @ORM\Column(type="boolean", name="text_active", options={"default":0}) */
     private $text_active;
 
     public function __construct()
     {       
-        $this->bannerTranslation = new ArrayCollection();   
+        $this->translation = new ArrayCollection();   
     }
 
     public function getId()
@@ -79,12 +79,12 @@ class Banner
 
     public function getTranslation()
     {
-        return $this->bannerTranslation;
+        return $this->translation;
     }
 
-    public function setTranslation(BannerTranslation $bannerTranslation)
+    public function setTranslation(BannerTranslation $translation)
     {
-        $this->bannerTranslation = $bannerTranslation;
+        $this->translation = $translation;
     }
 
     public function getCurrentTranslation(Locales $locales)

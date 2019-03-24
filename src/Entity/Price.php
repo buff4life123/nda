@@ -26,8 +26,8 @@ class Price
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="price") 
      */
     private $product;
-    /** @ORM\OneToMany(targetEntity="PriceTranslation", mappedBy="price", cascade={"persist", "remove"}) */
-    private $priceTranslation;
+    /** @ORM\OneToMany(targetEntity="PriceTranslation", mappedBy="id", cascade={"persist", "remove"}) */
+    private $translation;
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $isActive;
     /** @ORM\Column(type="boolean", name="is_child", options={"default":0}) */
@@ -39,7 +39,7 @@ class Price
     private $amount;
     
     public function __construct(){       
-        $this->priceTranslation = new ArrayCollection();   
+        $this->translation = new ArrayCollection();   
     }
 
     public function getId()
@@ -87,12 +87,12 @@ class Price
     
     public function getTranslation()
     {
-        return $this->priceTranslation;
+        return $this->translation;
     }
 
-    public function setTranslation(PriceTranslation $priceTranslation)
+    public function setTranslation(PriceTranslation $translation)
     {
-        $this->priceTranslation = $priceTranslation;
+        $this->translation = $translation;
     }
 
     public function getCurrentTranslation(Locales $locales)

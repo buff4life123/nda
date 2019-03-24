@@ -118,6 +118,9 @@ $('#banner-form').on('submit',function(e){
 
   $('input[name=translated]').val(JSON.stringify(arr))
   
+
+  //console.log(JSON.stringify(arr))
+
   $('.required').addClass('w3-hide')
     $.ajax({
       url:'{{ path('admin_banner_edit') }}',

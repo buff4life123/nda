@@ -19,15 +19,15 @@ class Menu
     private $id;
     
     /**
-     *@ORM\OneToMany(targetEntity="MenuTranslation", mappedBy="menu") */
-    private $menuTranslation;
+     *@ORM\OneToMany(targetEntity="MenuTranslation", mappedBy="id", cascade={"persist", "remove"})  */
+    private $translation;
 
     /** @ORM\Column(type="boolean", name="link_active", options={"default":0})*/
     private $link_active;
 
     public function __construct()
     {       
-        $this->menuTranslation = new ArrayCollection();   
+        $this->translation = new ArrayCollection();   
     }
 
     public function getId()
@@ -37,12 +37,12 @@ class Menu
 
     public function getTranslation()
     {
-        return $this->menuTranslation;
+        return $this->translation;
     }
 
-    public function setTranslation(MenuTranslation $menuTranslation)
+    public function setTranslation(MenuTranslation $translation)
     {
-        $this->menuTranslation = $menuTranslation;
+        $this->translation = $translation;
     }
 
     public function getLinkActive()

@@ -1,5 +1,7 @@
 <?php
 return array(
+    'categoria' => 'Category',
+    'warranty_payment' => 'Warranty Payment',
     'best_first' => 'Get the best offers first!',
     'join_newsletter' => 'Join our newsletter.',
     'change' => 'Change',

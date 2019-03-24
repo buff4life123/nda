@@ -1,5 +1,7 @@
 <?php
 return array(
+    'categoria' => 'Categoria',
+    'warranty_payment' => 'Garantia Pagamento',
     'best_first' => 'Receba as melhores ofertas primeiro!',
     'join_newsletter' => 'Receba a nossa newsletter.',
     'change' => 'Alterar',
@@ -77,7 +79,7 @@ return array(
     'ordering_not possible' => 'Não foi possivel mudar a ordem. Tente novamente!',
     'hello' => 'Olá',
     'dash' => 'Painel Controlo',
-    'product_23' => 'Produto Máx. :24h',
+    'product_23' => 'Produto Máx. (24h)',
     'showcase' => 'Galeria',
     'available' => 'Disponivel',
     'warning' => 'Aviso',

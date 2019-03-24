@@ -3,6 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Entity\Category;
+use App\Entity\CategoryTranslation;
+use App\Entity\Price;
+use App\Entity\ProductDescriptionTranslation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ProductType extends AbstractType
@@ -22,54 +27,44 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('category', EntityType::class, array(
+                'class' => Category::class,
+                'choice_label' => 'id',
+                'placeholder' => 'category',
+                'label' => 'category'              
+            ))
             ->add('image', FileType::class, array(
                 'label' => false,
                 'required' => false,
                 'attr' => ['class' => 'w3-hide set-image','onchange' => 'loadFile(event)']
             ))
-            ->add('name_pt', TextType::class,
-            array(
-                'required' => false,
-                'label' => 'Nome (PT)*',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Nome (PT)*',]
-            ))
             ->add('availability', IntegerType::class,
             array(
                 'required' => true,
-                'label' => 'Lotação *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Lotação *',]
+                'label' => 'available',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'available',]
             ))
             ->add('duration', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Duração *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Duração *', 'readonly' => true]
+                'label' => 'duration',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'duration', 'readonly' => true]
             ))
-            ->add('name_en', TextType::class, array(
-                'required' => false,
-                'label' => 'Nome (EN)*',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Nome (EN)*']
+            ->add('price', CollectionType::class, array(
+                'entry_type' => ProductDescriptionTranslationType::class,
+                'entry_options' => array('label' => false),
+                'allow_add' => true,
+                'allow_delete' => true,                 
+                'by_reference' => false,
+                'label' => false   
             ))
-            ->add('description_pt', TextareaType::class,
-            array(
-                'required' => false,
-                'label' => 'Descrição (PT)*',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Descrição (PT)*', 'rows' => 5 ]
-            ))
-            ->add('description_en', TextareaType::class, array(
-                'required' => false,
-                'label' => 'Descrição (EN)*',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Descrição (EN)*', 'rows' => 5 ]
-            ))
-            ->add('children_price', MoneyPhpType::class, array(
-                'label' => 'Preço Criança (€)*',
-                'required'  => false,
-                'attr' => ['placeholder'=>'Preço Criança (€)*', 'min'=>'0', 'step'=>'any', 'type'=>'number']
-            ))
-            ->add('adult_price', MoneyPhpType::class, array(
-                'label' =>'Preço Adulto (€)*',
-                'required' => false,
-                'attr' => ['placeholder'=>'Preço Adulto (€)*', 'min'=>'0','step'=>'any', 'type'=>'number']
+            ->add('price', CollectionType::class, array(
+                'entry_type' => PriceType::class,
+                'entry_options' => array('label' => false),
+                'allow_add' => true,
+                'allow_delete' => true,                 
+                'by_reference' => false,
+                'label' => false   
             ))
             ->add('event', CollectionType::class, array(
                 'entry_type' => EventType::class,
@@ -79,44 +74,25 @@ class ProductType extends AbstractType
                 'by_reference' => false,
                 'label' => false   
             ))
-            ->add('blockdate', CollectionType::class, array(
-                    'entry_type' => BlockdatesType::class,
-                    'entry_options' => array('label' => false),
-                    'allow_add' => true,
-                    'allow_delete' => true,                 
-                    'by_reference' => false,
-                    'label' => false   
-            ))
             ->add('is_active', CheckboxType::class, array(
-                'label'    => 'Ativa?',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('highlight', CheckboxType::class, array(
-                'label'    => 'Destaque',
+                'label'    => 'highlight',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('warranty_payment', CheckboxType::class, array(
-                'label'    => 'Garantia Pagamento',
+                'label'    => 'warranty_payment',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
-            ->add('warranty_payment_pt', TextareaType::class,
-            array(
-                'required' => false,
-                'label' => 'Garantia Pagamento (PT)',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Garantia Pagamento (PT)', 'rows' => 5 ]
-            ))
-            ->add('warranty_payment_en', TextareaType::class, array(
-                'required' => false,
-                'label' => 'Garantia Pagamento (EN)',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Garantia Pagamento (EN)', 'rows' => 5 ]
-            ))
             ->add('submit', SubmitType::class,
             array(
-                'label' => 'part_seven.submit',
-                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top SAVE']
+                'label' => 'submit',
+                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
             ))
         ;
     }
