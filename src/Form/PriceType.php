@@ -57,8 +57,8 @@ class PriceType extends AbstractType
             ))
             ->add('submit', SubmitType::class,
             array(
-                'label' => 'part_seven.submit',
-                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top SAVE']
+                'label' => 'submit',
+                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
             ))
         ;
     }

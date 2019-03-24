@@ -44,30 +44,30 @@ class BookingType extends AbstractType
             array(
                 'label'=>false,
                 'required' => false,
-                'attr' => ['class' => 'w3-input w3-padding-16 ADULT','placeholder'=>'part_seven.adult', 'min' => '0']
+                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'adult', 'min' => '0']
             ))
         ->add('children', IntegerType::class,
             array(
                 'label'=>false,
                 'required' => false,
-                'attr' => ['class' => 'w3-input w3-padding-16 CHILDREN','placeholder'=>'part_seven.children', 'min' => '0']
+                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'children', 'min' => '0']
             ))
         ->add('baby', IntegerType::class,
             array(
                 'label'=>false,
                 'required' => false,
-                'attr' => ['class' => 'w3-input w3-padding-16 BABY','placeholder'=>'part_seven.baby', 'min' => '0']
+                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'baby', 'min' => '0']
             ))
         ->add('notes', TextareaType::class,
             array(
                 'label'=>false,
                 'required' => false,
-                'attr' => ['class' => 'w3-input w3-padding-16 NOTES','placeholder'=>'Notas']
+                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'notes']
             ))
         ->add('submit', SubmitType::class,
             array(
-                'label' => 'part_seven.submit',
-                'attr' => ['class' => 'w3-btn w3-padding w3-section my-btn SUBMIT']
+                'label' => 'submit',
+                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
             ))
         ;
     }
