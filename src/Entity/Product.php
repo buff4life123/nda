@@ -25,8 +25,13 @@ class Product
     private $category;
     /** @ORM\OneToMany(targetEntity="Price", mappedBy="id", cascade={"persist", "remove"}) */
     private $price;
+
+    /** @ORM\OneToMany(targetEntity="Available", mappedBy="id", cascade={"persist", "remove"}) */
+    private $available;
+    
     /** @ORM\OneToMany(targetEntity="ProductDescriptionTranslation", mappedBy="id", cascade={"persist", "remove"}) */
     private $product_description_translation;
+    
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $isActive;
     /**

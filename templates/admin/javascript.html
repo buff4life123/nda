@@ -65,6 +65,12 @@ function ajaxUpload(block){
         case 'banner-list': 
             url = '{{ path("admin_banner_list") }}' 
         break
+        case 'category-new': 
+            url = '{{ path("admin_category_new") }}' 
+        break
+        case 'category-list': 
+            url = '{{ path("admin_category_list") }}' 
+        break
     }
 
     $('.w3-overlay').show() 

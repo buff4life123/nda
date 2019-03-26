@@ -1,6 +1,6 @@
 <?php
 return array(
-    'categoria' => 'Categoria',
+    'category' => 'Categoria',
     'warranty_payment' => 'Garantia Pagamento',
     'best_first' => 'Receba as melhores ofertas primeiro!',
     'join_newsletter' => 'Receba a nossa newsletter.',

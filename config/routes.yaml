@@ -343,6 +343,42 @@ admin_banner_order:
     path: /admin-banner-order/
     controller: App\Controller\BannerController::bannerOrder
 
+
+##
+# BANNER
+##
+
+admin_category:
+    path: /admin-category/
+    controller: App\Controller\CategoryController::category
+
+admin_category_list:
+    path: /admin-category-list/
+    controller: App\Controller\CategoryController::categoryList
+
+admin_category_new:
+    path: /admin-category-new/
+    controller: App\Controller\CategoryController::categoryNew
+
+admin_category_delete:
+    path: /admin-category-delete/
+    controller: App\Controller\CategoryController::categoryDelete
+
+admin_category_add:
+    path: /admin-category-add/
+    controller: App\Controller\CategoryController::categoryAdd
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_category_show_edit:
+    path: /admin-category-show-edit/
+    controller: App\Controller\CategoryController::categoryShowEdit
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_category_edit:
+    path: /admin-category-edit/
+    controller: App\Controller\CategoryController::categoryEdit
+    #condition: 'request.isXmlHttpRequest()'
+
 ##
 # USERS
 ##

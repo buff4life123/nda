@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Locales;
 use App\Entity\CategoryTranslation;
 use App\Entity\Price;
 use App\Entity\ProductDescriptionTranslation;
@@ -21,17 +22,45 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ProductType extends AbstractType
 {
+    
+    private $locale = 'pt_PT';
+
+    public function __construct(EntityManagerInterface $locale)
+    {
+        $this->locale = $locale;
+    }
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('category', EntityType::class, array(
-                'class' => Category::class,
-                'choice_label' => 'id',
+                'class' => CategoryTranslation::class,
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('ct')
+                        ->Join('ct.locales', 'l')
+                        ->addSelect('l')
+                        ->Join ('ct.category', 'c' )
+                        ->addSelect('c')
+                        ->where('l.name = :local')
+                        ->setParameter('local', 'pt_PT')
+                        ->orderBy('ct.name', 'ASC');
+                },
                 'placeholder' => 'category',
-                'label' => 'category'              
+                    'label' => 'category',
+                    'attr' => array(
+                            'class' => 'w3-select w3-border w3-white',
+                            'data-live-search' => true,
+                            'data-actions-box' => true
+                    )
+        
+
             ))
             ->add('image', FileType::class, array(
                 'label' => false,
@@ -42,7 +71,7 @@ class ProductType extends AbstractType
             array(
                 'required' => true,
                 'label' => 'available',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'available',]
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'available']
             ))
             ->add('duration', TextType::class,
             array(

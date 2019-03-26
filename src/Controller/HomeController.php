@@ -106,7 +106,7 @@ class HomeController extends AbstractController
 
         foreach ($menus as $menu) {
             $m []= array( 
-                'text' => $menu->getCurrentTranslation($userLocale),
+                'text' => '',//$menu->getCurrentTranslation($userLocale),
                 'id' => $menu->getId()
             );
         }
@@ -126,17 +126,17 @@ class HomeController extends AbstractController
             $flag = true;
             $ord = array();
 
-            if($products->getAvailable()){
-                foreach ($products->getAvailable() as $available)
-                   array_push($ord, $available->getDatetimeStart()->format('U'));
+            //if($products->getAvailable()){
+//                foreach ($products->getAvailable() as $available)
+//                   array_push($ord, $available->getDatetimeStart()->format('U'));
                     
-                sort($ord);
+//                sort($ord);
                 
-                for($t = 0; $t<count($ord); $t++) {
-                    if($ord[$t] >= $now->format('U'))
-                    $flag = false;
-                }
-            }
+//                for($t = 0; $t<count($ord); $t++) {
+//                    if($ord[$t] >= $now->format('U'))
+ //                   $flag = false;
+            //    }
+            //}
 
             $s = explode(":",$products->getDuration());
             $minutes = (int)$s[0]*60 + (int)$s[1];

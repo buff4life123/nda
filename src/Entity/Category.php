@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -31,11 +33,11 @@ class Category
 	}
 
     public function getIsActive() {
-        return $this->isActive;
+        return $this->is_active;
     }
 
-    public function setIsActive($isActive) {
-        $this->isActive = $isActive;
+    public function setIsActive($is_active) {
+        $this->is_active = $is_active;
     }
 
     public function getTranslation()

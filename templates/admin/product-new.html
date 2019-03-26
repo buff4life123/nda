@@ -9,6 +9,7 @@ ul{padding: 0px}
 .table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {border: 0px solid #FFF!important}
 .w3-input {border-bottom: 0px solid #05788d}
 input, select, textarea {color: #000!important}
+.w3-select{padding: 11.5px 4px}
 
 </style>
 <header class="w3-container" style="padding-top:22px">
@@ -60,34 +61,13 @@ input, select, textarea {color: #000!important}
         </div>
       </div>
 
-
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
-
-        <div class="w3-col l3 m1 s0 w3-hide-small">&nbsp;</div>
-
-        <div class="w3-col l6 m10 s12">
-          <label for="product_name_pt">{%trans%}hours_take_place{%endtrans%}</label>
-          <textarea class="w3-input w3-border" required readonly id="receive-hour" placeholder="Escolha as horas, no relógio, de quando se realiza o evento" rows="2"></textarea>
-      
-        <div class="w3-row-padding w3-margin-top">
-          <div class="w3-col s6">
-            <span class="w3-btn w3-border w3-block w3-white" id="clear-hour"><i class="fa fa-eraser"></i> {%trans%}clear{%endtrans%}</span>
-          </div>
-          <div class="w3-col s6">
-            <span class="w3-btn w3-block w3-border w3-light-green" id="add-hour">
-              <i class="fa fa-check"></i> <span class="w3-hide-small"> {%trans%}add{%endtrans%}</span> {%trans%}hour{%endtrans%}
-            </span>
-          </div>
+        <div class="w3-col s6 l3 m6 w3-margin-bottom">
+          {{ form_label(form.category) }}
+          {{ form_widget(form.category) }}
         </div>
-
-        <div class="w3-col s12">
-          <div style="position:relative" class="w3-padding">
-            <input type="text" class="w3-hide" id="datetimepicker3">
-          </div>
-        </div>
-        {{ form_widget(form.event)}}
       </div>
-    
+      <div class="w3-row-padding w3-margin-top w3-border-bottom">    
       <div class="w3-hide">
         {{ form_widget(form.submit)}}
       </div>
@@ -113,46 +93,9 @@ input, select, textarea {color: #000!important}
     output.src = URL.createObjectURL(event.target.files[0])
   }
 
-hoursn = []
-uniquen = []
-position = 0
-
-eventObj = $('#product_event').data("prototype")
-
 priceObj = $('#product_price').data("prototype")
 
-eventObj = $('#product_event').data("prototype")
-
-$('#product_event').html('<div class="w3-hide">'+eventObj+'</div>')
-
 $('#product_price').html('<div class="w3-hide">'+priceObj+'</div>')
-
-
-$('#clear-hour').click(function(){
-  hoursn = []
-  uniquen = []
-  $('#receive-hour').text('')
-  $('#product_event___name___event').val('')
-})
-
-$('#add-hour').click(function(){
-  hoursn.push($('.timepicker-hour').text()+':'+$('.timepicker-minute').text())
-
-  $.each(hoursn, function(i, el){
-    if($.inArray(el, uniquen) === -1) uniquen.push(el)
-  })
-
-  $('#receive-hour').text(uniquen)
-  $('#product_event___name___event').val(uniquen)
-})
-
-$('#datetimepicker3').datetimepicker({keepOpen: true,format: 'H:m',stepping:5,inline: true,sideBySide:true, icons: {
-  time: "fa fa-clock-o",
-  date: "fa fa-calendar",
-  up: "fa fa-chevron-up",
-  down: "fa fa-chevron-down"
-  }
-})
 
 $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,icons: {
   time: "fa fa-clock-o",
@@ -169,7 +112,6 @@ $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,ico
   e.preventDefault()
   $('.w3-overlay').show()
   $('.required').addClass('w3-hide')
-  //setTimeout(function(){
     $.ajax({  
       url:'{{ path('admin_product_add') }}',
       type: "POST",
@@ -181,7 +123,6 @@ $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,ico
         $('.w3-overlay').hide()
         //console.log(data)
         if (data.message == 'success'){
-          //$('#datetimepicker3').data('DateTimePicker').destroy()
           ajaxUpload('product-list')
         }
         else if (data.message=='fail'){
