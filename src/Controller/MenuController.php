@@ -9,172 +9,320 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use App\Form\MenuType;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
 
 class MenuController extends AbstractController
-{
+{    
 
-    public function menu(Request $request, ValidatorInterface $validator)
+    public function menuNew(Request $request)
     {
+        $menu = new Menu();
         $em = $this->getDoctrine()->getManager();
 
-        if($request->request->get('id')){
-            $aboutUs = $em->getRepository(Menu::class)->find($request->request->get('id'));
-            $form = $this->createForm(MenuType::class, $aboutUs);
-        }
-        else
-        {
-            $aboutUs = $em->getRepository(MenuUs::class)->findAll();
-            $form = $this->createForm(MenuType::class);
-
-        } 
+        $locales = $em->getRepository(Locales::class)->findAll();
         
+        $form = $this->createForm(MenuType::class, $menu);
+        
+        $form->handleRequest($request);
+        
+        return $this->render('admin/menu-new.html',array(
+            'form' => $form->createView(),
+            'locales' => $locales));
+    }
+
+    public function menuAdd(Request $request, ValidatorInterface $validator)
+    {
+        $menu = new Menu();
+
+        $s = json_decode($request->request->get('locale'));
+
+        $em = $this->getDoctrine()->getManager();
+
         $locales = $em->getRepository(Locales::class)->findAll();
 
-        if ($request->isXmlHttpRequest() && $request->request->get($form->getName())) {
+        $totals = $em->getRepository(Menu::class)->findAll();
 
-            $form->submit($request->request->get($form->getName()));
-            
+        $form = $this->createForm(MenuType::class, $menu);
+
+        $form->handleRequest($request);
+
             if($form->isSubmitted()){
-
-                $aboutUs->setLocales($locales);
-
+                
                 if($form->isValid()){
 
-                    $em = $this->getDoctrine()->getManager();
-                    $aboutUs = $form->getData();
+                try {
 
-                    $aboutUs->setLocales($locales);
+                    foreach ($s as $translated) {
 
-                    $em->persist($aboutUs);
+                        $locales = $em->getRepository(Locales::class)->find($translated->id);
+                        
+                        $menuTranslation = new MenuTranslation();
+                        
+                        $menuTranslation->setLocales($locales);
+                        $menuTranslation->setName($translated->name);
+                        $menuTranslation->setMenu($menu);
+                        $em->persist($menuTranslation);
+                    }
+                    
+                    $menu->setOrderBy(count($totals)+1);
+                    $em->persist($menu);
                     $em->flush();
 
                     $response = array(
-                        'result' => 1,
+                        'status' => 1,
                         'message' => 'success',
-                        'data' => $aboutUs->getId());
+                        'data' => $menu->getId(),
+                        'form' => $request->request->get('locale'),
+                        'ff' => $s[0]->id
+                    );
+                    
+                    } 
+                    catch(DBALException $e){
+                        
+                        $a = array("Contate administrador sistema sobre: ".$e->getMessage());
+
+                        $response = array(
+                            'status' => 0,
+                            'message' => 'fail',
+                            'data' => $a);
+                    }
                 }
                 else{   
                     $response = array(
-                        'result' => 0,
+                        'status' => 0,
                         'message' => 'fail',
-                        'is_ok' =>$form["locales"]->getData(), 
                         'data' => $this->getErrorMessages($form)
                     );
                 }
             }
             else
                 $response = array(
-                    'result' => 2,
+                    'status' => 2,
                     'message' => 'fail not submitted',
                     'data' => '');
-                return new JsonResponse($response);
+        return new JsonResponse($response);
+    }
+
+
+    public function menuOrder(Request $request)
+    {
+        $result = $request->request->get('result');
+
+        if (!$result)
+        
+           return new JsonResponse(array('status'=> 0, 'message' => 'nada para ordenar', 'data' => null));
+
+        $order = json_decode($result);
+    
+        $em = $this->getDoctrine()->getManager();  
+
+        foreach ($order as $orderBy) {
+            $menu = $em->getRepository(Menu::class)->find($orderBy->id);
+            $menu->setOrderBy($orderBy->to);
+            $em->persist($menu);
+            $em->flush();
         }
 
-        return $this->render('admin/about-us.html',array(
-            'form' => $form->createView(),
-            'aboutUs' => $aboutUs,
-            'locales' => $locales
-        ));
+        $response = array('status'=> 1, 'message' => 'success', 'data' => count($order));
+        
+        return new JsonResponse($response);
 
-        return $this->render('admin/about-us.html');
+    }
+
+    public function menuShowEdit(Request $request, ValidatorInterface $validator)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $id = $request->request->get('id');
+        
+        $locales = $em->getRepository(Locales::class)->findAll();
+
+        $totals = $em->getRepository(Menu::class)->findAll();
+
+        $menu = $em->getRepository(Menu::class)->find($id);
+
+        $form = $this->createForm(MenuType::class, $menu);
+
+        if($menu) {
+
+            $t = array();
+
+           foreach($menu->getTranslation() as $translated){
+                $t[] = array(
+                    'local' => $translated->getLocales()->getName(),
+                    'name' => $translated->getName(),
+                    'local_id' => $translated->getId(),
+                );
+           }
+            $b[] = array(
+                'id' => $menu->getId(),
+                'is_active' => $menu->getIsActive(),
+                'order_by' => $menu->getOrderBy(),
+                'locales_translated' => $t,
+            );
+        }
+       
+
+        return $this->render('admin/menu-edit.html',array(
+            'form' => $form->createView(),
+            'menu' => $menu,
+            'locales' => $locales,
+            'totals' => count($totals)
+        ));
     }
 
 
 
     public function menuEdit(Request $request, ValidatorInterface $validator)
     {
-        $em = $this->getDoctrine()->getManager();
-        
-        $aboutUs = $em->getRepository(Menu::class)->find($request->request->get('id'));
+        $id = $request->request->get('id');
 
-        $form = $this->createForm(MenuType::class, $aboutUs);
+        $em = $this->getDoctrine()->getManager();
+      
+        $menu = $em->getRepository(Menu::class)->find($id);
+
+        if(!$menu){
+        
+            $response = array(
+                'status' => 0,
+                'message' => 'menu not found',
+                'menuid' => $id);
+            return new JsonResponse($response);
+        }
+
+        $form = $this->createForm(MenuType::class, $menu);
 
         $form->handleRequest($request);
             
         if($form->isSubmitted()){
-                
+            
             if($form->isValid()){ 
-
-            $aboutUs = $form->getData();
-
+                
                 try {
-                    $em->persist($aboutUs);
+
+                    $t = json_decode($request->request->get('translated'));
+
+                    foreach ($t as $translated) {
+                    
+                        $locales = $em->getRepository(Locales::class)->find($translated->locale_id);
+
+                        $menuTranslation = $em->getRepository(MenuTranslation::class)->findOneBy(['locales' => $locales, 'menu'=> $menu]);
+                    
+                        if(!$menuTranslation){
+
+                            $menuTranslation = new MenuTranslation();
+                        
+                            $menuTranslation->setLocales($locales);
+                            $menuTranslation->setName($translated->name);
+                            $menuTranslation->setMenu($menu);
+                            $em->persist($menuTranslation);
+                        }
+                        else{
+                            $menuTranslation->setName($translated->name);
+                            $em->persist($menuTranslation);
+                        }
+                    }
+
+                    $menu->setOrderBy($request->request->get('order_by'));
+                    $em->persist($menu);
                     $em->flush();
 
                     $response = array(
                         'status' => 1,
-                        'message' => 'Sucesso',
-                        'data' => 'O registo '.$aboutUs->getId().' foi gravado.');
+                        'message' => 'success',
+                        'image' => $deleted,
+                        'data' => $menu->getId()
+                    );
+                    return new JsonResponse($response);
                 } 
                 catch(DBALException $e){
-
+                    
                     $a = array("Contate administrador sistema sobre: ".$e->getMessage());
-
                     $response = array(
                         'status' => 0,
                         'message' => 'fail',
                         'data' => $a);
+                    return new JsonResponse($response);
                 }
             }
-            
             else{   
                 $response = array(
-                    'result' => 0,
+                    'status' => 0,
                     'message' => 'fail',
                     'data' => $this->getErrorMessages($form)
                 );
+                return new JsonResponse($response);
             }
         }
         return new JsonResponse($response);
     }
 
 
-    public function menuDelete(Request $request){
-
-        $response = array();
-        $aboutUsId = $request->request->get('id');
+    public function menuList(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
-        
-        $aboutUs = $em->getRepository(Menu::class)->find($aboutUsId);
-       
-        if (!$aboutUs) {
-            $response = array('message'=>'fail', 'status' => 'Registo #'.$aboutUsId . ' não existe.');
-        }
-        else{
-            $em->remove($aboutUs);
-            $em->flush();
 
-            $response = array('message'=>'success', 'status' => $aboutUsId);
+        $menus = $em->getRepository(Menu::class)->findAll([],['orderBy' => 'ASC']);
+
+        $locales = $em->getRepository(Locales::class)->findAll();
+
+        $b = array();
+        
+        foreach ($menus as $menu) {
+
+            $t = array();
+
+           foreach($menu->getTranslation() as $translated){
+                $t[] = array(
+                    'local' => $translated->getLocales()->getName(),
+                    'name' => $translated->getName(),
+                    'local_id' => $translated->getLocales()->getId(),
+                );
+           }
+            $b[] = array(
+                'id' => $menu->getId(),
+                'is_active' => $menu->getIsActive(),
+                'order_by' => $menu->getOrderBy(),
+                'locales_translated' => $t,
+            );
         }
-        return new JsonResponse($response);
+   
+        return $this->render('admin/menu-list.html', array(
+            'menus' => $b,
+            'locales' => $locales
+            ));
     }
 
 
-    public function menuShow(Request $request){
-
+    public function menuDelete(Request $request)
+    {
+        $deleted = 1;
         $response = array();
+        $id = $request->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        
+        $menu = $em->getRepository(Menu::class)->find($id);
+        
+        if (!$menu) {
+            return new JsonResponse(array('status'=> 0, 'message' => 'Menu #'.$id . ' não existe.'));
+        }
 
-        $em = $this->getDoctrine()->getManager(); 
+        $em->remove($menu);
+        $em->flush();
 
-        $locales = $em->getRepository(Locales::class)->findOneBy(['name' => $this->session->get('_locale')->getName()]);
-
-        $aboutUs = $em->getRepository(Menu::class)->findOneBy(['locales' => $locales]);
-       
-        $response = !$aboutUs ?
-            array('status' => 0, 'message' => 'Registo não encontrado', 'data' => null)
-            :
-            array('status' => 1, 'message' => $aboutUs->getName(), 'data' => $aboutUs->getRgpdHtml());
-        return new JsonResponse($response);
+        return new JsonResponse(array('status' => 1, 'message' => 'Menu foi apagado'));
     }
 
 
     protected function getErrorMessages(\Symfony\Component\Form\Form $form) 
     {
         $errors = array();
+        $err = array();
         foreach ($form->getErrors() as $key => $error) {
             $errors[] = $error->getMessage();
         }
@@ -184,9 +332,13 @@ class MenuController extends AbstractController
                 $errors [] = $this->getErrorMessages($child);
             }
         }
-        return $errors;
-    }
 
+        foreach ($errors as $error) {
+                $err [] = $error;
+        }
+
+        return $err;
+    }
 }
 
 ?>

@@ -345,7 +345,47 @@ admin_banner_order:
 
 
 ##
-# BANNER
+# MENU
+##
+
+admin_menu:
+    path: /admin-menu/
+    controller: App\Controller\MenuController::menu
+
+admin_menu_list:
+    path: /admin-menu-list/
+    controller: App\Controller\MenuController::menuList
+
+admin_menu_new:
+    path: /admin-menu-new/
+    controller: App\Controller\MenuController::menuNew
+
+admin_menu_delete:
+    path: /admin-menu-delete/
+    controller: App\Controller\MenuController::menuDelete
+
+admin_menu_add:
+    path: /admin-menu-add/
+    controller: App\Controller\MenuController::menuAdd
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_menu_show_edit:
+    path: /admin-menu-show-edit/
+    controller: App\Controller\MenuController::menuShowEdit
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_menu_edit:
+    path: /admin-menu-edit/
+    controller: App\Controller\MenuController::menuEdit
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_menu_order:
+    path: /admin-menu-order/
+    controller: App\Controller\MenuController::menuOrder
+
+
+##
+# CATEGORY
 ##
 
 admin_category:

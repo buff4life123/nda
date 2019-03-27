@@ -8,7 +8,7 @@ input, select, textarea {color: #000!important}
 
 </style>
 <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="far fa-image"></i> {%trans%}category{%endtrans%} <i class="far fa-plus-square fa-fw"></i></b></h5>
+    <h5><b><i class="fas fa-project-diagram"></i> {%trans%}category{%endtrans%} <i class="far fa-plus-square fa-fw"></i></b></h5>
 </header>
 
 <div class="w3-padding-16 w3-container">
@@ -18,18 +18,14 @@ input, select, textarea {color: #000!important}
   {{ form_start(form, {'attr': {'id': 'category-form'}})  }}
 
 <div class="w3-row-padding w3-margin-top w3-border-bottom">
-
     <div class="w3-col s12 l2 m4 w3-margin-bottom">
       {{ form_label(form.is_active)}}<br>
       {{ form_widget(form.is_active)}} 
     </div>
-  
   </div>
-
   <div class="w3-row-padding w3-margin-top w3-border-bottom">
     {%for locale in locales %}
     <div class="w3-col s12 l4 m6 w3-margin-bottom">
-
       <label>{% trans %}text{% endtrans %} {% set k = locale.name|split('_') %} {{ k[1] }}</label>
       
       <div class="w3-row">
@@ -71,9 +67,6 @@ input, select, textarea {color: #000!important}
   $('input[type=text').each(function( index ) {
     arr.push({id:$(this).attr('data-local-id'), name:$(this).val()})
   })
-
-
-console.log($('#category-form').serialize()+'&locale='+JSON.stringify(arr))
 
   e.preventDefault()
   $('.w3-overlay').show()

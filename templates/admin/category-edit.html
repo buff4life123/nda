@@ -7,57 +7,20 @@
 <header class="w3-container" style="padding-top:22px">
     <h5>
       <b>
-        <i class="fas fa-image"></i> Banner <i class="far fa-edit fa-fw"></i>
+        <i class="fas fa-project-diagram"></i> {%trans%}category{%endtrans%} <i class="far fa-edit fa-fw"></i>
     </b>
   </h5>
 </header>
 
 <div class="">
-  {{ form_start(form, {'attr': {'id': 'banner-form'}})  }}
-  
-    <div class="w3-padding-16 w3-row-padding w3-border w3-sand">
-
-      <input type="hidden" value="{{banner.id}}" name="id">
-
-      <div class="w3-col s0 l3 m2 w3-hide-small">&nbsp;</div>
-
-      <div class="w3-col s12 l6 m8 w3-center" title="Vamos meter uma imagem">
-      <div class="w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
-
-        {% if banner.image %}
-        {% set url=banner.image|split('/public/') %}
-          <img id="output" src="../{{ url[1] }}" class="w3-image w3-animate-zoom">
-        {% else %}
-        <i class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
-        {% endif %}
-      </div>
-      {{ form_widget(form.image)}}
-    </div>
-  </div>
+  {{ form_start(form, {'attr': {'id': 'category-form'}})  }}
 
   <div class="w3-row-padding w3-border w3-sand w3-padding-16">
 
+    <input type="hidden" value="{{category.id}}" name="id">
     <div class="w3-col s12 l2 m4">
-      <label>{%trans%}order{%endtrans%}</label>
-      <select class="w3-select w3-border" name="order_by">
-        {% for i in 1..totals %}
-          {% if (i == banner.orderBy) %}
-            <option selected value="{{i}}">{{ i }}</option>
-          {% else %}
-            <option value="{{i}}">{{ i }}</option>
-        {% endif %}
-          {% endfor %}
-      </select>
-    </div>
-
-    <div class="w3-col s12 l2 m4" title="Vamos mostrar esta imagem aos clientes no site">
       <label>&nbsp;</label><br>
       {{ form_widget(form.is_active)}} {{ form_label(form.is_active)}}
-    </div>
-
-    <div class="w3-col s12 l2 m4" title="Vamos mostrar os textos no banner">
-      <label>&nbsp;</label><br>
-      {{ form_widget(form.text_active)}} {{ form_label(form.text_active)}}
     </div>
   </div>
 
@@ -74,7 +37,7 @@
         </div>
         <div class="w3-rest">
 
-        {% for translated in banner.Translation %}
+        {% for translated in category.Translation %}
           {% if locale.id == translated.locales.id %}
 
           <input type="text" data-translated-id="{{translated.id}}" data-locale-id="{{locale.id}}" name="locale" class="w3-input w3-border w3-white" value="{{translated.name}}" placeholder="{{locale.name}}">
@@ -105,7 +68,7 @@
     output.src = URL.createObjectURL(event.target.files[0])
   }
 
-$('#banner-form').on('submit',function(e){
+$('#category-form').on('submit',function(e){
   e.preventDefault()
   obj=''
   $('.w3-overlay').show()
@@ -117,25 +80,21 @@ $('#banner-form').on('submit',function(e){
   })
 
   $('input[name=translated]').val(JSON.stringify(arr))
-  
-
-  //console.log(JSON.stringify(arr))
 
   $('.required').addClass('w3-hide')
     $.ajax({
-      url:'{{ path('admin_banner_edit') }}',
+      url:'{{ path('admin_category_edit') }}',
       type: "POST",
       data: new FormData($(this)[0]),
       processData: false,
       contentType: false,
       cache: false,
       success: function(data){  
-        //console.log(data)
         $('.w3-overlay').hide()
         if (data.status == 1){
-          ajaxUpload('banner-list')
-          $('#modal-edit-banner').hide()
-          $('#banner-form').trigger('reset')
+          ajaxUpload('category-list')
+          $('#modal-edit-category').hide()
+          $('#category-form').trigger('reset')
         }
         else {
           for(i=0; i<data.data.length;i++)

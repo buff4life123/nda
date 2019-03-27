@@ -20,7 +20,7 @@ class Category
     private $id;
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $is_active;
-    /** @ORM\OneToMany(targetEntity="CategoryTranslation", mappedBy="id", cascade={"persist", "remove"}) */
+    /** @ORM\OneToMany(targetEntity="CategoryTranslation", mappedBy="category", cascade={"persist", "remove"}) */
     private $translation;
 
     public function __construct()

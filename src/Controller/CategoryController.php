@@ -113,8 +113,6 @@ class CategoryController extends AbstractController
         
         $locales = $em->getRepository(Locales::class)->findAll();
 
-        $totals = $em->getRepository(Category::class)->findAll();
-
         $category = $em->getRepository(Category::class)->find($id);
 
         $form = $this->createForm(CategoryType::class, $category);
@@ -136,8 +134,6 @@ class CategoryController extends AbstractController
                 'locales_translated' => $t,
             );
         }
-       
-
         return $this->render('admin/category-edit.html',array(
             'form' => $form->createView(),
             'category' => $category,
@@ -160,7 +156,7 @@ class CategoryController extends AbstractController
             $response = array(
                 'status' => 0,
                 'message' => 'category not found',
-                'categoryid' => $id);
+                'categoryId' => $id);
             return new JsonResponse($response);
         }
 
@@ -246,13 +242,13 @@ class CategoryController extends AbstractController
 
             $t = array();
 
-           /*foreach($category->getTranslation() as $translated){
+           foreach($category->getTranslation() as $translated){
                 $t[] = array(
                     'local' => $translated->getLocales()->getName(),
                     'name' => $translated->getName(),
                     'local_id' => $translated->getLocales()->getId(),
                 );
-           }*/
+           }
             $b[] = array(
                 'id' => $category->getId(),
                 'is_active' => $category->getIsActive(),
