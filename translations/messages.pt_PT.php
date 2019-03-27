@@ -1,5 +1,6 @@
 <?php
 return array(
+    'menu' => 'Menu',
     'category' => 'Categoria',
     'warranty_payment' => 'Garantia Pagamento',
     'best_first' => 'Receba as melhores ofertas primeiro!',

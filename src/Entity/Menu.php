@@ -19,11 +19,14 @@ class Menu
     private $id;
     
     /**
-     *@ORM\OneToMany(targetEntity="MenuTranslation", mappedBy="id", cascade={"persist", "remove"})  */
+     *@ORM\OneToMany(targetEntity="MenuTranslation", mappedBy="menu", cascade={"persist", "remove"})  */
     private $translation;
 
-    /** @ORM\Column(type="boolean", name="link_active", options={"default":0})*/
-    private $link_active;
+    /** @ORM\Column(type="integer", name="order_by", nullable=true)*/
+    private $orderBy;
+
+    /** @ORM\Column(type="boolean", name="is_active", options={"default":0})*/
+    private $is_active;
 
     public function __construct()
     {       
@@ -45,14 +48,24 @@ class Menu
         $this->translation = $translation;
     }
 
-    public function getLinkActive()
+    public function getIsActive()
     {
-        return $this->link_active;
+        return $this->is_active;
     }
 
-    public function setLinkActive($link_active)
+    public function setIsActive($is_active)
     {
-        $this->link_active = $link_active;
+        $this->is_active = $is_active;
+    }
+
+    public function getOrderBy()
+    {
+        return $this->orderBy;
+    }
+
+    public function setOrderBy($orderBy)
+    {
+        $this->orderBy = $orderBy;
     }
 
     public function getCurrentTranslation(Locales $locales)
