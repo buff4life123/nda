@@ -1,5 +1,10 @@
 <?php
 return array(
+    'local' => 'Local',
+    'choose' => 'Escolha',
+    'image_visible' => 'Imagem visivel',
+    'add_image' => 'Adicionar Imagem',
+    'text_visible' => 'Texto visivel',
     'menu' => 'Menu',
     'category' => 'Categoria',
     'warranty_payment' => 'Garantia Pagamento',

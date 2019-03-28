@@ -21,7 +21,7 @@
 
       <div class="w3-col s0 l3 m2 w3-hide-small">&nbsp;</div>
 
-      <div class="w3-col s12 l6 m8 w3-center" title="Vamos meter uma imagem">
+      <div class="w3-col s12 l6 m8 w3-center" title="{%trans%}add_image{%endtrans%}">
       <div class="w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
 
         {% if banner.image %}
@@ -50,12 +50,12 @@
       </select>
     </div>
 
-    <div class="w3-col s12 l2 m4" title="Vamos mostrar esta imagem aos clientes no site">
+    <div class="w3-col s12 l2 m4" title="{%trans%}image_visible{%endtrans%}">
       <label>&nbsp;</label><br>
       {{ form_widget(form.is_active)}} {{ form_label(form.is_active)}}
     </div>
 
-    <div class="w3-col s12 l2 m4" title="Vamos mostrar os textos no banner">
+    <div class="w3-col s12 l2 m4" title="{%trans%}text_visible{%endtrans%}">
       <label>&nbsp;</label><br>
       {{ form_widget(form.text_active)}} {{ form_label(form.text_active)}}
     </div>
@@ -117,9 +117,6 @@ $('#banner-form').on('submit',function(e){
   })
 
   $('input[name=translated]').val(JSON.stringify(arr))
-  
-
-  //console.log(JSON.stringify(arr))
 
   $('.required').addClass('w3-hide')
     $.ajax({

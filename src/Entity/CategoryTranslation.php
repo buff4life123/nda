@@ -22,7 +22,7 @@ class CategoryTranslation
     * @Assert\NotBlank(message="name")
     */
     private $name;
-    /** @ORM\ManyToOne(targetEntity="Category") */
+    /** @ORM\ManyToOne(targetEntity="Category", inversedBy="translation") */
     private $category;
     /** @ORM\ManyToOne(targetEntity="Locales") */
     private $locales;

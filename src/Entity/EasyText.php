@@ -31,10 +31,23 @@ class EasyText
     * @Assert\NotBlank(message="NAME")
     */
     private $name;
-    
+
+    /** @ORM\ManyToOne(targetEntity="Locales") */
+    private $locales;
+
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getLocales()
+    {
+        return $this->locales;
+    }
+
+    public function setLocales(Locales $locales)
+    {
+        $this->locales = $locales;
     }
 
     public function getName()

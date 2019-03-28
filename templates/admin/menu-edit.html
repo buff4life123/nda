@@ -13,14 +13,26 @@
 </header>
 
 <div class="">
-  {{ form_start(form, {'attr': {'id': 'category-form'}})  }}
+  {{ form_start(form, {'attr': {'id': 'menu-form'}})  }}
 
   <div class="w3-row-padding w3-border w3-sand w3-padding-16">
 
-    <input type="hidden" value="{{category.id}}" name="id">
+    <input type="hidden" value="{{menu.id}}" name="id">
     <div class="w3-col s12 l2 m4">
       <label>&nbsp;</label><br>
       {{ form_widget(form.is_active)}} {{ form_label(form.is_active)}}
+    </div>
+    <div class="w3-col s12 l2 m4">
+      <label>{%trans%}order{%endtrans%}</label>
+      <select class="w3-select w3-border" name="order_by">
+        {% for i in 1..totals %}
+          {% if (i == menu.orderBy) %}
+            <option selected value="{{i}}">{{ i }}</option>
+          {% else %}
+            <option value="{{i}}">{{ i }}</option>
+        {% endif %}
+          {% endfor %}
+      </select>
     </div>
   </div>
 
@@ -37,7 +49,7 @@
         </div>
         <div class="w3-rest">
 
-        {% for translated in category.Translation %}
+        {% for translated in menu.Translation %}
           {% if locale.id == translated.locales.id %}
 
           <input type="text" data-translated-id="{{translated.id}}" data-locale-id="{{locale.id}}" name="locale" class="w3-input w3-border w3-white" value="{{translated.name}}" placeholder="{{locale.name}}">
@@ -68,7 +80,7 @@
     output.src = URL.createObjectURL(event.target.files[0])
   }
 
-$('#category-form').on('submit',function(e){
+$('#menu-form').on('submit',function(e){
   e.preventDefault()
   obj=''
   $('.w3-overlay').show()
@@ -83,7 +95,7 @@ $('#category-form').on('submit',function(e){
 
   $('.required').addClass('w3-hide')
     $.ajax({
-      url:'{{ path('admin_category_edit') }}',
+      url:'{{ path('admin_menu_edit') }}',
       type: "POST",
       data: new FormData($(this)[0]),
       processData: false,
@@ -92,9 +104,9 @@ $('#category-form').on('submit',function(e){
       success: function(data){  
         $('.w3-overlay').hide()
         if (data.status == 1){
-          ajaxUpload('category-list')
-          $('#modal-edit-category').hide()
-          $('#category-form').trigger('reset')
+          ajaxUpload('menu-list')
+          $('#modal-edit-menu').hide()
+          $('#menu-form').trigger('reset')
         }
         else {
           for(i=0; i<data.data.length;i++)

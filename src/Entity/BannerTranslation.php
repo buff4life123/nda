@@ -22,7 +22,7 @@ class BannerTranslation
     * @Assert\NotBlank(message="Texto *")
     */
     private $name;
-    /** @ORM\ManyToOne(targetEntity="Banner") */
+    /** @ORM\ManyToOne(targetEntity="Banner", inversedBy="translation") */
     private $banner;
     /**
      *@ORM\ManyToOne(targetEntity="Locales") */

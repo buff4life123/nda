@@ -3,12 +3,14 @@
 namespace App\Form;
 
 use App\Entity\EasyText;
+use App\Entity\Locales;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class EasyTextType extends AbstractType
 {
@@ -22,6 +24,15 @@ class EasyTextType extends AbstractType
             ->add('easytexthtml', HiddenType::class,
             array(
                 'required' => false
+            ))
+            ->add('locales', EntityType::class, array(
+                'class' => Locales::class,
+                'choice_label' => 'name',
+                'placeholder' => 'choose',
+                    'label' => 'local',
+                    'attr' => array(
+                            'class' => 'w3-select w3-border w3-white'
+                    )
             ))
             ->add('name', TextType::class,
                 array(

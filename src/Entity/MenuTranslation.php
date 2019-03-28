@@ -23,7 +23,7 @@ class MenuTranslation
     */
     private $name;
 
-    /** @ORM\ManyToOne(targetEntity="Menu") */
+    /** @ORM\ManyToOne(targetEntity="Menu", inversedBy="translation") */
     private $menu;
     /**
      *@ORM\ManyToOne(targetEntity="Locales") */

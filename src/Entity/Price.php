@@ -26,7 +26,7 @@ class Price
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="price") 
      */
     private $product;
-    /** @ORM\OneToMany(targetEntity="PriceTranslation", mappedBy="id", cascade={"persist", "remove"}) */
+    /** @ORM\OneToMany(targetEntity="PriceTranslation", mappedBy="price", cascade={"persist", "remove"}) */
     private $translation;
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $isActive;

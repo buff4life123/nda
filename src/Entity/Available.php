@@ -33,6 +33,9 @@ class Available
     * @ORM\Column(type="datetime") */
     private $datetimeend;
 
+    /** @ORM\ManyToOne(targetEntity="Product", inversedBy="available") */
+    private $product;
+
     public function getId()
     {
         return $this->id;

@@ -22,7 +22,7 @@ class WarningTranslation
     * @Assert\NotBlank(message="Texto *")
     */
     private $name;
-    /** @ORM\ManyToOne(targetEntity="Warning") */
+    /** @ORM\ManyToOne(targetEntity="Warning", inversedBy="translation") */
     private $warning;
     /**
      *@ORM\ManyToOne(targetEntity="Locales") */

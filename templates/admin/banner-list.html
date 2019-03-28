@@ -104,13 +104,6 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
 <script>
  
 stored = []
-/*if(!localStorage.getItem("tableproduct") ){
-  localStorage.setItem("tableproduct", JSON.stringify(tableproduct))
-  stored = JSON.parse(localStorage.getItem("tableproduct"))
-}
-else
-  stored = JSON.parse(localStorage.getItem("tableproduct"))
-*/
 
 function editBanner(id){
   $('.w3-overlay').show()
@@ -166,63 +159,15 @@ function deleteBanner(id){
   }, 500)
 }
 
-
 $(function(){
 
   table = $('#dataTable').DataTable({
     dom: 'lfrtip',
     rowReorder: true,
-    /*buttons: [
-        {
-        extend:    'excelHtml5',
-        text:      '<i class="far fa-file-excel"></i>',
-        titleAttr: 'Excel',
-        exportOptions: {
-          columns: ':visible'
-          }
-        },
-        {
-        extend:    'pdfHtml5',
-        text:      '<i class="far fa-file-pdf"></i>',
-        titleAttr: 'PDF',
-        exportOptions: {
-          columns: ':visible'
-          },
-          customize: function (doc) {
-            //doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('')
-              doc['footer']=(function(page, pages) {
-                return {
-                  columns: [
-                    {
-                      alignment: 'right',
-                      text: ['']
-                    },
-                  ],
-                  margin: 20
-                }
-              })
-            }
-        },
-        {
-        extend: 'colvis',
-        columns: ':gt(0)',
-        text:      '<i class="far fa-eye-slash"></i>',
-        titleAttr: 'Colunas',
-        exportOptions: {
-          columns: ':visible' // [ 0, 1, 2, 3, 4, 5]
-        }
-      }
-    ],*/
-
-
-
     columnDefs: [
-      //{ className:"my_class", "targets": [4] },
-      //{ "orderData":[ 2 ], "targets": [ 3 ] },
         {
           "targets": stored,
           "visible": false
-          //"searchable": false
         }
     ],
     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -249,8 +194,6 @@ $(function(){
       var rowData = table.row( diff[i].node ).data()  
       result.push({'id':rowData[1],'from':diff[i].oldData,'to':diff[i].newData})
     }
-    //console.log(result)
-
     if (result.length>0){
 
       $.ajax({  
@@ -260,7 +203,6 @@ $(function(){
         dataType: 'json',
         success: function(data){
           $('.w3-overlay').hide()
-          //console.log(data)
           if (data.status != 1){
             $('#info-client').show()                
             $('#info-client-head').removeClass('w3-green w3-red w3-amber').addClass('w3-blue').html('<span onclick="$(\'#info-client\').hide()" class="w3-button w3-display-topright w3-large"><i class="fa fa-times"></i></span><h1><i class="fa fa-info-circle"></i> {%trans%}check{%endtrans%}</h1>')

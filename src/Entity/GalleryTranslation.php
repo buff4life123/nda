@@ -22,7 +22,7 @@ class GalleryTranslation
     * @Assert\NotBlank(message="Texto *")
     */
     private $name;
-    /** @ORM\ManyToOne(targetEntity="Gallery") */
+    /** @ORM\ManyToOne(targetEntity="Gallery", inversedBy="translation") */
     private $gallery;
     /**
      *@ORM\ManyToOne(targetEntity="Locales") */

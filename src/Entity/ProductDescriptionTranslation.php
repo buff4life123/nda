@@ -31,7 +31,7 @@ class ProductDescriptionTranslation
      */
     private $product;
     /** 
-    * @ORM\ManyToOne(targetEntity="Locales", inversedBy="product")
+    * @ORM\ManyToOne(targetEntity="Locales")
     */
     private $locales;
 

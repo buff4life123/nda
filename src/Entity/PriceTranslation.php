@@ -22,7 +22,7 @@ class PriceTranslation
     * @Assert\NotBlank(message="name")
     */
     private $name;
-    /** @ORM\ManyToOne(targetEntity="Price") */
+    /** @ORM\ManyToOne(targetEntity="Price", inversedBy="translation") */
     private $price;
     /** @ORM\ManyToOne(targetEntity="Locales") */
     private $locales;

@@ -235,7 +235,6 @@ class MenuController extends AbstractController
                     $response = array(
                         'status' => 1,
                         'message' => 'success',
-                        'image' => $deleted,
                         'data' => $menu->getId()
                     );
                     return new JsonResponse($response);

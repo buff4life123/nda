@@ -10,23 +10,24 @@
 </header>
 
 <div class="w3-row-padding">
-  {% for product in easyTexts%}
-  <div class="w3-col s6 m4 l3 w3-margin-bottom">
-    <div class="w3-card-2 w3-sand w3-border">
-      <div class="w3-center w3-col s12 w3-padding-small">
-      {{product.name}}
+  {% for e in easyTexts%}
+  <div class="w3-col s12 m6 l4 w3-margin-bottom">
+    <div class="w3-card-2 w3-sand  w3-padding-small w3-border">
+<div class="w3-row w3-border-bottom">
+      <div class="w3-col" style="width:45px">
+        <img src="{{e.locales.getFilename}}" style="height:45px" class="w3-border w3-left w3-opacity-min" title="{{e.locales.name}}">
       </div>
-      <div class="w3-row">
-        <div class="w3-col s6">
-          <button class="w3-btn w3-block w3-border w3-blue" onclick="editEasyText('{{product.id}}','{{product.name}}',{{product.easytext}})">
+      <div class="w3-rest w3-padding">
+      {{e.name}}
+      </div>
+    </div>  
+      <div class="w3-row" style="margin-top:4px">
+           <button style="padding:5px 16px;margin-left:4px" class=" w3-right w3-btn w3-border w3-blue" onclick="editEasyText('{{e.id}}','{{e.name}}',{{e.easytext}},{{e.locales.getId}})">
             <i class="far fa-edit fa-fw"></i>
           </button>
-        </div>
-        <div class="w3-col s6">
-        <button class="w3-btn w3-block w3-border w3-red" onclick="deleteEasyTextConfirm('{{ product.id}}','{{ product.name }}')">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-        </div>
+          <button  style="padding:5px 19px" class="w3-right w3-btn w3-border w3-red" onclick="deleteEasyTextConfirm('{{ e.id}}','{{ e.name }}')">
+            <i class="fas fa-trash-alt"></i>
+          </button>
       </div>
     </div>
   </div>  
@@ -41,6 +42,10 @@
         {{form_widget(form.name)}}
       </div>
 
+      <div class="w3-col s12">
+        {{form_label(form.locales)}}
+        {{form_widget(form.locales)}}
+      </div>
       <div class="w3-col s12">
         <label>{%trans%}text{%endtrans%}</label>
         <div id="editor" class="w3-white" style="height: 375px"></div>
@@ -126,11 +131,11 @@ function clearEasyText(){
 } 
 
 
-function editEasyText(id,name,easytext){
+function editEasyText(id,name,easytext, local_id){
 	quill.setContents(easytext)
   $('#easytext').val(id)
   $('#easy_text_name').val(name)
-  //$('#debug').html(quill.root.innerHTML)
+  $('#easy_text_locales').val(local_id)
 }
 
 $('#easytext-form').on('submit',function(e){

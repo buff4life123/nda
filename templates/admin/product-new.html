@@ -25,7 +25,7 @@ input, select, textarea {color: #000!important}
 
         <div class="w3-col l4 m3 s0">&nbsp;</div>
 
-        <div class="w3-col l4 m6 s12 w3-center w3-margin-bottom" title="Vamos meter uma imagem para este prod">
+        <div class="w3-col l4 m6 s12 w3-center w3-margin-bottom" title="{%trans%}add_image{%endtrans%}">
           <div class="w3-white w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
             <i class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
           </div>
@@ -34,28 +34,28 @@ input, select, textarea {color: #000!important}
       </div>
  
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
-        <div class="w3-col l2 m4 s12" title="Garantia da pagamento mostra ao cliente q tem q preencher os dados do cartão de crédito">
+        <div class="w3-col l2 m4 s12" title="{%trans%}warranty_payment_active{%endtrans%}">
           {{ form_label(form.warranty_payment)}}<br>
           {{ form_widget(form.warranty_payment)}}
         </div>
 
-        <div class="w3-col s6 l2 m4" title="Em destaque no banner">
+        <div class="w3-col s6 l2 m4" title="{%trans%}highlight{%endtrans%}">
           {{ form_label(form.highlight)}}<br>
           {{ form_widget(form.highlight)}}
         </div>
 
-        <div class="w3-col s6 l2 m4" title="Vamos mostrar este Produt aos clientes no site">
+        <div class="w3-col s6 l2 m4" title="{%trans%}active{%endtrans%}">
           {{ form_label(form.is_active)}}<br>
           {{ form_widget(form.is_active)}} 
         </div>
 
-        <div class="w3-col s6 l3 m6 w3-margin-bottom" title="A duração deste Peod">
+        <div class="w3-col s6 l3 m6 w3-margin-bottom" title="{%trans%}duration{%endtrans%}">
           <div style="position:relative">
             {{ form_label(form.duration) }}
             {{ form_widget(form.duration) }}
           </div>
         </div>
-        <div class="w3-col s6 l3 m6 w3-margin-bottom" title="A lotação deste Prod">
+        <div class="w3-col s6 l3 m6 w3-margin-bottom" title="{%trans%}lotation{%endtrans%}">
           {{ form_label(form.availability) }}
           {{ form_widget(form.availability) }}
         </div>
@@ -104,7 +104,6 @@ $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,ico
   down: "fa fa-chevron-down"
   }
 }).val('00:00')
-
 
 
   $('#product-form').on('submit',function(e){
