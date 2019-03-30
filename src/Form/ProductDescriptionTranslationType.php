@@ -25,21 +25,19 @@ class ProductDescriptionTranslationType extends AbstractType
             ->add('locales', EntityType::class, array(
                 'class' => Locales::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Local',
-                'label' => 'Local',
-                'attr' => ['class' => 'w3-input w3-select w3-border w3-white']
+                'label' => false,
+                'attr' => ['class' => 'w3-input w3-select w3-border w3-white w3-hide']
             ))
             ->add('product', EntityType::class, array(
                 'class' => Product::class,
                 'choice_label' => 'id',
-                'placeholder' => 'product',
-                'label' => 'product',
+                'label' => false,
                 'attr' => ['class' => 'w3-input w3-select w3-border w3-white']
             ))
             ->add('name', TextType::class,array(
-                'label'=> 'name',
+                'label'=> 'title',
                 'required' => false,
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'name']
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'title']
             ))
         ;
     }

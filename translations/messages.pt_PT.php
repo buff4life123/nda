@@ -1,5 +1,8 @@
 <?php
 return array(
+    'description' => 'Descrição', 
+    'product' => 'Produto',
+    'title' => 'Titulo',
     'local' => 'Local',
     'choose' => 'Escolha',
     'image_visible' => 'Imagem visivel',

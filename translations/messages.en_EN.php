@@ -1,5 +1,8 @@
 <?php
 return array(
+    'description' => 'Description', 
+    'product' => 'Product',
+    'title' => 'Title',
     'local' => 'Local',
     'choose' => 'Choose',
     'image_visible' => 'Image visible',
@@ -11,7 +14,7 @@ return array(
     'best_first' => 'Get the best offers first!',
     'join_newsletter' => 'Join our newsletter.',
     'change' => 'Change',
-    'email_easy_text'=>'Email Easy Text',
+    'email_easy_text' => 'Email Easy Text',
     'end' => 'End',
     'start' =>'Start',
     'month' => 'Month',

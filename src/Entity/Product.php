@@ -66,7 +66,7 @@ class Product
     public function getCategory() {
         return $this->category;
     }
-
+    
     public function setCategory(Category $category) {
         $this->category = $category;
     }
@@ -170,6 +170,18 @@ class Product
     public function setProductDescriptionTranslation(ProductDescriptionTranslation $product_description_translation)
     {
         $this->product_description_translation = $product_description_translation;
+    }
+
+    public function getCurrentTranslation(Locales $locales)
+    {
+        $txt = '';
+        if($this->getProductDescriptionTranslation()){
+            foreach ($this->getProductDescriptionTranslation() as $translation){
+                if( $locales->getName() == $translation->getLocales()->getName())
+                    $txt = $translation->getName();
+            }
+        }
+        return $txt;
     }
 
     public function getPrice()

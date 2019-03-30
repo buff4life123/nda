@@ -63,10 +63,38 @@ input, select, textarea {color: #000!important}
 
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
         <div class="w3-col s6 l3 m6 w3-margin-bottom">
-          {{ form_label(form.category) }}
-          {{ form_widget(form.category) }}
+          <label>{%trans%}category{%endtrans%}"</label>
+          <select class="w3-select w3-border" name="category">
+            {%for c in categories%}
+          
+            <option value='{{c.id}}'>{{c.name}}</option>
+          
+            {%endfor%}
+          </select>
         </div>
       </div>
+
+      <div class="w3-row-padding w3-margin-top w3-border-bottom">
+        {%for locale in locales %}
+        <div class="w3-col s12 l6 m12 w3-margin-bottom">
+
+        <label>{% trans %}description{% endtrans %}</label>
+        <div class="w3-row">
+        <div class="w3-col" style="width:45px">
+          <img src="{{locale.getFilename}}" style="height:45px" class="w3-border" title="{{locale.name}}">
+        </div>
+
+
+        <div class="product_product_description_translation" data-locales='{{locale.id}}'>
+        </div>
+        <label>{% trans %}text{% endtrans %}</label>
+        <div class="summernote"></div>
+      </div>
+      </div>
+    
+      {% endfor %}
+      </div>
+
       <div class="w3-row-padding w3-margin-top w3-border-bottom">    
       <div class="w3-hide">
         {{ form_widget(form.submit)}}
@@ -87,15 +115,51 @@ input, select, textarea {color: #000!important}
 
 <script>
 
+
+$('.summernote').summernote({
+  placeholder: '{%trans%}text{%endtrans%} ....',
+  tabsize: 3,
+  height: 300,
+  fontName:'Arial'
+})
+
+function editRgpd(id,name,locales){
+  $('.summernote').summernote('code', $('#'+id+'-rgpd').val())
+  $('#about_us_id').val(id)
+  $('#about_us_name').val(name)
+  $('#about_us_locales').val(locales)
+}
+
+
+function addItemForm($collectionHolder, $newLinkDiv) {
+    var prototype = $collectionHolder.data('prototype')
+    var local_id = $newLinkDiv.data('locales')
+    var newForm = prototype
+    newForm = newForm.replace(/__name__/g, local_id)
+    var $newFormDiv = $('<div></div>').html(newForm)
+    $newLinkDiv.html($newFormDiv)
+  }
+
+  
+  $CollectionHolder = $('#product_product_description_translation')
+
+  //set locales to descriptions
+  $(".product_product_description_translation" ).each(function() {
+    var id = $(this).data('locales')
+    addItemForm($CollectionHolder, $(this))
+    $('#product_product_description_translation_'+id+'_locales').removeAttr('selected').val(id)
+})
+
   var loadFile = function(event) {
     $('.set-image-container').html('<img id="output" class="w3-image w3-animate-zoom">')
     var output = document.getElementById('output')
     output.src = URL.createObjectURL(event.target.files[0])
   }
 
-priceObj = $('#product_price').data("prototype")
 
+priceObj = $('#product_price').data("prototype")
 $('#product_price').html('<div class="w3-hide">'+priceObj+'</div>')
+
 
 $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,icons: {
   time: "fa fa-clock-o",
@@ -104,7 +168,6 @@ $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,ico
   down: "fa fa-chevron-down"
   }
 }).val('00:00')
-
 
   $('#product-form').on('submit',function(e){
   obj=''
@@ -120,8 +183,8 @@ $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,ico
       cache: false,
       success: function(data){  
         $('.w3-overlay').hide()
-        //console.log(data)
-        if (data.message == 'success'){
+        console.log(data)
+        if (data.status == 1){
           ajaxUpload('product-list')
         }
         else if (data.message=='fail'){

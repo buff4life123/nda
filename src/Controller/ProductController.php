@@ -1,10 +1,10 @@
 <?php
 namespace App\Controller;
-
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\Booking;
-use App\Entity\BlockDates;
 use App\Entity\Event;
+use App\Entity\Locales;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,11 +34,36 @@ class ProductController extends AbstractController
     
     public function productNew(Request $request)
     {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+
+        $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
+
+        if(!$locale)
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+
+        $locales = $em->getRepository(Locales::class)->findAll();
+
         $product = new Product();
+
+        $categories = $em->getRepository(Category::class)->findAll();
+
+        $c = array();
+
+        foreach ($categories as $category)
+            $c[] = array('id' => $category->getId(), 'name' => $category->getCurrentTranslation($locale));
+
+
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-        return $this->render('admin/product-new.html',array(
-            'form' => $form->createView()));
+        return $this->render('admin/product-new.html',
+            array(
+                'form' => $form->createView(),
+                'categories' => $c,
+                'locales' => $locales
+                ));
     }
 
 
@@ -77,34 +102,26 @@ class ProductController extends AbstractController
                     $em->persist($product);
                     $em->flush();
 
-                    ///$product->setOrderBy(count($totals));
-                    //$em->persist($product);
-                    //$em->flush();
+                    $product->setOrderBy(count($totals));
+                    $em->persist($product);
+                    $em->flush();
 
                     $response = array(
-                        'result' => 1,
+                        'status' => 1,
                         'message' => 'success',
                         'data' => $product->getId());
                     } 
                     catch(DBALException $e){
-
-                        if (preg_match("/'event'/i", $e))
-                            $a = array( "Insira pelo menos 1 hora.");
-
-                        else if (preg_match("/'children_price'/i", $e))
-                            $a = array("Preço Criança (€)* não pode ser vazio, insira 0 ou maior.");
-                        else
-                            $a = array("Contate administrador sistema sobre: ".$e->getMessage());
-
+                        $a = array("Contate administrador sistema sobre: ".$e->getMessage());
                         $response = array(
-                            'result' => 0,
+                            'status' => 0,
                             'message' => 'fail',
                             'data' => $a);
                     }
                 }
                 else{   
                     $response = array(
-                        'result' => 0,
+                        'status' => 0,
                         'message' => 'fail',
                         'data' => $this->getErrorMessages($form)
                     );
@@ -112,12 +129,11 @@ class ProductController extends AbstractController
             }
             else
                 $response = array(
-                    'result' => 2,
+                    'status' => 2,
                     'message' => 'fail not submitted',
                     'data' => '');
         return new JsonResponse($response);
     }
-
 
     public function productList(Request $request, MoneyFormatter $moneyFormatter)
     {

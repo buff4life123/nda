@@ -39,29 +39,6 @@ class ProductType extends AbstractType
     {
 
         $builder
-            ->add('category', EntityType::class, array(
-                'class' => CategoryTranslation::class,
-                'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) use ($options) {
-                    return $er->createQueryBuilder('ct')
-                        ->Join('ct.locales', 'l')
-                        ->addSelect('l')
-                        ->Join ('ct.category', 'c' )
-                        ->addSelect('c')
-                        ->where('l.name = :local')
-                        ->setParameter('local', 'pt_PT')
-                        ->orderBy('ct.name', 'ASC');
-                },
-                'placeholder' => 'category',
-                    'label' => 'category',
-                    'attr' => array(
-                            'class' => 'w3-select w3-border w3-white',
-                            'data-live-search' => true,
-                            'data-actions-box' => true
-                    )
-        
-
-            ))
             ->add('image', FileType::class, array(
                 'label' => false,
                 'required' => false,
@@ -79,7 +56,7 @@ class ProductType extends AbstractType
                 'label' => 'duration',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'duration', 'readonly' => true]
             ))
-            ->add('price', CollectionType::class, array(
+            ->add('product_description_translation', CollectionType::class, array(
                 'entry_type' => ProductDescriptionTranslationType::class,
                 'entry_options' => array('label' => false),
                 'allow_add' => true,
