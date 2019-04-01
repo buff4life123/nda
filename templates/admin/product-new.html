@@ -10,6 +10,7 @@ ul{padding: 0px}
 .w3-input {border-bottom: 0px solid #05788d}
 input, select, textarea {color: #000!important}
 .w3-select{padding: 11.5px 4px}
+.note-editor.note-frame .note-editing-area .note-codable{color:#DDD!important}
 
 </style>
 <header class="w3-container" style="padding-top:22px">
@@ -78,17 +79,17 @@ input, select, textarea {color: #000!important}
         {%for locale in locales %}
         <div class="w3-col s12 l6 m12 w3-margin-bottom">
 
-        <label>{% trans %}description{% endtrans %}</label>
+        
         <div class="w3-row">
-        <div class="w3-col" style="width:45px">
+        <div class="w3-col s12">
           <img src="{{locale.getFilename}}" style="height:45px" class="w3-border" title="{{locale.name}}">
+          <label>{% trans %}description{% endtrans %}</label>
         </div>
-
 
         <div class="product_product_description_translation" data-locales='{{locale.id}}'>
         </div>
         <label>{% trans %}text{% endtrans %}</label>
-        <div class="summernote"></div>
+        <div class="summernote" data-locales='{{locale.id}}'></div>
       </div>
       </div>
     
@@ -123,13 +124,14 @@ $('.summernote').summernote({
   fontName:'Arial'
 })
 
+/*
 function editRgpd(id,name,locales){
   $('.summernote').summernote('code', $('#'+id+'-rgpd').val())
   $('#about_us_id').val(id)
   $('#about_us_name').val(name)
   $('#about_us_locales').val(locales)
 }
-
+*/
 
 function addItemForm($collectionHolder, $newLinkDiv) {
     var prototype = $collectionHolder.data('prototype')
@@ -157,10 +159,6 @@ function addItemForm($collectionHolder, $newLinkDiv) {
   }
 
 
-priceObj = $('#product_price').data("prototype")
-$('#product_price').html('<div class="w3-hide">'+priceObj+'</div>')
-
-
 $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,icons: {
   time: "fa fa-clock-o",
   date: "fa fa-calendar",
@@ -169,8 +167,16 @@ $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,ico
   }
 }).val('00:00')
 
-  $('#product-form').on('submit',function(e){
+
+$('#product-form').on('submit',function(e){
   obj=''
+  
+  $(".summernote").each(function() {
+    $('#product_product_description_translation_'+$(this).data('locales')+'_html').val($(this).summernote('code'))
+  })
+  
+  console.log($('#product-form').serialize())
+
   e.preventDefault()
   $('.w3-overlay').show()
   $('.required').addClass('w3-hide')
@@ -187,7 +193,7 @@ $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,ico
         if (data.status == 1){
           ajaxUpload('product-list')
         }
-        else if (data.message=='fail'){
+        else{
           for(i=0;i<data.data.length;i++)
             obj += data.data[i]+'<br>'
           $('#set-fields').html(obj)

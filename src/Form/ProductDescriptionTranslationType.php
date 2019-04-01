@@ -32,7 +32,7 @@ class ProductDescriptionTranslationType extends AbstractType
                 'class' => Product::class,
                 'choice_label' => 'id',
                 'label' => false,
-                'attr' => ['class' => 'w3-input w3-select w3-border w3-white']
+                'attr' => ['class' => 'w3-input w3-select w3-border w3-white w3-hide']
             ))
             ->add('name', TextType::class,array(
                 'label'=> 'title',
