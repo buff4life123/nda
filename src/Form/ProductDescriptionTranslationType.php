@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\ProductDescriptionTranslation;
 use App\Entity\Locales;
-use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,12 +24,6 @@ class ProductDescriptionTranslationType extends AbstractType
             ->add('locales', EntityType::class, array(
                 'class' => Locales::class,
                 'choice_label' => 'name',
-                'label' => false,
-                'attr' => ['class' => 'w3-input w3-select w3-border w3-white w3-hide']
-            ))
-            ->add('product', EntityType::class, array(
-                'class' => Product::class,
-                'choice_label' => 'id',
                 'label' => false,
                 'attr' => ['class' => 'w3-input w3-select w3-border w3-white w3-hide']
             ))

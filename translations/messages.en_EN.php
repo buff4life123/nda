@@ -1,6 +1,9 @@
 <?php
 return array(
-    'description' => 'Description', 
+    'prices' => 'Prices ', 
+    'dependent' => 'Dependent ',
+    'amount' => 'Amount ',
+    'description' => 'Description ', 
     'product' => 'Product',
     'title' => 'Title',
     'local' => 'Local',
@@ -74,7 +77,7 @@ return array(
     'acess' => 'Access',
     'order' => 'Order',
     'image' => 'Image',
-    'active' => 'Active',
+    'active' => 'Active ',
     'text_active' => 'Text Active',
     'actions' => 'Actions',
     'show' => 'Show',

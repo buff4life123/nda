@@ -25,13 +25,6 @@ class PriceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product', EntityType::class, array(
-                'class' => Product::class,
-                'choice_label' => 'id',
-                'placeholder' => 'product',
-                'label' => 'product',
-                'attr' => ['class' => 'w3-input w3-select w3-border w3-white']
-            ))
             ->add('amount', MoneyPhpType::class, array(
                 'label' => 'amount',
                 'required'  => false,
@@ -46,19 +39,14 @@ class PriceType extends AbstractType
                 'label' => false   
             ))
             ->add('is_active', CheckboxType::class, array(
-                'label'    => 'Ativa?',
+                'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('isChild', CheckboxType::class, array(
-                'label'    => 'Destaque',
+                'label'    => 'dependent',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
-            ))
-            ->add('submit', SubmitType::class,
-            array(
-                'label' => 'submit',
-                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
             ))
         ;
     }

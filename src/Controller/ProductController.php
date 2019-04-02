@@ -2,11 +2,14 @@
 namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Price;
+use App\Entity\ProductDescriptionTranslation;
 use App\Entity\Booking;
 use App\Entity\Event;
 use App\Entity\Locales;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -31,7 +34,8 @@ class ProductController extends AbstractController
     {
         $this->products_images_directory = $products_images_directory;
     }
-    
+
+
     public function productNew(Request $request)
     {
 
@@ -55,7 +59,6 @@ class ProductController extends AbstractController
         foreach ($categories as $category)
             $c[] = array('id' => $category->getId(), 'name' => $category->getCurrentTranslation($locale));
 
-
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         return $this->render('admin/product-new.html',
@@ -66,14 +69,11 @@ class ProductController extends AbstractController
                 ));
     }
 
-
-    public function productAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer)
+    public function productAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer, TranslatorInterface $translator)
     {
         $product = new Product();
-        
+               
         $em = $this->getDoctrine()->getManager();
-
-        $totals = $em->getRepository(Product::class)->findAll();
 
         $form = $this->createForm(ProductType::class, $product);
 
@@ -82,8 +82,10 @@ class ProductController extends AbstractController
             if($form->isSubmitted()){
                 
                 if($form->isValid()){
+                    $product = $form->getData();
 
-                    $em = $this->getDoctrine()->getManager();
+                    $totals = $em->getRepository(Product::class)->findAll();
+                    $category = $em->getRepository(Category::class)->find($request->request->get('category'));
 
                     $file = $product->getImage();
 
@@ -99,11 +101,10 @@ class ProductController extends AbstractController
                 try {
                     
                     $product->setOrderBy(count($totals)+1);
-                    $em->persist($product);
-                    $em->flush();
+                    $product->setCategory($category);
 
-                    $product->setOrderBy(count($totals));
                     $em->persist($product);
+
                     $em->flush();
 
                     $response = array(
@@ -206,7 +207,7 @@ class ProductController extends AbstractController
     }
 
 
-    public function productEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
+    public function productEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer, TranslatorInterface $translator)
     {
         $productId = $request->request->get('id');
         
@@ -303,7 +304,7 @@ class ProductController extends AbstractController
         return new JsonResponse($response);
     }
 
-    public function productDelete(Request $request)
+    public function productDelete(Request $request, TranslatorInterface $translator)
     {
         $deleted = 1;
         $response = array();
@@ -360,7 +361,7 @@ class ProductController extends AbstractController
     }
 
 
-    public function productOrder(Request $request)
+    public function productOrder(Request $request, TranslatorInterface $translator)
     {
         $result = $request->request->get('result');
 
@@ -400,19 +401,6 @@ class ProductController extends AbstractController
         }
 
         foreach ($errors as $error) {
-            if ($error == 'NAME_PT')
-                $err [] = 'Nome (PT)*';
-            else if ($error == 'NAME_EN')
-                $err [] = 'Nome (EN)*';
-            else if ($error == 'DESCRIPTION_PT')
-                $err [] = 'Descrição (PT)*';
-            else if ($error == 'DESCRIPTION_EN')
-                $err [] = 'Descrição (EN)*';
-            else if ($error == 'ADULT_PRICE')
-                $err [] = 'Preço Adulto (€)*';
-            else if ($error == 'CHILDREN_PRICE')
-                $err [] = 'Preço Criança (€)*';
-            else 
                 $err [] = $error;
         }
 

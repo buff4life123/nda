@@ -5,6 +5,7 @@ use App\Entity\Product;
 use App\Entity\Booking;
 use App\Entity\Event;
 use App\Entity\Logs;
+use Symfony\Component\Translation\TranslatorInterface;
 use App\Entity\Available;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,7 +43,7 @@ class AvailableController extends AbstractController
         ));
     }
 
-    public function adminAvailableCreate(Request $request){
+    public function adminAvailableCreate(Request $request, TranslatorInterface $translator){
 
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class)->find($request->request->get('product'));
@@ -51,7 +52,7 @@ class AvailableController extends AbstractController
 
             $response = array(
                 'status' => 0,
-                'message' => 'Categoria não encontrada!',
+                'message' => 'category_not_found',
                 'data' => null);
 
             return new JsonResponse($response);
@@ -165,7 +166,7 @@ class AvailableController extends AbstractController
      * @param int $productId
      * @param Request $request     
      */
-    public function adminAvailableList(Request $request)
+    public function adminAvailableList(Request $request, TranslatorInterface $translator)
     {       
         $em = $this->getDoctrine()->getManager();
         
@@ -215,7 +216,7 @@ class AvailableController extends AbstractController
         return $this->json(array('events' => $data_events, 'resources' => $data_resources));        
     }
 
-    public function adminAvailableEdit(Request $request){
+    public function adminAvailableEdit(Request $request, TranslatorInterface $translator){
 
         $em = $this->getDoctrine()->getManager();
         
@@ -252,7 +253,7 @@ class AvailableController extends AbstractController
         return new JsonResponse($response);
    }
 
-    public function adminAvailableDelete(Request $request){
+    public function adminAvailableDelete(Request $request, TranslatorInterface $translator){
 
         $em = $this->getDoctrine()->getManager();
     

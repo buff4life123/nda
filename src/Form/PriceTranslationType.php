@@ -30,13 +30,6 @@ class PriceTranslationType extends AbstractType
                 'label' => 'name',
                 'attr' => ['class' => 'w3-input w3-select w3-border w3-white']
             ))
-            ->add('product', EntityType::class, array(
-                'class' => Price::class,
-                'choice_label' => 'id',
-                'placeholder' => 'amount',
-                'label' => 'amount',
-                'attr' => ['class' => 'w3-input w3-select w3-border w3-white']
-            ))
             ->add('name', TextType::class,array(
                 'label'=> 'name',
                 'required' => false,

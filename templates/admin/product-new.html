@@ -11,6 +11,7 @@ ul{padding: 0px}
 input, select, textarea {color: #000!important}
 .w3-select{padding: 11.5px 4px}
 .note-editor.note-frame .note-editing-area .note-codable{color:#DDD!important}
+.note-editor.note-frame{border-color:#CCC}
 
 </style>
 <header class="w3-container" style="padding-top:22px">
@@ -81,7 +82,7 @@ input, select, textarea {color: #000!important}
 
         
         <div class="w3-row">
-        <div class="w3-col s12">
+        <div class="w3-col s12 w3-border-bottom">
           <img src="{{locale.getFilename}}" style="height:45px" class="w3-border" title="{{locale.name}}">
           <label>{% trans %}description{% endtrans %}</label>
         </div>
@@ -96,10 +97,21 @@ input, select, textarea {color: #000!important}
       {% endfor %}
       </div>
 
-      <div class="w3-row-padding w3-margin-top w3-border-bottom">    
-      <div class="w3-hide">
-        {{ form_widget(form.submit)}}
+
+      <div class="w3-row-padding w3-margin-top w3-border-bottom">
+
+        <label class="w3-col s12">{%trans%}prices{%endtrans%}</label>
+
+        <div class="w3-col s12 l6 m12 w3-margin-bottom">
+        <div class="w3-row">
+        <div class="product_price" data-locales='0'>
+        </div>
       </div>
+      </div>
+      </div>
+
+      <div class="w3-row-padding w3-margin-top w3-border-bottom">    
+      {{ form_widget(form.submit)}}
 
       <div class="w3-col s12 w3-margin-top w3-margin-bottom w3-border-top">
         <span class="w3-btn w3-border w3-green w3-right w3-margin-top" onclick="$('#product-form').trigger('submit')">
@@ -117,23 +129,15 @@ input, select, textarea {color: #000!important}
 <script>
 
 
-$('.summernote').summernote({
-  placeholder: '{%trans%}text{%endtrans%} ....',
-  tabsize: 3,
-  height: 300,
-  fontName:'Arial'
-})
+  $('.summernote').summernote({
+    placeholder: '{%trans%}text{%endtrans%} ....',
+    tabsize: 3,
+    height: 300,
+    fontName:'Arial'
+  })
 
-/*
-function editRgpd(id,name,locales){
-  $('.summernote').summernote('code', $('#'+id+'-rgpd').val())
-  $('#about_us_id').val(id)
-  $('#about_us_name').val(name)
-  $('#about_us_locales').val(locales)
-}
-*/
 
-function addItemForm($collectionHolder, $newLinkDiv) {
+  function addItemForm($collectionHolder, $newLinkDiv) {
     var prototype = $collectionHolder.data('prototype')
     var local_id = $newLinkDiv.data('locales')
     var newForm = prototype
@@ -142,15 +146,21 @@ function addItemForm($collectionHolder, $newLinkDiv) {
     $newLinkDiv.html($newFormDiv)
   }
 
-  
-  $CollectionHolder = $('#product_product_description_translation')
+
+
+  //set locales to descriptions
+  $(".product_price" ).each(function() {
+    var id = $(this).data('locales')
+    addItemForm($('#product_price'), $(this))
+  })
+
 
   //set locales to descriptions
   $(".product_product_description_translation" ).each(function() {
     var id = $(this).data('locales')
-    addItemForm($CollectionHolder, $(this))
+    addItemForm($('#product_product_description_translation'), $(this))
     $('#product_product_description_translation_'+id+'_locales').removeAttr('selected').val(id)
-})
+  })
 
   var loadFile = function(event) {
     $('.set-image-container').html('<img id="output" class="w3-image w3-animate-zoom">')

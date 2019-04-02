@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Product;
-use App\Entity\Category;
 use App\Entity\Locales;
 use App\Entity\CategoryTranslation;
 use App\Entity\Price;
@@ -71,7 +70,7 @@ class ProductType extends AbstractType
                 'allow_delete' => true,                 
                 'by_reference' => false,
                 'label' => false   
-            ))
+            ))/*
             ->add('event', CollectionType::class, array(
                 'entry_type' => EventType::class,
                 'entry_options' => array('label' => false),
@@ -79,7 +78,7 @@ class ProductType extends AbstractType
                 'allow_delete' => true,                 
                 'by_reference' => false,
                 'label' => false   
-            ))
+            ))*/
             ->add('is_active', CheckboxType::class, array(
                 'label'    => 'active',
                 'required' => false,
@@ -98,7 +97,7 @@ class ProductType extends AbstractType
             ->add('submit', SubmitType::class,
             array(
                 'label' => 'submit',
-                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top']
+                'attr' => ['class' => 'w3-btn w3-block w3-border w3-green w3-margin-top w3-hide']
             ))
         ;
     }

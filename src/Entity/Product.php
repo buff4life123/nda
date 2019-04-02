@@ -161,6 +161,17 @@ class Product
         $event->setProduct($this);
         $this->event->add($event);
     }
+
+    public function addProductDescriptionTranslation(ProductDescriptionTranslation $product_description_translation)
+    {
+        $product_description_translation->setProduct($this);
+        $this->product_description_translation->add($product_description_translation);
+    }
+    
+    public function removeProductDescriptionTranslation(ProductDescriptionTranslation $product_description_translation)
+    {
+        $this->product_description_translation->removeElement($product_description_translation);
+    }
     
     public function getProductDescriptionTranslation()
     {
@@ -171,6 +182,8 @@ class Product
     {
         $this->product_description_translation = $product_description_translation;
     }
+
+
 
     public function getCurrentTranslation(Locales $locales)
     {
@@ -194,6 +207,24 @@ class Product
         $this->price = $price;
     }
     
+
+
+    public function addPrice(Price $price)
+    {
+        $price->setProduct($this);
+        $this->$price->add($price);
+    }
+    
+    public function removePrice(Price $price)
+    {
+        $this->price->removeElement($price);
+    }
+    
+
+
+
+
+
     public function removeEvent(Event $event)
     {
         $this->event->removeElement($event);
@@ -219,4 +250,5 @@ class Product
     {
         $this->available->removeElement($available);
     }
+
 }
