@@ -8,13 +8,6 @@ use App\Entity\PriceTranslation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -25,12 +18,8 @@ class PriceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', MoneyPhpType::class, array(
-                'label' => 'amount',
-                'required'  => false,
-                'attr' => ['placeholder'=>'amount', 'min'=>'0', 'step'=>'any', 'type'=>'number']
-            ))
-            ->add('translation', CollectionType::class, array(
+
+         ->add('translation', CollectionType::class, array(
                 'entry_type' => PriceTranslationType::class,
                 'entry_options' => array('label' => false),
                 'allow_add' => true,
@@ -38,15 +27,20 @@ class PriceType extends AbstractType
                 'by_reference' => false,
                 'label' => false   
             ))
+            ->add('amount', MoneyPhpType::class, array(
+                'label' => 'amount',
+                'required'  => false,
+                'attr' => ['placeholder'=>'amount', 'min'=>'0', 'step'=>'any', 'type'=>'number']
+            ))
             ->add('is_active', CheckboxType::class, array(
                 'label'    => 'active',
                 'required' => false,
-                'attr' => ['class' => 'w3-check']
+                'attr' => ['class' => 'w3-check w3-margin-left']
             ))
             ->add('isChild', CheckboxType::class, array(
                 'label'    => 'dependent',
                 'required' => false,
-                'attr' => ['class' => 'w3-check']
+                'attr' => ['class' => 'w3-check w3-margin-left']
             ))
         ;
     }

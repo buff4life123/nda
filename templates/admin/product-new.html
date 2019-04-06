@@ -12,7 +12,7 @@ input, select, textarea {color: #000!important}
 .w3-select{padding: 11.5px 4px}
 .note-editor.note-frame .note-editing-area .note-codable{color:#DDD!important}
 .note-editor.note-frame{border-color:#CCC}
-
+div > label:nth-child(1n+1){margin-top: 6px}
 </style>
 <header class="w3-container" style="padding-top:22px">
     <h5><b><i class="fa fa-tags"></i> {%trans%}product_23{%endtrans%} <i class="far fa-plus-square fa-fw"></i></b></h5>
@@ -75,12 +75,15 @@ input, select, textarea {color: #000!important}
           </select>
         </div>
       </div>
-
+      <script>var l = []</script>
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
         {%for locale in locales %}
-        <div class="w3-col s12 l6 m12 w3-margin-bottom">
-
         
+        <script>
+         l.push({name:'{{locale.name}}', id:{{locale.id}}, file:'{{locale.getFilename}}'})  
+        </script>
+
+        <div class="w3-col s12 l6 m12 w3-margin-bottom">
         <div class="w3-row">
         <div class="w3-col s12 w3-border-bottom">
           <img src="{{locale.getFilename}}" style="height:45px" class="w3-border" title="{{locale.name}}">
@@ -100,14 +103,16 @@ input, select, textarea {color: #000!important}
 
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
 
-        <label class="w3-col s12">{%trans%}prices{%endtrans%}</label>
-
-        <div class="w3-col s12 l6 m12 w3-margin-bottom">
         <div class="w3-row">
-        <div class="product_price" data-locales='0'>
+          <label>{%trans%}prices{%endtrans%}</label>
+          <button class="w3-button w3-border w3-blue w3-right"><i class="fa fa-plus"></i></button>
         </div>
-      </div>
-      </div>
+        
+        <div class="w3-col s12 w3-margin-bottom">
+          <div class="w3-row">
+            <div class="product_price w3-col s12 l4 m6"></div>
+          </div>
+        </div>
       </div>
 
       <div class="w3-row-padding w3-margin-top w3-border-bottom">    
@@ -128,7 +133,6 @@ input, select, textarea {color: #000!important}
 
 <script>
 
-
   $('.summernote').summernote({
     placeholder: '{%trans%}text{%endtrans%} ....',
     tabsize: 3,
@@ -136,30 +140,51 @@ input, select, textarea {color: #000!important}
     fontName:'Arial'
   })
 
-
-  function addItemForm($collectionHolder, $newLinkDiv) {
+  function addItemForm($collectionHolder, $newLinkDiv, index) {
     var prototype = $collectionHolder.data('prototype')
-    var local_id = $newLinkDiv.data('locales')
+    id = index != 0 ? 
+      $newLinkDiv.data('locales') : index
     var newForm = prototype
-    newForm = newForm.replace(/__name__/g, local_id)
+    newForm = newForm.replace(/__name__/g, id)
     var $newFormDiv = $('<div></div>').html(newForm)
     $newLinkDiv.html($newFormDiv)
   }
 
-
-
-  //set locales to descriptions
-  $(".product_price" ).each(function() {
-    var id = $(this).data('locales')
-    addItemForm($('#product_price'), $(this))
+  //set prices
+  $(".product_price" ).each(function(index) {
+    addItemForm($('#product_price'), $(this), index)
   })
-
 
   //set locales to descriptions
   $(".product_product_description_translation" ).each(function() {
     var id = $(this).data('locales')
-    addItemForm($('#product_product_description_translation'), $(this))
+    addItemForm($('#product_product_description_translation'), $(this), 0)
     $('#product_product_description_translation_'+id+'_locales').removeAttr('selected').val(id)
+  })
+
+
+  function addItemFormp($collectionHolder, $newLinkDiv, locale) {
+    var prototype = $collectionHolder.data('prototype')
+    $newLinkDiv.attr('data-locales', locale)
+    
+    var newForm = prototype
+    
+    newForm = newForm.replace(/_translation_/g, '_locales_'+locale+'_')
+    var $newFormDiv = $('<div></div>').html(newForm)
+    $newLinkDiv.append($newFormDiv)
+
+  }
+
+
+  $('.product_price').each(function(index) {
+    for (var k in l){
+      addItemFormp($('#product_price_'+index+'_translation'), $('#product_price_'+index+'_translation'), l[k].id)
+      $('#product_price_'+index+'_locales_'+l[k].id+'_'+index+'_locales').addClass('w3-red').removeAttr('selected').val(l[k].id)
+       
+      $('#product_price_'+index+'_locales_'+l[k].id+'_'+index).children('div').children('label').prepend('<img src="'+l[k].file+'" style="margin-right:4px;height:45px" class="w3-border" title="'+l[k].name+'">')
+    
+    }
+  
   })
 
   var loadFile = function(event) {

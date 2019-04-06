@@ -13,6 +13,7 @@ input, select, textarea {color: #000!important}
 div.dataTables_length select {height: 50px}
 table.dt-rowReorder-float{position:absolute !important;opacity:0.8;table-layout:fixed;outline:2px solid #888;outline-offset:-2px;z-index:2001}tr.dt-rowReorder-moving{outline:2px solid #555;outline-offset:-2px}body.dt-rowReorder-noOverflow{overflow-x:hidden}table.dataTable td.reorder{text-align:center;cursor:move}
 table.dataTable thead > tr > th {padding-left: 8px!important}
+.grab {cursor: -webkit-grab; cursor: grab}
 </style>
 
 <header class="w3-container" style="padding-top:22px">
@@ -39,7 +40,7 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
     </thead>
     <tbody>
       {% for c in menus%}
-      <td>{{c.order_by}}</td>
+      <td class="grab">{{c.order_by}}</td>
       <td class="w3-hide">{{c.id}}</td>
       <td class="w3-center">
         <div style="width:110px;max-width:110px">
