@@ -13,6 +13,8 @@ input, select, textarea {color: #000!important}
 .note-editor.note-frame .note-editing-area .note-codable{color:#DDD!important}
 .note-editor.note-frame{border-color:#CCC}
 div > label:nth-child(1n+1){margin-top: 6px}
+span.product_price_0{opacity:0.5;cursor: not-allowed}
+
 </style>
 <header class="w3-container" style="padding-top:22px">
     <h5><b><i class="fa fa-tags"></i> {%trans%}product_23{%endtrans%} <i class="far fa-plus-square fa-fw"></i></b></h5>
@@ -99,17 +101,15 @@ div > label:nth-child(1n+1){margin-top: 6px}
     
       {% endfor %}
       </div>
-
-
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
 
         <div class="w3-row">
           <label>{%trans%}prices{%endtrans%}</label>
-          <button class="w3-button w3-border w3-blue w3-right"><i class="fa fa-plus"></i></button>
+          <span class="w3-button w3-border w3-blue w3-right" style="margin:-7px 0px 8px 0px" onclick="createNewPrice()"><i class="fa fa-plus"></i></span>
         </div>
         
         <div class="w3-col s12 w3-margin-bottom">
-          <div class="w3-row">
+          <div class="w3-row-padding">
             <div class="product_price w3-col s12 l4 m6"></div>
           </div>
         </div>
@@ -130,8 +130,33 @@ div > label:nth-child(1n+1){margin-top: 6px}
 
 <script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
-
 <script>
+
+
+  function deleteNewPrice(index){
+    index = index.replace(/product_price_/g, '')
+    console.log(index)
+    index != 0 ?
+      $('#product_price_'+index).parent().parent().parent().remove() : false
+
+  }
+
+
+  function createNewPrice(){
+    $(".product_price" ).each(function() {
+      index = $(this).children().children().children().attr('id').split("_")
+
+      last = parseInt(index[2])
+
+    })
+
+console.log(last)
+
+    var newForm = $('.product_price').html()
+    newForm = newForm.replace(/product_price_0/g, 'product_price_'+(last+1))
+    $('.product_price').parent().append('<div class="product_price w3-col s12 l4 m6">'+newForm+'</div>')
+  }
+
 
   $('.summernote').summernote({
     placeholder: '{%trans%}text{%endtrans%} ....',
@@ -141,12 +166,16 @@ div > label:nth-child(1n+1){margin-top: 6px}
   })
 
   function addItemForm($collectionHolder, $newLinkDiv, index) {
+    deleteLink = '<span class="w3-button w3-red w3-border w3-right product_price_0" style="margin-top:-45px" onclick="deleteNewPrice(\'product_price_0\')"><i class="fa fa-trash"></i></span>'
     var prototype = $collectionHolder.data('prototype')
     id = index != 0 ? 
       $newLinkDiv.data('locales') : index
     var newForm = prototype
     newForm = newForm.replace(/__name__/g, id)
-    var $newFormDiv = $('<div></div>').html(newForm)
+    var $newFormDiv =  ($collectionHolder).attr('id') == 'product_price' ? 
+      $('<div style="padding: 0px 8px 4px 8px" class="w3-border w3-margin-bottom"></div>').html(newForm+deleteLink) 
+      :
+      $('<div></div>').html(newForm)
     $newLinkDiv.html($newFormDiv)
   }
 
@@ -166,13 +195,10 @@ div > label:nth-child(1n+1){margin-top: 6px}
   function addItemFormp($collectionHolder, $newLinkDiv, locale) {
     var prototype = $collectionHolder.data('prototype')
     $newLinkDiv.attr('data-locales', locale)
-    
     var newForm = prototype
-    
     newForm = newForm.replace(/_translation_/g, '_locales_'+locale+'_')
     var $newFormDiv = $('<div></div>').html(newForm)
     $newLinkDiv.append($newFormDiv)
-
   }
 
 
@@ -181,10 +207,8 @@ div > label:nth-child(1n+1){margin-top: 6px}
       addItemFormp($('#product_price_'+index+'_translation'), $('#product_price_'+index+'_translation'), l[k].id)
       $('#product_price_'+index+'_locales_'+l[k].id+'_'+index+'_locales').addClass('w3-red').removeAttr('selected').val(l[k].id)
        
-      $('#product_price_'+index+'_locales_'+l[k].id+'_'+index).children('div').children('label').prepend('<img src="'+l[k].file+'" style="margin-right:4px;height:45px" class="w3-border" title="'+l[k].name+'">')
-    
+      $('#product_price_'+index+'_locales_'+l[k].id+'_'+index).children('div').children('label').prepend('<img src="'+l[k].file+'" style="margin-right:4px;height:45px" class="w3-border" title="'+l[k].name+'">')  
     }
-  
   })
 
   var loadFile = function(event) {
@@ -194,7 +218,9 @@ div > label:nth-child(1n+1){margin-top: 6px}
   }
 
 
-$('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true ,icons: {
+$('#product_price, #product_product_description_translation').parent().remove()
+
+$('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true, icons: {
   time: "fa fa-clock-o",
   date: "fa fa-calendar",
   up: "fa fa-chevron-up",
