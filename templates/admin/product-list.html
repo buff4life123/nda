@@ -32,27 +32,19 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
   <table id="dataTable" class="w3-border table table-striped centered hover table-bordered" style="width:100%">
     <thead class="w3-sand">
       <tr>
-      <th class="w3-center">{%trans%}order{%endtrans%}</th>
-      <th class="">#</th>
-      <th class="w3-center" style="width:120px">{%trans%}actions{%endtrans%}</th>    
-      <th class="w3-center">Nome PT</th>    
-      <th class="w3-center">Nome EN</th>    
-      <th class="w3-center">Preço Adulto</th>    
-      <th class="w3-center">Preço Criança</th>    
-      <th class="w3-center">Descriçao PT</th>    
-      <th class="w3-center">Descriçao EN</th>    
-      <th class="w3-center">{%trans%}hour{%endtrans%}</th>    
-      <th class="w3-center">{%trans%}active{%endtrans%}</th>
-      <th class="w3-center">Destaque</th>
-      <th class="w3-center">Lotação</th>
-      <th class="w3-center">Duração</th>
-      <th class="w3-center">Gart.Pag.</th>
-      <th class="w3-center">Gart.Pag.PT</th>
-      <th class="w3-center">Gart.Pag.EN</th>
+        <th class="w3-center">{%trans%}order{%endtrans%}</th>
+        <th class="">#</th>
+        <th class="w3-center" style="width:120px">{%trans%}actions{%endtrans%}</th>
+        <th class="w3-center">{%trans%}title{%endtrans%}</th>
+        <th class="w3-center">{%trans%}active{%endtrans%}</th>
+        <th class="w3-center">{%trans%}category{%endtrans%}</th>
+        <th class="w3-center">{%trans%}highlight{%endtrans%}</th>
+        <th class="w3-center">{%trans%}lotation{%endtrans%}</th>
+        <th class="w3-center">{%trans%}duration{%endtrans%}</th>
+        <th class="w3-center">{%trans%}warranty_payment{%endtrans%}</th>
       </tr>
     </thead>
     <tbody>
-
 
       {% for product in products%}
        <tr>
@@ -62,68 +54,58 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
           <div style="width:149px">
           <span class="w3-tooltip">
             <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}edit{%endtrans%} {%trans%}product_23{%endtrans%}</span>
-            <button class="w3-btn w3-border w3-blue w3-tooltip" style="width: 13px" onclick="editProduct({{product.id}},'{{ product.namePt}}')"> 
+            <button class="w3-btn w3-border w3-blue w3-tooltip" style="width:13px" onclick="editProduct({{product.id}},'{{product.title}}')"> 
               <i class="far fa-edit fa-fw"></i>
             </button>
           </span>
           <span class="w3-tooltip">
             <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}delete{%endtrans%} {%trans%}product_23{%endtrans%}</span>
-          <button class="w3-btn w3-border w3-red" style="width: 13px" onclick="deleteProductConfirm({{product.id}},'{{ product.namePt }}')">
+          <button class="w3-btn w3-border w3-red" style="width:13px" onclick="deleteProductConfirm({{product.id}},'{{product.title}}')">
             <i class="fas fa-trash-alt"></i>
           </button>
         </span>
         <span class="w3-tooltip">
             <span style="position:absolute;left:0;bottom:32px" class="w3-round w3-text w3-tag">{%trans%}add{%endtrans%} {%trans%}availability{%endtrans%}</span>
-            <button class="w3-btn w3-border w3-indigo" onclick="addAvailable({{product.id}},'{{ product.namePt}}')">
+            <button class="w3-btn w3-border w3-indigo" onclick="addAvailable({{product.id}},'{{product.title}}')">
               <i class="far fa-calendar-check"></i>
             </button>
           </span>
         </div>
         </td>
-        <td>{{ product.namePt }}</td>
-        <td>{{ product.nameEn }}</td>
-        <td class="w3-center">{{ product.adultAmount}}</td>
-        <td class="w3-center">{{ product.childrenAmount}}</td>
-        <td>{{ product.descriptionPt }}</td>
-        <td>{{ product.descriptionEn }}</td>
-        <td>{{ product.event }}</td>
+        <td class="w3-center">{{ product.title }}</td>
         <td class="w3-center">
-          {% if product.isActive == 1 %}
+          {% if product.is_active == 1 %}
             <i class="w3-text-green w3-xlarge fas fa-check-circle"></i>
           {% else %}
             <i class="w3-text-red w3-xlarge fas fa-times-circle"></i>
           {% endif %}
         </td>
+
+        <td class="w3-center">{{ product.category }}</td>
+
          <td class="w3-center">
-          {% if product.highLight == 1 %}
+          {% if product.highlight == 1 %}
             <i class="w3-text-green w3-xlarge fas fa-check-circle"></i>
           {% else %}
             <i class="w3-text-red w3-xlarge fas fa-times-circle"></i>
           {% endif %}
         </td>
+        
         <td class="w3-right-align">{{ product.availability }}</td>
+
         <td class="w3-right-align">{{ product.duration }}</td>
         <td class="w3-center">
-          {% if product.warrantyPayment == 1 %}
+          {% if product.warranty_payment == 1 %}
             <i class="w3-text-green w3-xlarge fas fa-check-circle"></i>
           {% else %}
             <i class="w3-text-red w3-xlarge fas fa-times-circle"></i>
           {% endif %}
         </td>
-        <td>{{ product.warrantyPaymentPt }}</td>
-        <td>{{ product.warrantyPaymentEn }}</td>
       </tr>
     {% endfor %}
     </tbody>
     <tfoot class="w3-sand">
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -142,17 +124,6 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
 </div>
 
 <script>
- /*
-tableproduct = [2,4,5]
-
-if(!localStorage.getItem("tableproduct") ){
-  localStorage.setItem("tableproduct", JSON.stringify(tableproduct))
-  stored = JSON.parse(localStorage.getItem("tableproduct"))
-}
-else
-  stored = JSON.parse(localStorage.getItem("tableproduct"))
-*/
-
 
 function addAvailable(id,name){
   $('.w3-overlay').show()
@@ -178,7 +149,7 @@ function addAvailable(id,name){
   }, 500)
 }
 
-stored = tableproduct = [1, 4, 7, 8, 15, 16]
+stored = tableproduct = [1]
 
 function editProduct(id, name){
   $('.w3-overlay').show()
@@ -276,7 +247,7 @@ $(function(){
         extend: 'colvis',
         columns: ':gt(0)',
         text:      '<i class="far fa-eye-slash"></i>',
-        titleAttr: 'Colunas',
+        titleAttr: '{%trans%}columns{%endtrans%}',
         exportOptions: {
           columns: ':visible' // [ 0, 1, 2, 3, 4, 5]
         }

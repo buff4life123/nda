@@ -23,7 +23,8 @@ class PriceTranslation
     */
     private $name;
     /** @ORM\ManyToOne(targetEntity="Price", inversedBy="translation") */
-    private $price;
+    
+    private $prices;
     /** @ORM\ManyToOne(targetEntity="Locales") */
     private $locales;
 
@@ -53,11 +54,11 @@ class PriceTranslation
 
     public function getPrice()
     {
-        return $this->price;
+        return $this->prices;
     }
 
     public function setPrice(Price $price)
     {
-        $this->price = $price;
+        $this->prices = $price;
     }
 }

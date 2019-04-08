@@ -5,8 +5,9 @@ namespace App\Form;
 use App\Entity\Product;
 use App\Entity\Locales;
 use App\Entity\CategoryTranslation;
-use App\Entity\Price;
+use App\Entity\Amount;
 use App\Entity\ProductDescriptionTranslation;
+use App\Entity\ProductWPTranslation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,14 +26,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ProductType extends AbstractType
 {
-    
-    private $locale = 'pt_PT';
-
-    public function __construct(EntityManagerInterface $locale)
-    {
-        $this->locale = $locale;
-    }
-
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -63,14 +56,24 @@ class ProductType extends AbstractType
                 'by_reference' => false,
                 'label' => false   
             ))
-            ->add('price', CollectionType::class, array(
-                'entry_type' => PriceType::class,
+            ->add('product_wp_translation', CollectionType::class, array(
+                'entry_type' => ProductWPTranslationType::class,
                 'entry_options' => array('label' => false),
                 'allow_add' => true,
                 'allow_delete' => true,                 
                 'by_reference' => false,
                 'label' => false   
-            ))/*
+            ))
+        
+            ->add('amount', CollectionType::class, array(
+                'entry_type' => AmountType::class,
+                'entry_options' => array('label' => false),
+                'allow_add' => true,
+                'allow_delete' => true,                 
+                'by_reference' => false,
+                'label' => false   
+            ))
+/*
             ->add('event', CollectionType::class, array(
                 'entry_type' => EventType::class,
                 'entry_options' => array('label' => false),
@@ -79,6 +82,7 @@ class ProductType extends AbstractType
                 'by_reference' => false,
                 'label' => false   
             ))*/
+
             ->add('is_active', CheckboxType::class, array(
                 'label'    => 'active',
                 'required' => false,

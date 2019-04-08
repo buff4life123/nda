@@ -8,13 +8,11 @@ use Money\Money;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="price")
- * @ORM\Entity(repositoryClass="App\Repository\PriceRepository")
+ * @ORM\Table(name="amount")
+ * @ORM\Entity(repositoryClass="App\Repository\AmountRepository")
  */
 
-
-
-class Price
+class Amount
 {
     /**
      * @ORM\Id
@@ -23,7 +21,7 @@ class Price
      */
     private $id;
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="price") 
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="product_price") 
      */
     private $product;
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
@@ -35,13 +33,6 @@ class Price
     * @ORM\Column(type="money", name="amount", options={"unsigned"=true}) 
     */
     private $amount;
-    /** @ORM\OneToMany(targetEntity="PriceTranslation", mappedBy="price", cascade={"persist", "remove"}) */
-    private $translation;
-
-
-    public function __construct(){       
-        $this->translation = new ArrayCollection();   
-    }
 
     public function getId()
     {
@@ -85,38 +76,4 @@ class Price
     public function setIsChild($isChild) {
         $this->isChild = $isChild;
     }
-
-    public function addTranslation(PriceTranslation $translation)
-    {
-        $translation->setPrice($this);
-        $this->translation->add($translation);
-    }
-    
-    public function removeTranslation(PriceTranslation $translation)
-    {
-        $this->translation->removeElement($translation);
-    }
-    
-    public function getTranslation()
-    {
-        return $this->translation;
-    }
-
-    public function setTranslation(PriceTranslation $translation)
-    {
-        $this->translation = $translation;
-    }
-
-    public function getCurrentTranslation(Locales $locales)
-    {
-        $txt = '';
-        if($this->getTranslation()){
-            foreach ($this->getTranslation() as $translation){
-                if( $locales->getName() == $translation->getLocales()->getName())
-                    $txt = $translation->getName();
-            }
-        }
-        return $txt;
-    }
-
 }

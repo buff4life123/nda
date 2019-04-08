@@ -2,8 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Price;
-use App\Entity\PriceTranslation;
+use App\Entity\Amount;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class PriceType extends AbstractType
+class AmountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -46,7 +45,7 @@ class PriceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Price::class,
+            'data_class' =>Amount::class,
         ));
     }
 }

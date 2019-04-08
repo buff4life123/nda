@@ -14,7 +14,7 @@ input, select, textarea {color: #000!important}
 .note-editor.note-frame{border-color:#CCC}
 div > label:nth-child(1n+1){margin-top: 6px}
 span.product_price_0{opacity:0.5;cursor: not-allowed}
-
+.note-toolbar{position:relative!important;top:0px!important;width:100%!important}
 </style>
 <header class="w3-container" style="padding-top:22px">
     <h5><b><i class="fa fa-tags"></i> {%trans%}product_23{%endtrans%} <i class="far fa-plus-square fa-fw"></i></b></h5>
@@ -38,18 +38,14 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
       </div>
  
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
-        <div class="w3-col l2 m4 s12" title="{%trans%}warranty_payment_active{%endtrans%}">
-          {{ form_label(form.warranty_payment)}}<br>
-          {{ form_widget(form.warranty_payment)}}
-        </div>
 
-        <div class="w3-col s6 l2 m4" title="{%trans%}highlight{%endtrans%}">
-          {{ form_label(form.highlight)}}<br>
+        <div class="w3-col s6 l3 m6" title="{%trans%}highlight{%endtrans%}">
+            <span class="w3-margin-right">{{ form_label(form.highlight)}}</span>
           {{ form_widget(form.highlight)}}
         </div>
 
-        <div class="w3-col s6 l2 m4" title="{%trans%}active{%endtrans%}">
-          {{ form_label(form.is_active)}}<br>
+        <div class="w3-col s6 l3 m6" title="{%trans%}active{%endtrans%}">
+          <span class="w3-margin-right">{{ form_label(form.is_active)}}</span>
           {{ form_widget(form.is_active)}} 
         </div>
 
@@ -70,37 +66,56 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
           <label>{%trans%}category{%endtrans%}"</label>
           <select class="w3-select w3-border" name="category">
             {%for c in categories%}
-          
             <option value='{{c.id}}'>{{c.name}}</option>
-          
             {%endfor%}
           </select>
         </div>
       </div>
+
       <script>var l = []</script>
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
-        {%for locale in locales %}
-        
+        {%for locale in locales %}  
         <script>
          l.push({name:'{{locale.name}}', id:{{locale.id}}, file:'{{locale.getFilename}}'})  
         </script>
-
         <div class="w3-col s12 l6 m12 w3-margin-bottom">
         <div class="w3-row">
         <div class="w3-col s12 w3-border-bottom">
           <img src="{{locale.getFilename}}" style="height:45px" class="w3-border" title="{{locale.name}}">
           <label>{% trans %}description{% endtrans %}</label>
         </div>
-
         <div class="product_product_description_translation" data-locales='{{locale.id}}'>
         </div>
         <label>{% trans %}text{% endtrans %}</label>
-        <div class="summernote" data-locales='{{locale.id}}'></div>
+        <div class="summernote_pd" data-locales='{{locale.id}}'></div>
+      </div>
+      </div>
+      {% endfor %}
+      </div>
+      
+      <div class="w3-row-padding w3-margin-top w3-border-bottom">
+        <div class="w3-col s12" title="{%trans%}active{%endtrans%}">
+          <span class="w3-margin-right">{{ form_label(form.warranty_payment)}}</span> 
+          {{ form_widget(form.warranty_payment)}}
+        </div>
+        {%for locale in locales %}
+        <div class="w3-col s12 l6 m12 w3-margin-bottom">
+        <div class="w3-row">
+        <div class="w3-col s12" style="margin-bottom:-16px">
+          <img src="{{locale.getFilename}}" style="height:45px" class="w3-border" title="{{locale.name}}">
+          <label>{% trans %}text{% endtrans %}</label>
+        </div>
+        <div class="product_product_wp_translation" data-locales='{{locale.id}}'>
+        </div>
+        <label></label>
+        <div class="summernote_wp" data-locales='{{locale.id}}'></div>
       </div>
       </div>
     
       {% endfor %}
       </div>
+
+
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
 
         <div class="w3-row">
@@ -110,7 +125,7 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
         
         <div class="w3-col s12 w3-margin-bottom">
           <div class="w3-row-padding">
-            <div class="product_price w3-col s12 l4 m6"></div>
+            <div class="product_amount w3-col s12 l4 m6"></div>
           </div>
         </div>
       </div>
@@ -143,27 +158,23 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
 
 
   function createNewPrice(){
-    $(".product_price" ).each(function() {
+    $(".product_amount" ).each(function() {
       index = $(this).children().children().children().attr('id').split("_")
-
       last = parseInt(index[2])
-
     })
 
-console.log(last)
-
-    var newForm = $('.product_price').html()
-    newForm = newForm.replace(/product_price_0/g, 'product_price_'+(last+1))
-    $('.product_price').parent().append('<div class="product_price w3-col s12 l4 m6">'+newForm+'</div>')
+    var newForm = $('.product_amount').html()
+    newForm = newForm.replace(/product_amount_0/g, 'product_amount_'+(last+1))
+    $('.product_amount').parent().append('<div class="product_amount w3-col s12 l4 m6">'+newForm+'</div>')
   }
 
-
-  $('.summernote').summernote({
+  $('.summernote_pd, .summernote_wp').summernote({
     placeholder: '{%trans%}text{%endtrans%} ....',
-    tabsize: 3,
-    height: 300,
+    tabsize: 2,
+    height: 220,
     fontName:'Arial'
   })
+
 
   function addItemForm($collectionHolder, $newLinkDiv, index) {
     deleteLink = '<span class="w3-button w3-red w3-border w3-right product_price_0" style="margin-top:-45px" onclick="deleteNewPrice(\'product_price_0\')"><i class="fa fa-trash"></i></span>'
@@ -179,18 +190,19 @@ console.log(last)
     $newLinkDiv.html($newFormDiv)
   }
 
-  //set prices
-  $(".product_price" ).each(function(index) {
-    addItemForm($('#product_price'), $(this), index)
-  })
-
   //set locales to descriptions
   $(".product_product_description_translation" ).each(function() {
     var id = $(this).data('locales')
-    addItemForm($('#product_product_description_translation'), $(this), 0)
+    addItemForm($('#product_product_description_translation'), $(this), id)
     $('#product_product_description_translation_'+id+'_locales').removeAttr('selected').val(id)
   })
 
+  //set locales to wp
+  $(".product_product_wp_translation" ).each(function() {
+    var id = $(this).data('locales')
+    addItemForm($('#product_product_wp_translation'), $(this), id)
+    $('#product_product_wp_translation_'+id+'_locales').removeAttr('selected').val(id)
+  })
 
   function addItemFormp($collectionHolder, $newLinkDiv, locale) {
     var prototype = $collectionHolder.data('prototype')
@@ -201,6 +213,19 @@ console.log(last)
     $newLinkDiv.append($newFormDiv)
   }
 
+
+  $(".product_amount" ).each(function(index) {
+    addItemForm($('#product_amount'), $(this), index)
+  })
+
+
+
+
+/*
+  //set prices
+  $(".product_price" ).each(function(index) {
+    addItemForm($('#product_price'), $(this), index)
+  })
 
   $('.product_price').each(function(index) {
     for (var k in l){
@@ -216,9 +241,8 @@ console.log(last)
     var output = document.getElementById('output')
     output.src = URL.createObjectURL(event.target.files[0])
   }
-
-
-$('#product_price, #product_product_description_translation').parent().remove()
+*/
+//$('#product_price, #product_product_description_translation').parent().remove()
 
 $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true, icons: {
   time: "fa fa-clock-o",
@@ -232,10 +256,13 @@ $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true, ico
 $('#product-form').on('submit',function(e){
   obj=''
   
-  $(".summernote").each(function() {
+  $(".summernote_pd").each(function() {
     $('#product_product_description_translation_'+$(this).data('locales')+'_html').val($(this).summernote('code'))
   })
   
+  $(".summernote_wp").each(function() {
+    $('#product_product_wp_translation_'+$(this).data('locales')+'_html').val($(this).summernote('code'))
+  })
   console.log($('#product-form').serialize())
 
   e.preventDefault()

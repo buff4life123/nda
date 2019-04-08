@@ -2,7 +2,8 @@
 namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
-use App\Entity\Price;
+use App\Entity\Amount;
+use App\Entity\PriceTranslation;
 use App\Entity\ProductDescriptionTranslation;
 use App\Entity\Booking;
 use App\Entity\Event;
@@ -34,7 +35,6 @@ class ProductController extends AbstractController
     {
         $this->products_images_directory = $products_images_directory;
     }
-
 
     public function productNew(Request $request)
     {
@@ -139,8 +139,14 @@ class ProductController extends AbstractController
     public function productList(Request $request, MoneyFormatter $moneyFormatter)
     {
         $em = $this->getDoctrine()->getManager();
-     
-        //$events = $em->getRepository(Event::class)->findAll();
+
+        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+
+        $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
+
+        if(!$locale)
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+
         $products = $em->getRepository(Product::class)->findBy([],['orderBy' => 'ASC']);
 
         $cA = array();
@@ -151,22 +157,15 @@ class ProductController extends AbstractController
                 $ev = $evt->getEvent();
 
             $cA[]=array(
+                'order' => $c->getOrderBy(),
                 'id' => $c->getId(),
-                'namePt' => $c->getNamePt(),
-                'nameEn' => $c->getNameEn(),
-                'descriptionPt' => $c->getDescriptionPt(),
-                'descriptionEn' => $c->getDescriptionEn(),
-                'adultAmount' =>$moneyFormatter->format($c->getAdultPrice()).'€',
-                'childrenAmount' =>$moneyFormatter->format($c->getChildrenPrice()).'€',
-                'warrantyPayment' => $c->getWarrantyPayment(),
-                'warrantyPaymentPt' => $c->getWarrantyPaymentPt(),
-                'warrantyPaymentEn' => $c->getWarrantyPaymentEn(),
-                'highLight' => $c->getHighlight(),
-                'isActive' => $c->getIsActive(),
+                'is_active' => $c->getIsActive(),
+                'category' => $c->getCategory()->getCurrentTranslation($locale),
+                'highlight' => $c->getHighlight(),
+                'title' => $c->getCurrentTranslationName($locale),
                 'availability' => $c->getAvailability(),
                 'duration' => $c->getDuration(),
-                'event' => $ev,
-                'order' => $c->getOrderBy()
+                'warranty_payment' => $c->getWarrantyPayment(),
              );
 
         }    

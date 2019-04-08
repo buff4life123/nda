@@ -23,8 +23,6 @@ class Product
     /** @ORM\ManyToOne(targetEntity="App\Entity\Category") 
      */
     private $category;
-    /** @ORM\OneToMany(targetEntity="Price", mappedBy="product", cascade={"persist", "remove"}) */
-    private $price;
 
     /** @ORM\OneToMany(targetEntity="Available", mappedBy="product", cascade={"persist", "remove"}) */
     private $available;
@@ -32,6 +30,15 @@ class Product
     /** @ORM\OneToMany(targetEntity="ProductDescriptionTranslation", mappedBy="product", cascade={"persist", "remove"}) */
     private $product_description_translation;
     
+    /** @ORM\OneToMany(targetEntity="ProductWPTranslation", mappedBy="product", cascade={"persist", "remove"}) */
+    private $product_wp_translation;
+
+    /** @ORM\OneToMany(targetEntity="Amount", mappedBy="product", cascade={"persist", "remove"}) */
+    private $amount;
+
+    /** @ORM\OneToMany(targetEntity="Price", mappedBy="product", cascade={"persist", "remove"}) */
+    private $price;
+
     /** @ORM\Column(type="boolean", name="is_active", options={"default":0}) */
     private $isActive;
     /**
@@ -60,7 +67,9 @@ class Product
         $this->available = new ArrayCollection();
         $this->event = new ArrayCollection();
         $this->price = new ArrayCollection();
-        $this->product_description_translation = new ArrayCollection();  
+        $this->amount = new ArrayCollection();
+        $this->product_description_translation = new ArrayCollection();
+        $this->product_wp_translation = new ArrayCollection();
     }
 
     public function getCategory() {
@@ -162,6 +171,7 @@ class Product
         $this->event->add($event);
     }
 
+
     public function addProductDescriptionTranslation(ProductDescriptionTranslation $product_description_translation)
     {
         $product_description_translation->setProduct($this);
@@ -183,9 +193,7 @@ class Product
         $this->product_description_translation = $product_description_translation;
     }
 
-
-
-    public function getCurrentTranslation(Locales $locales)
+    public function getCurrentTranslationName(Locales $locales)
     {
         $txt = '';
         if($this->getProductDescriptionTranslation()){
@@ -196,7 +204,83 @@ class Product
         }
         return $txt;
     }
+    
+    public function getCurrentTranslationHtml(Locales $locales)
+    {
+        $txt = '';
+        if($this->getProductDescriptionTranslation()){
+            foreach ($this->getProductDescriptionTranslation() as $translation){
+                if( $locales->getHtml() == $translation->getLocales()->getName())
+                    $txt = $translation->getHtml();
+            }
+        }
+        return $txt;
+    }
 
+    public function addProductWPTranslation(ProductWPTranslation $product_wp_translation)
+    {
+        $product_wp_translation->setProduct($this);
+        $this->product_wp_translation->add($product_wp_translation);
+    }
+    
+    public function removeProductWPTranslation(ProductWPTranslation $product_wp_translation)
+    {
+        $this->product_wp_translation->removeElement($product_wp_translation);
+    }
+    
+    public function getProductWPTranslation()
+    {
+        return $this->product_wp_translation;
+    }
+
+    public function setProductWPTranslation(ProductWPTranslation $product_wp_translation)
+    {
+        $this->product_wp_translation = $product_wp_translation;
+    }
+
+    public function getCurrentTranslationWP(Locales $locales)
+    {
+        $txt = '';
+        if($this->getProductWPTranslation()){
+            foreach ($this->getProductWPTranslation() as $translation){
+                if( $locales->getName() == $translation->getLocales()->getName())
+                    $txt = $translation->getName();
+            }
+        }
+        return $txt;
+    }
+    
+
+
+    public function addAmount(Amount $amount)
+    {
+        $amount->setProduct($this);
+        $this->amount->add($amount);
+    }
+    
+    public function removeAmount(Amount $amount)
+    {
+        $this->amount->removeElement($amount);
+    }
+    
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(Amount $amount)
+    {
+        $this->amount = $amount;
+    }
+
+
+
+
+
+
+
+
+/*
     public function getPrice()
     {
         return $this->price;
@@ -207,12 +291,10 @@ class Product
         $this->price = $price;
     }
     
-
-
     public function addPrice(Price $price)
     {
         $price->setProduct($this);
-        $this->$price->add($price);
+        $this->price->add($price);
     }
     
     public function removePrice(Price $price)
@@ -220,6 +302,7 @@ class Product
         $this->price->removeElement($price);
     }
     
+*/
 
 
 
