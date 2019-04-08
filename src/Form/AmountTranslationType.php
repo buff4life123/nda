@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Locales;
-use App\Entity\Price;
-use App\Entity\PriceTranslation;
+use App\Entity\Amount;
+use App\Entity\AmountTranslation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class PriceTranslationType extends AbstractType
+class AmountTranslationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

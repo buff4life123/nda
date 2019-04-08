@@ -5,11 +5,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="price_translation")
- * @ORM\Entity(repositoryClass="App\Repository\PriceTranslationRepository")
+ * @ORM\Table(name="amount_translation")
+ * @ORM\Entity(repositoryClass="App\Repository\AmountTranslationRepository")
  */
 
-class PriceTranslation
+class AmountTranslation
 {
     /**
      * @ORM\Column(type="integer")
@@ -22,9 +22,8 @@ class PriceTranslation
     * @Assert\NotBlank(message="name")
     */
     private $name;
-    /** @ORM\ManyToOne(targetEntity="Price", inversedBy="translation") */
-    
-    private $prices;
+    /** @ORM\ManyToOne(targetEntity="Amount", inversedBy="translation") */
+    private $amount;
     /** @ORM\ManyToOne(targetEntity="Locales") */
     private $locales;
 
@@ -52,13 +51,13 @@ class PriceTranslation
         $this->locales = $locales;
     }
 
-    public function getPrice()
+    public function getAmount()
     {
-        return $this->prices;
+        return $this->amount;
     }
 
-    public function setPrice(Price $price)
+    public function setAmount(Amount $amount)
     {
-        $this->prices = $price;
+        $this->amount = $amount;
     }
 }

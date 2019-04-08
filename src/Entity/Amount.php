@@ -33,6 +33,14 @@ class Amount
     * @ORM\Column(type="money", name="amount", options={"unsigned"=true}) 
     */
     private $amount;
+    
+    /** @ORM\OneToMany(targetEntity="AmountTranslation", mappedBy="amount", cascade={"persist", "remove"}) */
+    private $translation;
+
+    public function __construct()
+    {   
+        $this->translation = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -76,4 +84,38 @@ class Amount
     public function setIsChild($isChild) {
         $this->isChild = $isChild;
     }
+
+    public function addTranslation(AmountTranslation $translation)
+    {
+        $translation->setPrice($this);
+        $this->translation->add($translation);
+    }
+    
+    public function removeTranslation(AmountTranslation $translation)
+    {
+        $this->translation->removeElement($translation);
+    }
+    
+    public function getTranslation()
+    {
+        return $this->translation;
+    }
+
+    public function setTranslation(AmountTranslation $translation)
+    {
+        $this->translation = $translation;
+    }
+
+    public function getCurrentTranslation(Locales $locales)
+    {
+        $txt = '';
+        if($this->getTranslation()){
+            foreach ($this->getTranslation() as $translation){
+                if( $locales->getName() == $translation->getLocales()->getName())
+                    $txt = $translation->getName();
+            }
+        }
+        return $txt;
+    }
+
 }

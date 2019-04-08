@@ -16,15 +16,16 @@ class AmountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        /*
+        
          ->add('translation', CollectionType::class, array(
-                'entry_type' => PriceTranslationType::class,
+                'entry_type' => AmountTranslationType::class,
                 'entry_options' => array('label' => false),
                 'allow_add' => true,
                 'allow_delete' => true,                 
                 'by_reference' => false,
                 'label' => false   
-            ))*/
+            ))
+
             ->add('amount', MoneyPhpType::class, array(
                 'label' => 'amount',
                 'required' => false,

@@ -149,13 +149,10 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
 
 
   function deleteNewPrice(index){
-    index = index.replace(/product_price_/g, '')
-    console.log(index)
+    index = index.replace(/product_amount_/g, '')
     index != 0 ?
-      $('#product_price_'+index).parent().parent().parent().remove() : false
-
+      $('#product_amount_'+index).parent().parent().parent().remove() : false
   }
-
 
   function createNewPrice(){
     $(".product_amount" ).each(function() {
@@ -165,6 +162,10 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
 
     var newForm = $('.product_amount').html()
     newForm = newForm.replace(/product_amount_0/g, 'product_amount_'+(last+1))
+    
+    for (i = 0; i<6; i++)
+      newForm = newForm.replace('product[amount][0]', 'product[amount]['+(last+1)+']')
+
     $('.product_amount').parent().append('<div class="product_amount w3-col s12 l4 m6">'+newForm+'</div>')
   }
 
@@ -174,7 +175,6 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
     height: 220,
     fontName:'Arial'
   })
-
 
   function addItemForm($collectionHolder, $newLinkDiv, index) {
     deleteLink = '<span class="w3-button w3-red w3-border w3-right product_price_0" style="margin-top:-45px" onclick="deleteNewPrice(\'product_price_0\')"><i class="fa fa-trash"></i></span>'
@@ -209,30 +209,29 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
     $newLinkDiv.attr('data-locales', locale)
     var newForm = prototype
     newForm = newForm.replace(/_translation_/g, '_locales_'+locale+'_')
+
+    for (i = 0; i<6; i++){
+      newForm = newForm.replace('[translation][0][name]', '[translation]['+locale+'][name]')
+      newForm = newForm.replace('[translation][0][locales]', '[translation]['+locale+'][locales]')
+    }
+
     var $newFormDiv = $('<div></div>').html(newForm)
     $newLinkDiv.append($newFormDiv)
   }
 
-
-  $(".product_amount" ).each(function(index) {
+/*
+  $(".product_amount").each(function(index) {
     addItemForm($('#product_amount'), $(this), index)
   })
+*/
 
 
-
-
-/*
-  //set prices
-  $(".product_price" ).each(function(index) {
-    addItemForm($('#product_price'), $(this), index)
-  })
-
-  $('.product_price').each(function(index) {
+  $('.product_amount').each(function(index) {
+    addItemForm($('#product_amount'), $(this), index)
     for (var k in l){
-      addItemFormp($('#product_price_'+index+'_translation'), $('#product_price_'+index+'_translation'), l[k].id)
-      $('#product_price_'+index+'_locales_'+l[k].id+'_'+index+'_locales').addClass('w3-red').removeAttr('selected').val(l[k].id)
-       
-      $('#product_price_'+index+'_locales_'+l[k].id+'_'+index).children('div').children('label').prepend('<img src="'+l[k].file+'" style="margin-right:4px;height:45px" class="w3-border" title="'+l[k].name+'">')  
+      addItemFormp($('#product_amount_'+index+'_translation'), $('#product_amount_'+index+'_translation'), l[k].id)
+      $('#product_amount_'+index+'_locales_'+l[k].id+'_'+index+'_locales').addClass('w3-red').removeAttr('selected').val(l[k].id)
+      $('#product_amount_'+index+'_locales_'+l[k].id+'_'+index).children('div').children('label').prepend('<img src="'+l[k].file+'" style="margin-right:4px;height:45px" class="w3-border" title="'+l[k].name+'">')  
     }
   })
 
@@ -241,8 +240,9 @@ span.product_price_0{opacity:0.5;cursor: not-allowed}
     var output = document.getElementById('output')
     output.src = URL.createObjectURL(event.target.files[0])
   }
-*/
-//$('#product_price, #product_product_description_translation').parent().remove()
+
+
+$('#product_amount, #product_product_description_translation').parent().remove()
 
 $('#product_duration').datetimepicker({format: 'HH:mm', ignoreReadonly:true, icons: {
   time: "fa fa-clock-o",
