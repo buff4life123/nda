@@ -14,6 +14,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface , \Serializable
 {
+    //const ROLE_SUPERUSER = 'superuser';
+    //const ROLE_ADMIN = 'admin';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -58,7 +61,7 @@ class User implements UserInterface , \Serializable
 
 
     public function __construct($username = '', $password = '', $salt = '', $status = '') {
-        $this->roles = array('ROLE_USER');
+        //$this->roles = array('ROLE_USER');
         $this->username = $username;
         $this->password = $password;
         $this->status = $status;
@@ -133,6 +136,19 @@ class User implements UserInterface , \Serializable
     {
         return $this->roles;
     }
+    
+    // public function getRole()
+    // {
+    //     return $this->role;
+    // }
+
+    // public function setRole($role) 
+    // {
+    //     if (!in_array($role, array(self::ROLE_SUPERUSER, self::ROLE_ADMIN))) {
+    //         throw new \InvalidArgumentException('Invalid Role');
+    //     }       
+    //     $this->role = $role;
+    // }
 
     public function eraseCredentials()
     {
