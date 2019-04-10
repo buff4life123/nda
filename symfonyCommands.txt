@@ -1,0 +1,18 @@
+Composer:
+
+php composer.phar update 	- This will resolve all dependencies of the project and write the exact versions into composer.lock.
+php composer.phar require 	- The require command adds new packages to the composer.json file from the current directory. If no file exists one will be created on the fly.
+php composer.phar validate 	- You should always run the validate command before you commit your composer.json file, and before you tag a release. It will check if your composer.json is valid.
+
+
+web server:
+
+php bin/console server:run 	- This starts the web server at localhost:8000 in the background that serves your Symfony application.
+
+
+doctrine:
+
+php bin/console doctrine:database:create 		- create the database 
+php bin/console make:entity 					- create a class that is saved to the database 
+php bin/console make:migration         	    	- generate a migration
+php bin/console doctrine:migrations:migrate 	- execute the migrations
