@@ -39,7 +39,7 @@ class SeasirenController extends AbstractController
     	$curl_response = json_decode($p);
     
 		return $this->render('index/index.html.twig',  array(
-			'page' => 'home', 
+			'page' => 'index', 
 			'company' => $company,
 			'products' => $curl_response, 
 			'exp_api_key' => $this->exp_api_key, 

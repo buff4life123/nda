@@ -116,7 +116,12 @@ return array(
     'gdpr' => 'G.D.P.R.',
     'about_title' => 'Future Projects',
     'about_text' => 'NauticDrive`s main ambition for 2019 season is to provide their costumers with a new attraction.After analyzing the evolution of the adherent zone, nauticdrive sees a new boat as a value.<br><br> A boat suitable for all types of customers, where you can adapt to all ages.<br><br> This boat is fast and will be directed to sightseeing and private tours of our wonderful coast, it will be a value to the company, taking into account that this will be your premium service.<br><br> Adapting a different nautical service for the well-being of the customer and observation of the surrounding nature will do without doubt a differentiated service on the sand market.',
-            
+    'key_title' => 'Key Factor',
+    'key_text' => 'Proper experience acquired over the last few years, technical knowledge and capacity for innovation.',
+    'focus_title' => 'Focus',
+    'focus_text' => 'Service provided and with permanent concern for your well being and safety.',
+    'ambition_title' => 'Ambition',
+    'ambition_text' => 'Reference and preference in the activity sector with a new dynamic, a new vision and responsibility.',
          
 
     'cookies' => array(
@@ -125,7 +130,7 @@ return array(
         'btn' =>'Got It!'
     ),
 
-    'about_us' => 'About Us',
+    'future' => 'Future Projects',
     'booking' => 'Booking',
     'tours' => 'Tours',
     'book_now' => 'Book Now',

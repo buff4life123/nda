@@ -43,7 +43,7 @@ body {
   z-index: 10;
   width: 100%;
   background-image: url('../images/fundo-azul.jpg'), -webkit-gradient(linear, left top, left bottom, from(#0047b3), to(#0047b3));
-  background-image: url('../images/fundo-azuln.jpg'), linear-gradient(180deg, #0047b3, #0047b3);
+  background-image: url('../images/fundo-azul.jpg'), linear-gradient(180deg, #0047b3, #0047b3);
   background-position: 50% 50%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
@@ -714,7 +714,7 @@ body {
   margin-top: 0px;
   margin-bottom: 36px;
   font-family: Barlow, sans-serif;
-  color: #17b401;
+  color: #0047b3;
   font-size: 38px;
   line-height: 40px;
   font-weight: 500;
@@ -1016,8 +1016,8 @@ body {
 }
 
 .slide-tour-1-home {
-  background-image: url('../images/slider-ultimate-algarve-boat-tour.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
-  background-image: url('../images/slider-ultimate-algarve-boat-tour.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
+  background-image: url('../assets/images/slider-ultimate-algarve-boat-tour.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
+  background-image: url('../assets/images/slider-ultimate-algarve-boat-tour.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
   background-position: 50% 61%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
@@ -2333,8 +2333,8 @@ body {
 }
 
 .slide-tour-2-home {
-  background-image: url('../images/slider-algarve-benagil-cave-tour.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
-  background-image: url('../images/slider-algarve-benagil-cave-tour.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
+  background-image: url('../assets/images/slider-algarve-benagil-cave-tour.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
+  background-image: url('../assets/images/slider-algarve-benagil-cave-tour.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
   background-position: 50% 94%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
@@ -2352,32 +2352,32 @@ body {
 }
 
 .slide-tour-3-home {
-  background-image: url('../images/slider-algarve-snorkeling-safari.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
-  background-image: url('../images/slider-algarve-snorkeling-safari.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
+  background-image: url('../assets/images/slider-algarve-snorkeling-safari.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
+  background-image: url('../assets/images/slider-algarve-snorkeling-safari.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
   background-position: 50% 52%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
 }
 
 .slide-tour-4-home {
-  background-image: url('../images/slider-benagil-cave-marinha-beach-tour.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
-  background-image: url('../images/slider-benagil-cave-marinha-beach-tour.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
+  background-image: url('../assets/images/slider-benagil-cave-marinha-beach-tour.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
+  background-image: url('../assets/images/slider-benagil-cave-marinha-beach-tour.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
   background-position: 50% 50%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
 }
 
 .slide-tour-5-home {
-  background-image: url('../images/slider-algarve-fishing-trip.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
-  background-image: url('../images/slider-algarve-fishing-trip.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
+  background-image: url('../assets/images/slider-algarve-fishing-trip.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
+  background-image: url('../assets/images/slider-algarve-fishing-trip.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
   background-position: 53% 47%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
 }
 
 .slide-tour-6-home {
-  background-image: url('../images/slider-benagil-cave-sunset-boat-tour.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
-  background-image: url('../images/slider-benagil-cave-sunset-boat-tour.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
+  background-image: url('../assets/images/slider-benagil-cave-sunset-boat-tour.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
+  background-image: url('../assets/images/slider-benagil-cave-sunset-boat-tour.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
   background-position: 50% 20%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
@@ -2387,7 +2387,7 @@ body {
   height: 950px;
   border-bottom: 1px none #fff;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .57)), color-stop(33%, transparent)), url('../images/seasiren-algarve-boat-tours.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url('../images/seasiren-algarve-boat-tours.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url('../assets/images/seasiren-algarve-boat-tours.jpg');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -2399,7 +2399,7 @@ body {
   height: 950px;
   border-bottom: 1px none #fff;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .57)), color-stop(37%, transparent)), url('../images/seasiren-algarve-boat-trip.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 37%), url('../images/seasiren-algarve-boat-trip.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 37%), url('../assets/images/seasiren-algarve-boat-trip.jpg');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -3367,9 +3367,9 @@ body {
 
 .slide1_tour2-1 {
   height: 680px;
-
   background-image: url('../images/benagil-image-backg_1.jpg');
-
+  background-image: url('../images/benagil-image-backg_1.jpg');
+  background-image: url('../images/benagil-image-backg_1.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;

@@ -3,7 +3,7 @@
 return array(
 
 
-    'about_us' => 'Sobre Nós',
+    'future' => 'Projetos Futuros',
     'booking' => 'Reservar',
     'tours' => 'Passeios',
     'book_now' => 'Reservar já',
@@ -170,6 +170,12 @@ return array(
     'gdpr' => 'R.G.P.D.',
     'about_title' => 'Projetos Futuros',
     'about_text' => 'A nauticdrive tem como principal ambição para época 2019 proporcionar aos seus clientes uma nova atracão .<br><br> Após analise da evolução da zona aderente ,a nauticdrive vê como uma mais valia uma embarcação nova.<br><br> Uma embarcação adequada a todo tipo de cliente, onde se prove adaptar a todas as idades. Esta embarcação é rápida será direcionada para passeios turísticos e privados para observação do meio ambiente da nossa costa maravilhosa , será uma mais valia para a empresa tendo em conta que este serviço será sem duvida o seu serviço premium .<br><br> Adaptar um serviço náutico diferente para o bem estar do cliente e observação da natureza envolvente fará sem duvida um serviço diferenciado no mercado na areia.',
+     'key_title' => 'Factor-Chave',
+    'key_text' => 'Experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.',
+     'focus_title' => 'Foco',
+    'focus_text' => 'Serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
+     'ambition_title' => 'Ambição',
+    'ambition_text' => 'Referência e preferência no sector da atividade com uma nova dinâmica, uma nova visão e responsabilidade',
         
 
     'cookies' => array(
