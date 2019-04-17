@@ -10,17 +10,17 @@ login_clients:
 logout:
     path: /logout    
 
-index:
-    path: /
-    controller: App\Controller\HomeController::html
+home:
+    path: /home
+    controller: App\Controller\SeasirenController::home
 
 index_info:
     path: /info/
     controller: App\Controller\HomeController::info
 
-index_translate:
-    path: /translate/{local}
-    controller: App\Controller\TranslationController::translate
+translation:
+    path: /translation/{lang}/{page}
+    controller: App\Controller\SeasirenController::userTranslation
 
 set_booking:
     path: /booking
@@ -449,3 +449,39 @@ user_new:
 user_create:
     path: /user-create/
     controller: App\Controller\RegistrationController::userCreate
+
+    ###
+# PAGES
+###
+
+
+
+about_us:
+    path: /about-us
+    controller: App\Controller\SeasirenController::aboutUs
+
+tour:
+    path: /tour/{id}/{text}
+    controller: App\Controller\SeasirenController::tour
+
+
+page_detail:
+    path: /page/{page}/{pageSub}
+    controller: App\Controller\SeasirenController::pageDetail
+    
+product_detail:
+    path: /product/{page}/{pageSub}
+    controller: App\Controller\SeasirenController::productDetail
+    
+private_detail:
+    path: /private/{page}/{pageSub}
+    controller: App\Controller\SeasirenController::privateDetail
+    
+send_email:
+    path: /send-email/
+    controller: App\Controller\SeasirenController::sendEmail
+   
+send_voucher:
+    path: /send-voucher/
+    controller: App\Controller\SeasirenController::sendVoucher
+   
