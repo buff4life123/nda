@@ -2832,7 +2832,11 @@ body {
   padding-top: 10px;
   font-family: Barlow, sans-serif;
   font-size: 16px;
+<<<<<<< HEAD
+  text-align: center;
+=======
   text-align: justify;
+>>>>>>> nautic_drive_content
 }
 
 .div-block-1about {
@@ -3363,7 +3367,9 @@ body {
 
 .slide1_tour2-1 {
   height: 680px;
-  background-image: url('../images/algarve.jpg');
+
+  background-image: url('../images/benagil-image-backg_1.jpg');
+
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;

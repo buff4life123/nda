@@ -1,3 +1,6 @@
+index:
+    path: /
+    controller: App\Controller\SeasirenController::home
 
 login:
     path: /login
@@ -10,9 +13,7 @@ login_clients:
 logout:
     path: /logout    
 
-home:
-    path: /home
-    controller: App\Controller\SeasirenController::home
+
 
 index_info:
     path: /info/
