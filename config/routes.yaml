@@ -13,7 +13,9 @@ login_clients:
 logout:
     path: /logout    
 
-
+home:
+    path: /home
+    controller: App\Controller\SeasirenController::home
 
 index_info:
     path: /info/
