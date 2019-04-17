@@ -1,0 +1,103 @@
+{% extends "base.html.twig" %}
+{% block content %}
+
+<!-- CATAMARAN TOURS -->
+<div class="w3-container w3-center w3-padding-top">
+	<h1>{% trans %}home.catamaran.title{% endtrans %}</h1>
+</div>
+<div class="w3-row-padding">
+	<div class="w3-col l12">
+		<div class="w3-card-4 w3-margin w3-white">
+			<div class="w3-row">
+				<div class="w3-col l6 m12 s12">
+					<img src="{{ asset('assets/images/benagil-image-backg_2.jpg') }}" style="width:100%">
+				</div>
+				<div class="w3-col l6 m12 s12">
+					<div class="w3-container w3-center">
+						<h3><b>{% trans %}home.catamaran.sub_title{% endtrans %}</b></h3>
+					</div>
+					<div class="w3-container">
+						<p>{% trans %}home.catamaran.text{% endtrans %}</p>
+						<div class="w3-row-padding">
+							<div class="w3-col m6 s12">
+								<p><button class="w3-btn w3-green w3-border w3-block"><b>{% trans %}home.book{% endtrans %}</b></button></p>
+							</div>
+							<div class="w3-col m6 s12">
+								<p><button type="button" onclick="location.href='{{ path('product_detail', {'page': 'product_detail', 'pageSub': 'kayak_tour'}) }}';" class="w3-btn w3-green w3-border w3-block"><b>{% trans %}home.detail{% endtrans %}</b></button></p>
+							</div>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- CAVES & COASTAL TOURS -->
+<br>
+<div class="w3-container w3-center w3-padding-top">
+	<h1>{% trans %}home.cave_costal.title{% endtrans %}</h1>
+</div>
+<div class="w3-row-padding w3-margin-bottom">
+	{% set tours = ['ultimate_tour','benagil_cave_experience','benagil_sunset'] %}
+	{% set i = 0 %}
+	{% for product in products %}
+		<div class="w3-col l4 m6 s12 w3-margin-bottom">
+			<div class="w3-card-4">
+				<img src="{{ asset('assets/images/') }}{{product.image}}" alt="{{product.title}}" style="width:100%">
+				<div class="w3-container" style="min-height:350px">
+					<h3 style="min-height:80px;"><b>{{product.title}}</b></h3>
+					<p style="min-height: 150px;">{{product.text}}</p>
+					<div class="w3-row-padding">
+						<div class="w3-col l6 m6 s12">
+							<p><button class="w3-btn w3-green w3-border w3-block">{% trans %}home.book{% endtrans %}</button></p>
+						</div>
+						<div class="w3-col l6 m6 s12">
+							<p><button type="button" onclick="location.href='{{ path('product_detail', {'page': 'product_detail', 'pageSub': tours[i]}) }}';" class="w3-btn w3-green w3-border w3-block">{% trans %}home.detail{% endtrans %}</button></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% set i = i+1 %}
+	{% endfor %}
+</div>
+
+<!-- PRIVATE TOURS -->
+<br>
+<div class="w3-container w3-center w3-padding-top">
+	<h1>{% trans %}home.private.title{% endtrans %}</h1>
+</div>
+<div class="w3-row-padding w3-margin-bottom">
+	<div class="w3-col l12 w3-margin-bottom" style="font-size:20px">
+		<div ID="ngy2p" data-nanogallery2='{
+			"itemsBaseURL": "http://nanogallery2.nanostudio.org/samples/",
+			"thumbnailWidth": "auto",
+			"thumbnailHeight": "320",
+			"thumbnailBorderVertical": 0,
+			"thumbnailBorderHorizontal": 0,
+			"thumbnailGutterWidth": 25,
+			"thumbnailGutterHeight": 25,
+			"thumbnailAlignment": "center",
+			"thumbnailLabel": {
+			  "align": "left",
+			  "titleMultiLine": true
+			},
+			"thumbnailOpenImage": false,
+			"gallerySorting": "random",
+			"colorScheme": {
+				"thumbnail": {
+					"background": "rgba(237,229,229,0.06)"
+				}
+			}
+		}'>
+		{% for private in privates %}
+			<a href="#" target="_self" data-ngthumb="{{private.image}}" data-ngdesc="" data-ngdest="{{ path('private_detail', {'page': 'private_detail', 'pageSub': private.href}) }}">{{private.desc}}</a>
+			{% set i = i+1 %}
+		{% endfor %}
+		
+		</div>
+	</div>
+</div>
+{% endblock %}

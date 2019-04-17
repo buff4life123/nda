@@ -74,18 +74,18 @@
       <!-- </div> -->
     <!-- </div> -->
 
-    <!-- <div class="w3-dropdown-click"> -->
-      <!-- <button onclick="dropDownMenu('product')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown"> -->
-        <!-- <i class="fa fa-tags fa-fw"></i>  {%trans%}product_23{%endtrans%}</button> -->
-      <!-- <div id="product" class="w3-dropdown-content w3-bar-block" style="position:relative"> -->
-        <!-- <a href="#" onclick="ajaxUpload(this.id)" id="product-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding"> -->
-          <!-- <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%} -->
-        <!-- </a> -->
-        <!-- <a href="#" onclick="ajaxUpload(this.id)" id="product-list" class="w3-right-align nav w3-bar-item w3-button w3-padding"> -->
-          <!-- <i class="far fa-edit fa-fw"></i>{%trans%}list{%endtrans%} -->
-        <!-- </a> -->
-      <!-- </div> -->
-    <!-- </div> -->
+     <div class="w3-dropdown-click"> 
+       <button onclick="dropDownMenu('product')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown"> 
+         <i class="fa fa-tags fa-fw"></i>  {%trans%}product_23{%endtrans%}</button> 
+       <div id="product" class="w3-dropdown-content w3-bar-block" style="position:relative"> 
+         <a href="#" onclick="ajaxUpload(this.id)" id="product-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding"> 
+           <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%} 
+         </a> 
+         <a href="#" onclick="ajaxUpload(this.id)" id="product-list" class="w3-right-align nav w3-bar-item w3-button w3-padding"> 
+           <i class="far fa-edit fa-fw"></i>{%trans%}list{%endtrans%} 
+         </a> 
+       </div> 
+     </div> 
 
  <!-- <a href="#" onclick="ajaxUpload(this.id)" id="available" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown"> -->
       <!--  <i class="far fa-calendar-check"></i>  {%trans%}available{%endtrans%} -->
@@ -143,9 +143,9 @@
       <!-- </div> -->
     <!-- </div> -->
 
-    <!-- <a href="{{ path('index') }}" target="_blank" class="w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown"> -->
-      <!-- <i class="fas fa-external-link-alt fa-fw"></i> {%trans%}view_home{%endtrans%} -->
-    <!-- </a> -->
+    <a href="{{ path('home') }}" target="_blank" class="w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
+      <i class="fas fa-external-link-alt fa-fw"></i> {%trans%}view_home{%endtrans%}
+    </a>
     <a href="{{ path('logout') }}" class="w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-bottom w3-border-brown">
       <i class="fas fa-sign-out-alt fa-fw"></i> {%trans%}exit{%endtrans%}
     </a>

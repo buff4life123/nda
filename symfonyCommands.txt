@@ -44,3 +44,6 @@ git push origin <branch_name>		- Pushes a local branch to the origin remote.
 
 $second_player_rank =& $first_player_rank; // create an alias (apontar para o mesmo lugar)
 $second_player_rank = $first_player_rank; // create a copy
+CMD:
+
+grep -Rl "palavra"  - search for word "palavra".
