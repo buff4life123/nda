@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+{% block content %}
+	<div class="w3-row">
+		<div class="w3-col l12 m12 s12">
+			<div class="w3-padding">
+				<h1>{{pageDesc.title}}</h1>
+			</div>
+		</div>
+		<div class="w3-col l12 m12 s12">
+			<div class="w3-card-4" style="height:100%">
+				<div class="w3-padding-large">
+					{% for i in 0..(pageDesc.text_list|length)-1 %}
+						<div>
+							<p>{{pageDesc.text_list[i].text}}</p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="w3-row-padding">
+				<div class="w3-col l6 m6 s6 w3-center w3-padding-large">
+					<span class="w3-green w3-text-white" style="border: none;display: inline-block;padding: 8px 16px;vertical-align: middle;overflow: hidden;text-decoration: none;color: inherit;background-color: inherit;text-align: center;cursor: pointer;white-space: nowrap;">{{pageDesc.price}}:</span>
+				</div>
+				<div class="w3-col l6 m6 s6 w3-center w3-padding-large">
+					<span class="w3-btn w3-green w3-text-white">{{pageDesc.book}}</span>
+				</div>
+			</div>
+		</div>
+		<!-- info para pdf -->
+		<div class="w3-col l12 m12 s12">
+			<div class="w3-padding">
+				<h3>{{pageDesc.pdf_info.title}}</h3>
+				<a href="{{pageDesc.pdf_info.link}}">{{pageDesc.pdf_info.text_1}}</a>
+			</div>
+		</div>	
+		<!-- informação adicional -->
+		<div class="w3-col l12 m12 s12">
+			<div class="w3-padding">
+				<h2>{{pageDesc.add_info.title}}</h2>
+			</div>
+		</div>
+		<div class="w3-col l12 m12 s12">
+			<div class="w3-card-4">
+				<div class="w3-padding-large">
+					<ul>
+						{% for i in 0..(pageDesc.add_info.text_list|length)-1 %}
+							<li>{{pageDesc.add_info.text_list[i].text}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- politica de cancelamento -->
+		<div class="w3-col l12 m12 s12">
+			<div class="w3-padding">
+				<h2>{{pageDesc.cancel_pol.title}}</h2>
+			</div>
+		</div>
+		<div class="w3-col l12 m12 s12">
+			<div class="w3-card-4">
+				<div class="w3-padding-large">
+					<ul>
+						<li>{{pageDesc.cancel_pol.text_list.text_1}}</li>
+						<li>{{pageDesc.cancel_pol.text_list.text_2}}</li>
+						<li>{{pageDesc.cancel_pol.text_list.text_3}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
