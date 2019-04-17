@@ -782,6 +782,7 @@ body {
   font-family: Barlow, sans-serif;
   font-weight: 500;
   text-align: center;
+  color:   #ff0055;
 }
 
 .paragraph-4 {
@@ -2795,7 +2796,7 @@ body {
 
 .slide-about {
   height: 550px;
-  background-image: url('../images/about-seasiren-tours.jpg');
+  background-image: url('../images/future-nautic.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -3354,7 +3355,7 @@ body {
 
 .slide1_tour4_bm2 {
   height: 680px;
-  background-image: url('../images/benagil-image-backg_2.jpg');
+  background-image: url('../images/algarve.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -3362,7 +3363,7 @@ body {
 
 .slide1_tour2-1 {
   height: 680px;
-  background-image: url('../images/algarve');
+  background-image: url('../images/algarve.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -3370,7 +3371,7 @@ body {
 
 .slide-5-1 {
   height: 680px;
-  background-image: url('../images/ultimate-algarve-boat-trip.jpg');
+  background-image: url('../images/algarve.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
