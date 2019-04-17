@@ -168,6 +168,9 @@ return array(
     'system' => 'Sistema',
     'about_us' => 'Sobre nós',
     'gdpr' => 'R.G.P.D.',
+    'about_title' => 'Projetos Futuros',
+    'about_text' => 'A nauticdrive tem como principal ambição para época 2019 proporcionar aos seus clientes uma nova atracão .<br><br> Após analise da evolução da zona aderente ,a nauticdrive vê como uma mais valia uma embarcação nova.<br><br> Uma embarcação adequada a todo tipo de cliente, onde se prove adaptar a todas as idades. Esta embarcação é rápida será direcionada para passeios turísticos e privados para observação do meio ambiente da nossa costa maravilhosa , será uma mais valia para a empresa tendo em conta que este serviço será sem duvida o seu serviço premium .<br><br> Adaptar um serviço náutico diferente para o bem estar do cliente e observação da natureza envolvente fará sem duvida um serviço diferenciado no mercado na areia.',
+        
 
     'cookies' => array(
         'txt'=>'Este site utiliza cookies. Ao navegar no site estará a consentir a sua utilização.',
@@ -578,7 +581,9 @@ return array(
                 'text_3' => 'A sessão fotográfica dura entre 2 a 3 horas, podendo variar na sua duração consoante a sua preferência. O nosso fantástico barco tem WC, solário, cadeiras acolchoadas, sombra retrátil e Wi-Fi.',
                 'text_4' => 'Para informações adicionais, entre em contato conosco por telefone ou e-mail.',
             ),
+            
+         ),
         ),
-    ),
+    
 );
 

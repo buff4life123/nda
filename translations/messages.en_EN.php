@@ -114,6 +114,10 @@ return array(
     'system' => 'System',
     'about_us' => 'About us',
     'gdpr' => 'G.D.P.R.',
+    'about_title' => 'Future Projects',
+    'about_text' => 'NauticDrive`s main ambition for 2019 season is to provide their costumers with a new attraction.After analyzing the evolution of the adherent zone, nauticdrive sees a new boat as a value.<br><br> A boat suitable for all types of customers, where you can adapt to all ages.<br><br> This boat is fast and will be directed to sightseeing and private tours of our wonderful coast, it will be a value to the company, taking into account that this will be your premium service.<br><br> Adapting a different nautical service for the well-being of the customer and observation of the surrounding nature will do without doubt a differentiated service on the sand market.',
+            
+         
 
     'cookies' => array(
         'txt'=>'This website uses cookies to ensure you get the best experience on our website.',
@@ -610,6 +614,7 @@ Please feel free to contact us anytime.',
                 'text_3' => 'Usually last 2-3 hours, however can be customized for our guests preference. Our speed boat is capable of holding 8 guests comfortably without need wear life-jacket, relish comforts like a WC, padded sundeck, retractable shade and Wi-Fi.',
                 'text_4' => 'For additional info please contact us by phone or email.',
             ),
+            
         ),
     ),
 );
