@@ -16,7 +16,7 @@ class SeasirenController extends AbstractController
 {
 	private $session;
 
-	private $exp_api_key = 'f2276c36c42725d27bded90f61707e438602e019';
+	private $exp_api_key = 'ab09f4752091f568b0f3f30fd8dcf544c242fe20';
 
 	private $url_api_key = 'https://admin.experienceware.pt/';
 
