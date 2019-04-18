@@ -76,27 +76,16 @@
 
    <div class="w3-overlay"></div>
       <div class="socialmedia-links" data-ix="social-interact">
-
+      {# <i class="fb-ico fa fa-2x fa-facebook-official w5-hover-opacity"></i>       
+      <div class="in-txt"><div class="text-block-13">facebook</div></div> #}
       {% if company.linkFacebookActive == true %}
-      <div onclick="openWindow('{{company.getLinkFacebook}}')" class="facebook-link w-inline-block w-clearfix">      
+         <div onclick="openWindow('{{company.getLinkFacebook}}')" class="facebook-link w-inline-block w-clearfix">      
             <div class="fb-ico"></div>
             <div class="in-txt">
                <div class="text-block-13">facebook</div>
             </div>
-           
-            {# <i class="fb-ico fa fa-2x fa-facebook-official w5-hover-opacity"></i>       
-            <div class="in-txt">
-               <div class="text-block-13">facebook</div>
-            </div> #}
-            </div>
-    {%endif %}
-         {# <a href="https://www.facebook.com/nauticdrive/" target="_blank" class="facebook-link w-inline-block w-clearfix">
-            <div class="fb-ico"></div>
-            <div class="in-txt">
-               <div class="text-block-13">facebook</div>
-            </div>
-         </a> #}
-
+         </div>
+      {%endif %}
 
          <a href="https://www.tripadvisor.pt/Attraction_Review-g189112-d13795619-Reviews-Nauticdrive-Albufeira_Faro_District_Algarve.html" target="_blank" class="tripad-link w-inline-block w-clearfix">
             <div class="trip-ico"></div>
@@ -104,18 +93,25 @@
                <div class="text-block-13">tripadvisor</div>
             </div>
          </a>
-         <a href="https://www.instagram.com/nauticdrive/" target="_blank" class="instagram-link w-inline-block w-clearfix">
-            <div class="int-ico"></div>
-            <div class="in-txt">
-               <div class="text-block-13">instagram</div>
+
+         {% if company.linkInstagramActive == true %}
+            <div onclick="openWindow('{{company.getLinkInstagram}}')" class="instagram-link w-inline-block w-clearfix">      
+               <div class="int-ico"></div>
+               <div class="in-txt">
+                  <div class="text-block-13">instagram</div>
+               </div>
             </div>
-         </a>
-         <a href="https://twitter.com/Nauticdrive" target="_blank" class="linked-in-link w-inline-block w-clearfix">
-            <div class="twitter-ico"></div>
-            <div class="in-txt">
-               <div class="text-block-13">twitter</div>
+         {%endif %}
+
+         {% if company.linkTwitterActive  == true %}
+            <div onclick="openWindow('{{company.getLinkTwitter}}')" class="linked-in-link w-inline-block w-clearfix">      
+               <div class="twitter-ico"></div>
+               <div class="in-txt">
+                  <div class="text-block-13">twitter</div>
+               </div>
             </div>
-         </a>
+         {%endif %}
+         
       </div>
       <div class="seasiren-1">
          <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar w-nav">

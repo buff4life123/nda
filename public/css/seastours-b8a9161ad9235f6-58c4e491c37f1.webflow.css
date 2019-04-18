@@ -1470,6 +1470,7 @@ body {
   opacity: 0.5;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
+  cursor: pointer;
 }
 
 .facebook-link:hover {
@@ -1485,6 +1486,7 @@ body {
   opacity: 0.5;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
+  cursor: pointer;
 }
 
 .tripad-link:hover {
@@ -1500,6 +1502,7 @@ body {
   opacity: 0.5;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
+  cursor: pointer;
 }
 
 .instagram-link:hover {
@@ -1515,6 +1518,7 @@ body {
   opacity: 0.5;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
+  cursor: pointer;
 }
 
 .linked-in-link:hover {
@@ -1697,6 +1701,7 @@ body {
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
+  margin-top: 95px;
 }
 
 .div-block-18 {
