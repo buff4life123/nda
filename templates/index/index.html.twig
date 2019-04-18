@@ -17,6 +17,7 @@
       <link href="images/sea32_1sea32.png" rel="shortcut icon" type="image/x-icon">
       <link href="images/ico-256.png" rel="apple-touch-icon">
       <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
+      <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
    </head>
    <style>
    .w3-round-top-large {
@@ -77,12 +78,17 @@
       <div class="socialmedia-links" data-ix="social-interact">
 
       {% if company.linkFacebookActive == true %}
-      <i style= "opacity:1!important" onclick="openWindow('{{company.getLinkFacebook}}')" class="facebook-link w-inline-block w-clearfix">      
-            <i class="fb-ico fa fa-2x fa-facebook-official w5-hover-opacity"></i>       
+      <div onclick="openWindow('{{company.getLinkFacebook}}')" class="facebook-link w-inline-block w-clearfix">      
+            <div class="fb-ico"></div>
             <div class="in-txt">
                <div class="text-block-13">facebook</div>
             </div>
-            </i>
+           
+            {# <i class="fb-ico fa fa-2x fa-facebook-official w5-hover-opacity"></i>       
+            <div class="in-txt">
+               <div class="text-block-13">facebook</div>
+            </div> #}
+            </div>
     {%endif %}
          {# <a href="https://www.facebook.com/nauticdrive/" target="_blank" class="facebook-link w-inline-block w-clearfix">
             <div class="fb-ico"></div>
@@ -422,12 +428,15 @@
 				<label class="w3-left" style="text-transform: capitalize" for="contact_message">{%trans%}message{%endtrans%}</label>
 				<label class="contact_message w3-text-red w3-hide w3-right"></label>
 				<textarea class="w3-large w3-input w3-round w3-border" rows="5" id="contact_message" name="contact_message" placeholder="{%trans%}message{%endtrans%}"></textarea>
-					<div class="w3-padding-large pull-left">	
-						<label class="contact_success w3-text-green w3-hide w3-left"></label>
-					</div>
-					<div class="w3-padding book-now-novo">
-						<span onclick="formContact()" class="text-block-8">{%trans%}submit{%endtrans%}</span>
-					</div>
+
+            <div class="w3-padding book-now-novo "> 
+               <span onclick="formContact()" id="contact-submit" class="text-block-8">{%trans%}submit{%endtrans%}</span>
+            </div>
+
+            <div class="w3-padding-large pull-left">	
+               <label class="contact_success w3-text-green w3-hide w3-left"></label>
+            </div>
+               
 				</form>
 			</div>
          </div>

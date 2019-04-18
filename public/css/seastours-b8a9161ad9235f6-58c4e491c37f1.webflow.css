@@ -1467,7 +1467,7 @@ body {
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 5px;
-  opacity: 1;
+  opacity: 0.5;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
@@ -1533,17 +1533,7 @@ body {
   width: 25%;
   height: 100%;
   float: left;
-
-  background-position: 50% 50%;
-  background-size: auto 85%;
-  background-repeat: no-repeat;
-}
-
-.trip-ico {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/tripadvisor-brands.svg');
+  background-image: url('../images/fb-01.svg');
   background-position: 50% 50%;
   background-size: auto 85%;
   background-repeat: no-repeat;
