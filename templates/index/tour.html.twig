@@ -81,7 +81,7 @@
          </div>
          <div class="topo-pag-tour w-clearfix">
             <div class="logo-e-gradiente"></div>
-            <a href="{{path('home')}}"  class="link-block w-inline-block w-clearfix">
+            <a href="{{path('index')}}"  class="link-block w-inline-block w-clearfix">
                <div class="div-block-27"></div>
                <div class="text-block-16">{% trans %}back_to_home{% endtrans %}</div>
             </a>
@@ -102,6 +102,13 @@
       <div class="section-price">
          <div class="price-flex">
             <div class="div-block-20 w-clearfix">
+            
+			{# {%for product in products %} #}
+               <div class="w3-col s12 txt-destaque">
+                  <div class="titulo-tour-1" style="padding: 0px">{{product[0].title}}</div>
+               </div>
+			{# {% endfor %} #}
+
                <div class="price-tit w-clearfix">
                   <h3 class="heading-14">{% trans %}prices{% endtrans %}</h3>
                </div>
@@ -119,7 +126,7 @@
                </a>
                <div class="text-block-14">2 {%trans%}hour_trip{%endtrans%}</div>
             </div>
-            <div class="info-tour2_txt">
+            {# <div class="info-tour2_txt">
                 {% set list_text_2 =  text ~ '.text_list.text_2' %}
                 {% set list_text_3 =  text ~ '.text_list.text_3' %}
                <p class="paragraph-9">
@@ -132,7 +139,7 @@
                   <br>
                   Private charter this fantastic boat for €250.00 p/hour Inc. skipper, deckhand assistant and fuel.
                </p>
-            </div>
+            </div> #}
          </div>
       </div>
       <div class="section-3">

@@ -17,6 +17,7 @@
       <link href="images/sea32_1sea32.png" rel="shortcut icon" type="image/x-icon">
       <link href="images/ico-256.png" rel="apple-touch-icon">
       <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
+      <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
    </head>
    <style>
    .w3-round-top-large {
@@ -75,22 +76,16 @@
 
    <div class="w3-overlay"></div>
       <div class="socialmedia-links" data-ix="social-interact">
-
+      {# <i class="fb-ico fa fa-2x fa-facebook-official w5-hover-opacity"></i>       
+      <div class="in-txt"><div class="text-block-13">facebook</div></div> #}
       {% if company.linkFacebookActive == true %}
-      <i style= "opacity:1!important" onclick="openWindow('{{company.getLinkFacebook}}')" class="facebook-link w-inline-block w-clearfix">      
-            <i class="fb-ico fa fa-2x fa-facebook-official w5-hover-opacity"></i>       
-            <div class="in-txt">
-               <div class="text-block-13">facebook</div>
-            </div>
-            </i>
-    {%endif %}
-         {# <a href="https://www.facebook.com/nauticdrive/" target="_blank" class="facebook-link w-inline-block w-clearfix">
+         <div onclick="openWindow('{{company.getLinkFacebook}}')" class="facebook-link w-inline-block w-clearfix">      
             <div class="fb-ico"></div>
             <div class="in-txt">
                <div class="text-block-13">facebook</div>
             </div>
-         </a> #}
-
+         </div>
+      {%endif %}
 
          <a href="https://www.tripadvisor.pt/Attraction_Review-g189112-d13795619-Reviews-Nauticdrive-Albufeira_Faro_District_Algarve.html" target="_blank" class="tripad-link w-inline-block w-clearfix">
             <div class="trip-ico"></div>
@@ -98,18 +93,25 @@
                <div class="text-block-13">tripadvisor</div>
             </div>
          </a>
-         <a href="https://www.instagram.com/nauticdrive/" target="_blank" class="instagram-link w-inline-block w-clearfix">
-            <div class="int-ico"></div>
-            <div class="in-txt">
-               <div class="text-block-13">instagram</div>
+
+         {% if company.linkInstagramActive == true %}
+            <div onclick="openWindow('{{company.getLinkInstagram}}')" class="instagram-link w-inline-block w-clearfix">      
+               <div class="int-ico"></div>
+               <div class="in-txt">
+                  <div class="text-block-13">instagram</div>
+               </div>
             </div>
-         </a>
-         <a href="https://twitter.com/Nauticdrive" target="_blank" class="linked-in-link w-inline-block w-clearfix">
-            <div class="twitter-ico"></div>
-            <div class="in-txt">
-               <div class="text-block-13">twitter</div>
+         {%endif %}
+
+         {% if company.linkTwitterActive  == true %}
+            <div onclick="openWindow('{{company.getLinkTwitter}}')" class="linked-in-link w-inline-block w-clearfix">      
+               <div class="twitter-ico"></div>
+               <div class="in-txt">
+                  <div class="text-block-13">twitter</div>
+               </div>
             </div>
-         </a>
+         {%endif %}
+         
       </div>
       <div class="seasiren-1">
          <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar w-nav">
@@ -422,12 +424,15 @@
 				<label class="w3-left" style="text-transform: capitalize" for="contact_message">{%trans%}message{%endtrans%}</label>
 				<label class="contact_message w3-text-red w3-hide w3-right"></label>
 				<textarea class="w3-large w3-input w3-round w3-border" rows="5" id="contact_message" name="contact_message" placeholder="{%trans%}message{%endtrans%}"></textarea>
-					<div class="w3-padding-large pull-left">	
-						<label class="contact_success w3-text-green w3-hide w3-left"></label>
-					</div>
-					<div class="w3-padding book-now-novo">
-						<span onclick="formContact()" class="text-block-8">{%trans%}submit{%endtrans%}</span>
-					</div>
+
+            <div class="w3-padding book-now-novo "> 
+               <span onclick="formContact()" id="contact-submit" class="text-block-8">{%trans%}submit{%endtrans%}</span>
+            </div>
+
+            <div class="w3-padding-large pull-left">	
+               <label class="contact_success w3-text-green w3-hide w3-left"></label>
+            </div>
+               
 				</form>
 			</div>
          </div>
