@@ -2,7 +2,7 @@
 
 return array(
 
-
+    'follow_social_network' => 'Siga-nos nas nossas redes sociais ', 
     'future' => 'Projetos Futuros',
     'booking' => 'Reservar',
     'tours' => 'Passeios',

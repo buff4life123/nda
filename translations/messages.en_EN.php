@@ -1,6 +1,8 @@
 <?php
 
 return array(
+
+    'follow_social_network' => 'Follow us on our social network ', 
      'prices' => 'Prices ', 
     'dependent' => 'Dependent ',
     'amount' => 'Amount ',
