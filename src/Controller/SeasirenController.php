@@ -61,11 +61,12 @@ class SeasirenController extends AbstractController
     	$p = curl_exec($ch);
     	curl_close($ch);
     	$curl_response = json_decode($p);
-    
+		
+		
 
     	return $this->render('index/tour.html.twig', array(
     		'page'=> 'tour',
-    		'product' => $curl_response,
+    		'products' => $curl_response,
     		'exp_api_key' => $this->exp_api_key, 
 			'url_api_key' => $this->url_api_key,
     		'text' => 'ultimate_tour'));

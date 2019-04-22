@@ -994,6 +994,7 @@ body {
   border-radius: 3px;
   -webkit-transition: all 350ms ease;
   transition: all 350ms ease;
+  text-align: center;
 }
 
 .book-now-novo:hover {
@@ -1705,8 +1706,9 @@ body {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(79, 175, 66, .55)), to(rgba(79, 175, 66, .55))), url('../images/fundo-azul.jpg');
-  background-image: linear-gradient(180deg, rgba(79, 175, 66, .55), rgba(79, 175, 66, .55)), url('../images/fundo-azul.jpg');
+  /* background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(79, 175, 66, .55)), to(rgba(79, 175, 66, .55))), url('../images/fundo-azul.jpg');
+  background-image: linear-gradient(180deg, rgba(79, 175, 66, .55), rgba(79, 175, 66, .55)), url('../images/fundo-azul.jpg'); */
+  background-image: linear-gradient(180deg, #3385ff, #0047b3);
   background-position: 0px 0px, 50% 33%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -1729,7 +1731,7 @@ body {
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
-  margin-top: 95px;
+  /* margin-top: 95px; */
 }
 
 .div-block-18 {
@@ -2129,8 +2131,8 @@ body {
   width: 250px;
   height: 250px;
   float: left;
-  background-image: url('../images/logo-branco-seasiren-01.svg'), -webkit-gradient(linear, left top, left bottom, from(#000), to(transparent));
-  background-image: url('../images/logo-branco-seasiren-01.svg'), linear-gradient(180deg, #000, transparent);
+
+  background-image: url('../images/logo_nautic.png'), linear-gradient(180deg, rgb(49, 40, 40), transparent);
   background-position: 50% 50%, 0px 0px;
   background-size: 80%, auto;
   background-repeat: no-repeat, repeat;
@@ -2212,7 +2214,7 @@ body {
 
 .logo-rodape-pagetour {
   display: block;
-  width: 180px;
+  width: 90px;
   height: 100%;
   margin-right: auto;
   margin-bottom: 0px;
@@ -2223,10 +2225,12 @@ body {
   -ms-flex: 0 auto;
   flex: 0 auto;
   border-bottom: 1px solid #000;
-  background-image: url('../images/logo-branco-seasiren-01.svg');
+  background-image: url('../images/logo_nautic.svg');
   background-position: 0px 50%;
   background-size: contain;
   background-repeat: no-repeat;
+  background-color: rgb(160, 160, 160);
+  background-position: center; 
 }
 
 .div-block-28 {
@@ -2912,11 +2916,7 @@ body {
   padding-top: 10px;
   font-family: Barlow, sans-serif;
   font-size: 16px;
-<<<<<<< HEAD
   text-align: center;
-=======
-  text-align: justify;
->>>>>>> nautic_drive_content
 }
 
 .div-block-1about {
@@ -3448,11 +3448,19 @@ body {
 .slide1_tour2-1 {
   height: 680px;
   background-image: url('../images/benagil-image-backg_1.jpg');
-  background-image: url('../images/benagil-image-backg_1.jpg');
-  background-image: url('../images/benagil-image-backg_1.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.slide_tour{
+  height: 680px;
+  background-position: 50% 50%;
+  background-size: auto;
+  background-repeat: no-repeat;
+  /* background-image: linear-gradient(180deg, #3385ff, #0047b3); */
+  /* background-color: #3385ff; */
+  
 }
 
 .slide-5-1 {
@@ -5971,20 +5979,8 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   }
 }
 
-.fa {
-  color: white;
-  /* background-image: linear-gradient( to bottom, transparent 20%, black 20%, black 93%, transparent 93% ); */
-  cursor: pointer;
+.btn-about-us {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }
-
-/* .icone-rodape2 {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  background-image: url('../images/tripad-02.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease;
-} */

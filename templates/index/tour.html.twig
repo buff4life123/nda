@@ -67,17 +67,28 @@
    <body>      
       <div class="section-2">
          <div data-delay="5000" data-animation="slide" data-autoplay="1" data-duration="900" data-infinite="1" class="slider-tour-2 w-slider">
+            
             <div class="w-slider-mask">
-               <div class="slide1_tour2-1 w-slide"></div>
-               <div class="slide1_tour2 w-slide"></div>
+               {# <div class="slide1_tour2-1 w-slide"></div> #}
+               {# <div class="slide1_tour2 w-slide"></div> #}
+               
+            {%for images in products[0].image%}
+              <div class="slide_tour w-slide" style="background-image: url('{{images.images}}')"></div> 
+                  {# <img src="{{images.images}}" > #}
+     
+            {% endfor %}
+            
             </div>
+
             <div class="left-arrow-3 w-slider-arrow-left">
                <div class="w-icon-slider-left"></div>
             </div>
+            
             <div class="right-arrow-3 w-slider-arrow-right">
                <div class="w-icon-slider-right"></div>
             </div>
             <div class="slide-nav-7 w-slider-nav w-round"></div>
+         
          </div>
          <div class="topo-pag-tour w-clearfix">
             <div class="logo-e-gradiente"></div>
@@ -90,41 +101,35 @@
             <div class="free-transport"></div>
             <div class="div-block-16">
               {% set title =  text ~ '.title' %}
-              <h2 class="heading-6">SEASIREN TOURS</h2>
-              <h1 class="heading-7"> {{title|trans}} </h1>
+              <h2 class="heading-6">NAUTICDRIVE WATERSPORTS</h2>
+               {% if products[0].title == true %}
+                  <h1 class="heading-7">{{products[0].title}}</h1>
+               {%endif %}
+        
 
-                 {% set list_text_1 =  text ~ '.text_list.text_1' %}
-              <p class="paragraph-8">{{list_text_1 |trans }}</p>
-              <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product[0].id}}" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{% endtrans %}</a>
+                 {# {% set list_text_1 =  text ~ '.text_list.text_1' %} #}
+               {% if products[0].to_do == true %}
+                  <p class="paragraph-8">{{products[0].to_do}}</p>
+               {%endif %}
+              <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{products[0].id}}" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{% endtrans %}</a>
             </div>
          </div>
       </div>
       <div class="section-price">
          <div class="price-flex">
             <div class="div-block-20 w-clearfix">
-            
-			{# {%for product in products %} #}
-               <div class="w3-col s12 txt-destaque">
-                  <div class="titulo-tour-1" style="padding: 0px">{{product[0].title}}</div>
-               </div>
-			{# {% endfor %} #}
-
                <div class="price-tit w-clearfix">
                   <h3 class="heading-14">{% trans %}prices{% endtrans %}</h3>
                </div>
-               <a href="#" class="adulto-tour-1 w-inline-block w-clearfix">
-                  <h3 class="price-ad">€50</h3>
-                  <h3 class="heading-12">{%trans%}adult{%endtrans%}:</h3>
-               </a>
-               <a href="#" class="adulto-tour-1 w-inline-block w-clearfix">
-                  <h3 class="price-ad">€35</h3>
-                  <h3 class="heading-12">{%trans%}junior{%endtrans%}:</h3>
-               </a>
-               <a href="#" class="adulto-tour-1 w-inline-block w-clearfix">
-                  <h3 class="price-ad">{%trans%}free{%endtrans%}</h3>
-                  <h3 class="heading-12">{%trans%}up_to_3{%endtrans%}:</h3>
-               </a>
-               <div class="text-block-14">2 {%trans%}hour_trip{%endtrans%}</div>
+                  {% if products[0].price == true %}
+                     {%for prices in products[0].price%}
+                        <a href="#" class="adulto-tour-1 w-inline-block w-clearfix">
+                           {% set price = prices|length > 0 ? "%.2f"|format(prices.price.amount/100) : '-/-' %}
+                           <h3 class="price-ad ">{{price}} {{prices.price.currency}}</h3>
+                           <h3 class="heading-12">{{prices.name}}:</h3>
+                        </a>
+                     {% endfor %}
+                  {%endif %}
             </div>
             {# <div class="info-tour2_txt">
                 {% set list_text_2 =  text ~ '.text_list.text_2' %}
@@ -144,119 +149,161 @@
       </div>
       <div class="section-3">
          <div class="div-block-22">
+            {% if products[0].to_do == true %}
+               <div data-delay="0" class="dropdown w-dropdown">
+                  <div class="dropdown-toggle-2 w-dropdown-toggle">
+                     <div class="div-block-23" data-ix="anim-plus-drop"></div>
+                     <div class="text-block-15">{%trans%}to_do{%endtrans%}</div>
+                  </div>
+                  <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
+                     <div class="div-block-24">
+                        <ul>
+                           <li class="list-item">{{products[0].to_do}}</li>
+                     </ul>
+                     </div>
+                  </nav>
+               </div>
+            {%endif %}
+            {% if products[0].what_included == true %}
+               <div data-delay="0" class="dropdown w-dropdown">
+                  <div class="dropdown-toggle-2 w-dropdown-toggle">
+                     <div class="div-block-23" data-ix="anim-plus-drop"></div>
+                     <div class="text-block-15">{%trans%}what_included{%endtrans%}</div>
+                  </div>
+                  <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
+                     <div class="div-block-24">
+                        <ul>
+                           <li class="list-item">{{products[0].what_included}}</li>
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            {%endif %}
+            {% if products[0].who_can_participate == true %}
             <div data-delay="0" class="dropdown w-dropdown">
                <div class="dropdown-toggle-2 w-dropdown-toggle">
                   <div class="div-block-23" data-ix="anim-plus-drop"></div>
-                  <div class="text-block-15">{%trans%}hightlights{%endtrans%}</div>
-               </div>
-               <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
-                      {% set list_text_4 =  text ~ '.text_list.text_4' %}
-                      {% set list_text_5 =  text ~ '.text_list.text_5' %}
-                      {% set list_text_6 =  text ~ '.text_list.text_6' %}
-                      {% set list_text_7 =  text ~ '.text_list.text_7' %}
-                  <div class="div-block-24">
-                     <ul>
-                       <li class="list-item">{{list_text_4|trans}}</li>
-                        <li class="list-item">{{list_text_5|trans}}</li>
-                        <li class="list-item">{{list_text_6|trans}}</li>
-                        <li class="list-item">{{list_text_7|trans}}</li>
-                    </ul>
-                  </div>
-               </nav>
-            </div>
-            <!--div data-delay="0" class="dropdown w-dropdown">
-               <div class="dropdown-toggle-2 w-dropdown-toggle">
-                  <div class="div-block-23" data-ix="anim-plus-drop"></div>
-                  <div class="text-block-15">{%trans%}what_expect{%endtrans%}</div>
+                  <div class="text-block-15">{%trans%}who_can_participate{%endtrans%}</div>
                </div>
                <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
                   <div class="div-block-24">
                      <ul>
-                        <li>Get picked up by your driver at your hotel/ villa and driven to your boarding gate in Portimão.</li>
-                        <li>After a brief introduction and safety briefing, cruise down the historic river, past the idyllic fishing village of Ferragudo, the famous castle, and old fortress as you head onto the open sea.</li>
-                        <li>Enjoy a gentle cruise from Portimao to Benagil, observe panoramic views and visit inside the most fascinating caves.</li>
-                        <li>As the adventure draws to a close, stop in a safe location for a quick dive to cool down.</li>
-                        <li>Return back to port, where your transfer driver will meet you to take you home and say goodbye, on what it can definitely be the highlight your holiday and your best boat tour ever.</li>
-                        <li>If you want to explore the unique nature of the Algarve on a fantastic boat, visit the caves, take beautiful photographs, stop for a swim, and feel the need for speed, then this boat tour is perfect for you.</li>
-                        <li>We look forward to welcoming you on board in the near future.</li>
+                       <li class="list-item">{{products[0].who_can_participate}}</li>
                      </ul>
                   </div>
                </nav>
-            </div-->
-            <div data-delay="0" class="dropdown w-dropdown">
-               <div class="dropdown-toggle-2 w-dropdown-toggle">
-                  <div class="div-block-23" data-ix="anim-plus-drop"></div>
-                  <div class="text-block-15">{%trans%}additional_info{%endtrans%}</div>
+            </div>
+            {%endif %}
+            {% if products[0].comments == true %}
+               <div data-delay="0" class="dropdown w-dropdown">
+                  <div class="dropdown-toggle-2 w-dropdown-toggle">
+                     <div class="div-block-23" data-ix="anim-plus-drop"></div>
+                     <div class="text-block-15">{%trans%}comments{%endtrans%}</div>
+                  </div>
+                  <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
+                     <div class="div-block-24">
+                        <ul>
+                           <li class="list-item">{{products[0].comments}}</li>
+                        </ul>
+                     </div>
+                  </nav>
                </div>
-               <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
-                  <div class="div-block-24">
-                    {% set info_text_1 =  text ~ '.add_info.text_list.text_1' %}
-                    {% set info_text_2 =  text ~ '.add_info.text_list.text_2' %}
-                    {% set info_text_3 =  text ~ '.add_info.text_list.text_3' %}
-                    {% set info_text_4 =  text ~ '.add_info.text_list.text_4' %}
-                    {% set info_text_5 =  text ~ '.add_info.text_list.text_5' %}
-                    {% set info_text_6 =  text ~ '.add_info.text_list.text_6' %}
-                    {% set info_text_7 =  text ~ '.add_info.text_list.text_7' %}
-                    {% set info_text_8 =  text ~ '.add_info.text_list.text_8' %}
-                    {% set info_text_9 =  text ~ '.add_info.text_list.text_9' %}
-                    {% set info_text_10 =  text ~ '.add_info.text_list.text_10' %}
-                    {% set info_text_11 =  text ~ '.add_info.text_list.text_11' %}
-                    {% set info_text_12 =  text ~ '.add_info.text_list.text_12' %}
+            {%endif %}
+            {% if products[0].cancelation_policy == true %}
+               <div data-delay="0" class="dropdown w-dropdown">
+                  <div class="dropdown-toggle-2 w-dropdown-toggle">
+                     <div class="div-block-23" data-ix="anim-plus-drop"></div>
+                     <div class="text-block-15">{%trans%}cancelation_policy{%endtrans%}</div>
+                  </div>
+                  <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
+                     <div class="div-block-24">
+                        <ul>
+                        <li class="list-item">{{products[0].cancelation_policy}}</li>
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            {%endif %}
+            {% if products[0].guest_requirements == true %}
+               <div data-delay="0" class="dropdown w-dropdown">
+                  <div class="dropdown-toggle-2 w-dropdown-toggle">
+                     <div class="div-block-23" data-ix="anim-plus-drop"></div>
+                     <div class="text-block-15">{%trans%}guest_requirements{%endtrans%}</div>
+                  </div>
+                  <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
+                     <div class="div-block-24">
+                        <ul>
+                           <li class="list-item">{{products[0].guest_requirements}}</li>
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            {%endif %}
+            {# {% if products[0].where_going_to_be == true %}
+               <div data-delay="0" class="dropdown w-dropdown">
+                  <div class="dropdown-toggle-2 w-dropdown-toggle">
+                     <div class="div-block-23" data-ix="anim-plus-drop"></div>
+                     <div class="text-block-15">{%trans%}where_going_to_be{%endtrans%}</div>
+                  </div>
+                  <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
+                     <div class="div-block-24">
+                        <ul>
+                           <li class="list-item">{{products[0].where_going_to_be}}</li>
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            {%endif %} #}
+            {% if products[0].group_size == true %}
+               <div data-delay="0" class="dropdown w-dropdown">
+                  <div class="dropdown-toggle-2 w-dropdown-toggle">
+                     <div class="div-block-23" data-ix="anim-plus-drop"></div>
+                     <div class="text-block-15">{%trans%}group_size{%endtrans%}</div>
+                  </div>
+                  <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
+                     <div class="div-block-24">
+                        <ul>
+                           <li class="list-item">{{products[0].group_size}}</li>
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            {%endif %}
+          {% if products[0].group_discount == true %}
+               <div data-delay="0" class="dropdown w-dropdown">
+                  <div class="dropdown-toggle-2 w-dropdown-toggle">
+                     <div class="div-block-23" data-ix="anim-plus-drop"></div>
+                     <div class="text-block-15">{%trans%}group_discount{%endtrans%}</div>
+                  </div>
+                  <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
+                     <div class="div-block-24">
+                        <ul>
+                        <li class="list-item"> >= {{products[0].group_discount[0].pax_greater_than}} People  {{products[0].group_discount[0].discount * 100}}%</li>
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            {%endif %}
 
-                     <ul>
-                        <li class="list-item">{{info_text_1|trans}}</li>
-                        <li class="list-item">{{info_text_2|trans}}</li>
-                        <li class="list-item">{{info_text_3|trans}}</li>
-                        <li class="list-item">{{info_text_4|trans}}</li>
-                        <li class="list-item">{{info_text_5|trans}}</li>
-                        <li class="list-item">{{info_text_6|trans}}</li>
-                        <li class="list-item">{{info_text_7|trans}}</li>
-                        <li class="list-item">{{info_text_8|trans}}</li>
-                        <li class="list-item">{{info_text_9|trans}}</li>
-                        <li class="list-item">{{info_text_10|trans}}</li>
-                        <li class="list-item">{{info_text_11|trans}}</li>
-                        <li class="list-item">{{info_text_12|trans}}</li>
-                     </ul>
-                  </div>
-               </nav>
-            </div>
-            <div data-delay="0" class="dropdown w-dropdown">
-               <div class="dropdown-toggle-2 w-dropdown-toggle">
-                  <div class="div-block-23" data-ix="anim-plus-drop"></div>
-                  <div class="text-block-15">{%trans%}exclusions{%endtrans%}</div>
-               </div>
-               <nav class="dropdown-list-2 w-dropdown-list" data-ix="dropdown-highlights">
-                  <div class="div-block-24">
-                     {% set cancel_text_1 =  text ~ '.cancel_pol.text_list.text_1' %}
-                     {% set cancel_text_2 =  text ~ '.cancel_pol.text_list.text_2' %}
-                     {% set cancel_text_3 =  text ~ '.cancel_pol.text_list.text_3' %}
-                     <ul>
-                       <li class="list-item">{{cancel_text_1|trans}}</li>
-                       <li class="list-item">{{cancel_text_2|trans}}</li>
-                       <li class="list-item">{{cancel_text_3|trans}}</li>
-                     </ul>
-                  </div>
-               </nav>
-            </div>
          </div>
       </div>
       <div class="boarding-location w-clearfix">
          <div class="boarding-info">
-            <h4 class="heading-16">{%trans%}boarding_location{%endtrans%}<br></h4>
-            <h4 class="heading-15">{%trans%}to_board_at{%endtrans%} Rua Goncalo do Nascimento.<br>
-              <a target="_blank" href="https://www.google.com/maps/dir//37.1347927,-8.5351366/@37.1351029,-8.6051306,12">GPS: 37.13093 – 8.53420</a>
+            <h4 class="heading-16">{%trans%}where_going_to_be{%endtrans%}<br></h4>
+            <h4 class="heading-15">{{products[0].local}}<br>
+              <a target="_blank" href="https://www.google.com/maps/dir//{{products[0].gps_coords}}">GPS: {{products[0].gps_coords}}</a>
               <br>
             </h4>
-            <p class="paragraph-11" style="color:red">{%trans%}notes{%endtrans%}</p>
+            {# <p class="paragraph-11" style="color:red">{%trans%}notes{%endtrans%}</p> #}
          </div>
-         <div class="div-block-31">
+         {# <div class="div-block-31">
             <div class="div-block-32">
                <div class="text-block-20">{%trans%}boarding_and_info{%endtrans%}</div>
             </div>
             <a href="{{ asset('documents/seasiren2018.pdf') }}" target="_blank" class="pdf-info w-inline-block" data-ix="loop-seta">
                <div class="seta-pdf"></div>
             </a>
-         </div>
+         </div> #}
       </div>
       <div class="section-5">
          <div class="rodape-tour w-clearfix">
@@ -265,11 +312,12 @@
                <div class="text-block-17">{%trans%}subject_changes{%endtrans%}</div>
             </div>
             <div class="div-block-29 w-clearfix">
-               <div class="text-block-18">SEASIREN 2018</div>
+               <div class="text-block-18">NAUTICDRIVE 2019</div>
             </div>
          </div>
       </div>
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <script src="{{ asset('js/webflow.js') }}"  type="text/javascript"></script>
+      <script src='js/main.js'></script> 
    </body>
 </html>

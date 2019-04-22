@@ -16,5 +16,13 @@ $( document ).ready(function() {
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat"
     })
+    // $('.logo-e-gradiente').css({
+    //     background: "url(../upload/gallery/"+brandLogo+")",
+    //     linearGradient:"(180deg,  #1a1a1a, transparent)",
+    //     backgroundPosition: "50% 50%, 0px 0px",
+    //     backgroundSize: "240px, auto",
+    //     backgroundRepeat: "no-repeat, repeat"
+  
+    // })
 });
 
