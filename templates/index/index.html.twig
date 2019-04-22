@@ -3,9 +3,6 @@
    <head>
       <meta charset="utf-8">
       <title>NAUTICDRIVE</title>
-      <meta content="Seasiren Tours provides exceptional Algarve Boat Trips. Visit the Benagil Cave, from Portimão and experience one of the best things to do in Albufeira and the whole Algarve, Portugal. Transport &amp; Drinks included." name="description">
-      <meta content="#1 Algarve Boat &amp; Cave Tours 2018 | Seasiren Tours" property="og:title">
-      <meta content="Seasiren Tours provides exceptional Algarve Boat Trips. Visit the Benagil Cave, from Portimão and experience one of the best things to do in Albufeira and the whole Algarve, Portugal. Transport &amp; Drinks included." property="og:description">
       <meta content="summary" name="twitter:card">
       <meta content="width=device-width, initial-scale=1" name="viewport">
       <meta content="Webflow" name="generator">
@@ -76,24 +73,30 @@
 
    <div class="w3-overlay"></div>
       <div class="socialmedia-links" data-ix="social-interact">
-      {# <i class="fb-ico fa fa-2x fa-facebook-official w5-hover-opacity"></i>       
-      <div class="in-txt"><div class="text-block-13">facebook</div></div> #}
-      {% if company.linkFacebookActive == true %}
-         <div onclick="openWindow('{{company.getLinkFacebook}}')" class="facebook-link w-inline-block w-clearfix">      
-            <div class="fb-ico"></div>
-            <div class="in-txt">
-               <div class="text-block-13">facebook</div>
+         {% if company.linkFacebookActive == true %}
+            <div onclick="openWindow('{{company.getLinkFacebook}}')" class="facebook-link w-inline-block w-clearfix">      
+               <div class="fb-ico"></div>
+               <div class="in-txt">
+                  <div class="text-block-13">facebook</div>
+               </div>
             </div>
-         </div>
-      {%endif %}
-
-         <a href="https://www.tripadvisor.pt/Attraction_Review-g189112-d13795619-Reviews-Nauticdrive-Albufeira_Faro_District_Algarve.html" target="_blank" class="tripad-link w-inline-block w-clearfix">
-            <div class="trip-ico"></div>
-            <div class="in-txt">
-               <div class="text-block-13">tripadvisor</div>
+         {%endif %}
+         {% if company.linkTripadvisorActive  == true %}
+            <div onclick="openWindow('{{company.getLinkTripAdvisor}}')" class="tripad-link w-inline-block w-clearfix">      
+               <div class="trip-ico"></div>
+               <div class="in-txt">
+                  <div class="text-block-13">tripadvisor</div>
+               </div>
             </div>
-         </a>
-
+         {%endif %}
+         {% if company.linkTwitterActive  == true %}
+            <div onclick="openWindow('{{company.getLinkTwitter}}')" class="twitter-link w-inline-block w-clearfix">      
+               <div class="twitter-ico"></div>
+               <div class="in-txt">
+                  <div class="text-block-13">twitter</div>
+               </div>
+            </div>
+         {%endif %}
          {% if company.linkInstagramActive == true %}
             <div onclick="openWindow('{{company.getLinkInstagram}}')" class="instagram-link w-inline-block w-clearfix">      
                <div class="int-ico"></div>
@@ -102,15 +105,16 @@
                </div>
             </div>
          {%endif %}
-
-         {% if company.linkTwitterActive  == true %}
-            <div onclick="openWindow('{{company.getLinkTwitter}}')" class="linked-in-link w-inline-block w-clearfix">      
-               <div class="twitter-ico"></div>
+         {% if company.linkLinkenActive == true %}
+            <div onclick="openWindow('{{company.getLinkLinken}}')" class="linked-in-link w-inline-block w-clearfix">      
+               <div class="linkedin-ico"></div>
                <div class="in-txt">
-                  <div class="text-block-13">twitter</div>
+                  <div class="text-block-13">linkedin</div>
                </div>
             </div>
          {%endif %}
+
+        
          
       </div>
       <div class="seasiren-1">
@@ -127,7 +131,7 @@
                </a>
                {% endif %}
                
-               <a href="#" class="brand w-nav-brand"></a>
+               <a href="#" id="brand-logo" data-brand="{{ company.getLogo }}" class="brand w-nav-brand"></a>
 
             	<nav role="navigation" class="nav-menu w-nav-menu">
                	<a href="#seasiren-tours" class="nav-link w-nav-link">{% trans %}tours{% endtrans %}</a>
@@ -323,7 +327,7 @@
 				{% endfor %}
 				</div>
         	</div>
-
+{# 
 			<div class="seasiren-conteudo-tours-1" style="display:block!important">
 
         		<div class="w3-row-padding" style="margin-top:-64px">
@@ -352,7 +356,7 @@
 				</div>
     		</div>
     	</div>
-	</div>
+	</div> #}
 
 
 
@@ -442,8 +446,9 @@
             <div class="rodape-esq w-clearfix">
                <div class="logo-rodape"></div>
                <div class="txt-info-rodape">
-                  <div class="text-block-2">Portugal – Algarve - Albufeira</div>
-                  <div class="text-block-3">+351 969 838 771 | +351 969838 772</div>
+                  <div class="text-block-2">Praia da Rocha Baixinha (Falésia)  . Albufeira</div>
+                  <div class="text-block-2">{{company.getAddress}} . {{company.getPCode}} {{company.getCity}}</div>
+                  <div class="text-block-3"> Rui Silva: +351 968 767 638 | André Cabrita: +351 968 469 784</div>
                   <div class="text-block-4">Nauticdrive.fotos@gmail.com <br>Nauticdrive.reservas@gmail.com<br> info@nauticdrive-algarve.com</div>
                </div>
                <div class="rodape-logo-atlantik-morning w-clearfix">
@@ -459,7 +464,30 @@
          </div>
          <div class="icones-social">
             <div class="text-block-19">Follow us on our social network</div>
-            <a href="https://www.facebook.com/nauticdrive/" target="_blank" class="icone-rodape1 w-inline-block"></a><a href="https://www.tripadvisor.pt/Attraction_Review-g189112-d13795619-Reviews-Nauticdrive-Albufeira_Faro_District_Algarve.html" target="_blank" class="icone-rodape2 w-inline-block"></a><a href="https://www.instagram.com/nauticdrive/" target="_blank" class="icone-rodape3 w-inline-block"></a>
+               {# {% if company.linkFacebookActive        == true %}<i onclick="openWindow('{{company.getLinkFacebook}}')"        style="font-size:39px" class="fa icone-rodape1 w-inline-block">&#xf082;</i>{%endif %}
+               {% if company.linkTwitterActive         == true %}<i onclick="openWindow('{{company.getLinkTwitter}}')"         style="font-size:39px" class="fa icone-rodape1 w-inline-block">&#xf081;</i>{%endif %}
+               {% if company.linkLinkenActive          == true %}<i onclick="openWindow('{{company.getLinkLinken}}')"          style="font-size:39px" class="fa icone-rodape1 w-inline-block">&#xf08c;</i>{%endif %}
+               {% if company.linkInstagramActive       == true %}<i onclick="openWindow('{{company.getLinkInstagram}}')"       style="font-size:39px" class="fa icone-rodape1 w-inline-block">&#xf16d;</i>{%endif %}
+               {% if company.linkTripadvisorActive     == true %}<i onclick="openWindow('{{company.getLinkTripAdvisor}}')"     style="font-size:39px" class="fa icone-rodape1 w-inline-block">&#xf262;</i>{%endif %} #}
+            {% if company.linkFacebookActive == true %}
+               <div onclick="openWindow('{{company.getLinkFacebook}}')" class="icone-rodape1 w-inline-block"></div>
+            {%endif %}
+            {% if company.linkTripadvisorActive  == true %}
+               <div onclick="openWindow('{{company.getLinkTripAdvisor}}')" class="icone-rodape2 w-inline-block"></div>
+            {%endif %}
+            {% if company.linkTwitterActive  == true %}
+               <div onclick="openWindow('{{company.getLinkTwitter}}')" class="icone-rodape5 w-inline-block"></div>
+            {%endif %}
+            {% if company.linkInstagramActive == true %}
+               <div onclick="openWindow('{{company.getLinkInstagram}}')" class="icone-rodape3 w-inline-block"></div>
+            {%endif %}
+            {% if company.linkLinkenActive == true %}
+               <div onclick="openWindow('{{company.getLinkLinken}}')" class="icone-rodape6 w-inline-block"></div>
+            {%endif %}
+
+            {# <a href="https://www.tripadvisor.pt/Attraction_Review-g189112-d13795619-Reviews-Nauticdrive-Albufeira_Faro_District_Algarve.html" target="_blank" class="icone-rodape2 w-inline-block"></a>
+            <a href="https://www.instagram.com/nauticdrive/" target="_blank" class="icone-rodape3 w-inline-block"></a> #}
+
          </div>
          <div class="rodape-dir-local w-clearfix">
             <div class="text-block-5">{%trans%}subject_changes{%endtrans%}</div>
@@ -538,6 +566,8 @@
 			}, 500)
 		}
 	</script>
+
+<script src='js/main.js'></script> 
 
 </body>
 </html>

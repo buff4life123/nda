@@ -104,6 +104,9 @@ class Company
     private $link_my_domain;
     /** @ORM\Column(type="string", name="link_facebook",nullable=true)*/
     private $link_facebook;
+    /** @ORM\Column(type="string", name="link_tripadvisor",nullable=true)*/
+    private $link_tripadvisor;
+
     /** @ORM\Column(type="string", name="link_twitter",nullable=true)*/
     private $link_twitter;
     /** @ORM\Column(type="string", name="link_instagram",nullable=true)*/
@@ -121,6 +124,9 @@ class Company
 
     /** @ORM\Column(type="boolean", name="link_facebook_active", options={"default":0}) */
     private $link_facebook_active = false;
+    /** @ORM\Column(type="boolean", name="link_tripadvisor_active", options={"default":0}) */
+    private $link_tripadvisor_active = false;
+
        /** @ORM\Column(type="boolean", name="link_twitter_active", options={"default":0}) */
     private $link_twitter_active = false;
         /** @ORM\Column(type="boolean", name="link_instagram_active", options={"default":0}) */
@@ -408,6 +414,16 @@ class Company
         $this->link_snapchat = str_replace("'","’",$link_snapchat);
     }
 
+    public function getLinkTripAdvisor()
+    {
+        return $this->link_tripadvisor;
+    }
+
+    public function setLinkTripAdvisor($link_tripadvisor)
+    {
+        $this->link_tripadvisor = str_replace("'","’",$link_tripadvisor);
+    }
+
 
     public function getLinkBehanceActive()
     {
@@ -487,5 +503,15 @@ class Company
     public function setLinkSnapChatActive($link_snapchat_active)
     {
         $this->link_snapchat_active = $link_snapchat_active;
+    }
+
+    public function getLinkTripAdvisorActive()
+    {
+        return $this->link_tripadvisor_active;
+    }
+
+    public function setLinkTripAdvisorActive($link_tripadvisor_active)
+    {
+        $this->link_tripadvisor_active = $link_tripadvisor_active;
     }
 }

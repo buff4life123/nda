@@ -184,6 +184,11 @@ class CompanyType extends AbstractType
                 'label' => 'Snapchat Url',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'https://snapchat']
             ))
+            ->add('link_tripadvisor', TextType::class, array(
+                'required' => false,
+                'label' => 'TripAdvisor Url',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'https://tripadvisor']
+            ))
             ->add('link_facebook_active', CheckboxType::class, array(
                 'label'    => 'active',
                 'required' => false,
@@ -220,6 +225,11 @@ class CompanyType extends AbstractType
                 'attr' => ['class' => 'w3-check']
             ))
             ->add('link_snapchat_active', CheckboxType::class, array(
+                'label'    => 'active',
+                'required' => false,
+                'attr' => ['class' => 'w3-check']
+            ))
+            ->add('link_tripadvisor_active', CheckboxType::class, array(
                 'label'    => 'active',
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
