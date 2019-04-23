@@ -28,7 +28,7 @@ return array(
     'to_do' => 'O que iremos fazer',
     'what_included' => 'O que está incluido',
     'who_can_participate' => 'Quem pode participar',
-    'comments' => 'Observations',
+    'comments' => 'Observações',
     'cancelation_policy' => 'Politica cancelamento',
     'guest_requirements' => 'Requesitos',
     'where_going_to_be' => 'Onde estaremos',

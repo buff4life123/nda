@@ -158,7 +158,7 @@ return array(
     'to_do' => 'What are we going to do',
     'what_included' => 'What’s included',
     'who_can_participate' => 'Who can attend',
-    'comments' => 'Observações',
+    'comments' => 'Observations',
     'cancelation_policy' => 'Cancellation policy',
     'guest_requirements' => 'Requirements',
     'where_going_to_be' => 'Where we will be',

@@ -9,52 +9,55 @@ function w3_close(cl) {
 
 function openWindow(url){window.open(url, "_blank")}
 
-function myMap() {
-    
-  var myCenter = new google.maps.LatLng({{company.CoordsGoogleMaps}})
-  var mapCanvas = document.getElementById("themap")
-  var mapOptions = {
-    center: myCenter,
-    scrollwheel: false,
-    draggable: false,    
-    zoom: 13,
-    panControl: true,
-    zoomControl: true,
-    mapTypeControl: false,
-    scaleControl: false,
-    streetViewControl: false,
-    overviewMapControl: false,
-    rotateControl: false,
-  }
+// function myMap() {
 
-  var map = new google.maps.Map(mapCanvas, mapOptions)
+//   var myCenter = new google.maps.LatLng("{{company.CoordsGoogleMaps}}");
+//   var mapCanvas = document.getElementById("themap")
+//   var mapOptions = {
+//     center: myCenter,
+//     scrollwheel: false,
+//     draggable: false,    
+//     zoom: 13,
+//     panControl: true,
+//     zoomControl: true,
+//     mapTypeControl: false,
+//     scaleControl: false,
+//     streetViewControl: false,
+//     overviewMapControl: false,
+//     rotateControl: false,
+//   }
 
-  var marker = new google.maps.Marker({position:myCenter})
+//   var map = new google.maps.Map(mapCanvas, mapOptions)
 
-  marker.setMap(map)
+//   var marker = new google.maps.Marker({position:myCenter})
 
-google.maps.event.addListener(marker,"click",function() {
-  map.setZoom(17)
-  map.setCenter(marker.getPosition())
-  })
-  var infowindow = new google.maps.InfoWindow({
-    content: "{{company.name}}"
-  })
-  infowindow.open(map,marker)
-}
+//   marker.setMap(map)
 
-$(function() {
- $('#ei-slider').eislideshow({
-  easing    : 'easeOutExpo',
-  titleeasing : 'easeOutExpo',
-  titlespeed  : 1200,
-  animation           : 'center',
-  autoplay            : true,
-  slideshow_interval  : 6000,
-  titlesFactor        : 0
-})
-})
+// google.maps.event.addListener(marker,"click",function() {
+//   map.setZoom(17)
+//   map.setCenter(marker.getPosition())
+//   })
+//   var infowindow = new google.maps.InfoWindow({
+//     content: "{{company.name}}"
+//   })
+//   infowindow.open(map,marker)
+// }
 
+// $(function() {
+
+//   $('#ei-slider').eislideshow(
+//   {
+//   easing    : 'easeOutExpo',
+//   titleeasing : 'easeOutExpo',
+//   titlespeed  : 1200,
+//   animation           : 'center',
+//   autoplay            : true,
+//   slideshow_interval  : 6000,
+//   titlesFactor        : 0
+//   })
+
+// })
+
+// myMap();
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key={{company.GoogleMapsApiKey}}&callback=myMap"></script>
