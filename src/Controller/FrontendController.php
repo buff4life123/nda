@@ -12,7 +12,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use EmailValidator\EmailValidator;
 
-class SeasirenController extends AbstractController
+class FrontendController extends AbstractController
 {
 	private $session;
 
@@ -47,12 +47,20 @@ class SeasirenController extends AbstractController
     }
 
     public function aboutUs(Request $request)
-    {
-		return $this->render('index/about_us.html.twig',  array('page' => 'about_us'));
+{		
+		$em = $this->getDoctrine()->getManager();
+		$company = $em->getRepository(Company::class)->find(1);
+		return $this->render('index/about_us.html.twig',  array(
+			'page' => 'about_us',
+			'company' => $company,
+		));
     }
 
 	function tour($id, $text, Request $request)
 	{
+		$em = $this->getDoctrine()->getManager();
+		$company = $em->getRepository(Company::class)->find(1);
+
     	$ch = curl_init();
 		$url = $this->url_api_key.'api/'.$this->exp_api_key.'/product/'.$id.'/'.$request->getLocale();
     	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -65,7 +73,8 @@ class SeasirenController extends AbstractController
 		
 
     	return $this->render('index/tour.html.twig', array(
-    		'page'=> 'tour',
+			'page'=> 'tour',
+			'company' => $company,
     		'products' => $curl_response,
     		'exp_api_key' => $this->exp_api_key, 
 			'url_api_key' => $this->url_api_key,

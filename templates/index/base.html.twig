@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="summary" name="twitter:card">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <meta content="Webflow" name="generator">
+        <title>{% block title %}NAUTICDRIVE{% endblock %}</title>
+        
+        {% block stylesheets %}
+            <link href="{{ asset('css/w3.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('css/normalize.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('css/webflow.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('css/style.webflow.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet"/>
+            <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
+        {% endblock %}
+
+
+        <link rel="shortcut icon" type="image/x-icon" href="../images/logo_nautic.ico"/>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            WebFont.load({
+                google: {
+                    families: ["Varela:400", "Montserrat Subrayada:regular,700", "Barlow:200,200italic,300,300italic,regular,italic,500,600,700,800,900"]
+                }
+            });
+        </script>
+
+
+        <script crossorigin="anonymous" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript">
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+        {% endblock %}
+    </body>
+</html>

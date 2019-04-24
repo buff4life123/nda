@@ -47,3 +47,8 @@ $second_player_rank = $first_player_rank; // create a copy
 CMD:
 
 grep -Rl "palavra"  - search for word "palavra".
+
+vsCode:
+
+ctrl + P        - find file
+ctrl + alt + F  - format code

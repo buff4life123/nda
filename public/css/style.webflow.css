@@ -30,7 +30,7 @@ body {
   display: block;
 }
 
-.slider-seasiren-inicio {
+.slider-nauticDrive-inicio {
   height: 950px;
 }
 
@@ -38,7 +38,7 @@ body {
   top: 617px;
 }
 
-.seasiren-tours-destaques {
+.nauticDrive-tours-highlights {
   position: relative;
   z-index: 10;
   width: 100%;
@@ -50,7 +50,7 @@ body {
   background-attachment: scroll, scroll;
 }
 
-.seasiren-conteudo {
+.nauticDrive-conteudo {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -247,9 +247,8 @@ body {
   width: 300px;
   height: 300px;
   padding-left: 20px;
-  /* background-image: url('../images/logo_nautic.png'), -webkit-gradient(linear, left top, left bottom, from  #1a1a1a), to(transparent);  */
-  /* background-image: url('../images/logo_nautic.png'), linear-gradient(180deg,  #1a1a1a, transparent); 
-  background-position: 50% 50%, 0px 0px;
+  /* background-image: url('../images/logo_nautic.png'), linear-gradient(180deg,  #1a1a1a, transparent);  */
+  /* background-position: 50% 50%, 0px 0px;
   background-size: 240px, auto;
   background-repeat: no-repeat, repeat; */
 }
@@ -344,7 +343,7 @@ body {
   background-repeat: no-repeat, repeat;
 }
 
-.seasiren-tours {
+.nauticDrive-tours {
   padding-top: 98px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
   background-image: linear-gradient(180deg, #fff, #fff);
@@ -407,7 +406,7 @@ body {
 }
 
 .testemonials-algarve {
-  /* background-image: url('../images/fundo-azul.jpg'); */
+  background-image: url('../images/fundo-azul.jpg'); 
   background-position: 50% 50%;
   background-size: cover;
   background-attachment: fixed;
@@ -432,11 +431,11 @@ body {
 }
 
 
-.seasiren-form-contact {
+.nauticDrive-form-contact {
   display: block;
 }
 
-.seasiren-tours-wrapper-form {
+.nauticDrive-tours-wrapper-form {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -508,7 +507,7 @@ body {
   background-image: linear-gradient(180deg, #ebebeb, #ebebeb);
 }
 
-.rodape-sea-siren {
+.rodape-nauticDrive {
   display: block;
   width: 100%;
   margin-right: auto;
@@ -1142,7 +1141,7 @@ body {
 
 }
 
-.seasiren-conteudo-tours-1 {
+.nauticDrive-conteudo-tours-1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3940,7 +3939,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     left: 0px;
     background-color: #000;
   }
-  .seasiren-tours {
+  .nauticDrive {
     padding-top: 31px;
   }
   .tour-1 {
@@ -4200,8 +4199,8 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     padding-left: 40px;
   }
   .slide-tour-4-home {
-    background-image: url('../images/slider-tour-4.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/slider-tour-4.jpg'), linear-gradient(180deg, transparent, transparent);
+    /* background-image: url('../images/slider-tour-4.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/slider-tour-4.jpg'), linear-gradient(180deg, transparent, transparent); */
   }
   .slide-topo-2 {
     background-position: 0px 0px, 50% 50%;
@@ -4377,13 +4376,13 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
 }
 
 @media (max-width: 767px) {
-  .slider-seasiren-inicio {
+  .slider-nauticDrive-inicio {
     height: 900px;
   }
   .slide-nav-2 {
     top: 696px;
   }
-  .seasiren-conteudo {
+  .nauticDrive-conteudo {
     width: 80%;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -4476,7 +4475,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .algarve-tours {
     height: auto;
   }
-  .seasiren-tours-wrapper-form {
+  .nauticDrive-tours-wrapper-form {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
@@ -4619,7 +4618,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .div-block-9 {
     padding-bottom: 0px;
   }
-  .seasiren-conteudo-tours-1 {
+  .nauticDrive-conteudo-tours-1 {
     padding-top: 20px;
     padding-bottom: 5px;
     -webkit-box-orient: vertical;
@@ -4856,8 +4855,8 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     padding-left: 35px;
   }
   .slide-tour-4-home {
-    background-image: url('../images/slider-tour-4.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/slider-tour-4.jpg'), linear-gradient(180deg, transparent, transparent);
+    /* background-image: url('../images/slider-tour-4.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/slider-tour-4.jpg'), linear-gradient(180deg, transparent, transparent); */
   }
   .mask {
     position: relative;
@@ -5111,16 +5110,16 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
 }
 
 @media (max-width: 479px) {
-  .slider-seasiren-inicio {
+  .slider-nauticDrive-inicio {
     height: 900px;
   }
   .slide-nav-2 {
     top: 768px;
   }
-  .seasiren-tours-destaques {
+  .nauticDrive-tours-highlights {
     height: auto;
   }
-  .seasiren-conteudo {
+  .nauticDrive-conteudo {
     width: 100%;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -5192,7 +5191,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .slider-2 {
     height: 550px;
   }
-  .seasiren-tours {
+  .nauticDrive-tours {
     margin-top: 15px;
   }
   .pag-tours {
@@ -5223,15 +5222,15 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     height: auto;
   }
   .algarve-tours-test1 {
-    /* background-image: url('../images/fundo-azul.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/fundo-azul.jpg'), linear-gradient(180deg, transparent, transparent); */
+    background-image: url('../images/fundo-azul.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/fundo-azul.jpg'), linear-gradient(180deg, transparent, transparent);
     background-size: cover, auto;
     background-repeat: no-repeat, repeat;
   }
   .map {
     height: 400px;
   }
-  .seasiren-tours-wrapper-form {
+  .nauticDrive-tours-wrapper-form {
     margin-top: 21px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -5396,7 +5395,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .right-arrow {
     margin-right: -11px;
   }
-  .seasiren-conteudo-tours-1 {
+  .nauticDrive-conteudo-tours-1 {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
@@ -5620,47 +5619,47 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     margin-left: auto;
   }
   .algarve-tours-test2 {
-    /* background-image: url('../images/fundo-azul.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/fundo-azul.jpg'), linear-gradient(180deg, transparent, transparent); */
+    background-image: url('../images/fundo-azul.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/fundo-azul.jpg'), linear-gradient(180deg, transparent, transparent);
     background-size: cover, auto;
     background-repeat: no-repeat, repeat;
   }
   .slide-snorkling-copy {
-    /* background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, transparent, transparent); */
+    background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, transparent, transparent);
     background-size: cover, auto;
   }
   .slide-tour-2-home {
-    /* height: 550px;
+    height: 550px;
     background-image: url('../images/slider-tour-2.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/slider-tour-2.jpg'), linear-gradient(180deg, transparent, transparent); */
+    background-image: url('../images/slider-tour-2.jpg'), linear-gradient(180deg, transparent, transparent);
     background-position: 0px 50%, 0px 0px;
     background-size: cover, auto;
   }
   .slide-tour-3-home {
     height: 550px;
-    /* background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, transparent, transparent); */
+    background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, transparent, transparent);
     background-size: cover, auto;
   }
   .slide-tour-4-home {
     height: 550px;
-    /* background-image: url('../images/slider-tour-4.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/slider-tour-4.jpg'), linear-gradient(180deg, transparent, transparent); */
+    background-image: url('../images/slider-tour-4.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/slider-tour-4.jpg'), linear-gradient(180deg, transparent, transparent);
     background-position: 50% 50%, 0px 0px;
     background-size: cover, auto;
     background-repeat: no-repeat, repeat;
   }
   .slide-tour-5-home {
     height: 550px;
-    /* background-image: url('../images/slider-tour-5.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/slider-tour-5.jpg'), linear-gradient(180deg, transparent, transparent); */
+    background-image: url('../images/slider-tour-5.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/slider-tour-5.jpg'), linear-gradient(180deg, transparent, transparent);
     background-size: cover, auto;
   }
   .slide-tour-6-home {
     height: 550px;
-    /* background-image: url('../images/slider-tour-6.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/slider-tour-6.jpg'), linear-gradient(180deg, transparent, transparent); */
+    background-image: url('../images/slider-tour-6.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image: url('../images/slider-tour-6.jpg'), linear-gradient(180deg, transparent, transparent);
     background-size: cover, auto;
   }
   .slide-5 {
@@ -5986,4 +5985,73 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+}
+
+.w3-round-top-large {
+  border-radius-top-right: 8px;
+  border-radius-top-left: 8px
+}
+
+.heading-6,
+.heading-7,
+.titulo-tour-1,
+.text-block-8,
+.heading-8,
+.button-slider-1,
+.heading-5,
+.heading-2,
+.heading-3,
+.heading-9 {
+  text-transform: uppercase
+}
+
+/* styles for '...' */
+.block-with-text {
+  /* hide text if it more than N lines  */
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative;
+  /* use this value to count block height */
+  line-height: 1.2em;
+  /* max-height = line-height (1.2) * lines max number (3) */
+  max-height: 3.6em;
+  /* fix problem when last visible word doesn't adjoin right side  */
+  text-align: justify;
+  /* place for '...' */
+  margin-right: -1em;
+  padding-right: 1em;
+}
+/* create the ... */
+.block-with-text:before {
+  /* points in the end */
+  content: '...';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of block */
+  right: 0;
+  bottom: 0;
+}
+/* hide ... if we have text, which is less than or equal to max lines */
+.block-with-text:after {
+  /* points in the end */
+  content: '';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of text */
+  right: 0;
+  /* set width and height */
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  /* bg color = bg color under block */
+  background: transparent;
+}
+.w3-row-padding,
+.w3-row-padding>.w3-half,
+.w3-row-padding>.w3-third,
+.w3-row-padding>.w3-twothird,
+.w3-row-padding>.w3-threequarter,
+.w3-row-padding>.w3-quarter,
+.w3-row-padding > .w3-col {
+  padding: 0 12px
 }

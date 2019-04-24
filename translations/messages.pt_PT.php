@@ -51,9 +51,9 @@ return array(
      'h3_3_head'=>'Bem vido ao Algarve',
      'h3_3_txt' => 'Naturalmente orgulhosos do nosso trabalho, estamos confiantes de que, quando comparados, os nossos passeios representam uma excelente relação qualidade-preço, contribuindo para umas férias de excelência no Algarve.',
 
-    'seasiren_head' => 'Sobre',
+    'nauticDrive_head' => 'Sobre',
 
-    'seasiren_text' => 'A Nauticdrive é uma empresa do ramo marítimo-turístico, presente na praia da Rocha Baixinha , desde 2014, dedicada à prática de diversões e desportos náuticos.<br><br> Tem como principal ambição ser referência e preferência no sector da actividade, tendo como factores-chave, a experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.<br><br> Para isso, conta com uma equipa profissional e qualificada, onde o cliente é o foco no serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
+    'nauticDrive_text' => 'A Nauticdrive é uma empresa do ramo marítimo-turístico, presente na praia da Rocha Baixinha , desde 2014, dedicada à prática de diversões e desportos náuticos.<br><br> Tem como principal ambição ser referência e preferência no sector da actividade, tendo como factores-chave, a experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.<br><br> Para isso, conta com uma equipa profissional e qualificada, onde o cliente é o foco no serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
 
     'testimonial' => 'Testemunhos',
 
@@ -226,14 +226,14 @@ return array(
                     'text_9' => 'Desfrute de extras como champanhe e outros itens, disponíveis mediante um pedido com 24h de antecedência e com um custo extra.',
                     'text_10' => 'Por favor vista-se apropriadamente para atividades aquáticas; roupas confortáveis, protetor solar, chapéu, protetor labial, roupa de banho, toalha de praia e uma blusa, caso haja uma brisa fresca no mar.',
                     'text_11' => 'Passageiros com lesões, problemas nas costas ou grávidas devem informar o capitão.',
-                    'text_12' => 'A Seasiren Tours não é responsável pela perda ou dano de itens pessoais, incluindo equipamentos eletrónicos ou qualquer outra perda.',
+                    'text_12' => 'A nauticDrive Tours não é responsável pela perda ou dano de itens pessoais, incluindo equipamentos eletrónicos ou qualquer outra perda.',
                 ),
             ),
             'cancel_pol' => array(
                 'title' => 'Política de cancelamento',
                 'text_list' => array(
                     'text_1' => 'Caso queira cancelar a sua reserva, deverá fazê-lo até 48 horas de antecedência da experiência. Cancelar dentro do período das 48 horas não concede o direito a reembolso, exceto na apresentação de comprovativo médico.',
-                    'text_2' => 'Na eventualidade da Seasiren Tours cancelar a sua experiência devido às condições marítimo-atmosféricas ou circunstâncias imprevistas, será oferecida uma data alternativa. Caso não seja possível essa alteração será efetuada um reembolso integral.',
+                    'text_2' => 'Na eventualidade da nauticDrive Tours cancelar a sua experiência devido às condições marítimo-atmosféricas ou circunstâncias imprevistas, será oferecida uma data alternativa. Caso não seja possível essa alteração será efetuada um reembolso integral.',
                     'text_3' => 'Partidas diárias de Portimão sujeitas a condições climáticas favoráveis.',
                 ),
             ),
@@ -254,8 +254,8 @@ return array(
         'about_us' => 'Sobre Nós',
         'menu_boats' => array(
             'boats'=> 'Barcos',
-            'seasiren' => 'Seasiren',
-            'seasiren2' => 'Seasiren II',
+            'nauticDrive' => 'nauticDrive',
+            'nauticDrive2' => 'nauticDrive II',
         ),
         'menu_experiences' => array(
             'experiences'=> 'Experiências',
@@ -294,7 +294,7 @@ return array(
             'title' => 'PASSEIOS PRIVADOS',
             'title_list' => array(
                 'kids_party' => 'Catamaran Festa de Aniversário Crianças',
-                'private_tour' => 'Passeio Privado Seasiren',
+                'private_tour' => 'Passeio Privado nauticDrive',
                 'marrige_wedding' => 'Proposta de Casamento e Casamento - Sessão de Fotos',
                 'team_building' => 'Atividade de Team Building no Mar',
                 'gift_voucher' => 'Voucher de Presente',
@@ -307,29 +307,29 @@ return array(
     'page_detail' => array(
         'about_us' => array(
             'title' => 'SOBRE NÓS',
-            'sub_title' => 'Seasiren Tours',
+            'sub_title' => 'nauticDrive Tours',
             'text_list' => array(
                 'text_1' => 'Os nossos passeios nasceram da nossa paixão por esta bela região.',
                 'text_2' => 'Por isso, e de acordo com a nossa tradição acolhedora, estamos constantemente a desenvolver experiências autênticas para o seu lazer, focamo-nos continuamente no bem-estar dos nossos clientes.',
                 'text_3' => 'Naturalmente orgulhosos do nosso trabalho, estamos confiantes de que, quando comparados, os nossos passeios representam uma excelente relação qualidade-preço, contribuindo para as suas magníficas férias no Algarve.',
                 'text_4' => 'Trabalhamos diariamente para que os nossos clientes nos diferenciem pelo profissionalismo, atendimento personalizado e qualidade proporcionada.',
-                'text_5' => 'O SEASIREN TOURS está registado pelo Turismo de Portugal, com as licenças nº RNVAT 5228 e RNAAT 188/2015, regulamentadas pelo Governo Português.',
+                'text_5' => 'O nauticDrive TOURS está registado pelo Turismo de Portugal, com as licenças nº RNVAT 5228 e RNAAT 188/2015, regulamentadas pelo Governo Português.',
             ),
         ),
         'boats' => array(
-            'seasiren' => array(
-                'title' => 'Seasiren',
+            'nauticDrive' => array(
+                'title' => 'nauticDrive',
                 'sub_title' => '10 metros (33ft)',
                 'text_list' => array(
-                    'text_1' => 'Seasiren is a 10-meter (33ft) powerboat, designed for performance, Comfort and Style aboard. The boat is equipped with everything you need to enjoy your day including a WC, comfortable upholstery seating, a sundeck and retractable shade. The structure as an open deck with a centre-console layout to allow free movement around the boat. There is plenty of dry storage facilities for your belongings plus Wi-Fi and the latest sound system available to keep everyone entertained, complete with an easy boarding ladder and freshwater shower.',
+                    'text_1' => 'nauticDrive is a 10-meter (33ft) powerboat, designed for performance, Comfort and Style aboard. The boat is equipped with everything you need to enjoy your day including a WC, comfortable upholstery seating, a sundeck and retractable shade. The structure as an open deck with a centre-console layout to allow free movement around the boat. There is plenty of dry storage facilities for your belongings plus Wi-Fi and the latest sound system available to keep everyone entertained, complete with an easy boarding ladder and freshwater shower.',
                     'text_2' => 'Além dos mais recentes equipamentos de navegação e segurança, ele é equipado com 2 x 250 HP V6 Honda, os mais recentes motores ECO, perfeitos para qualquer tipo de desporto aquático ou entretenimento de amigos e familiares. Se gosta de passeios náuticos, de uma visita dentro das grutas ou de pesca no alto mar, você veio ao lugar certo.',
                 ),
             ),
-            'seasiren2' => array(
-                'title' => 'Seasiren II',
+            'nauticDrive2' => array(
+                'title' => 'nauticDrive II',
                 'sub_title' => '13 metros (42ft)',
                 'text_list' => array(
-                    'text_1' => 'O nosso novo catamarã, Seasiren II, é um barco aberto de 13 metros (42 pés) com capacidade para 30 pessoas, projetado especialmente para passeios agradáveis como os passeios nas grutas, capaz de acessar áreas que outras embarcações não podem alcançar.',
+                    'text_1' => 'O nosso novo catamarã, nauticDrive II, é um barco aberto de 13 metros (42 pés) com capacidade para 30 pessoas, projetado especialmente para passeios agradáveis como os passeios nas grutas, capaz de acessar áreas que outras embarcações não podem alcançar.',
                     'text_2' => 'Totalmente equipado com equipamento de segurança e conforto, com armazenamento para seus pertences. É alimentado pelo mais recente motor ecológico.',
                 ),
             ),
@@ -361,8 +361,8 @@ return array(
         'kayak_tour' => array(
             'title' => 'Catamarã Passeio de Caiaque',
             'text_list' => array(
-                'text_1' => 'A maioria das grutas e enseadas do Algarve não são acessíveis de barco, por isso a Seasiren Tours desenvolveu passeios de kayak para chegar a lugares não acessíveis aos habituais passeios de barco.',
-                'text_2' => 'Com partida da Marina de Portimão, a actividade inicia-se abordo do catamarã Seasiren II, até ao local destinado para a prática de kayak. Durante o percurso, a nossa tripulação o instruirá acerca das técnicas de remo.',
+                'text_1' => 'A maioria das grutas e enseadas do Algarve não são acessíveis de barco, por isso a nauticDrive Tours desenvolveu passeios de kayak para chegar a lugares não acessíveis aos habituais passeios de barco.',
+                'text_2' => 'Com partida da Marina de Portimão, a actividade inicia-se abordo do catamarã nauticDrive II, até ao local destinado para a prática de kayak. Durante o percurso, a nossa tripulação o instruirá acerca das técnicas de remo.',
                 'text_3' => 'Cruzaremos a costa até à Praia de Albandeira. Depois de chegarmos, remamos 1h30m até Benagil, ao longo do percurso existe a possibilidade de visitar várias grutas. O nosso guia estará à vossa disposição indicando-lhe pontos de referência locais e direcioná-lo para os melhores lugares, tais como; a Praia de Albandeira, a impressionante Gruta do Capitão, a Praia do Barranquinho, a Gruta do Baraço, a famosa Praia da Marinha e a Gruta de Benagil.',
                 'text_4' => 'Se sentir-se cansado, o nosso catamarã estará por perto para um imediato regresso abordo.  Aqueles que preferem não fazer kayak, podem participar no passeio.',
                 'text_5' => 'É com satisfação que estamos aptos a receber pessoas com mobilidade reduzida, todas as pessoas são bem-vindas e todos irão se divertir!',
@@ -386,7 +386,7 @@ return array(
                     'text_7' => 'Desfrute de extras como champanhe e outros itens, disponíveis mediante um pedido com 24h de antecedência e com um custo extra.',
                     'text_8' => 'Por favor vista-se apropriadamente para as atividades aquáticas; roupas confortáveis, protetor solar, chapéu, protetor labial, roupa de banho, toalha de praia e uma blusa caso haja uma brisa fresca no mar.',
                     'text_9' => 'Passageiros com lesões, problemas nas costas ou grávidas devem informar o capitão.',
-                    'text_10' => 'A Seasiren Tours não é responsável pela perda ou dano de itens pessoais, incluindo equipamentos eletrónicos ou qualquer outra perda.',
+                    'text_10' => 'A nauticDrive Tours não é responsável pela perda ou dano de itens pessoais, incluindo equipamentos eletrónicos ou qualquer outra perda.',
                     'text_11' => 'Se nunca esteve num barco no mar ou se acha que pode sentir enjoo, visite seu farmacêutico e procure a medicação apropriada.',
                 ),
             ),
@@ -394,7 +394,7 @@ return array(
                 'title' => 'Política de cancelamento',
                 'text_list' => array(
                     'text_1' => 'Caso queira cancelar a sua reserva, deverá fazê-lo até 48 horas de antecedência da experiência. Cancelar dentro do período das 48 horas não concede o direito a reembolso, exceto na apresentação de comprovativo médico.',
-                    'text_2' => 'Na eventualidade da Seasiren Tours cancelar a sua experiência devido às condições marítimo-atmosféricas ou circunstâncias imprevistas, será oferecida uma data alternativa. Caso não seja possível essa alteração será efetuada um reembolso integral.',
+                    'text_2' => 'Na eventualidade da nauticDrive Tours cancelar a sua experiência devido às condições marítimo-atmosféricas ou circunstâncias imprevistas, será oferecida uma data alternativa. Caso não seja possível essa alteração será efetuada um reembolso integral.',
                     'text_3' => 'Partidas diárias de Portimão sujeitas a condições climáticas favoráveis.',
                 ),
             ),
@@ -432,7 +432,7 @@ return array(
                     'text_8' => 'Desfrute de extras como champanhe e outros itens, disponíveis mediante de um pedido com antecedência de 24h antes do passeio.',
                     'text_9' => 'Por favor vista-se apropriadamente para atividades aquáticas; roupas confortáveis, protetor solar, chapéu, protetor labial, roupa de banho, toalha de praia e uma blusa, caso haja uma brisa fresca no mar.',
                     'text_10' => 'Passageiros com lesões, problemas nas costas ou grávidas devem informar o capitão.',
-                    'text_11' => 'A Seasiren Tours não é responsável pela perda ou dano de itens pessoais, incluindo equipamentos eletrónicos ou qualquer outra perda.',
+                    'text_11' => 'A nauticDrive Tours não é responsável pela perda ou dano de itens pessoais, incluindo equipamentos eletrónicos ou qualquer outra perda.',
                     'text_12' => 'Se nunca esteve num barco no mar ou se acha que pode sentir enjoo, visite seu farmacêutico e procure a medicação apropriada.',
                 ),
             ),
@@ -440,7 +440,7 @@ return array(
                 'title' => 'Política de cancelamento',
                 'text_list' => array(
                     'text_1' => 'Caso queira cancelar a sua reserva, deverá fazê-lo até 48 horas de antecedência da experiência. Cancelar dentro do período das 48 horas não concede o direito a reembolso, exceto na apresentação de comprovativo médico.',
-                    'text_2' => 'Na eventualidade da Seasiren Tours cancelar a sua experiência devido às condições marítimo-atmosféricas ou circunstâncias imprevistas, será oferecida uma data alternativa. Caso não seja possível essa alteração será efetuada um reembolso integral.',
+                    'text_2' => 'Na eventualidade da nauticDrive Tours cancelar a sua experiência devido às condições marítimo-atmosféricas ou circunstâncias imprevistas, será oferecida uma data alternativa. Caso não seja possível essa alteração será efetuada um reembolso integral.',
                     'text_3' => 'Partidas diárias de Portimão sujeitas a condições climáticas favoráveis.',
                 ),
             ),
@@ -478,7 +478,7 @@ return array(
                     'text_9' => 'Desfrute de extras como champanhe e outros itens, disponíveis mediante de um pedido com antecedência de 24h antes do passeio.',
                     'text_10' => 'Por favor vista-se apropriadamente para atividades aquáticas; roupas confortáveis, protetor solar, chapéu, protetor labial, roupa de banho, toalha de praia e uma blusa, caso haja uma brisa fresca no mar.',
                     'text_11' => 'Passageiros com lesões, problemas nas costas ou grávidas devem informar o capitão.',
-                    'text_12' => 'A Seasiren Tours não é responsável pela perda ou dano de itens pessoais, incluindo equipamentos eletrónicos ou qualquer outra perda.',
+                    'text_12' => 'A nauticDrive Tours não é responsável pela perda ou dano de itens pessoais, incluindo equipamentos eletrónicos ou qualquer outra perda.',
                     'text_13' => 'Se nunca esteve num barco no mar ou se acha que pode sentir enjoo, visite seu farmacêutico e procure a medicação apropriada.',
                 ),
             ),
@@ -486,7 +486,7 @@ return array(
                 'title' => 'Política de cancelamento',
                 'text_list' => array(
                     'text_1' => 'Caso queira cancelar a sua reserva, deverá fazê-lo até 48 horas de antecedência da experiência. Cancelar dentro do período das 48 horas não concede o direito a reembolso, exceto na apresentação de comprovativo médico.',
-                    'text_2' => 'Na eventualidade da Seasiren Tours cancelar a sua experiência devido às condições marítimo-atmosféricas ou circunstâncias imprevistas, será oferecida uma data alternativa. Caso não seja possível essa alteração será efetuada um reembolso integral.',
+                    'text_2' => 'Na eventualidade da nauticDrive Tours cancelar a sua experiência devido às condições marítimo-atmosféricas ou circunstâncias imprevistas, será oferecida uma data alternativa. Caso não seja possível essa alteração será efetuada um reembolso integral.',
                     'text_3' => 'Partidas diárias de Portimão sujeitas a condições climáticas favoráveis.',
                 ),
             ),
@@ -559,7 +559,7 @@ return array(
                         '5' => 'Atividades aquáticas para grupos e empresas',
                         '6' => 'Pedidos de casamento & Sessão Fotográfica',
                         '7' => 'Catamarã Festa De Aniversário Para Crianças',
-                        '8' => 'Seasiren Passeios Privados',
+                        '8' => 'nauticDrive Passeios Privados',
                         '9' => 'Passeios Fotográficos',
                     ),
                 ),
@@ -572,9 +572,9 @@ return array(
                 ),
             ),
         ),
-        // seasiren private
-        'seasiren_private_tour' => array(
-            'title' => 'Seasiren Passeios Privados',
+        // nauticDrive private
+        'nauticDrive_private_tour' => array(
+            'title' => 'nauticDrive Passeios Privados',
             'text_list' => array(
                 'text_1' => 'Podemos providenciar o passeio em privado com tripulação (apenas). Os preços variam consoante o tipo de viagem e a duração.',
                 'text_2' => 'Pode reservar um dos nossos passeios; “Benagil Cave Experience”, “Benagil Sunset” ou o mais popular “Ultimate Tour”.  Ambos os passeios iniciam do ponto de embarque habitual e seguem o percurso previamente definido, contudo você tem a opção de escolher a hora de partida e a duração das paragens para nadar.',
