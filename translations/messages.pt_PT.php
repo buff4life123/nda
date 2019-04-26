@@ -3,9 +3,9 @@
 return array(
 
     'follow_social_network' => 'Siga-nos nas nossas redes sociais ', 
-    'future' => 'Projetos Futuros',
+    'aboutUs' => 'Sobre nós',
     'booking' => 'Reservar',
-    'tours' => 'Passeios',
+    'activities' => 'Actividades',
     'book_now' => 'Reservar já',
     'contact' => 'Contatos',
     'more_info' => 'Mais Info',
@@ -51,9 +51,9 @@ return array(
      'h3_3_head'=>'Bem vido ao Algarve',
      'h3_3_txt' => 'Naturalmente orgulhosos do nosso trabalho, estamos confiantes de que, quando comparados, os nossos passeios representam uma excelente relação qualidade-preço, contribuindo para umas férias de excelência no Algarve.',
 
-    'nauticDrive_head' => 'Sobre',
+    'aboutus_head' => 'Sobre',
 
-    'nauticDrive_text' => 'A Nauticdrive é uma empresa do ramo marítimo-turístico, presente na praia da Rocha Baixinha , desde 2014, dedicada à prática de diversões e desportos náuticos.<br><br> Tem como principal ambição ser referência e preferência no sector da actividade, tendo como factores-chave, a experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.<br><br> Para isso, conta com uma equipa profissional e qualificada, onde o cliente é o foco no serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
+    'aboutus_text' => 'A Nauticdrive é uma empresa do ramo marítimo-turístico, presente na praia da Rocha Baixinha , desde 2014, dedicada à prática de diversões e desportos náuticos.<br><br> Tem como principal ambição ser referência e preferência no sector da actividade, tendo como factores-chave, a experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.<br><br> Para isso, conta com uma equipa profissional e qualificada, onde o cliente é o foco no serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
 
     'testimonial' => 'Testemunhos',
 
@@ -177,8 +177,10 @@ return array(
     'system' => 'Sistema',
     'about_us' => 'Sobre nós',
     'gdpr' => 'R.G.P.D.',
-    'about_title' => 'Projetos Futuros',
-    'about_text' => 'A nauticdrive tem como principal ambição para época 2019 proporcionar aos seus clientes uma nova atração .<br><br> Após analise da evolução da zona aderente ,a nauticdrive vê como uma mais valia uma embarcação nova.<br><br> Uma embarcação adequada a todo tipo de cliente, onde se prove adaptar a todas as idades. Esta embarcação é rápida será direcionada para passeios turísticos e privados para observação do meio ambiente da nossa costa maravilhosa , será uma mais valia para a empresa tendo em conta que este serviço será sem duvida o seu serviço premium .<br><br> Adaptar um serviço náutico diferente para o bem estar do cliente e observação da natureza envolvente fará sem duvida um serviço diferenciado no mercado na areia.',
+    'about_title' => 'Sobre nós',
+    'about_subtitle' => 'Projetos Futuros',
+    'about_text' => 'A Nauticdrive é uma empresa do ramo marítimo-turístico, presente na praia da Rocha Baixinha , desde 2014, dedicada à prática de diversões e desportos náuticos.<br><br> Tem como principal ambição ser referência e preferência no sector da actividade, tendo como factores-chave, a experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.<br><br> Para isso, conta com uma equipa profissional e qualificada, onde o cliente é o foco no serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
+    'future'=> 'A nauticdrive tem como principal ambição para época 2019 proporcionar aos seus clientes uma nova atração .<br><br> Após analise da evolução da zona aderente ,a nauticdrive vê como uma mais valia uma embarcação nova.<br><br> Uma embarcação adequada a todo tipo de cliente, onde se prove adaptar a todas as idades. Esta embarcação é rápida será direcionada para passeios turísticos e privados para observação do meio ambiente da nossa costa maravilhosa , será uma mais valia para a empresa tendo em conta que este serviço será sem duvida o seu serviço premium .<br><br> Adaptar um serviço náutico diferente para o bem estar do cliente e observação da natureza envolvente fará sem duvida um serviço diferenciado no mercado na areia.',
      'key_title' => 'Factor-Chave',
     'key_text' => 'Experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.',
      'focus_title' => 'Foco',

@@ -1,59 +1,28 @@
 {% extends 'index/base.html.twig' %}
 
 {% block body %}
+    {% set icon_text   = ['facebook', 'tripadvisor', 'twitter', 'instagram', 'linkedin', 'youtube', 'behance', 'snapchat', 'pinterest'] %}
     {# WTFKKKKK SE REMOVER O INDEX NAO FUNCIONA #}
     {% include '/page/javascript.html' %}
 
     {#SOCIAL MEDIA________________________________________________________________________________________________________________________________________________________________#}
     <div class="w3-overlay"></div>
     <div class="socialmedia-links" data-ix="social-interact">
-        {% if company.linkFacebookActive == true %}
-            <div class="facebook-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinkFacebook}}')">
-                <div class="fb-ico"></div>
-                <div class="in-txt">
-                    <div class="text-block-13">facebook</div>
-                </div>
-            </div>
-        {%endif %}
-        {% if company.linkTripadvisorActive  == true %}
-            <div class="tripad-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinkTripAdvisor}}')">
-                <div class="trip-ico"></div>
-                <div class="in-txt">
-                    <div class="text-block-13">tripadvisor</div>
-                </div>
-            </div>
-        {%endif %}
-        {% if company.linkTwitterActive  == true %}
-            <div class="twitter-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinkTwitter}}')">
-                <div class="twitter-ico"></div>
-                <div class="in-txt">
-                    <div class="text-block-13">twitter</div>
-                </div>
-            </div>
-        {%endif %}
-        {% if company.linkInstagramActive == true %}
-            <div class="instagram-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinkInstagram}}')">
-                <div class="int-ico"></div>
-                <div class="in-txt">
-                    <div class="text-block-13">instagram</div>
-                </div>
-            </div>
-        {%endif %}
-        {% if company.linkLinkenActive == true %}
-            <div class="linked-in-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinkLinken}}')">
-                <div class="linkedin-ico"></div>
-                <div class="in-txt">
-                    <div class="text-block-13">linkedin</div>
-                </div>
-            </div>
-        {%endif %}
+        {%for name in social_network_icons %}
+            {% if company.getLinksActive[loop.index0] == true %}
+                <div class="social-media-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinks[loop.index0]}}')">
+                    <div class="social-media-ico" style="background-image: url(../images/iconss/{{name}})"></div>
 
-
+                    <div class="in-txt">
+                        <div class="text-block-13">{{icon_text[loop.index0]}}</div>
+                    </div>
+                </div>
+            {%endif %}
+        {% endfor %}
     </div>
-    {#NAV AND SLIDER AND HIGHLIGHTS________________________________________________________________________________________________________________________________________________________________#}
-    <div
-        class="nauticDrive-1">
 
+    {#NAV AND SLIDER AND HIGHLIGHTS________________________________________________________________________________________________________________________________________________________________#}
+    <div class="header">
         {#nav________________________________________________________________________________________________________________________________________________________________#}
         <div class="navbar w-nav" data-animation="default" data-collapse="medium" data-duration="400">
             <div class="container-nav w-clearfix">
@@ -71,62 +40,30 @@
                 <a href="#" id="brand-logo" data-brand="{{ company.getLogo }}" class="brand w-nav-brand"></a>
 
                 <nav class="nav-menu w-nav-menu" role="navigation">
-                    <a class="nav-link w-nav-link" href="#nauticDrive-tours">{% trans %}tours{% endtrans %}</a>
+                    <a class="nav-link w-nav-link" href="#activities">{% trans %}activities{% endtrans %}</a>
 
                     <a class="nav-link w-nav-link" href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0" target="_blank">{% trans %}booking{% endtrans %}</a>
 
-                    <a href="{{path('about_us')}}" class="nav-link w-nav-link">{% trans %}future{% endtrans %}</a>
+                    <a href="{{path('about_us')}}" class="nav-link w-nav-link">{% trans %}aboutUs{% endtrans %}</a>
 
                     <a class="nav-link w-nav-link" href="#contact">{% trans %}contact{% endtrans %}</a>
                 </nav>
-
-                <div class="menu-button w-nav-button">
-                    <div class="icon w-icon-nav-menu"></div>
-                </div>
             </div>
         </div>
 
         {#slider________________________________________________________________________________________________________________________________________________________________#}
-        <div class="slider-nauticDrive-inicio w-slider" data-animation="over" data-autoplay-limit="29000" data-autoplay="1" data-delay="10000" data-duration="1000" data-infinite="1">
-
+        <div class="header-slider w-slider" data-animation="over" data-autoplay-limit="29000" data-autoplay="1" data-delay="10000" data-duration="1000" data-infinite="1">
             <div class="w-slider-mask">
-
-                <div class="slide-2 w-slide">
-                    <div class="div-block-5 w-clearfix">
-                        <div class="free-transport-ini-pt"></div>
-                        <div class="destaque-slogan-seas1">{# <h3 class="heading-6">{% trans %}h3_1_head{%endtrans%}</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <h3 class="heading-7">{% trans %}h3_1_sub_head{%endtrans%}</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="paragraph-5">{% trans %}h3_1_txt{%endtrans%}</p> #}
-                            {# <a href="" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a> #}
+                {%for name in header_slider_items %}
+                    <div class="slider-item w-slide" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url(../images/headerSlider/{{name}})">
+                        <div class="div-block-5 w-clearfix">
+                            <div class="free-transport-ini-pt"></div>
+                            <div class="destaque-slogan-seas1"></div>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="slide-topo-3 w-slide">
-                    <div class="div-block-5 w-clearfix">
-                        <div class="free-transport-ini-pt"></div>
-                        <div class="destaque-slogan-seas1">{# <h2 class="heading-6">{% trans %}h3_2_head{%endtrans%}</h2>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="paragraph-5">{% trans %}h3_2_txt{%endtrans%}</p> #}
-                            {# <a href="" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a> #}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slide-topo-3-entrada w-slide">
-                    <div class="div-block-5 w-clearfix">
-                        <div class="free-transport-ini-pt"></div>
-                        <div class="destaque-slogan-seas1">{# <h1 class="heading-6">{% trans %}h3_3_head{%endtrans%}</h1>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="paragraph-5">{% trans %}h3_3_txt{%endtrans%}</p> #}
-                            {# <a href="" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a> #}
-                        </div>
-                    </div>
-                </div>
-
-
+                {% endfor %}
             </div>
+
             <div class="left-arrow-2 w-slider-arrow-left">
                 <div class="w-icon-slider-left"></div>
             </div>
@@ -137,9 +74,9 @@
         </div>
 
         {#highlights________________________________________________________________________________________________________________________________________________________________#}
-        <div class="nauticDrive-tours-highlights">
+        <div class="activities-highlights">
 
-            <div class="nauticDrive-conteudo">
+            <div class="activities-highlights-content">
                 <div class="w3-row-padding" style="margin-top:-48px">
 
                     {%for product in products %}
@@ -152,8 +89,7 @@
                                         {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
                                         <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div>
 
-                                        <div class="">
-
+                                        <div>
                                             <div class="w3-row-padding" style="height:142px!important">
                                                 <div class="w3-col s12 txt-destaque">
                                                     <div class="titulo-tour-1" style="padding: 0px">{{product.title}}</div>
@@ -185,10 +121,8 @@
 
             </div>
         </div>
-
     </div>
-
-    {#PRODUCTS SLIDER________________________________________________________________________________________________________________________________________________________________#}
+    {#ACTIVITIES SLIDER________________________________________________________________________________________________________________________________________________________________#}
     <div class="slideshowtours">
         <div class="slider-2 w-slider" data-animation="over" data-duration="1000" data-infinite="1">
             <div class="mask w-slider-mask">
@@ -201,12 +135,16 @@
 
                     {% set imagelooper = loop.index >= 7 ?  0 : false %}
 
-                    <div class="slide-tour-{{loop.index}}-home w-slide">
+                    {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
+                    <div  class="slide-tour-{{loop.index}}-home slider-activities w-slide" style="background-image:url({{image}}), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5))">
+                    <div class="activities-layer">
                         <div class="div-block-7">
                             <h2 class="heading-8">{{product.title}}</h2>
                             <p class="paragraph-6 block-with-text">{{product.to_do}}</p>
                             <a href="{{path('tour', {id:product.id, text:'ultimate_tour'}) }}" class="button-slider-1 w-button">{%trans%}more_info{%endtrans%}</a>
                         </div>
+                    </div>
+      
                     </div>
 
                 {% endfor %}
@@ -220,28 +158,25 @@
             </div>
             <div class="w-slider-nav w-round"></div>
         </div>
-    </div>
-
-    {#ABOUT AND PRODUCTS________________________________________________________________________________________________________________________________________________________________#}
-    <div
-        class="nauticDrive-tours" id="nauticDrive-tours">
+    </div>{#ABOUT AND PRODUCTS________________________________________________________________________________________________________________________________________________________________#}
+    <div class="all-activities-container" id="activities">
 
         {#aboutus________________________________________________________________________________________________________________________________________________________________#}
         <div class="txt-intro-tours">
-            <h1 class="heading-4">NAUTICDRIVE</h1>
-            <h3 class="heading-5">{% trans %}nauticDrive_head{%endtrans%}</h3>
-            <p class="paragraph-4">{% trans %}nauticDrive_text{%endtrans%}</p>
+            <h1 class="heading-4">{{company.name}}</h1>
+            <h3 class="heading-5">{% trans %}aboutus_head{%endtrans%}</h3>
+            <p class="paragraph-4">{% trans %}aboutus_text{%endtrans%}</p>
         </div>
 
-        {#products________________________________________________________________________________________________________________________________________________________________#}
+        {#all activities________________________________________________________________________________________________________________________________________________________________#}
         <div class="pag-tours">
 
-            <div class="nauticDrive-conteudo-tours-1">
+            <div class="all-activities-items">
 
                 <div class="w3-row-padding">
 
                     {%for product in products %}
-                        {% if  loop.index0 > 3 and loop.index0 < 13 %}
+                        {% if  loop.index0 > 2 and loop.index0 < 13 %}
 
                             <div class="w3-col l4 m6 s12" data-ix="new-interaction" style="padding-bottom:24px">
                                 <div class="w3-white w3-card w3-border w3-round-large">
@@ -321,8 +256,8 @@
         <div id="themap" class="map" data-company-name='{{company.name}}' data-coords="{{company.getCoordsGoogleMaps}}"></div>
 
         {#CONTACT FORM________________________________________________________________________________________________________________________________________________________________#}
-        <div class="nauticDrive-form-contact" id="contact">
-            <div class="nauticDrive-tours-wrapper-form w-clearfix">
+        <div class="form-contact" id="contact">
+            <div class="activities-wrapper-form w-clearfix">
 
                 <div class="txt-contacto">
                     <h4 class="heading-2">{%trans%}contact_us{%endtrans%}</h4>
@@ -361,13 +296,13 @@
             </div>
         </div>
 
-        {#RODAPE________________________________________________________________________________________________________________________________________________________________#}
-        <div class="rodape-nauticDrive">
+        {#FOOTER________________________________________________________________________________________________________________________________________________________________#}
+        <div class="footer">
 
-            <div class="rodape-info">
-                <div class="rodape-esq w-clearfix">
-                    <div class="logo-rodape"></div>
-                    <div class="txt-info-rodape">
+            <div class="footer-info">
+                <div class="footer-esq w-clearfix">
+                    <div class="logo-footer"></div>
+                    <div class="txt-info-footer">
                         <div class="text-block-2">Praia da Rocha Baixinha (Falésia)  . Albufeira</div>
                         <div class="text-block-2">{{company.getAddress}}
                             .
@@ -379,53 +314,34 @@
                             <br>Nauticdrive.reservas@gmail.com<br>
                             info@nauticdrive-algarve.com</div>
                     </div>
-                    {# <div class="rodape-logo-atlantik-morning w-clearfix">
-                    
-                                                    <div class="info-adicional"></div>
-                                                </div> #}
                 </div>
-                <div class="rodape-dir">
+                <div class="footer-dir">
                     <div class="info-boarding"></div>
                 </div>
             </div>
 
             <div class="icones-social">
                 <div class="text-block-19">{%trans%}follow_social_network{%endtrans%}</div>
-
-                {% if company.linkFacebookActive == true %}
-                    <div class="icone-rodape1 w-inline-block" onclick="openWindow('{{company.getLinkFacebook}}')"></div>
-                {%endif %}
-                {% if company.linkTripadvisorActive  == true %}
-                    <div class="icone-rodape2 w-inline-block" onclick="openWindow('{{company.getLinkTripAdvisor}}')"></div>
-                {%endif %}
-                {% if company.linkTwitterActive  == true %}
-                    <div class="icone-rodape5 w-inline-block" onclick="openWindow('{{company.getLinkTwitter}}')"></div>
-                {%endif %}
-                {% if company.linkInstagramActive == true %}
-                    <div class="icone-rodape3 w-inline-block" onclick="openWindow('{{company.getLinkInstagram}}')"></div>
-                {%endif %}
-                {% if company.linkLinkenActive == true %}
-                    <div class="icone-rodape6 w-inline-block" onclick="openWindow('{{company.getLinkLinken}}')"></div>
-                {%endif %}
-
+                {%for name in social_network_icons %}
+                    {% if company.getLinksActive[loop.index0] == true %}
+                        <div class="icone-footer w-inline-block" onclick="openWindow('{{company.getLinks[loop.index0]}}')"></div>
+                    {%endif %}
+                {% endfor %}
             </div>
 
-            <div class="rodape-dir-local w-clearfix">
-                <div class="text-block-7">{{company.name}}
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>
+            <div class="footer-dir-local w-clearfix">
+                <div class="text-block-7" id="footer-fullyear">{{company.name}}
                 </div>
             </div>
 
         </div>
 
-        {% block javascripts %}
-            <script src="https://maps.googleapis.com/maps/api/js?key={{company.GoogleMapsApiKey}}"></script>
-            <script src='js/googleMaps.js'></script>
-            <script src='js/main.js'></script>
-            <script src='js/formContact.js'></script>
-            <script src="js/webflow.js" type="text/javascript">
-        {% endblock %}
+    {% endblock body %}
 
-{% endblock %}
+    {% block javascripts %}
+        <script src="https://maps.googleapis.com/maps/api/js?key={{company.GoogleMapsApiKey}}"></script>
+        <script src='js/googleMaps.js'></script>
+        <script src='js/main.js'></script>
+        <script src='js/formContact.js'></script>
+        <script src="js/webflow.js" type="text/javascript">
+    {% endblock %}
