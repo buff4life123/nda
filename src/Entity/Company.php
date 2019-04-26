@@ -514,4 +514,35 @@ class Company
     {
         $this->link_tripadvisor_active = $link_tripadvisor_active;
     }
+
+    public function getLinks()
+    {
+        return array(
+            $this->getLinkFacebook(),
+            $this->getLinkTripAdvisor(),
+            $this->getLinkTwitter(),
+            $this->getLinkInstagram(),
+            $this->getLinkLinken(),
+            $this->getLinkYouTube(),
+            $this->getLinkBehance(),
+            $this->getLinkSnapChat(),
+            $this->getLinkPinterest()
+        );
+    }
+
+    public function getLinksActive()
+    {
+        return array(
+            $this->getLinkFacebookActive(),
+            $this->getLinkTripAdvisorActive(),
+            $this->getLinkTwitterActive(),
+            $this->getLinkInstagramActive(),
+            $this->getLinkLinkenActive(),
+            $this->getLinkYouTubeActive(),
+            $this->getLinkBehanceActive(),
+            $this->getLinkSnapChatActive(),
+            $this->getLinkPinterestActive()
+        );
+    }
+
 }

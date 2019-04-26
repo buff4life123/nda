@@ -1,5 +1,12 @@
 function openWindow(url){window.open(url, "_blank")}
 
+function getFullYear() {
+    return new Date().getFullYear();
+}
+
+console.log("ola");
+document.getElementById("footer-fullyear").innerHTML +=  " " + getFullYear(); 
+
 $( document ).ready(function() {
 
     // console.log( "ready!" );
@@ -14,7 +21,7 @@ $( document ).ready(function() {
         backgroundRepeat: "no-repeat, repeat"
       })
       
-    $('.logo-rodape').css({
+    $('.logo-footer').css({
         background: "url(../upload/gallery/"+brandLogo+")",
         backgroundPosition: "0px 50%",
         backgroundSize: "contain",

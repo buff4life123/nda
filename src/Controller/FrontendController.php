@@ -25,7 +25,7 @@ class FrontendController extends AbstractController
 	{
        $this->session = $session;
 	}
-	
+
     public function home(Request $request)
     {
 		$em = $this->getDoctrine()->getManager();
@@ -39,14 +39,15 @@ class FrontendController extends AbstractController
     	curl_close($ch);
 		$curl_response = json_decode($p);
 		
-		$iconsFinder = new Finder();
-		$iconsFinder->files()->in("../public/images/icons");
-    
+		$social_network_icons = $this-> fileFinder("../public/images/iconss");
+		$header_slider_items  = $this-> fileFinder("../public/images/headerSlider");
+
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
 			'company' => $company,
-			'iconsFinder' => $iconsFinder,
-			'products' => $curl_response, 
+			'products' => $curl_response,
+			'social_network_icons' => $social_network_icons,
+			'header_slider_items'  => $header_slider_items,
 			'exp_api_key' => $this->exp_api_key, 
 			'url_api_key' => $this->url_api_key));
     }
@@ -502,5 +503,17 @@ class FrontendController extends AbstractController
         if($a)
             $invalid = preg_replace("/[0-9|\+?]{0,2}[0-9]{5,12}/", "", $a);
         return $invalid;
-    }
+	}
+	
+	private function fileFinder($dir)
+	{
+		$icons_finder = new Finder();
+		$icons_finder->files()->in($dir);
+		$icons_name = array();
+		foreach ($icons_finder as $name) {
+			array_push($icons_name, basename($name));
+		}
+
+		return $icons_name;
+	}
 }

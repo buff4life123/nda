@@ -116,8 +116,10 @@ return array(
     'system' => 'System',
     'about_us' => 'About us',
     'gdpr' => 'G.D.P.R.',
-    'about_title' => 'Future Projects',
-    'about_text' => 'NauticDrive`s main ambition for 2019 season is to provide their costumers with a new attraction.After analyzing the evolution of the adherent zone, nauticdrive sees a new boat as a value.<br><br> A boat suitable for all types of customers, where you can adapt to all ages.<br><br> This boat is fast and will be directed to sightseeing and private tours of our wonderful coast, it will be a value to the company, taking into account that this will be your premium service.<br><br> Adapting a different nautical service for the well-being of the customer and observation of the surrounding nature will do without doubt a differentiated service on the sand market.',
+    'about_title' => 'About Us',
+    'about_subtitle' => 'Future Projects',
+    'about_text' => 'Nauticdrive is a marine-tourism company, located in the beach of Rocha Baixinha, since 2014, dedicated to the practice of amusements and water sports. <br> <br> Its main ambition is to be reference and preference in the sector of the activity, having as key factors, the appropriate experience over the past years, technical knowledge and the ability to innovate. <br> <br> In order to do this, they count with a professional and qualified team, where the customer is the focus on the service provided and with permanent concern for their well-being and safety.',
+    'future' =>  'NauticDrive`s main ambition for 2019 season is to provide their costumers with a new attraction.After analyzing the evolution of the adherent zone, nauticdrive sees a new boat as a value.<br><br> A boat suitable for all types of customers, where you can adapt to all ages.<br><br> This boat is fast and will be directed to sightseeing and private tours of our wonderful coast, it will be a value to the company, taking into account that this will be your premium service.<br><br> Adapting a different nautical service for the well-being of the customer and observation of the surrounding nature will do without doubt a differentiated service on the sand market.',
     'key_title' => 'Key Factor',
     'key_text' => 'Proper experience acquired over the last few years, technical knowledge and capacity for innovation.',
     'focus_title' => 'Focus',
@@ -132,9 +134,9 @@ return array(
         'btn' =>'Got It!'
     ),
 
-    'future' => 'Future Projects',
+    'aboutUs' => 'About Us',
     'booking' => 'Booking',
-    'tours' => 'Tours',
+    'activities' => 'Activities',
     'book_now' => 'Book Now',
     'contact' => 'Contacts',
     'more_info' => 'More Info',
@@ -180,8 +182,8 @@ return array(
      'h3_3_head'=>'Welcome to Algarve',
      'h3_3_txt' => 'nauticDrive Tours provides exceptional Algarve Boat Trips. Visit the Benagil Cave, from Portimao and experience one of the best things to do in Albufeira and the whole Algarve, Portugal. Transport & Drinks included.',
 
-    'nauticDrive_head' => 'About',
-    'nauticDrive_text' => 'Nauticdrive is a marine-tourism company, located in the beach of Rocha Baixinha, since 2014, dedicated to the practice of amusements and water sports. <br> <br> Its main ambition is to be reference and preference in the sector of the activity, having as key factors, the appropriate experience over the past years, technical knowledge and the ability to innovate. <br> <br> In order to do this, they count with a professional and qualified team, where the customer is the focus on the service provided and with permanent concern for their well-being and safety.',
+    'aboutus_head' => 'About',
+    'aboutus_text' => 'Nauticdrive is a marine-tourism company, located in the beach of Rocha Baixinha, since 2014, dedicated to the practice of amusements and water sports. <br> <br> Its main ambition is to be reference and preference in the sector of the activity, having as key factors, the appropriate experience over the past years, technical knowledge and the ability to innovate. <br> <br> In order to do this, they count with a professional and qualified team, where the customer is the focus on the service provided and with permanent concern for their well-being and safety.',
 
     'testimonial' => 'Testimonial',
 

@@ -2,7 +2,7 @@
 <html>
    <head>
       <meta charset="utf-8">
-      <title>NAUTICDRIVE</title>
+      <title>{{company.name}}</title>
       <meta content="summary" name="twitter:card">
       <meta content="width=device-width, initial-scale=1" name="viewport">
       <meta content="Webflow" name="generator">
@@ -88,7 +88,10 @@
          
          </div>
          <div class="topo-pag-tour w-clearfix">
+         
+            <a href="{{path('index')}}">
             <div class="logo-e-gradiente"></div>
+            </a>
             <a href="{{path('index')}}"  class="link-block w-inline-block w-clearfix">
                <div class="div-block-27"></div>
                <div class="text-block-16">{% trans %}back_to_home{% endtrans %}</div>
@@ -98,7 +101,7 @@
             <div class="free-transport"></div>
             <div class="div-block-16">
               {% set title =  text ~ '.title' %}
-              <h2 class="heading-6">NAUTICDRIVE WATERSPORTS</h2>
+              <h2 class="heading-6">{{company.name}} WATERSPORTS</h2>
                {% if products[0].title == true %}
                   <h1 class="heading-7">{{products[0].title}}</h1>
                {%endif %}
@@ -113,7 +116,8 @@
          </div>
       </div>
       <div class="section-price">
-         <div class="price-flex">
+         <div class="section-price-layer">
+            <div class="price-flex">
             <div class="div-block-20 w-clearfix">
                <div class="price-tit w-clearfix">
                   <h3 class="heading-14">{% trans %}prices{% endtrans %}</h3>
@@ -128,6 +132,8 @@
                      {% endfor %}
                   {%endif %}
             </div>
+         </div>
+
             {# <div class="info-tour2_txt">
                 {% set list_text_2 =  text ~ '.text_list.text_2' %}
                 {% set list_text_3 =  text ~ '.text_list.text_3' %}
