@@ -11,11 +11,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use EmailValidator\EmailValidator;
+use Symfony\Component\Finder\Finder;
 
 class FrontendController extends AbstractController
 {
 	private $session;
-
+	
 	private $exp_api_key = 'ab09f4752091f568b0f3f30fd8dcf544c242fe20';
 
 	private $url_api_key = 'https://admin.experienceware.pt/';
@@ -36,11 +37,15 @@ class FrontendController extends AbstractController
     	curl_setopt($ch, CURLOPT_URL, $url);
     	$p = curl_exec($ch);
     	curl_close($ch);
-    	$curl_response = json_decode($p);
+		$curl_response = json_decode($p);
+		
+		$iconsFinder = new Finder();
+		$iconsFinder->files()->in("../public/images/icons");
     
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
 			'company' => $company,
+			'iconsFinder' => $iconsFinder,
 			'products' => $curl_response, 
 			'exp_api_key' => $this->exp_api_key, 
 			'url_api_key' => $this->url_api_key));

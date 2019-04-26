@@ -1,3 +1,4 @@
+
 {% extends 'index/base.html.twig' %}
 
 {% block body %}
@@ -7,7 +8,20 @@
     {#SOCIAL MEDIA________________________________________________________________________________________________________________________________________________________________#}
     <div class="w3-overlay"></div>
     <div class="socialmedia-links" data-ix="social-interact">
-        {% if company.linkFacebookActive == true %}
+
+        {%for icon in iconsFinder %}
+            {% if company.linkFacebookActive == true %}
+                <div class="facebook-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinkFacebook}}')">
+                    <div data-facebook-icon="iconsFinder" class="fb-ico"></div>
+                    <div class="in-txt">
+                        <div class="text-block-13">facebook</div>
+                    </div>
+                </div>
+            {%endif %}
+        {% endfor %}
+
+
+        {# {% if company.linkFacebookActive == true %}
             <div class="facebook-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinkFacebook}}')">
                 <div class="fb-ico"></div>
                 <div class="in-txt">
@@ -46,7 +60,7 @@
                     <div class="text-block-13">linkedin</div>
                 </div>
             </div>
-        {%endif %}
+        {%endif %} #}
 
 
     </div>
@@ -91,12 +105,16 @@
 
             <div class="w-slider-mask">
 
-                <div class="slide-2 w-slide">
+
+                <div
+                    class="slide-2 w-slide">
+                    {# background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .57)), color-stop(33%, transparent)), url('../images/jet-ski-1125329_1920.jpg');
+                      background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url('../images/jet-ski-1125329_1920.jpg'); #}
                     <div class="div-block-5 w-clearfix">
                         <div class="free-transport-ini-pt"></div>
                         <div class="destaque-slogan-seas1">{# <h3 class="heading-6">{% trans %}h3_1_head{%endtrans%}</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <h3 class="heading-7">{% trans %}h3_1_sub_head{%endtrans%}</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="paragraph-5">{% trans %}h3_1_txt{%endtrans%}</p> #}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <h3 class="heading-7">{% trans %}h3_1_sub_head{%endtrans%}</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p class="paragraph-5">{% trans %}h3_1_txt{%endtrans%}</p> #}
                             {# <a href="" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a> #}
                         </div>
                     </div>
@@ -107,8 +125,8 @@
                     <div class="div-block-5 w-clearfix">
                         <div class="free-transport-ini-pt"></div>
                         <div class="destaque-slogan-seas1">{# <h2 class="heading-6">{% trans %}h3_2_head{%endtrans%}</h2>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="paragraph-5">{% trans %}h3_2_txt{%endtrans%}</p> #}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p class="paragraph-5">{% trans %}h3_2_txt{%endtrans%}</p> #}
                             {# <a href="" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a> #}
                         </div>
                     </div>
@@ -118,8 +136,8 @@
                     <div class="div-block-5 w-clearfix">
                         <div class="free-transport-ini-pt"></div>
                         <div class="destaque-slogan-seas1">{# <h1 class="heading-6">{% trans %}h3_3_head{%endtrans%}</h1>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="paragraph-5">{% trans %}h3_3_txt{%endtrans%}</p> #}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p class="paragraph-5">{% trans %}h3_3_txt{%endtrans%}</p> #}
                             {# <a href="" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a> #}
                         </div>
                     </div>
@@ -380,9 +398,9 @@
                             info@nauticdrive-algarve.com</div>
                     </div>
                     {# <div class="rodape-logo-atlantik-morning w-clearfix">
-                    
-                                                    <div class="info-adicional"></div>
-                                                </div> #}
+                                                                                
+                                                                                                                <div class="info-adicional"></div>
+                                                                                                            </div> #}
                 </div>
                 <div class="rodape-dir">
                     <div class="info-boarding"></div>
@@ -426,6 +444,6 @@
             <script src='js/main.js'></script>
             <script src='js/formContact.js'></script>
             <script src="js/webflow.js" type="text/javascript">
-        {% endblock %}
-
-{% endblock %}
+                {% endblock %}
+                                                
+                                                {% endblock %}
