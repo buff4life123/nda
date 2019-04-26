@@ -48,11 +48,11 @@ return array(
     'h3_2_head' =>'Experiencie passear pela costa Algarvia',
     'h3_2_sub_head' => 'Sreasiren Boat tours',
     'h3_2_txt' => 'Explore a beleza diversificada desta costa única e visite as fascinantes grutas, praias e formações rochosas naturais, culminando com a fantástica gruta de Benagil. Experimente esta verdadeira maravilha natural, classificada como uma das 10 maiores cavernas do mundo.',
-     'h3_3_head'=>'Bem vido ao Algarve',
+     'h3_3_head'=>'Atreve-te!!',
      'h3_3_txt' => 'Naturalmente orgulhosos do nosso trabalho, estamos confiantes de que, quando comparados, os nossos passeios representam uma excelente relação qualidade-preço, contribuindo para umas férias de excelência no Algarve.',
 
     'aboutus_head' => 'Sobre',
-
+    'try_it' => 'Atreve-te!',
     'aboutus_text' => 'A Nauticdrive é uma empresa do ramo marítimo-turístico, presente na praia da Rocha Baixinha , desde 2014, dedicada à prática de diversões e desportos náuticos.<br><br> Tem como principal ambição ser referência e preferência no sector da actividade, tendo como factores-chave, a experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.<br><br> Para isso, conta com uma equipa profissional e qualificada, onde o cliente é o foco no serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
 
     'testimonial' => 'Testemunhos',

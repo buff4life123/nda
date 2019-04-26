@@ -179,10 +179,11 @@ return array(
     'h3_2_head' =>'Experience cruising offshore with',
     'h3_2_sub_head' => 'nauticDrive Boat tours',
     'h3_2_txt' => 'Explore the diverse beauty of this unique coastline and visit the fascinating caves, pristine beaches and dramatic rock formations, culminating with the most stunning of all, Benagil beach cave. Experience this true natural wonder, ranking as one of the worlds top 10 caves.',
-     'h3_3_head'=>'Welcome to Algarve',
+     'h3_3_head'=>'TRY IT!!',
      'h3_3_txt' => 'nauticDrive Tours provides exceptional Algarve Boat Trips. Visit the Benagil Cave, from Portimao and experience one of the best things to do in Albufeira and the whole Algarve, Portugal. Transport & Drinks included.',
 
     'aboutus_head' => 'About',
+    'try_it' => 'Try it!!',
     'aboutus_text' => 'Nauticdrive is a marine-tourism company, located in the beach of Rocha Baixinha, since 2014, dedicated to the practice of amusements and water sports. <br> <br> Its main ambition is to be reference and preference in the sector of the activity, having as key factors, the appropriate experience over the past years, technical knowledge and the ability to innovate. <br> <br> In order to do this, they count with a professional and qualified team, where the customer is the focus on the service provided and with permanent concern for their well-being and safety.',
 
     'testimonial' => 'Testimonial',

@@ -606,6 +606,16 @@ body {
   flex: 1;
 }
 
+.instagram {
+  background-color: rgba(0, 71, 179, 0.7);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+
+}
+
 .rodape-logo-atlantik-morning {
   display: block;
   width: 100%;
@@ -768,6 +778,18 @@ body {
   font-family: Barlow, sans-serif;
   color: rgba(0, 71, 179, 1);
   font-size: 90px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 5px;
+}
+
+.inst-head {
+  margin-top: 0px;
+
+  font-family: Barlow, sans-serif;
+  color: rgba(255, 255, 255, 1);
+  font-size: 40px;
   font-style: normal;
   font-weight: 700;
   text-align: center;
@@ -1011,6 +1033,8 @@ body {
   font-size: 16px;
   font-weight: 500;
   text-align: center;
+  width:100%;
+  height:100%;
 }
 
 .div-block-7 {
@@ -2311,7 +2335,7 @@ body {
   width: 40px;
   height: 40px;
   margin-right: 10px;
-  background-image: url('../images/fb-01.svg'); 
+  /* background-image: url('../images/fb-01.svg');  */
   background-position: 50% 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2888,6 +2912,14 @@ body {
 .slide-about {
   height: 550px;
   background-image: url('../images/yate.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-instagram {
+  height: 100%;
+  /* background-image: url('../images/yate.png'); */
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;

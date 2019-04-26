@@ -463,9 +463,9 @@ about_us:
     path: /about-us
     controller: App\Controller\FrontendController::aboutUs
 
-tour:
-    path: /tour/{id}/{text}
-    controller: App\Controller\FrontendController::tour
+activity:
+    path: /activity/{id}/{text}
+    controller: App\Controller\FrontendController::activity
 
 
 page_detail:

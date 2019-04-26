@@ -12,44 +12,34 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use EmailValidator\EmailValidator;
 use Symfony\Component\Finder\Finder;
+use App\Service\ExperienceApi;
 
 class FrontendController extends AbstractController
 {
 	private $session;
-	
-	private $exp_api_key = 'ab09f4752091f568b0f3f30fd8dcf544c242fe20';
-
-	private $url_api_key = 'https://admin.experienceware.pt/';
 
 	public function __construct(SessionInterface $session)
 	{
        $this->session = $session;
 	}
 
-    public function home(Request $request)
+    public function home(Request $request, ExperienceApi $experience)
     {
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
-		$ch = curl_init();
-		$url = $this->url_api_key.'api/'.$this->exp_api_key.'/products/'.$request->getLocale();
-    	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    	curl_setopt($ch, CURLOPT_URL, $url);
-    	$p = curl_exec($ch);
-    	curl_close($ch);
-		$curl_response = json_decode($p);
-		
-		$social_network_icons = $this-> fileFinder("../public/images/iconss");
+		$products = $experience->getProducts($request->getLocale());
+
+		$social_network_icons = $this-> fileFinder("../public/images/icons");
 		$header_slider_items  = $this-> fileFinder("../public/images/headerSlider");
 
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
 			'company' => $company,
-			'products' => $curl_response,
 			'social_network_icons' => $social_network_icons,
 			'header_slider_items'  => $header_slider_items,
-			'exp_api_key' => $this->exp_api_key, 
-			'url_api_key' => $this->url_api_key));
+			'products' => $products['products'],
+			'exp_api_key' => $products['key'],
+			'url_api_key' => $products['url']));
     }
 
     public function aboutUs(Request $request)
@@ -62,29 +52,19 @@ class FrontendController extends AbstractController
 		));
     }
 
-	function tour($id, $text, Request $request)
+	function activity($id, $text, Request $request,  ExperienceApi $experience)
 	{
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
-
-    	$ch = curl_init();
-		$url = $this->url_api_key.'api/'.$this->exp_api_key.'/product/'.$id.'/'.$request->getLocale();
-    	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    	curl_setopt($ch, CURLOPT_URL, $url);
-    	$p = curl_exec($ch);
-    	curl_close($ch);
-    	$curl_response = json_decode($p);
-		
+		$products = $experience->getProduct($request->getLocale(), $id);
 		
 
-    	return $this->render('index/tour.html.twig', array(
-			'page'=> 'tour',
+    	return $this->render('index/activity.html.twig', array(
+			'page'=> 'activity',
 			'company' => $company,
-    		'products' => $curl_response,
-    		'exp_api_key' => $this->exp_api_key, 
-			'url_api_key' => $this->url_api_key,
-    		'text' => 'ultimate_tour'));
+			'products' => $products['products'],
+			'exp_api_key' => $products['key'],
+			'url_api_key' => $products['url']));
 
 	}
 
@@ -297,9 +277,13 @@ class FrontendController extends AbstractController
 	
 	public function sendEmail(Request $request, \Swift_Mailer $mailer, TranslatorInterface $translator)
 	{
-                    
+			
+		$em = $this->getDoctrine()->getManager();
+		$company = $em->getRepository(Company::class)->find(1);
+
         $err = array();
-        $locale = $request->getlocale();
+		$locale = $request->getlocale();
+		$host = $request->getHost();
         
         //IF FIELDS IS NULL PUT IN ARRAY AND SEND BACK TO USER
         $request->request->get('contact_name') ? $name = $request->request->get('contact_name') : $err[] = 'contact_name';
@@ -333,17 +317,17 @@ class FrontendController extends AbstractController
         }
         else
 		{
-			$transport = (new \Swift_SmtpTransport($_ENV['EMAIL_SMTP'], $_ENV['EMAIL_PORT'], $_ENV['EMAIL_CERTIFICADE']))
-            ->setUsername($_ENV['EMAIL'])
-            ->setPassword($_ENV['EMAIL_PASS']);
+			$transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
+            ->setUsername($company->getEmail())
+            ->setPassword($company->getEmailPass());
 		
 			$mailer = new \Swift_Mailer($transport);
 						
 			$subject = $translator->trans('page_detail.contacts.form.subject');
 						
 			$message = (new \Swift_Message($subject))
-            ->setFrom([$_ENV['EMAIL'] => $_ENV['EMAIL_USERNAME']])
-            ->setTo([$request->request->get('contact_email') => $request->request->get('contact_name'), $_ENV['EMAIL'] => $_ENV['EMAIL_USERNAME'] ])
+            ->setFrom([$company->getEmail() => $company->getName()])
+            ->setTo([$request->request->get('contact_email') => $request->request->get('contact_name'), $company->getEmail() => $company->getName() ])
             ->addPart($subject, 'text/plain')
             ->setBody(
                 $this->renderView(
@@ -353,7 +337,7 @@ class FrontendController extends AbstractController
                         'email' => $email,
                         'telephone' => $telephone,
                         'message' => $information,
-                        'logo' => '/assets/images/logo-branco-seasiren-01.svg'
+                        'logo' => 'https://'.$host.'/images/'.$company->getLogo()
                     )
                 ),
                 'text/html'

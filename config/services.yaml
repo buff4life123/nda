@@ -112,7 +112,8 @@ services:
         arguments:
             - '%banner_images_directory%'
 
-
+    App\Service\ExperienceApi:
+        public: true
 
 security:
     encoders:

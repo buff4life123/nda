@@ -12,7 +12,7 @@
         {%for name in social_network_icons %}
             {% if company.getLinksActive[loop.index0] == true %}
                 <div class="social-media-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinks[loop.index0]}}')">
-                    <div class="social-media-ico" style="background-image: url(../images/iconss/{{name}})"></div>
+                    <div class="social-media-ico" style="background-image: url(../images/icons/{{name}})"></div>
 
                     <div class="in-txt">
                         <div class="text-block-13">{{icon_text[loop.index0]}}</div>
@@ -59,7 +59,14 @@
                     <div class="slider-item w-slide" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url(../images/headerSlider/{{name}})">
                         <div class="div-block-5 w-clearfix">
                             <div class="free-transport-ini-pt"></div>
-                            <div class="destaque-slogan-seas1"></div>
+                            <div class="destaque-slogan-seas1">
+                                <h1 class="heading-6">{% trans %}h3_3_head{%endtrans%}</h1>
+                                {# <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1> #}
+                                {# <p class="paragraph-5">{% trans %}h3_3_txt{%endtrans%}</p> #}
+                                <a href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a>
+                            </div>
+                                
+                                    
                         </div>
                     </div>
                 {% endfor %}
@@ -86,7 +93,8 @@
                             <div class="w3-col l4 m12 s12" data-ix="new-interaction" style="padding-bottom:24px">
 
                                 <div class="w3-white w3-card w3-border w3-round-large">
-                                    <a href="{{path('tour', {id:product.id, text:'ultimate_tour'}) }}" style="text-decoration:none">
+                                    {% set text = product.title|replace({' ': '-'}) %}
+                                    <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
                                         {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
                                         <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div>
 
@@ -142,7 +150,8 @@
                         <div class="div-block-7">
                             <h2 class="heading-8">{{product.title}}</h2>
                             <p class="paragraph-6 block-with-text">{{product.to_do}}</p>
-                            <a href="{{path('tour', {id:product.id, text:'ultimate_tour'}) }}" class="button-slider-1 w-button">{%trans%}more_info{%endtrans%}</a>
+                            {% set text = product.title|replace({' ': '-'}) %}
+                            <a href="{{path('activity', {id:product.id, text:text}) }}" class="button-slider-1 w-button">{%trans%}more_info{%endtrans%}</a>
                         </div>
                     </div>
       
@@ -164,9 +173,9 @@
 
         {#aboutus________________________________________________________________________________________________________________________________________________________________#}
         <div class="txt-intro-tours">
-            <h1 class="heading-4">{{company.name}}</h1>
-            <h3 class="heading-5">{% trans %}aboutus_head{%endtrans%}</h3>
-            <p class="paragraph-4">{% trans %}aboutus_text{%endtrans%}</p>
+            <h1 class="heading-4">{% trans %}activities{%endtrans%}</h1>
+            <h3 class="heading-5">{% trans %}try_it{%endtrans%}</h3>
+  
         </div>
 
         {#all activities________________________________________________________________________________________________________________________________________________________________#}
@@ -181,7 +190,8 @@
 
                             <div class="w3-col l4 m6 s12" data-ix="new-interaction" style="padding-bottom:24px">
                                 <div class="w3-white w3-card w3-border w3-round-large">
-                                    <a href="{{path('tour', {id:product.id, text:'ultimate_tour'}) }}" style="text-decoration:none">
+                                    {% set text = product.title|replace({' ': '-'}) %}
+                                    <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
                                         {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
                                         <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div>
                                         <div class="w3-row-padding" style="height:142px!important">
@@ -284,8 +294,8 @@
                         <label class="contact_message w3-text-red w3-hide w3-right"></label>
                         <textarea class="w3-large w3-input w3-round w3-border" rows="5" id="contact_message" name="contact_message" placeholder="{%trans%}message{%endtrans%}"></textarea>
 
-                        <div class="w3-padding book-now-novo ">
-                            <span class="text-block-8" id="contact-submit" onclick="formContact()">{%trans%}submit{%endtrans%}</span>
+                        <div class="w3-padding book-now-novo" onclick="formContact()">
+                            <span class="text-block-8" id="" >{%trans%}submit{%endtrans%}</span>
                         </div>
 
                         <div class="w3-padding-large pull-left">
@@ -297,6 +307,18 @@
             </div>
         </div>
 
+        <div> 
+       <!-- InstaWidget -->
+<!-- InstaWidget -->
+<div class="bg-instagram">
+<div class="instagram">
+    <br>
+    <div class="inst-head">{{company.name}} INSTAGRAM</div>
+    <br>
+<!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+<iframe src="//lightwidget.com/widgets/38e82cea633050a0a10b5b988816dbbc.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+</div>
+</div>
         {#FOOTER________________________________________________________________________________________________________________________________________________________________#}
         <div class="footer">
 
@@ -316,16 +338,21 @@
                             info@nauticdrive-algarve.com</div>
                     </div>
                 </div>
+                
                 <div class="footer-dir">
-                    <div class="info-boarding"></div>
+                    <div class="info-boarding">
+
+                    </div>
                 </div>
             </div>
+
+
 
             <div class="icones-social">
                 <div class="text-block-19">{%trans%}follow_social_network{%endtrans%}</div>
                 {%for name in social_network_icons %}
                     {% if company.getLinksActive[loop.index0] == true %}
-                        <div class="icone-footer w-inline-block" onclick="openWindow('{{company.getLinks[loop.index0]}}')"></div>
+                        <div class="icone-footer w-inline-block" style="background-image: url(../images/icons/{{name}})" onclick="openWindow('{{company.getLinks[loop.index0]}}')"></div>
                     {%endif %}
                 {% endfor %}
             </div>
@@ -337,12 +364,51 @@
 
         </div>
 
+        <script>
+                function formContact() {
+                    $('.w3-text-red.w3-right').addClass('w3-hide');
+                    $('.w3-overlay').show()
+                    setTimeout(function () {
+                        $.ajax({
+                            url: "{{ path('send_email') }}",
+                            type: "POST",
+                            data: $('#formContact').serialize(),
+                            success: function (data) {
+                                $('.w3-overlay').hide()
+                                if (data.status == 1) {
+                                    $('.contact_success').removeClass('w3-hide').html('{% trans %}page_detail.contacts.form.success{% endtrans %}');
+                                    setTimeout(function () {
+                                        $('.contact_success').addClass('w3-hide')
+                                    }, 10000);
+                                } else if (data.status == 0) {
+                                    for (var k in data.data)
+                                        $('.' + data.data[k]).removeClass('w3-hide').html('{% trans %}page_detail.contacts.form.required{% endtrans %}');
+                
+                
+                
+                                } else {
+                                    for (var k in data.data)
+                                        $('.' + data.data[k]).removeClass('w3-hide').html('{% trans %}page_detail.contacts.form.invalid{% endtrans %}');
+                
+                
+                
+                                }
+                            },
+                            error: function (data) {
+                                $('.w3-overlay').hide()
+                                $('#modal-error').removeClass('w3-hide')
+                            }
+                        })
+                    }, 500)
+                }
+                        </script>
     {% endblock body %}
 
     {% block javascripts %}
         <script src="https://maps.googleapis.com/maps/api/js?key={{company.GoogleMapsApiKey}}"></script>
         <script src='js/googleMaps.js'></script>
         <script src='js/main.js'></script>
-        <script src='js/formContact.js'></script>
         <script src="js/webflow.js" type="text/javascript">
     {% endblock %}
+
+    

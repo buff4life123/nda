@@ -28,10 +28,14 @@ use Money\Money;
 use App\Entity\TermsConditions;
 /*https://packagist.org/packages/inacho/php-credit-card-validator*/
 use Inacho\CreditCard;
-
+use App\Service\ExperienceApi;
 
 class HomeController extends AbstractController
 {
+    public function schedulesPrices(Request $request, ExperienceApi $experience)
+    {
+       $products = $experience->getProducts($request->getLocale());
+    }
 
     private $session;
     

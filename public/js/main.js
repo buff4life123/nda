@@ -4,7 +4,7 @@ function getFullYear() {
     return new Date().getFullYear();
 }
 
-console.log("ola");
+
 document.getElementById("footer-fullyear").innerHTML +=  " " + getFullYear(); 
 
 $( document ).ready(function() {

@@ -1,0 +1,38 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body style="padding:64px 8px;background:#EEE;margin:0px;font-family:Lato,sans-serif">
+<div style="background: #fdf5e6;border: 1px solid #999;max-width:500px; margin:0 auto">
+<div style="padding:12px 8px">	
+<img src='{{ logo }}' width=80 style="margin-top: -52px">
+<h4>Olá {{ payer_name }}, assim que nos for possível, entraremos em contacto consigo.</h4>
+<h5>{% trans %}private_detail.gift_voucher.text_list.payer.title{% endtrans %}:</h5>
+<hr>
+<p>
+Nome: {{ payer_name }}<br>
+Apelido: {{ payer_surname }}<br>
+Email: {{ payer_email }}<br>
+Telefone: {{ payer_telephone }}<br>
+</p>
+<h5>{% trans %}private_detail.gift_voucher.text_list.destiny.title{% endtrans %}:</h5>
+<hr>
+<p>
+Nome: {{ destiny_name }}<br>
+Apelido: {{ destiny_surname }}<br>
+Email: {{ destiny_email }}<br>
+Telefone: {{ destiny_telephone }}<br>
+</p>
+<h5>{% trans %}private_detail.gift_voucher.text_list.payer.experiences_title{% endtrans %}:</h5>
+<hr>
+<p>
+Numero de Pessoas: {{ number_persons }}<br>
+Passeio: {{ experience }}<br>
+Observações: {{ observations }}<br>
+</p>
+<br>
+<p>
+Obrigado, Seasiren Tours.
+</p>
+</div>
+</div>
+
+</body>
