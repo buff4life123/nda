@@ -117,6 +117,7 @@ return array(
     'about_us' => 'About us',
     'gdpr' => 'G.D.P.R.',
     'about_title' => 'About Us',
+    'follow_us' => 'Follow us on Instagram',
     'about_subtitle' => 'Future Projects',
     'about_text' => 'Nauticdrive is a marine-tourism company, located in the beach of Rocha Baixinha, since 2014, dedicated to the practice of amusements and water sports. <br> <br> Its main ambition is to be reference and preference in the sector of the activity, having as key factors, the appropriate experience over the past years, technical knowledge and the ability to innovate. <br> <br> In order to do this, they count with a professional and qualified team, where the customer is the focus on the service provided and with permanent concern for their well-being and safety.',
     'future' =>  'NauticDrive`s main ambition for 2019 season is to provide their costumers with a new attraction.After analyzing the evolution of the adherent zone, nauticdrive sees a new boat as a value.<br><br> A boat suitable for all types of customers, where you can adapt to all ages.<br><br> This boat is fast and will be directed to sightseeing and private tours of our wonderful coast, it will be a value to the company, taking into account that this will be your premium service.<br><br> Adapting a different nautical service for the well-being of the customer and observation of the surrounding nature will do without doubt a differentiated service on the sand market.',
@@ -184,6 +185,7 @@ return array(
 
     'aboutus_head' => 'About',
     'try_it' => 'Try it!!',
+    'about_activities' => 'Our activities are composed of motorized, non-motorized and luxurious activities',
     'aboutus_text' => 'Nauticdrive is a marine-tourism company, located in the beach of Rocha Baixinha, since 2014, dedicated to the practice of amusements and water sports. <br> <br> Its main ambition is to be reference and preference in the sector of the activity, having as key factors, the appropriate experience over the past years, technical knowledge and the ability to innovate. <br> <br> In order to do this, they count with a professional and qualified team, where the customer is the focus on the service provided and with permanent concern for their well-being and safety.',
 
     'testimonial' => 'Testimonial',
@@ -632,7 +634,7 @@ Please feel free to contact us anytime.',
                 'text_2' => 'The tour will start downstream Arade river, passing by the picturesque village of Ferragudo and its old Castle till one of the best beach in Europe "Marinha Beach". Soon we reach the open ocean, we will explore the finest caves and beaches of Portugal, incluind Benagil Cave.',
                 'text_3' => 'Usually last 2-3 hours, however can be customized for our guests preference. Our speed boat is capable of holding 8 guests comfortably without need wear life-jacket, relish comforts like a WC, padded sundeck, retractable shade and Wi-Fi.',
                 'text_4' => 'For additional info please contact us by phone or email.',
-            ),
+            )
             
         ),
     ),

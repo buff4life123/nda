@@ -248,9 +248,9 @@ body {
   height: 300px;
   padding-left: 20px;
   /* background-image: url('../images/logo_nautic.png'), linear-gradient(180deg,  #1a1a1a, transparent);  */
-  /* background-position: 50% 50%, 0px 0px;
+  background-position: 50% 50%, 0px 0px;
   background-size: 240px, auto;
-  background-repeat: no-repeat, repeat; */
+  background-repeat: no-repeat, repeat;
 }
 
 .navbar {
@@ -362,31 +362,6 @@ body {
   background-image: linear-gradient(180deg, #fff, #fff);
 }
 
-.seasiren-conteudo-tours {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 96%;
-  max-width: 1180px;
-  margin-right: auto;
-  margin-left: auto;
-  padding-top: 25px;
-  padding-bottom: 19px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-}
 
 .tour-1 {
   position: relative;
@@ -607,7 +582,7 @@ body {
 }
 
 .instagram {
-  background-color: rgba(0, 71, 179, 0.7);
+  /* background-color: rgba(0, 71, 179, 0.7); */
   top: 0;
   left: 0;
   width: 100%;
@@ -788,7 +763,7 @@ body {
   margin-top: 0px;
 
   font-family: Barlow, sans-serif;
-  color: rgba(255, 255, 255, 1);
+  color: black;
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
@@ -801,7 +776,7 @@ body {
   font-family: Barlow, sans-serif;
   font-weight: 500;
   text-align: center;
-  color:   #ff0055;
+  color:   black;
 }
 
 .paragraph-4 {
@@ -1184,30 +1159,7 @@ body {
   align-items: flex-start;
 }
 
-.seasiren-conteudo-tours-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 96%;
-  max-width: 1180px;
-  margin: 19px auto 0px;
-  padding-top: 25px;
-  padding-bottom: 19px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-}
+
 
 .tour-ss1 {
   position: relative;
@@ -1327,25 +1279,6 @@ body {
   position: relative;
 }
 
-.social-media-seasiren {
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  z-index: 9999;
-  width: 200px;
-  margin-top: 81px;
-  margin-bottom: 927px;
-  padding: 7px;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#000));
-  background-image: linear-gradient(180deg, #000, #000);
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-}
-
 .div-block-11 {
   height: 20%;
 }
@@ -1443,17 +1376,17 @@ body {
 }
 
 .socialmedia-links {
-  position: fixed;
+position: fixed;
   top: 102px;
   right: 0px;
-  bottom: auto;
+  bottom: 0px;
   z-index: 9999;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   width: 165px;
-  height: auto;
+  height: 200px;
   margin-top: 0px;
   margin-bottom: 0px;
   padding-top: 7px;
@@ -1471,6 +1404,8 @@ body {
   border-bottom-left-radius: 10px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .63)), to(rgba(0, 0, 0, .63)));
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .63), rgba(0, 0, 0, .63));
+  transform: translateX(118px) translateY(0px) translateZ(0px);
+
 }
 
 .div-block-13 {
@@ -1597,7 +1532,6 @@ body {
   width: 25%;
   height: 100%;
   float: left;
-  /* background-image: url('../images/iconss/fb-01 - Cópia (2).svg');  */
   background-position: 50% 50%;
   background-size: auto 85%;
   background-repeat: no-repeat;
@@ -1704,8 +1638,7 @@ body {
 .brand-2 {
   width: 250px;
   height: 200px;
-  background-image: url('../images/logo-branco-seasiren-01.svg'), -webkit-gradient(linear, left top, left bottom, from(#000), to(transparent));
-  background-image: url('../images/logo-branco-seasiren-01.svg'), linear-gradient(180deg, #000, transparent);
+
   background-position: 50% 50%, 0px 0px;
   background-size: 80%, auto;
   background-repeat: no-repeat, repeat;
@@ -1977,7 +1910,7 @@ body {
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
-  background-image: url('../images/mais-verde-01.svg');
+  /* background-image: url('../images/mais-verde-01.svg'); */
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2271,11 +2204,11 @@ body {
   -ms-flex: 0 auto;
   flex: 0 auto;
   border-bottom: 1px solid #000;
-  background-image: url('../images/logo_nautic.svg');
+  /* background-image: url('../images/logo_nautic_trans.png'); */
   background-position: 0px 50%;
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: rgb(160, 160, 160);
+  /* background-color: rgb(160, 160, 160); */
   background-position: center; 
 }
 
@@ -2501,8 +2434,7 @@ body {
 .slide-topo-2 {
   height: 950px;
   border-bottom: 1px none #fff;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .57)), color-stop(33%, transparent)), url('../images/seasiren-algarve-boat-tours.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url('../assets/images/seasiren-algarve-boat-tours.jpg');
+
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -2918,11 +2850,14 @@ body {
 }
 
 .bg-instagram {
-  height: 100%;
+  /* height: 100%; */
   /* background-image: url('../images/yate.png'); */
-  background-position: 50% 50%;
+  /* background-position: 50% 50%;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+  /* border-style: solid; 
+  border-color: #0047b3; */
+  background: #fff;
 }
 
 .section-2-about {
@@ -3578,40 +3513,8 @@ body {
   align-items: stretch;
 }
 
-.seasiren-conteudo-tours-3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 96%;
-  max-width: 1180px;
-  margin: 19px auto 0px;
-  padding: 25px 0px 19px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-}
 
-.imagem-tour-7 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/seasirenkayak.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
+
 
 .imagem-tour-8 {
   display: block;
@@ -4086,10 +3989,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     padding-right: 65px;
     padding-left: 65px;
   }
-  .seasiren-conteudo-tours-2 {
-    margin-top: 10px;
-    padding-top: 5px;
-  }
+
   .tour-ss1 {
     height: 480px;
     margin-right: 10px;
@@ -4290,10 +4190,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     background-position: 0px 0px, 50% 50%;
     background-size: auto, cover;
   }
-  .seasiren-conteudo-tours-3 {
-    margin-top: 10px;
-    padding-top: 5px;
-  }
+
   .skipper {
     display: block;
     width: 100%;
@@ -4647,19 +4544,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     -ms-flex-align: stretch;
     align-items: stretch;
   }
-  .seasiren-conteudo-tours-2 {
-    margin-top: 0px;
-    padding-top: 5px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: stretch;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-  }
+
   .tour-ss1 {
     position: relative;
     margin-right: 55px;
@@ -4989,19 +4874,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .list-item-16 {
     text-align: center;
   }
-  .seasiren-conteudo-tours-3 {
-    margin-top: 0px;
-    padding-top: 5px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: stretch;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-  }
+
   .imagem-tour-7 {
     height: 200px;
   }
@@ -5209,21 +5082,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     height: auto;
     padding-bottom: 17px;
   }
-  .seasiren-conteudo-tours {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-  }
+
   .tour-1 {
     top: -45px;
     margin-top: 10px;
@@ -5415,21 +5274,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     -ms-flex-align: start;
     align-items: flex-start;
   }
-  .seasiren-conteudo-tours-2 {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-  }
+
   .tour-ss1 {
     display: block;
     width: 90%;
@@ -5835,21 +5680,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .slide-5-1 {
     height: 800px;
   }
-  .seasiren-conteudo-tours-3 {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-  }
+
   .imagem-tour-7 {
     height: 200px;
   }
@@ -5959,53 +5790,5 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   text-transform: uppercase
 }
 
-/* styles for '...' */
-.block-with-text {
-  /* hide text if it more than N lines  */
-  overflow: hidden;
-  /* for set '...' in absolute position */
-  position: relative;
-  /* use this value to count block height */
-  line-height: 1.2em;
-  /* max-height = line-height (1.2) * lines max number (3) */
-  max-height: 3.6em;
-  /* fix problem when last visible word doesn't adjoin right side  */
-  text-align: center;
-  /* place for '...' */
-  margin-right: -1em;
-  padding-right: 1em;
-}
-/* create the ... */
-.block-with-text:before {
-  /* points in the end */
-  content: '...';
-  /* absolute position */
-  position: absolute;
-  /* set position to right bottom corner of block */
-  right: 0;
-  bottom: 0;
-}
-/* hide ... if we have text, which is less than or equal to max lines */
-.block-with-text:after {
-  /* points in the end */
-  content: '';
-  /* absolute position */
-  position: absolute;
-  /* set position to right bottom corner of text */
-  right: 0;
-  /* set width and height */
-  width: 1em;
-  height: 1em;
-  margin-top: 0.2em;
-  /* bg color = bg color under block */
-  background: transparent;
-}
-.w3-row-padding,
-.w3-row-padding>.w3-half,
-.w3-row-padding>.w3-third,
-.w3-row-padding>.w3-twothird,
-.w3-row-padding>.w3-threequarter,
-.w3-row-padding>.w3-quarter,
-.w3-row-padding > .w3-col {
-  padding: 0 12px
-}
+
+

@@ -53,6 +53,7 @@ return array(
 
     'aboutus_head' => 'Sobre',
     'try_it' => 'Atreve-te!',
+    'about_activities' => 'As nossas atividades são compostas por actividades motorizadas, não motorizadas e de luxo',
     'aboutus_text' => 'A Nauticdrive é uma empresa do ramo marítimo-turístico, presente na praia da Rocha Baixinha , desde 2014, dedicada à prática de diversões e desportos náuticos.<br><br> Tem como principal ambição ser referência e preferência no sector da actividade, tendo como factores-chave, a experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.<br><br> Para isso, conta com uma equipa profissional e qualificada, onde o cliente é o foco no serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
 
     'testimonial' => 'Testemunhos',
@@ -179,8 +180,9 @@ return array(
     'gdpr' => 'R.G.P.D.',
     'about_title' => 'Sobre nós',
     'about_subtitle' => 'Projetos Futuros',
+    'follow_us' => 'Siga-nos no Instagram',
     'about_text' => 'A Nauticdrive é uma empresa do ramo marítimo-turístico, presente na praia da Rocha Baixinha , desde 2014, dedicada à prática de diversões e desportos náuticos.<br><br> Tem como principal ambição ser referência e preferência no sector da actividade, tendo como factores-chave, a experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.<br><br> Para isso, conta com uma equipa profissional e qualificada, onde o cliente é o foco no serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
-    'future'=> 'A nauticdrive tem como principal ambição para época 2019 proporcionar aos seus clientes uma nova atração .<br><br> Após analise da evolução da zona aderente ,a nauticdrive vê como uma mais valia uma embarcação nova.<br><br> Uma embarcação adequada a todo tipo de cliente, onde se prove adaptar a todas as idades. Esta embarcação é rápida será direcionada para passeios turísticos e privados para observação do meio ambiente da nossa costa maravilhosa , será uma mais valia para a empresa tendo em conta que este serviço será sem duvida o seu serviço premium .<br><br> Adaptar um serviço náutico diferente para o bem estar do cliente e observação da natureza envolvente fará sem duvida um serviço diferenciado no mercado na areia.',
+    'future'=> 'A nauticdrive tem como principal ambição para época 2019 proporcionar aos seus clientes uma nova atração .<br><br> Após analise da evolução da zona aderente, a nauticdrive vê como uma mais valia uma embarcação nova.<br><br> Uma embarcação adequada a todo tipo de cliente, onde se prove adaptar a todas as idades. Esta embarcação é rápida será direcionada para passeios turísticos e privados para observação do meio ambiente da nossa costa maravilhosa , será uma mais valia para a empresa tendo em conta que este serviço será sem duvida o seu serviço premium .<br><br> Adaptar um serviço náutico diferente para o bem estar do cliente e observação da natureza envolvente fará sem duvida um serviço diferenciado no mercado na areia.',
      'key_title' => 'Factor-Chave',
     'key_text' => 'Experiência adequirida ao longo dos últimos anos, o conhecimento técnico e a capacidade de inovação.',
      'focus_title' => 'Foco',
