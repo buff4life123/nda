@@ -484,7 +484,7 @@ send_email:
     path: /send-email/
     controller: App\Controller\FrontendController::sendEmail
    
-send_voucher:
-    path: /send-voucher/
-    controller: App\Controller\FrontendController::sendVoucher
+# send_voucher:
+#     path: /send-voucher/
+#     controller: App\Controller\FrontendController::sendVoucher
    

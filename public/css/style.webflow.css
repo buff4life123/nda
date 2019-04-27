@@ -3867,9 +3867,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     left: 0px;
     background-color: #000;
   }
-  .nauticDrive {
-    padding-top: 31px;
-  }
+
   .tour-1 {
     margin-right: 10px;
     margin-left: 10px;
@@ -5100,18 +5098,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .map {
     height: 400px;
   }
-  .nauticDrive-tours-wrapper-form {
-    margin-top: 21px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-  }
+
   .txt-contacto {
     width: 90%;
   }
