@@ -30,15 +30,30 @@ class Company
     */
     private $address;
     /**
+    * @Assert\NotBlank(message="ADDRESS2")
+    * @ORM\Column(type="string", length=50, name="address2")
+    */
+    private $address2;
+    /**
     * @Assert\NotBlank(message="P_CODE")
     * @ORM\Column(type="string", length=10, name="p_code")
     */
     private $p_code;
     /**
+    * @Assert\NotBlank(message="P_CODE2")
+    * @ORM\Column(type="string", length=10, name="p_code2")
+    */
+    private $p_code2;
+    /**
     * @Assert\NotBlank(message="CITY")
     * @ORM\Column(type="string", length=10, name="city")
     */
     private $city;
+    /**
+    * @Assert\NotBlank(message="CITY2")
+    * @ORM\Column(type="string", length=10, name="city2")
+    */
+    private $city2;
     /**
     *@ORM\ManyToOne(targetEntity="Countries") */
     private $country;
@@ -64,10 +79,27 @@ class Company
     * @ORM\Column(type="string", length=4, name="email_certificade")
     */
     private $email_certificade;
+
+    /**
+    * @Assert\NotBlank(message="EMAIL2")
+    * @ORM\Column(type="string", length=30, name="email2")
+    */
+    private $email2;
+    /**
+    * @Assert\NotBlank(message="EMAIL3")
+    * @ORM\Column(type="string", length=30, name="email3")
+    */
+    private $email3;
+
     /**
      * @ORM\Column(type="string", length=20, name="telephone", nullable=true)
      */
     private $telephone;
+    /**
+     * @ORM\Column(type="string", length=20, name="telephone2", nullable=true)
+     */
+    private $telephone2;
+
     /**
     * @ORM\Column(type="text", name="meta_keywords", nullable=true)
     */
@@ -89,6 +121,11 @@ class Company
      * @Assert\NotBlank(message="COORDS_GOOGLE_MAPS")
      */
     private $coords_google_maps;
+        /**
+     * @ORM\Column(type="string", length=50, name="coords_google_maps2")
+     * @Assert\NotBlank(message="COORDS_GOOGLE_MAPS2")
+     */
+    private $coords_google_maps2;
     /**
      * @ORM\Column(type="string", length=50, name="google_maps_api_key")
      * @Assert\NotBlank(message="GOOGLE_MAPS_API_KEY")
@@ -213,6 +250,16 @@ class Company
         $this->address = str_replace("'","’",$address);
     }
 
+    public function getAddress2()
+    {
+        return $this->address2;
+    }
+
+    public function setAddress2($address2)
+    {
+        $this->address2 = str_replace("'","’",$address2);
+    }
+
     public function getCurrency()
     {
         return $this->currency;
@@ -233,6 +280,16 @@ class Company
         $this->p_code = str_replace("'","’",$p_code);
     }
 
+    public function getPCode2()
+    {
+        return $this->p_code2;
+    }
+
+    public function setPCode2($p_code2)
+    {
+        $this->p_code2 = str_replace("'","’",$p_code2);
+    }
+
     public function getCity()
     {
         return $this->city;
@@ -241,6 +298,16 @@ class Company
     public function setCity($city)
     {
         $this->city = str_replace("'","’",$city);
+    }
+
+    public function getCity2()
+    {
+        return $this->city2;
+    }
+
+    public function setCity2($city2)
+    {
+        $this->city2 = str_replace("'","’",$city2);
     }
 
     public function getCountry()
@@ -273,6 +340,25 @@ class Company
         $this->email_pass = $email_pass;
     }
 
+    public function getEmail2()
+    {
+        return $this->email2;
+    }
+
+    public function setEmail2($email2)
+    {
+        $this->email2 = str_replace("'","’",$email2);
+    }
+    public function getEmail3()
+    {
+        return $this->email3;
+    }
+
+    public function setEmail3($email3)
+    {
+        $this->email3 = str_replace("'","’",$email3);
+    }
+
     public function getTelephone()
     {
         return $this->telephone;
@@ -281,6 +367,16 @@ class Company
     public function setTelephone($telephone)
     {
         $this->telephone = str_replace("'","’",$telephone);
+    }
+
+    public function getTelephone2()
+    {
+        return $this->telephone2;
+    }
+
+    public function setTelephone2($telephone2)
+    {
+        $this->telephone2 = str_replace("'","’",$telephone2);
     }
 
     public function getFiscalNumber()
@@ -301,6 +397,17 @@ class Company
     public function setCoordsGoogleMaps($coords_google_maps)
     {
         $this->coords_google_maps = str_replace("'","’",$coords_google_maps);
+    }
+
+    
+    public function getCoordsGoogleMaps2()
+    {
+        return $this->coords_google_maps2;
+    }
+
+    public function setCoordsGoogleMaps2($coords_google_maps2)
+    {
+        $this->coords_google_maps2 = str_replace("'","’",$coords_google_maps2);
     }
 
     public function getGoogleMapsApiKey()

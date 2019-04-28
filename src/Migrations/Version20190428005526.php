@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190421220027 extends AbstractMigration
+final class Version20190428005526 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -23,7 +23,7 @@ final class Version20190421220027 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE booking CHANGE status status ENUM(\'pending\', \'canceled\', \'confirmed\')');
-        $this->addSql('ALTER TABLE company ADD link_tripadvisor VARCHAR(255) DEFAULT NULL, ADD link_tripadvisor_active TINYINT(1) DEFAULT \'0\' NOT NULL');
+        $this->addSql('ALTER TABLE company ADD coords_google_maps2 VARCHAR(50) NOT NULL');
         $this->addSql('ALTER TABLE logs CHANGE status status ENUM(\'update\', \'create\', \'delete\')');
     }
 
@@ -33,7 +33,7 @@ final class Version20190421220027 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE booking CHANGE status status VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE company DROP link_tripadvisor, DROP link_tripadvisor_active');
+        $this->addSql('ALTER TABLE company DROP coords_google_maps2');
         $this->addSql('ALTER TABLE logs CHANGE status status VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
     }
 }

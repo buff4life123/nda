@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190410160103 extends AbstractMigration
+final class Version20190427231814 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,12 +22,11 @@ final class Version20190410160103 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE admin (id INT NOT NULL, address VARCHAR(255) NOT NULL, nif VARCHAR(40) NOT NULL, location VARCHAR(255) NOT NULL, postal_code VARCHAR(10) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE super_user (id INT NOT NULL, address VARCHAR(255) NOT NULL, nif VARCHAR(40) NOT NULL, location VARCHAR(255) NOT NULL, postal_code VARCHAR(10) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE admin ADD CONSTRAINT FK_880E0D76BF396750 FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE super_user ADD CONSTRAINT FK_6160DF20BF396750 FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE user ADD role VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE company DROP FOREIGN KEY FK_4FBF094F3B7323CB');
+        $this->addSql('DROP TABLE phones');
         $this->addSql('ALTER TABLE booking CHANGE status status ENUM(\'pending\', \'canceled\', \'confirmed\')');
+        $this->addSql('DROP INDEX IDX_4FBF094F3B7323CB ON company');
+        $this->addSql('ALTER TABLE company ADD telephone VARCHAR(20) DEFAULT NULL, DROP phone_id');
         $this->addSql('ALTER TABLE logs CHANGE status status ENUM(\'update\', \'create\', \'delete\')');
     }
 
@@ -36,10 +35,11 @@ final class Version20190410160103 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE admin');
-        $this->addSql('DROP TABLE super_user');
+        $this->addSql('CREATE TABLE phones (id INT AUTO_INCREMENT NOT NULL, phone VARCHAR(20) DEFAULT NULL COLLATE utf8mb4_unicode_ci, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB COMMENT = \'\' ');
         $this->addSql('ALTER TABLE booking CHANGE status status VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE company ADD phone_id INT DEFAULT NULL, DROP telephone');
+        $this->addSql('ALTER TABLE company ADD CONSTRAINT FK_4FBF094F3B7323CB FOREIGN KEY (phone_id) REFERENCES phones (id)');
+        $this->addSql('CREATE INDEX IDX_4FBF094F3B7323CB ON company (phone_id)');
         $this->addSql('ALTER TABLE logs CHANGE status status VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE user DROP role');
     }
 }

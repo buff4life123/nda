@@ -51,13 +51,30 @@ class CompanyType extends AbstractType
                 'label' => 'address',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'address']
             ))
+            ->add('address2', TextType::class,
+            array(
+                'required' => true,
+                'label' => 'address2',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'address2']
+            ))
             ->add('p_code', TextType::class,
             array(
                 'required' => true,
                 'label' => 'postal_code',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'postal_code']
             ))
+            ->add('p_code2', TextType::class,
+            array(
+                'required' => true,
+                'label' => 'postal_code',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'postal_code']
+            ))
             ->add('city', TextType::class, array(
+                'required' => true,
+                'label' => 'city',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'city']
+            ))
+            ->add('city2', TextType::class, array(
                 'required' => true,
                 'label' => 'city',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'city']
@@ -72,19 +89,31 @@ class CompanyType extends AbstractType
             ->add('email', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Email',
+                'label' => 'Email 1',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email']
+            ))
+            ->add('email2', TextType::class,
+            array(
+                'required' => true,
+                'label' => 'Email 2',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email 2']
+            ))
+            ->add('email3', TextType::class,
+            array(
+                'required' => true,
+                'label' => 'Email 3',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email 3']
             ))
             ->add('email_smtp', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Email SMTP *',
+                'label' => 'Email 1 SMTP *',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email SMTP*']
             ))
             ->add('email_pass', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Email Pass *',
+                'label' => 'Email 1 Pass *',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email Pass *']
             ))
             ->add('email_port', IntegerType::class,
@@ -105,6 +134,12 @@ class CompanyType extends AbstractType
                 'label' => 'phone',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'phone']
             ))
+            ->add('telephone2', TextType::class,
+            array(
+                'required' => false,
+                'label' => 'phone2',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'phone2']
+            ))
             ->add('fiscal_number', IntegerType::class,
             array(
                 'required' => true,
@@ -113,8 +148,13 @@ class CompanyType extends AbstractType
             ))
             ->add('coords_google_maps', TextType::class, array(
                 'required' => true,
-                'label' => 'Google Maps Coords *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Google Maps Coords *']
+                'label' => 'Google Maps Coords 1 *',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Google Maps Coords 1 *']
+            ))
+            ->add('coords_google_maps2', TextType::class, array(
+                'required' => true,
+                'label' => 'Google Maps Coords 2 *',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Google Maps Coords 2 *']
             ))
             ->add('google_maps_api_key', TextType::class, array(
                 'required' => true,

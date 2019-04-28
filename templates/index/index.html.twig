@@ -266,7 +266,7 @@
         </div>
 
         {#GOOGLE MAPS________________________________________________________________________________________________________________________________________________________________#}
-        <div id="themap" class="map" data-company-name='{{company.name}}' data-coords="{{company.getCoordsGoogleMaps}}"></div>
+        <div id="themap" class="map" data-company-name='{{company.name}}' data-coords="{{company.getCoordsGoogleMaps}}" data-coords2="{{company.getCoordsGoogleMaps2}}"></div>
 
         {#CONTACT FORM________________________________________________________________________________________________________________________________________________________________#}
         <div class="form-contact" id="contact">
@@ -330,16 +330,19 @@
                     <div class="footer-esq w-clearfix">
                         <div class="logo-footer" style="background-image: url(../upload/gallery/{{company.getLogo}})"></div>
                         <div class="txt-info-footer">
-                            <div class="text-block-2">Praia da Rocha Baixinha (Falésia)  . Albufeira</div>
                             <div class="text-block-2">{{company.getAddress}}
                                 .
                                 {{company.getPCode}}
                                 {{company.getCity}}</div>
+                            <div class="text-block-2">{{company.getAddress2}}
+                                .
+                                {{company.getPCode2}}
+                                {{company.getCity2}}</div>
                             <div class="text-block-3">
-                                +351 968 767 638 | +351 968 469 784</div>
-                            <div class="text-block-4">Nauticdrive.fotos@gmail.com
-                                <br>Nauticdrive.reservas@gmail.com<br>
-                                info@nauticdrive-algarve.com</div>
+                                {{company.getTelephone}} | {{company.getTelephone2}}</div>
+                            <div class="text-block-4"> {{company.getEmail2}}
+                                <br>{{company.getEmail3}}<br>
+                                {{company.getEmail}}</div>
                         </div>
                     </div>
 

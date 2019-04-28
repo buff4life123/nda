@@ -2,13 +2,19 @@
 function myMap() {
   var mapCanvas = document.getElementById("themap")
   var companyName = mapCanvas.dataset.companyName;
+
   var coords  =  mapCanvas.dataset.coords;
   var coordsCenter = coords.split(",");
   const lat = parseFloat(coordsCenter[0]);
   const lon = parseFloat(coordsCenter[1]);
   var myCenter = new google.maps.LatLng(lat, lon);
+
+  var coords2  =  mapCanvas.dataset.coords2;
+  var coordsSplit2 = coords2.split(",");
+  const lat2 = parseFloat(coordsSplit2[0]);
+  const lon2 = parseFloat(coordsSplit2[1]);
   
- 
+
   
   var mapOptions = {
     center: myCenter,
@@ -46,7 +52,7 @@ function myMap() {
   var infowindow = new google.maps.InfoWindow({
 	content: companyName
   });
-  var markers = [[lat,lon], [37.078807,-8.120873520]];
+  var markers = [[lat,lon], [lat2, lon2]];
   var marker, i;
   for (i = 0; i < markers.length; i++) {  
 	marker = new google.maps.Marker({
