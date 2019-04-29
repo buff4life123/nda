@@ -42,11 +42,11 @@
                   <span onclick="getPrevPage()" class="text-block-8 btn-about-us">{% trans %}back_to_home{% endtrans %}</span>
                </div> #}
                <div class="text-block-21">{{company.name}}</div>
-               <h5 class="heading-18">{% trans %}about_title{% endtrans %}</h5>
-               <p class="paragraph-15">{% trans %}about_text{% endtrans %}
+               <h5 class="heading-18">{{about.name}}</h5>
+               <p id="aboutus-text" class="paragraph-15" data-aboutus-text="{{about.getRgpdHtml}}">
                </p>
-               <h6 class="aboutus-subtitle">{% trans %}about_subtitle{% endtrans %}</h5>
-               <p class="paragraph-15">{% trans %}future{% endtrans %}
+               <!-- <h6 class="aboutus-subtitle">{% trans %}about_subtitle{% endtrans %}</h5>
+               <p class="paragraph-15">{% trans %}future{% endtrans %} -->
                </p>
             </div>
          </div>

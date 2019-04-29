@@ -2890,7 +2890,9 @@ position: fixed;
   padding-top: 10px;
   font-family: Barlow, sans-serif;
   font-size: 16px;
-  text-align: center;
+  text-align: justify;
+  /* text-align-last: center; */
+  text-justify: inter-word;
 }
 
 .div-block-1about {
@@ -5770,6 +5772,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
 .text-block-8,
 .heading-8,
 .button-slider-1,
+.heading-4,
 .heading-5,
 .heading-2,
 .heading-3,

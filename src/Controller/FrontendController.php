@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Company;
+use App\Entity\AboutUs;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,9 +47,12 @@ class FrontendController extends AbstractController
 {		
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
+		$about = $em->getRepository(AboutUs::class)->find(1);
+
 		return $this->render('index/about_us.html.twig',  array(
 			'page' => 'about_us',
 			'company' => $company,
+			'about' => $about,
 		));
     }
 
