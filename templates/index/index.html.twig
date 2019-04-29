@@ -317,8 +317,13 @@
                     <div class="inst-head">{%trans%}follow_us{%endtrans%}</div>
                     <br>
                     <!-- LightWidget WIDGET -->
+                    <!-- <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+                    <iframe allowtransparency="true" class="lightwidget-widget" scrolling="no" src="//lightwidget.com/widgets/394fc45f331b5f57bbea00f5ac1f3cd8.html" style="width:100%;border:0;overflow:hidden;"></iframe> -->
+
+                    <!-- LightWidget WIDGET -->
                     <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-                    <iframe allowtransparency="true" class="lightwidget-widget" scrolling="no" src="//lightwidget.com/widgets/394fc45f331b5f57bbea00f5ac1f3cd8.html" style="width:100%;border:0;overflow:hidden;"></iframe>
+                    <iframe src="//lightwidget.com/widgets/f4112973c0a85a9b8c15089fb713c010.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+
 
 
                 </div>
@@ -347,7 +352,10 @@
                     </div>
 
                     <div class="footer-dir">
-                        <div class="info-boarding"></div>
+                        <div class="info-boarding">
+
+                                <div id="TA_selfserveprop952" class="TA_selfserveprop"><ul id="vLAhCUW6Ibc" class="TA_links Om9iRT830ZC"><li id="QZ1KBMJm4ISR" class="w2c1O9S"><a target="_blank" href="https://www.tripadvisor.pt/"><img src="https://www.tripadvisor.pt/img/cdsi/img2/branding/150_logo-11900-2.png" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=952&amp;locationId=13795619&amp;lang=pt_PT&amp;rating=true&amp;nreviews=4&amp;writereviewlink=true&amp;popIdx=false&amp;iswide=true&amp;border=false&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+                        </div>
                     </div>
                 </div>
 
@@ -360,13 +368,34 @@
                         {%endif %}
                     {% endfor %}
                 </div>
-
+             
                 <div class="footer-dir-local w-clearfix">
+                    <div class="text-block-5">
+                            <!-- <a href="#" data-toggle="modal" data-target="#termos-condicoes">
+                                    {%trans%}GDPR{%endtrans%} 
+                            </a> -->
+                    </div>
                     <div class="text-block-7" id="footer-fullyear">{{company.name}}
                     </div>
                 </div>
 
             </div>
+
+            <!-- MODAL Termos Utilização -->
+            <!-- <div class="modal fade" id="termos-condicoes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title text-center font-color" id="myModalLabel">  {%trans%}GDPR{%endtrans%} </h4>
+                            </div>
+                            <div class="modal-body"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-skin" data-dismiss="modal">  {%trans%}close{%endtrans%} </button>
+                            </div>
+                        </div>
+                    </div>
+            </div> -->
 
             <script>
                 function formContact() {
