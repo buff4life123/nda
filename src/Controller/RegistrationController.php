@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use App\Entity\User;
+
+use App\Form\AdminType;
+use App\Entity\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -17,8 +20,8 @@ class RegistrationController extends AbstractController
     public function userNew(/*Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer*/)
     {
         // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $user = new Admin();
+        $form = $this->createForm(AdminType::class, $user);
         return $this->render(
             'admin/register-new.html',
             array('form' => $form->createView())
@@ -29,8 +32,8 @@ class RegistrationController extends AbstractController
     public function userCreate(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
     {
 
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $user = new Admin();
+        $form = $this->createForm(AdminType::class, $user);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);

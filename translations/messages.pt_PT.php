@@ -31,7 +31,7 @@ return array(
     'comments' => 'Observações',
     'cancelation_policy' => 'Politica cancelamento',
     'guest_requirements' => 'Requesitos',
-    'where_going_to_be' => 'Onde estaremos',
+    'where_going_to_be' => 'Ponto de Encontro',
     'group_size' => 'Tamanho grupo',
     'group_discount' => 'Desconto de Grupo',
     'exclusions' => 'Exclusões',
@@ -40,6 +40,7 @@ return array(
     'to_board_at' => 'Antigo porto, no cais frente ao Museu de Portimão, <br>perto do “Clube Naval” em:',
     'notes' =>'NOTA: É necessário um bilhete eletrônico ou de papel para embarque',
     'telephone' =>'Telefone',
+    'address' => 'Endreço',
 
     'back_to_home' =>'Retroceder',
     'h3_1_head' => 'Descubra o local mais',
@@ -192,7 +193,8 @@ return array(
     'focus_text' => 'Serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
      'ambition_title' => 'Ambição',
     'ambition_text' => 'Referência e preferência no sector da atividade com uma nova dinâmica, uma nova visão e responsabilidade',
-        
+    'lang' => "pt_PT",
+    'openGoogleMaps' =>  "Abrir no Google Maps",
 
     'cookies' => array(
         'txt'=>'Este site utiliza cookies. Ao navegar no site estará a consentir a sua utilização.',

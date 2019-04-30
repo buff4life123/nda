@@ -65,4 +65,14 @@ class AboutUs
     {
         $this->rgpdHtml = $rgpdHtml;
     }
+
+    public function getCurrentTranslationHtml(Locales $locales)
+    {
+        $txt = '';
+        if($this->getLocales()){
+                if( $this->getLocales()->getName() == $locales-> getName())
+                    $txt = $translation->getRgpdHtml();
+        }
+        return $txt;
+    }
 }

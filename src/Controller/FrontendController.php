@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Company;
 use App\Entity\AboutUs;
+use App\Entity\Locales;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,14 +45,18 @@ class FrontendController extends AbstractController
     }
 
     public function aboutUs(Request $request)
-{		
+{	
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
-		$about = $em->getRepository(AboutUs::class)->find(1);
+
+		$defaultUserLocale = $request->getLocale() == "en" || $request->getLocale() == "en_EN" ? 'en_EN':'pt_PT';
+		$userLocale = $em->getRepository(Locales::class)->findOneBy(['name'=> $defaultUserLocale]);
+		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $userLocale]);
 
 		return $this->render('index/about_us.html.twig',  array(
 			'page' => 'about_us',
 			'company' => $company,
+			//'t' => $request->getLocale(),
 			'about' => $about,
 		));
     }

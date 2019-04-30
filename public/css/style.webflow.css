@@ -534,6 +534,15 @@ body {
   -ms-flex: 1;
   flex: 1;
 }
+.footer-left-icons {
+  width: 50%;
+  padding-right: 25px;
+  padding-left: 25px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
 
 .logo-footer {
   width: 100%;
@@ -603,7 +612,7 @@ body {
   align-items: flex-start;
 }
 
-.atl-morning {
+/* .atl-morning {
   width: 40%;
   height: 50px;
   float: left;
@@ -615,7 +624,7 @@ body {
   background-position: 0px 50%;
   background-size: contain;
   background-repeat: no-repeat;
-}
+} */
 
 .info-adicional {
   width: 60%;
@@ -643,6 +652,7 @@ body {
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   border-top: 1px solid #414141;
+  line-height: 75px;
 }
 
 .info-rodape-dir {
@@ -662,6 +672,10 @@ body {
   font-family: Barlow, sans-serif;
   color: #999;
   font-size: 12px;
+}
+
+.more-info {
+  margin-right: 10px;
 }
 
 .text-block-6 {
@@ -1377,9 +1391,9 @@ body {
 
 .socialmedia-links {
 position: fixed;
-  top: 102px;
+  /* top: 102px; */
   right: 0px;
-  bottom: 0px;
+  bottom: 55%;
   z-index: 9999;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1405,7 +1419,7 @@ position: fixed;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .63)), to(rgba(0, 0, 0, .63)));
   background-image: linear-gradient(180deg, rgba(0, 0, 0, .63), rgba(0, 0, 0, .63));
   transform: translateX(118px) translateY(0px) translateZ(0px);
-
+  height:auto;
 }
 
 .div-block-13 {
@@ -1910,7 +1924,7 @@ position: fixed;
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
-  /* background-image: url('../images/mais-verde-01.svg'); */
+  background-image: url('../images/plus.png'); 
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2111,7 +2125,7 @@ position: fixed;
   height: 250px;
   float: left;
 
-  background-image: url('../images/logo_nautic.png'), linear-gradient(180deg, rgb(49, 40, 40), transparent);
+  /* background-image: url('../images/logo_nautic.png'), linear-gradient(180deg, rgb(49, 40, 40), transparent); */
   background-position: 50% 50%, 0px 0px;
   background-size: 80%, auto;
   background-repeat: no-repeat, repeat;
@@ -2191,10 +2205,10 @@ position: fixed;
   padding-top: 22px;
 }
 
-.logo-rodape-pagetour {
+.logo-footer-sub {
   display: block;
   width: 90px;
-  height: 100%;
+  height: 75px;
   margin-right: auto;
   margin-bottom: 0px;
   margin-left: auto;
@@ -2210,6 +2224,9 @@ position: fixed;
   background-repeat: no-repeat;
   /* background-color: rgb(160, 160, 160); */
   background-position: center; 
+}
+.logo-pad {
+  margin-right: 10px;
 }
 
 .div-block-28 {
@@ -4084,7 +4101,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .div-block-27 {
     width: 8%;
   }
-  .logo-rodape-pagetour {
+  .logo-footer-sub {
     width: 140px;
     height: 60px;
     margin-bottom: 8px;
@@ -4722,7 +4739,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .left-arrow-3 {
     display: none;
   }
-  .logo-rodape-pagetour {
+  .logo-footer-sub {
     height: 80px;
   }
   .icon {
@@ -5121,6 +5138,13 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     margin-right: auto;
     margin-left: auto;
   }
+  .footer-left-icons {
+    display: inline;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
   .footer-dir {
     display: block;
     width: 100%;
@@ -5439,7 +5463,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .unordered-list {
     text-align: left;
   }
-  .logo-rodape-pagetour {
+  .logo-footer-sub {
     height: 65px;
   }
   .div-block-29 {

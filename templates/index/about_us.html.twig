@@ -21,7 +21,8 @@
       <div class="topo-pag-tour w-clearfix">
          
          <a href="{{path('index')}}">
-         <div class="logo-e-gradiente"></div>
+         {% set path = asset('/upload/gallery/')  %}
+         <div class="logo-e-gradiente" style="background-image: url({{path}}{{company.getLogo}}), linear-gradient(180deg,  #1a1a1a, transparent)"></div>
          </a>
          <a href="{{path('index')}}"  class="link-block w-inline-block w-clearfix">
             <div class="div-block-27"></div>
@@ -43,7 +44,8 @@
                </div> #}
                <div class="text-block-21">{{company.name}}</div>
                <h5 class="heading-18">{{about.name}}</h5>
-               <p id="aboutus-text" class="paragraph-15" data-aboutus-text="{{about.getRgpdHtml}}">
+               <p id="aboutus-text" class="paragraph-15">
+                  {{about.getRgpdHtml|raw}}
                </p>
                <!-- <h6 class="aboutus-subtitle">{% trans %}about_subtitle{% endtrans %}</h5>
                <p class="paragraph-15">{% trans %}future{% endtrans %} -->
@@ -58,7 +60,8 @@
       </div>
       <div class="section-5">
          <div class="rodape-tour w-clearfix">
-            <div class="logo-rodape-pagetour" style="background-image: url(../upload/gallery/{{company.getLogo}})"></div>
+            {% set path = asset('/upload/gallery/')  %}
+            <div class="logo-footer-sub" style="background-image: url({{path}}{{company.getLogo}} )"></div>
             <div class="div-block-28">
                {# <div class="text-block-17">* All programs are subject to change and / or cancellation under adverse weather conditions.</div> #}
             </div>

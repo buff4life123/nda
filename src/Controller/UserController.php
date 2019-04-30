@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
+use App\Entity\Admin;
+use App\Entity\SuperUser;
 use App\Form\ChangePasswordType;
 
 class UserController extends AbstractController
@@ -18,21 +20,57 @@ class UserController extends AbstractController
     public function listUser(Request $request, ValidatorInterface $validator)
     {
         $em = $this->getDoctrine()->getManager();
+        $id = $request->request->get('role');
 
-        $users = $em->getRepository(User::class)->findAll();
+        $user = $this->getUser();
+        $u = $user instanceof SuperUser?'superuser':'admin';
+
+        //superuser
+        if ($user instanceof SuperUser) {
+            $users = $em->getRepository(Admin::class)->findAll();
+            $superusers = $em->getRepository(SuperUser::class)->findAll();
+
+            $u = array();
+            foreach($users as $user) {
+                $u[] = array(
+                    'id'      =>  $user->getId(),
+                    'email'   =>  $user->getEmail(),
+                    'username'    =>  $user->getUsername(),
+                    'status'  =>  $user->getStatus(),
+                    'role'    =>  $user->getRoles(),
+                
+                );
+            }
+
+            foreach($superusers as $user) {
+                $u[] = array(
+                    'id'      =>  $user->getId(),
+                    'email'   =>  $user->getEmail(),
+                    'username'    =>  $user->getUsername(),
+                    'status'  =>  $user->getStatus(),
+                    'role'    =>  $user->getRoles(),
+                
+                );
+            }
+
+
+        } else {
+            $users = $em->getRepository(Admin::class)->findAll();
+        }
 
         return $this->render('admin/app-users.html', array(
-            'users' =>  $users));
+            'users' =>  $u,
+            )
+        );
     }
 
     public function statusUser (Request $request){
-        
         $id = $request->request->get('id');
         $status = $request->request->get('status');
         
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository(User::class)->find($id);
+        $user = $em->getRepository(Admin::class)->find($id);
 
         if (!$user) {
             $reponse = array('message' => 'fail', 'data' =>'Utilizador Não encontrado ', 'request'=>'');
@@ -48,14 +86,13 @@ class UserController extends AbstractController
     }
 
     public function deleteUser(Request $request){
-
         $response = array();
         
         $id = $request->request->get('id');
         
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository(User::class)->find($id);
+        $user = $em->getRepository(Admin::class)->find($id);
 
         if (!$user) {
             $response = array('message'=>'fail', 'data' => 'Utlizador #'.$id.' não existe!', 'request' => $id);
@@ -77,7 +114,7 @@ class UserController extends AbstractController
 
         if($request->query->get('id')){
             $id = $request->query->get('id');
-            $user = $em->getRepository(User::class)->find($id);
+            $user = $em->getRepository(Admin::class)->find($id);
 
             $passwordForm = $this->createForm(ChangePasswordType::class, $user);
             
@@ -92,7 +129,7 @@ class UserController extends AbstractController
 
             $id = $request->request->get('id');
 
-            $user = $em->getRepository(User::class)->find($id);
+            $user = $em->getRepository(Admin::class)->find($id);
         
             $form = $this->createForm(ChangePasswordType::class, $user);
         

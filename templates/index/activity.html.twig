@@ -25,7 +25,8 @@
 
         <div class="topo-pag-tour w-clearfix">
             <a href="{{path('index')}}">
-                <div class="logo-e-gradiente"></div>
+                {% set path = asset('/upload/gallery/')  %}
+                <div class="logo-e-gradiente" style="background-image: url({{path}}{{company.getLogo}}), linear-gradient(180deg,  #1a1a1a, transparent)"></div>
             </a>
             <a href="{{path('index')}}" class="link-block w-inline-block w-clearfix">
                 <div class="div-block-27"></div>
@@ -209,9 +210,10 @@
     <div class="boarding-location w-clearfix">
         <div class="boarding-info">
             <h4 class="heading-16">{%trans%}where_going_to_be{%endtrans%}<br></h4>
-            <h4 class="heading-15">{{products[0].local}}<br>
-                <a href="https://www.google.com/maps/dir//{{products[0].gps_coords}}" target="_blank">GPS:
-                    {{products[0].gps_coords}}</a>
+            <h4 class="heading-15">Centro de Esportes Aquáticos - Nauticdrive. <br> {%trans%}address{%endtrans%}: {{products[0].local}}, Olhos de Água 8200, Albufeira<br>
+                <a href="https://www.google.com/maps/dir//{{products[0].gps_coords}}" target="_blank">
+                    {%trans%}openGoogleMaps{%endtrans%} ⟶
+                </a>
                 <br>
             </h4>
         </div>
@@ -220,7 +222,7 @@
     <div class="section-5">
         <div class="rodape-tour w-clearfix">
             {% set path = asset('/upload/gallery/')  %}
-            <div class="logo-rodape-pagetour" style="background-image: url({{path}}{{company.getLogo}} )"></div>
+            <div class="logo-footer-sub" style="background-image: url({{path}}{{company.getLogo}} )"></div>
             <div
                 class="div-block-28">{# <div class="text-block-17">{%trans%}subject_changes{%endtrans%}</div> #}
             </div>

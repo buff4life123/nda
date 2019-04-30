@@ -11,11 +11,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="user")
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="role", type="string")
+ * @ORM\DiscriminatorMap({"superuser" = "SuperUser", "admin" = "Admin"})
  */
-class User implements UserInterface , \Serializable
+abstract class User implements UserInterface , \Serializable
 {
-    //const ROLE_SUPERUSER = 'superuser';
-    //const ROLE_ADMIN = 'admin';
+    const ROLE_SUPERUSER = 'superuser';
+    const ROLE_ADMIN = 'admin';
 
     /**
      * @ORM\Id
@@ -51,17 +54,17 @@ class User implements UserInterface , \Serializable
      */
     private $password;
 
-    /**
-     * @ORM\Column(type="array")
-     */
-    private $roles;
+    // /**
+    //  * @ORM\Column(type="array")
+    //  */
+    // private $roles;
 
     /** @ORM\Column(type="boolean", name="status", options={"default":0}) */
     private $status = 0;
 
 
     public function __construct($username = '', $password = '', $salt = '', $status = '') {
-        //$this->roles = array('ROLE_USER');
+        //$this->roles = array('ROLE_ADMIN');
         $this->username = $username;
         $this->password = $password;
         $this->status = $status;
@@ -132,23 +135,23 @@ class User implements UserInterface , \Serializable
         return null;
     }
 
-    public function getRoles()
-    {
-        return $this->roles;
-    }
+    // public function getRoles()
+    // {
+    //     return $this->roles;
+    // }
     
-    // public function getRole()
-    // {
-    //     return $this->role;
-    // }
+    public function getRole()
+    {
+        return $this->role;
+    }
 
-    // public function setRole($role) 
-    // {
-    //     if (!in_array($role, array(self::ROLE_SUPERUSER, self::ROLE_ADMIN))) {
-    //         throw new \InvalidArgumentException('Invalid Role');
-    //     }       
-    //     $this->role = $role;
-    // }
+    public function setRole($role) 
+    {
+        if (!in_array($role, array(self::ROLE_SUPERUSER, self::ROLE_ADMIN))) {
+            throw new \InvalidArgumentException('Invalid Role');
+        }       
+        $this->role = $role;
+    }
 
     public function eraseCredentials()
     {

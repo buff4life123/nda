@@ -12,13 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class SuperUser extends User
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $address;
@@ -40,12 +33,7 @@ class SuperUser extends User
 
     public function getRoles()
     {
-    	return array('ROLE_SUPERUSER');	
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
+    	return 'ROLE_SUPERUSER';	
     }
 
     public function getAddress(): ?string

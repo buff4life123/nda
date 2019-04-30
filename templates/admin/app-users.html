@@ -17,8 +17,6 @@ input, select, textarea {color: #000!important}
 .form-control{ border: 1px solid #ccc!important;height: 50px;padding: 0px 0px 0px 4px;padding-bottom: 0px}
 div.dataTables_length select {height: 50px}
 </style>
-
-
 <header class="w3-container" style="padding-top:22px">
    <h5><b><i class="fas fa-user-shield"></i> {%trans%}users{%endtrans%}</b></h5>
 </header>
@@ -37,18 +35,18 @@ div.dataTables_length select {height: 50px}
        <tr>
         <td>
           <div class="w3-block">
-          <button class="w3-btn w3-border w3-red w3-margin-bottom" style="width:19px" onclick="deleteUserConfirm({{ user.id }},'{{ user.username }}')">
+          <button class="w3-btn w3-border w3-red w3-margin-bottom" style="width:19px" onclick="deleteUserConfirm('{{ user.id }}','{{ user.username }}')">
             <i class="fas fa-trash-alt"></i>
           </button>
-          <button class="w3-btn w3-border w3-blue w3-margin-bottom" style="width:19px" onclick="passwordUser({{ user.id }},'{{ user.username }}')">
+          <button class="w3-btn w3-border w3-blue w3-margin-bottom" style="width:19px" onclick="passwordUser('{{ user.id }}','{{ user.username }}')">
             <i class="fas fa-unlock-alt"></i>
           </button>
           {% if user.status == 1 %}
-          <button class="w3-btn w3-border w3-margin-bottom" style="width:19px" onclick="statusUserConfirm({{ user.id }},'{{ user.username }}',0)">
+          <button class="w3-btn w3-border w3-margin-bottom" style="width:19px" onclick="statusUserConfirm('{{ user.id }}','{{ user.username }}',0)">
             <i class="w3-text-green far fa-check-circle" style="font-size:17px"></i>
           </button>
           {% else %}
-          <button class="w3-btn w3-border w3-margin-bottom" style="width:19px" onclick="statusUserConfirm({{ user.id }},'{{ user.username }}',1)">
+          <button class="w3-btn w3-border w3-margin-bottom" style="width:19px" onclick="statusUserConfirm('{{ user.id }}','{{ user.username }}',1)">
             <i class="fas fa-ban w3-text-red" style="font-size:17px"></i>
           </button>
           {% endif %}

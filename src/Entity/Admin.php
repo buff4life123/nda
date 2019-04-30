@@ -12,13 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Admin extends User
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $address;
@@ -40,12 +33,7 @@ class Admin extends User
 
     public function getRoles()
     {
-    	return array('ROLE_ADMIN');	
-    }
-    
-    public function getId(): ?int
-    {
-        return $this->id;
+    	return 'ROLE_ADMIN';	
     }
 
     public function getAddress(): ?string

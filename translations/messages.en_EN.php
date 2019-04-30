@@ -130,7 +130,8 @@ return array(
     'focus_text' => 'Service provided and with permanent concern for your well being and safety.',
     'ambition_title' => 'Ambition',
     'ambition_text' => 'Reference and preference in the activity sector with a new dynamic, a new vision and responsibility.',
-         
+    'lang' => "en_EN",
+    'openGoogleMaps' =>  "Open on Google Maps",
 
     'cookies' => array(
         'txt'=>'This website uses cookies to ensure you get the best experience on our website.',
@@ -167,7 +168,7 @@ return array(
     'comments' => 'Observations',
     'cancelation_policy' => 'Cancellation policy',
     'guest_requirements' => 'Requirements',
-    'where_going_to_be' => 'Where we will be',
+    'where_going_to_be' => 'Meeting point',
     'group_size' => 'Group Size',
     'group_discount' => 'Group Discount',
     'exclusions' => 'Exclusions',
@@ -176,6 +177,7 @@ return array(
     'to_board_at' =>'Old Harbour, in the pier opposite the Portimao Museum. <br>Close to the \'Clube Naval\' in:',
     'notes' => 'NOTE: An electronic or paper voucher is needed for boarding',
     'telephone' => 'Telephone',
+    'address' => 'Address',
 
     'h3_1_head' => 'nauticDrive',
     'h3_1_sub_head' => 'Algarve Boat & cave tours',
