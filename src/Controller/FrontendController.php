@@ -32,14 +32,12 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$products = $experience->getProducts($request->getLocale());
-	
-		$defaultUserLocale = $request->getLocale() == "en" || $request->getLocale() == "en_EN" ? 'en_EN':'pt_PT';
-		$userLocale = $em->getRepository(Locales::class)->findOneBy(['name'=> $defaultUserLocale]);
-		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $userLocale]);
-		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $userLocale]);
 
-		$social_network_icons = $this-> fileFinder("../public/images/icons");
-		$header_slider_items  = $this-> fileFinder("../public/images/headerSlider");
+		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+
+		$social_network_icons = $this-> fileFinder("../public_html/images/icons");
+		$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
 
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
@@ -51,16 +49,13 @@ class FrontendController extends AbstractController
 			'products' => $products['products'],
 			'exp_api_key' => $products['key'],
 			'url_api_key' => $products['url']));
-    }
+	}
 
     public function aboutUs(Request $request)
 {	
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
-
-		$defaultUserLocale = $request->getLocale() == "en" || $request->getLocale() == "en_EN" ? 'en_EN':'pt_PT';
-		$userLocale = $em->getRepository(Locales::class)->findOneBy(['name'=> $defaultUserLocale]);
-		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $userLocale]);
+		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 
 		return $this->render('index/about_us.html.twig',  array(
 			'page' => 'about_us',
@@ -416,5 +411,12 @@ class FrontendController extends AbstractController
 		}
 
 		return $icons_name;
+	}
+
+	private function defaultUserLocale(Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$defaultUserLocale = $request->getLocale() == "en" || $request->getLocale() == "en_EN" ? 'en_EN':'pt_PT';
+		$userLocale = $em->getRepository(Locales::class)->findOneBy(['name'=> $defaultUserLocale]);
+		return $userLocale;
 	}
 }

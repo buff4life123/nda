@@ -29,6 +29,22 @@
       {{ form_label(form.plainPassword.second) }}<br>
       {{ form_widget(form.plainPassword.second) }}
     </div>
+    <div class="w3-col m6 s12 w3-left-align">
+      {{ form_label(form.address) }}<br>
+      {{ form_widget(form.address) }}
+    </div>
+    <div class="w3-col m6 s12 w3-left-align">
+      {{ form_label(form.location) }}<br>
+      {{ form_widget(form.location) }}
+    </div>
+    <div class="w3-col m6 s12 w3-left-align">
+      {{ form_label(form.postalCode) }}<br>
+      {{ form_widget(form.postalCode) }}
+    </div>
+    <div class="w3-col m6 s12 w3-left-align">
+      {{ form_label(form.nif) }}<br>
+      {{ form_widget(form.nif) }}
+    </div>
     <div class="w3-col s12 w3-border-top" style="padding-top:16px">
       <button type="submit" class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green">
         <i class="fa fa-check"></i> {%trans%}save{%endtrans%}

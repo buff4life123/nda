@@ -640,6 +640,31 @@
       </div>
     </div>
 
+    <div id="modal-new-user" class="w3-modal" style="z-index: 9999999;padding-top: 12px; padding-bottom: 32px">
+  <div class="w3-modal-content w3-animate-zoom" style="max-width:400px">
+    <div class="w3-container w3-amber w3-padding">
+      <span onclick="$('#modal-new-user').hide()" class="w3-padding w3-button w3-display-topright">
+        <i class="w3-xlarge fa fa-times"></i>
+      </span>
+      <h2>
+        <i class="fas fa-exclamation-circle"></i>
+        <span>{%trans%}check{%endtrans%} !<input type="hidden" id="new-user-id"></span>
+      </h2>
+    </div>
+    <div class="w3-container w3-padding" id="new-user">
+    </div>
+    <div class="w3-row w3-padding-large w3-border-top">
+      <div class="w3-col s6">
+        <span class="w3-btn w3-border" onclick="$('#modal-new-user').hide()">
+          <i class="fa fa-times"></i> {%trans%}close{%endtrans%}
+        </span>
+      </div>
+      <div id="action-new-user" class="w3-col s6">
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 

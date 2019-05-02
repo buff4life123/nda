@@ -52,6 +52,7 @@ return array(
     'repeat_pass' => 'Repeat Password *',
     'columns_show_hide' => 'Columns Show/Hide',
     'sure_access' => 'Are you sure you want to change the acess to the user, ',
+    'new_user_type' => 'Choose the type of account',
     'users' => 'Users',
     'availability' => 'Availability',
     'delete' => 'Delete',
@@ -178,6 +179,7 @@ return array(
     'notes' => 'NOTE: An electronic or paper voucher is needed for boarding',
     'telephone' => 'Telephone',
     'address' => 'Address',
+    'location' => 'Location',
 
     'h3_1_head' => 'nauticDrive',
     'h3_1_sub_head' => 'Algarve Boat & cave tours',

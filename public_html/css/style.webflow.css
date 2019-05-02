@@ -2303,6 +2303,7 @@ position: fixed;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-top: 2%;
 }
 
 .icone-footer {

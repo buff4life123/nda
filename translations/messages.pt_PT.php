@@ -41,6 +41,7 @@ return array(
     'notes' =>'NOTA: É necessário um bilhete eletrônico ou de papel para embarque',
     'telephone' =>'Telefone',
     'address' => 'Endreço',
+    'location' => 'Localização',
 
     'back_to_home' =>'Retroceder',
     'h3_1_head' => 'Descubra o local mais',
@@ -115,6 +116,7 @@ return array(
     'all' => 'Todos',
     'columns_show_hide' => 'Mostrar/Esconder Colunas',
     'sure_access' => 'Tem a certeza que pretende mudar o acesso ao utilizador, ',
+    'new_user_type' => 'Escolhe o tipo de conta',
     'users' => 'Utilizadores',
     'availability' => 'Disponibilidade',
     'delete' => 'Apagar',

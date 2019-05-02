@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
 use App\Entity\Admin;
 use App\Entity\SuperUser;
+use App\Entity\Manager;
 use App\Form\ChangePasswordType;
 
 class UserController extends AbstractController
@@ -29,6 +30,7 @@ class UserController extends AbstractController
         if ($user instanceof SuperUser) {
             $users = $em->getRepository(Admin::class)->findAll();
             $superusers = $em->getRepository(SuperUser::class)->findAll();
+            $managers = $em->getRepository(Manager::class)->findAll();
 
             $u = array();
             foreach($users as $user) {
@@ -53,9 +55,42 @@ class UserController extends AbstractController
                 );
             }
 
-
+            foreach($managers as $user) {
+                $u[] = array(
+                    'id'      =>  $user->getId(),
+                    'email'   =>  $user->getEmail(),
+                    'username'    =>  $user->getUsername(),
+                    'status'  =>  $user->getStatus(),
+                    'role'    =>  $user->getRoles(),
+                
+                );
+            }
         } else {
             $users = $em->getRepository(Admin::class)->findAll();
+            $managers = $em->getRepository(Manager::class)->findAll();
+
+            $u = array();
+            foreach($users as $user) {
+                $u[] = array(
+                    'id'      =>  $user->getId(),
+                    'email'   =>  $user->getEmail(),
+                    'username'    =>  $user->getUsername(),
+                    'status'  =>  $user->getStatus(),
+                    'role'    =>  $user->getRoles(),
+                
+                );
+            }
+
+            foreach($managers as $user) {
+                $u[] = array(
+                    'id'      =>  $user->getId(),
+                    'email'   =>  $user->getEmail(),
+                    'username'    =>  $user->getUsername(),
+                    'status'  =>  $user->getStatus(),
+                    'role'    =>  $user->getRoles(),
+                
+                );
+            }
         }
 
         return $this->render('admin/app-users.html', array(

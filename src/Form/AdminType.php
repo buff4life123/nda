@@ -27,9 +27,9 @@ class AdminType extends AbstractType
                 'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'location']
             ))
             ->add('postalCode', TextType::class, array(
-                'label'=>'Postal Code',
+                'label'=>'postal_code',
                 'required' => true,
-                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'Postal Code']
+                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'postal_code']
             ))
             ->add('nif', TextType::class, array(
                 'label'=>'NIF',

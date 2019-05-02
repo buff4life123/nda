@@ -27,7 +27,8 @@ div.dataTables_length select {height: 50px}
       <tr>
       <th style="text-align: center">#</th>    
       <th style="text-align: center">{%trans%}name{%endtrans%}</th>    
-      <th style="text-align: center">Email</th>       
+      <th style="text-align: center">Email</th>
+      <th style="text-align: center">Role</th>          
       </tr>
     </thead>
     <tbody>
@@ -54,11 +55,14 @@ div.dataTables_length select {height: 50px}
         </td>
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
+        {% set role = user.role[0]|replace({'ROLE_': ''}) %}
+        <td>{{ role }}</td>
       </tr>
     {% endfor %}
     </tbody>
     <tfoot class="w3-sand">
       <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

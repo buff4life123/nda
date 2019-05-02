@@ -52,7 +52,7 @@
          <i class="fas fa-user-shield"></i> {%trans%}users{%endtrans%}
       </button>
       <div id="user" class="w3-dropdown-content w3-bar-block" style="position:relative">
-        <a href="#" onclick="ajaxUpload(this.id)" id="user-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
+        <a href="#" onclick="newUserType(this.id)" id="user-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
           <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
         </a>
         <a href="#" onclick="ajaxUpload(this.id)" id="user-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
@@ -162,3 +162,28 @@
 </div>
 <div class="w3-margin-top"> 
  <!-- Header -->
+
+ <script>
+
+  function newUserType(id)
+  {
+    //ajaxUpload(this.id)
+    $('#new-user').html('<p class="w3-center w3-large">{%trans%}new_user_type{%endtrans%} </p>  ' +
+    '<p class="w3-center w3-large"> Admin:   <input type="checkbox" id="myCheck"  onclick="myFunction()"> </p>' +
+    '<p class="w3-center w3-large"> Manager: <input type="checkbox" id="myCheck"  onclick="myFunction()"> </p>')
+    $('#new-user-id').val(id)
+    $('#action-new-user').html('<span class="w3-green w3-border w3-btn w3-right" onclick=""><i class="fas fa-check"></i> {%trans%}save{%endtrans%}</span>')
+    $('#modal-new-user').show()
+  }
+
+  {# function myFunction() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+} #}
+
+ </script>

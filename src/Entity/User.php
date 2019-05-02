@@ -13,12 +13,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity(fields="username", message="Username already taken")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="role", type="string")
- * @ORM\DiscriminatorMap({"superuser" = "SuperUser", "admin" = "Admin"})
+ * @ORM\DiscriminatorMap({"superuser" = "SuperUser", "admin" = "Admin", "manager" = "Manager"})
  */
 abstract class User implements UserInterface , \Serializable
 {
     const ROLE_SUPERUSER = 'superuser';
     const ROLE_ADMIN = 'admin';
+    const ROLE_MANAGER = 'manager';
 
     /**
      * @ORM\Id
@@ -147,7 +148,7 @@ abstract class User implements UserInterface , \Serializable
 
     public function setRole($role) 
     {
-        if (!in_array($role, array(self::ROLE_SUPERUSER, self::ROLE_ADMIN))) {
+        if (!in_array($role, array(self::ROLE_SUPERUSER, self::ROLE_ADMIN, self::ROLE_MANAGER))) {
             throw new \InvalidArgumentException('Invalid Role');
         }       
         $this->role = $role;

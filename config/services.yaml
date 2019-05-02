@@ -3,15 +3,15 @@
 parameters:
     locale: 'pt_PT'
 
-    products_images_directory: '%kernel.project_dir%/public/upload/product'
+    products_images_directory: '%kernel.project_dir%/public_html/upload/product'
     products_images_width: '640'
     products_images_height: '480'
 
-    gallery_images_directory: '%kernel.project_dir%/public/upload/gallery'
+    gallery_images_directory: '%kernel.project_dir%/public_html/upload/gallery'
     gallery_images_width: '640'
     gallery_images_height: '480'
 
-    banner_images_directory: '%kernel.project_dir%/public/upload/banner'
+    banner_images_directory: '%kernel.project_dir%/public_html/upload/banner'
     banner_images_width: '1920'
     banner_images_height: '1080'
 
