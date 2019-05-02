@@ -33,7 +33,7 @@ class SuperUser extends User
 
     public function getRoles()
     {
-    	return 'ROLE_SUPERUSER';	
+    	return array('ROLE_SUPERUSER');	
     }
 
     public function getAddress(): ?string

@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Company;
 use App\Entity\AboutUs;
+use App\Entity\Rgpd;
+use App\Entity\TermsConditions;
 use App\Entity\Locales;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +32,11 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$products = $experience->getProducts($request->getLocale());
+	
+		$defaultUserLocale = $request->getLocale() == "en" || $request->getLocale() == "en_EN" ? 'en_EN':'pt_PT';
+		$userLocale = $em->getRepository(Locales::class)->findOneBy(['name'=> $defaultUserLocale]);
+		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $userLocale]);
+		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $userLocale]);
 
 		$social_network_icons = $this-> fileFinder("../public/images/icons");
 		$header_slider_items  = $this-> fileFinder("../public/images/headerSlider");
@@ -37,6 +44,8 @@ class FrontendController extends AbstractController
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
 			'company' => $company,
+			'rgpd' => $rgpd,
+			'terms_conditions' => $terms_conditions,
 			'social_network_icons' => $social_network_icons,
 			'header_slider_items'  => $header_slider_items,
 			'products' => $products['products'],
@@ -56,7 +65,7 @@ class FrontendController extends AbstractController
 		return $this->render('index/about_us.html.twig',  array(
 			'page' => 'about_us',
 			'company' => $company,
-			//'t' => $request->getLocale(),
+			// 't' => $request->getLocale(),
 			'about' => $about,
 		));
     }

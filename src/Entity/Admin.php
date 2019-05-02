@@ -33,7 +33,7 @@ class Admin extends User
 
     public function getRoles()
     {
-    	return 'ROLE_ADMIN';	
+    	return array('ROLE_ADMIN');		
     }
 
     public function getAddress(): ?string

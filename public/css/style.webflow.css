@@ -775,14 +775,17 @@ body {
 
 .inst-head {
   margin-top: 0px;
-
   font-family: Barlow, sans-serif;
   color: black;
   font-size: 40px;
+  font-size: 3vw;
   font-style: normal;
   font-weight: 700;
   text-align: center;
   letter-spacing: 5px;
+  height: 100%;
+  line-height: 100%;
+  margin-bottom: 10px;
 }
 
 .heading-5 {
@@ -1867,6 +1870,26 @@ position: fixed;
   padding-top: 35px;
   padding-bottom: 15px;
   border-bottom: 1px none #bbb;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 96%;
+  height: auto;
+  max-width: 1180px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 25px;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  /* background-image: url('../images/beachPlace.jpg');
+  background-position: right;  
+  background-repeat: no-repeat;
+  background-position: 85% 60%; */
+
 }
 
 .div-block-22 {
@@ -1878,8 +1901,9 @@ position: fixed;
   display: flex;
   width: 100%;
   max-width: 1180px;
-  margin-right: auto;
-  margin-left: auto;
+  /* margin-right: auto;
+  margin-left: auto; */
+  /* margin-left: 15%; */
   padding-top: 0px;
   padding-bottom: 10px;
   -webkit-box-orient: vertical;

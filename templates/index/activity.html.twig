@@ -35,9 +35,10 @@
         </div>
         <div class="div-block-15 w-clearfix">
             <div class="free-transport"></div>
-            <div class="div-block-16">
+            <div
+                class="div-block-16">
                 {# <h2 class="heading-6">{{company.name}}
-                    WATERSPORTS</h2> #}
+                                    WATERSPORTS</h2> #}
                 {% if products[0].title == true %}
                     <h1 class="heading-7">{{products[0].title}}</h1>
                 {%endif %}
@@ -204,15 +205,20 @@
             {%endif %}
 
         </div>
+        <img id="section3-right" src="/images/beachPlace.jpg">
     </div>
 
     {#LOCATION________________________________________________________________________________________________________________________________________________________________#}
     <div class="boarding-location w-clearfix">
         <div class="boarding-info">
             <h4 class="heading-16">{%trans%}where_going_to_be{%endtrans%}<br></h4>
-            <h4 class="heading-15">Centro de Esportes Aquáticos - Nauticdrive. <br> {%trans%}address{%endtrans%}: {{products[0].local}}, Olhos de Água 8200, Albufeira<br>
+            <h4 class="heading-15">Centro de Esportes Aquáticos - Nauticdrive.
+                <br>
+                {%trans%}address{%endtrans%}:
+                {{products[0].local}}, Olhos de Água 8200, Albufeira<br>
                 <a href="https://www.google.com/maps/dir//{{products[0].gps_coords}}" target="_blank">
-                    {%trans%}openGoogleMaps{%endtrans%} ⟶
+                    {%trans%}openGoogleMaps{%endtrans%}
+                    ⟶
                 </a>
                 <br>
             </h4>
