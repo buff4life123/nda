@@ -52,7 +52,7 @@
          <i class="fas fa-user-shield"></i> {%trans%}users{%endtrans%}
       </button>
       <div id="user" class="w3-dropdown-content w3-bar-block" style="position:relative">
-        <a href="#" onclick="newUserType(this.id)" id="user-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
+        <a href="#" onclick="newUserType(this.id)" id="user-new-btn" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
           <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
         </a>
         <a href="#" onclick="ajaxUpload(this.id)" id="user-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
@@ -169,21 +169,49 @@
   {
     //ajaxUpload(this.id)
     $('#new-user').html('<p class="w3-center w3-large">{%trans%}new_user_type{%endtrans%} </p>  ' +
-    '<p class="w3-center w3-large"> Admin:   <input type="checkbox" id="myCheck"  onclick="myFunction()"> </p>' +
-    '<p class="w3-center w3-large"> Manager: <input type="checkbox" id="myCheck"  onclick="myFunction()"> </p>')
+    '<p class="w3-center w3-large"> Admin:   <input type="checkbox" value="admin" id="myCheck-admin"  onclick="checkBoxState()"> </p>' +
+    '<p class="w3-center w3-large"> Manager: <input type="checkbox" value="manager" id="myCheck-manager"  onclick="checkBoxState()"> </p>')
     $('#new-user-id').val(id)
-    $('#action-new-user').html('<span class="w3-green w3-border w3-btn w3-right" onclick=""><i class="fas fa-check"></i> {%trans%}save{%endtrans%}</span>')
+    $('#action-new-user').html('<button onclick="" id="user-new" class="w3-green w3-border w3-btn w3-right" disabled="true"> {%trans%}save{%endtrans%}</button>')
     $('#modal-new-user').show()
   }
 
-  {# function myFunction() {
-  var checkBox = document.getElementById("myCheck");
-  var text = document.getElementById("text");
-  if (checkBox.checked == true){
-    text.style.display = "block";
-  } else {
-     text.style.display = "none";
-  }
-} #}
+  function checkBoxState() {
+  var checkBoxAdmin = document.getElementById("myCheck-admin");
+  var checkBoxManager = document.getElementById("myCheck-manager");
+  var saveBtn = document.getElementById("user-new");
+  var adminCheckedValue = $('#myCheck-admin:checked').val();
+  var managerCheckedValue = $('#myCheck-manager:checked').val();
+  var userType = "";
+
+  checkBoxAdmin.addEventListener('change', (event) => {
+    if (event.target.checked) {
+        userType = adminCheckedValue;
+        checkBoxManager.checked = false;
+        saveBtn.disabled = false;
+    } else {
+        saveBtn.disabled = true;
+    }
+  })
+
+  checkBoxManager.addEventListener('change', (event) => {
+    if (event.target.checked) {
+        userType = managerCheckedValue;
+        checkBoxAdmin.checked = false;
+        saveBtn.disabled = false;
+    } else {
+        saveBtn.disabled = true;
+    }
+  })
+
+  saveBtn.addEventListener('click', (event) => {
+    $('#modal-new-user').hide()
+    ajaxUpload("user-new", userType);
+  })
+
+
+
+
+}
 
  </script>

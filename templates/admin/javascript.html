@@ -4,7 +4,7 @@ $(function(){
    // ajaxUpload('dashboard')
 })
 
-function ajaxUpload(block){
+function ajaxUpload(block, userType){
     block == 'product-new' || block == 'product-list' ? false : $('#product').removeClass('w3-show')
 
     switch (block){
@@ -38,8 +38,9 @@ function ajaxUpload(block){
         case 'user-list': 
             url = '{{ path("user_list") }}' 
         break
-        case 'user-new': 
-            url = '{{ path("user_new") }}' 
+        case 'user-new':
+            url = '{{ path("user_new",{userType:"userType"}) }}'
+            url = url.replace("userType", userType); 
         break
         case 'warning': 
             url = '{{ path("admin_warning") }}' 

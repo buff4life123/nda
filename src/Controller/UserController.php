@@ -21,76 +21,23 @@ class UserController extends AbstractController
     public function listUser(Request $request, ValidatorInterface $validator)
     {
         $em = $this->getDoctrine()->getManager();
-        $id = $request->request->get('role');
+        // $id = $request->request->get('role');
 
         $user = $this->getUser();
-        $u = $user instanceof SuperUser?'superuser':'admin';
-
+        //$u = $user instanceof SuperUser?'superuser':'admin';
+        $u = array();
         //superuser
         if ($user instanceof SuperUser) {
-            $users = $em->getRepository(Admin::class)->findAll();
+            $admins = $em->getRepository(Admin::class)->findAll();
             $superusers = $em->getRepository(SuperUser::class)->findAll();
             $managers = $em->getRepository(Manager::class)->findAll();
 
-            $u = array();
-            foreach($users as $user) {
-                $u[] = array(
-                    'id'      =>  $user->getId(),
-                    'email'   =>  $user->getEmail(),
-                    'username'    =>  $user->getUsername(),
-                    'status'  =>  $user->getStatus(),
-                    'role'    =>  $user->getRoles(),
-                
-                );
-            }
-
-            foreach($superusers as $user) {
-                $u[] = array(
-                    'id'      =>  $user->getId(),
-                    'email'   =>  $user->getEmail(),
-                    'username'    =>  $user->getUsername(),
-                    'status'  =>  $user->getStatus(),
-                    'role'    =>  $user->getRoles(),
-                
-                );
-            }
-
-            foreach($managers as $user) {
-                $u[] = array(
-                    'id'      =>  $user->getId(),
-                    'email'   =>  $user->getEmail(),
-                    'username'    =>  $user->getUsername(),
-                    'status'  =>  $user->getStatus(),
-                    'role'    =>  $user->getRoles(),
-                
-                );
-            }
+   
+            $u =  array_merge($this -> dataUser($admins), $this -> dataUser($superusers), $this -> dataUser($managers));
         } else {
             $users = $em->getRepository(Admin::class)->findAll();
             $managers = $em->getRepository(Manager::class)->findAll();
-
-            $u = array();
-            foreach($users as $user) {
-                $u[] = array(
-                    'id'      =>  $user->getId(),
-                    'email'   =>  $user->getEmail(),
-                    'username'    =>  $user->getUsername(),
-                    'status'  =>  $user->getStatus(),
-                    'role'    =>  $user->getRoles(),
-                
-                );
-            }
-
-            foreach($managers as $user) {
-                $u[] = array(
-                    'id'      =>  $user->getId(),
-                    'email'   =>  $user->getEmail(),
-                    'username'    =>  $user->getUsername(),
-                    'status'  =>  $user->getStatus(),
-                    'role'    =>  $user->getRoles(),
-                
-                );
-            }
+            $u =  array_merge($this -> dataUser($admins), $this -> dataUser($managers));
         }
 
         return $this->render('admin/app-users.html', array(
@@ -122,12 +69,16 @@ class UserController extends AbstractController
 
     public function deleteUser(Request $request){
         $response = array();
+        $userClass = "";
         
         $id = $request->request->get('id');
         
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository(Admin::class)->find($id);
+        $userData = $this->getUser();
+        $userData->getRoles();
+        
+        $userData == "ROLE_ADMIN"?  $user = $em->getRepository(Admin::class)->find($id):  $user = $em->getRepository(Manager::class)->find($id);
 
         if (!$user) {
             $response = array('message'=>'fail', 'data' => 'Utlizador #'.$id.' não existe!', 'request' => $id);
@@ -158,7 +109,6 @@ class UserController extends AbstractController
                 //'editFormErrors' => true
             ));
         }
-        
         
         else{
 
@@ -193,6 +143,25 @@ class UserController extends AbstractController
 
             return new JsonResponse($response);
         }
+
+    }
+
+    public function dataUser($userType) {
+        $u = array();
+        foreach($userType as $user) {
+            $u[] = array(
+                'id'      =>  $user->getId(),
+                'email'   =>  $user->getEmail(),
+                'username'    =>  $user->getUsername(),
+                'status'  =>  $user->getStatus(),
+                'role'    =>  $user->getRoles(),
+            
+            );
+        }
+        return $u;
+    }
+
+    public function roleUser() {
 
     }
 

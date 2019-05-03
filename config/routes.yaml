@@ -446,7 +446,7 @@ password_user:
     #condition: 'request.isXmlHttpRequest()'
 
 user_new:
-    path: /user-new/
+    path: /user-new/{userType}
     controller: App\Controller\RegistrationController::userNew
 
 user_create:

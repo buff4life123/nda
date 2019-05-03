@@ -6,6 +6,7 @@ use App\Entity\User;
 
 use App\Form\AdminType;
 use App\Entity\Admin;
+use App\Entity\Manager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -17,22 +18,28 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class RegistrationController extends AbstractController
 {
 
-    public function userNew(/*Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer*/)
+    public function userNew($userType/*Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer*/)
     {
+
         // 1) build the form
-        $user = new Admin();
+        // $user = new Admin();
+        $userType == "admin"?$user = new Admin():$user = new Manager();
         $form = $this->createForm(AdminType::class, $user);
+
         return $this->render(
             'admin/register-new.html',
-            array('form' => $form->createView())
+            array('userType' =>$userType,
+                'form' => $form->createView(),
+            )
         );
     }
 
 
     public function userCreate(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
     {
-
-        $user = new Admin();
+        //$request -> request -> get("type");
+        //$user = new Admin();
+        $request -> request -> get("type") == "admin"?$user = new Admin():$user = new Manager();
         $form = $this->createForm(AdminType::class, $user);
 
         // 2) handle the submit (will only happen on POST)

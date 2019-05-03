@@ -57,7 +57,7 @@ class AdminType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Admin::class,
+            //'data_class' => Admin::class,
         ));
     }
 }
