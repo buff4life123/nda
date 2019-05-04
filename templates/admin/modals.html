@@ -229,14 +229,14 @@
       </span>
       <h2>
         <i class="fas fa-exclamation-circle"></i>
-        <span>{%trans%}delete{%endtrans%} ?<input type="hidden" id="user-id"></span>
+        <span>{%trans%}delete{%endtrans%} ?<input type="hidden" id="user-id"></span><input type="hidden" id="user-role"></span>
       </h2>
     </div>
     <div class="w3-container w3-padding" id="delete-user">
     </div>
     <div class="w3-row-padding w3-border-top">
       <div class="w3-col s12 w3-margin-top w3-margin-bottom">
-        <span class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green" onclick="deleteUser($('#user-id').val())">
+        <span class="w3-btn-block w3-margin-left w3-right w3-button w3-border w3-green" onclick="deleteUser($('#user-id').val(),$('#user-role').val())">
           <i class="fas fa-trash-alt"></i> {%trans%}delete{%endtrans%}
         </span>
         <span class="w3-btn-block w3-button w3-left w3-border w3-white" onclick="$('#modal-delete-user').hide()">
@@ -484,7 +484,7 @@
         <span>Password</span>
       </h2>
     </div>
-    <input type="hidden" id="set-user-id">
+    <input type="hidden" id="set-user-id"><input type="hidden" id="set-user-role">
     <div class="w3-container w3-padding w3-sand" id="set-password"></div>
     <div class="w3-row-padding w3-border-top">
       <div class="w3-col s12 w3-margin-top w3-margin-bottom">

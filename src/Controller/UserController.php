@@ -20,65 +20,57 @@ class UserController extends AbstractController
 {
     public function listUser(Request $request, ValidatorInterface $validator)
     {
-        $em = $this->getDoctrine()->getManager();
-        // $id = $request->request->get('role');
+        $loggedUser = $this->getUser();
+        $users      = array();
+        $role     = $request-> request ->get('role');
 
-        $user = $this->getUser();
-        //$u = $user instanceof SuperUser?'superuser':'admin';
-        $u = array();
-        //superuser
-        if ($user instanceof SuperUser) {
-            $admins = $em->getRepository(Admin::class)->findAll();
+        $em         = $this->getDoctrine()->getManager();
+        $admins     = $em->getRepository(Admin::class)->findAll();
+        $managers   = $em->getRepository(Manager::class)->findAll();
+
+        if ($loggedUser instanceof SuperUser) {
             $superusers = $em->getRepository(SuperUser::class)->findAll();
-            $managers = $em->getRepository(Manager::class)->findAll();
-
-   
-            $u =  array_merge($this -> dataUser($admins), $this -> dataUser($superusers), $this -> dataUser($managers));
+            $users      = array_merge($this -> dataUser($admins), $this -> dataUser($superusers), $this -> dataUser($managers));
         } else {
-            $users = $em->getRepository(Admin::class)->findAll();
-            $managers = $em->getRepository(Manager::class)->findAll();
-            $u =  array_merge($this -> dataUser($admins), $this -> dataUser($managers));
+            $users      = array_merge($this -> dataUser($admins), $this -> dataUser($managers));
         }
-
+           
         return $this->render('admin/app-users.html', array(
-            'users' =>  $u,
+            'users' =>  $users,
             )
         );
     }
 
-    public function statusUser (Request $request){
-        $id = $request->request->get('id');
-        $status = $request->request->get('status');
+    public function statusUser (Request $request)
+    {
+        $response = array();
+
+        $id     = $request-> request ->get('id');
+        $status = $request-> request ->get('status');
+        $role = $request-> request ->get('role');
+
+        $em     = $this->getDoctrine()->getManager();
+        $role == "ROLE_ADMIN"?$user = $em->getRepository(Admin::class)->find($id): $user = $em->getRepository(Manager::class)->find($id);
         
-        $em = $this->getDoctrine()->getManager();
-
-        $user = $em->getRepository(Admin::class)->find($id);
-
         if (!$user) {
             $reponse = array('message' => 'fail', 'data' =>'Utilizador Não encontrado ', 'request'=>'');
         }    
-        else{
+        else {
             $user->setStatus($status);
             $em->flush();
-
             $response = array('message' => 'success', 'data' => $user->getStatus(), 'request '=> $status);
         }
-
         return new JsonResponse($response);
     }
 
-    public function deleteUser(Request $request){
+    public function deleteUser(Request $request)
+    {
         $response = array();
-        $userClass = "";
         
         $id = $request->request->get('id');
-        
+        $role = $request-> request ->get('role');
         $em = $this->getDoctrine()->getManager();
-
-        $userData = $this->getUser();
-        $userData->getRoles();
-        
-        $userData == "ROLE_ADMIN"?  $user = $em->getRepository(Admin::class)->find($id):  $user = $em->getRepository(Manager::class)->find($id);
+        $role == "ROLE_ADMIN"?$user = $em->getRepository(Admin::class)->find($id): $user = $em->getRepository(Manager::class)->find($id);
 
         if (!$user) {
             $response = array('message'=>'fail', 'data' => 'Utlizador #'.$id.' não existe!', 'request' => $id);
@@ -96,11 +88,14 @@ class UserController extends AbstractController
 
     public function passwordUser(Request $request, UserPasswordEncoderInterface $passwordEncoder){
 
+        $role = $request-> request ->get('role');
+
         $em = $this->getDoctrine()->getManager();
 
         if($request->query->get('id')){
             $id = $request->query->get('id');
-            $user = $em->getRepository(Admin::class)->find($id);
+            //$user = $em->getRepository(Admin::class)->find($id);
+            $role == "ROLE_ADMIN"?$user = $em->getRepository(Admin::class)->find($id): $user = $em->getRepository(Manager::class)->find($id);
 
             $passwordForm = $this->createForm(ChangePasswordType::class, $user);
             
@@ -114,7 +109,8 @@ class UserController extends AbstractController
 
             $id = $request->request->get('id');
 
-            $user = $em->getRepository(Admin::class)->find($id);
+            //$user = $em->getRepository(Admin::class)->find($id);
+            $role == "ROLE_ADMIN"?$user = $em->getRepository(Admin::class)->find($id): $user = $em->getRepository(Manager::class)->find($id);
         
             $form = $this->createForm(ChangePasswordType::class, $user);
         

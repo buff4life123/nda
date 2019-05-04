@@ -20,7 +20,7 @@ div.dataTables_length select {height: 50px}
 <header class="w3-container" style="padding-top:22px">
    <h5><b><i class="fas fa-user-shield"></i> {%trans%}users{%endtrans%}</b></h5>
 </header>
-{{dump(admins)}}
+
 <div class="w3-row-padding">
   <div class="w3-col s12">
   <table id="dataTable" class="w3-border table table-striped centered hover table-bordered" style="width:100%">
@@ -37,18 +37,18 @@ div.dataTables_length select {height: 50px}
        <tr>
         <td>
           <div class="w3-block">
-          <button class="w3-btn w3-border w3-red w3-margin-bottom" style="width:19px" onclick="deleteUserConfirm('{{ user.id }}','{{ user.username }}')">
+          <button class="w3-btn w3-border w3-red w3-margin-bottom" style="width:19px" onclick="deleteUserConfirm('{{ user.id }}','{{ user.username }}','{{ user.role[0] }}')">
             <i class="fas fa-trash-alt"></i>
           </button>
-          <button class="w3-btn w3-border w3-blue w3-margin-bottom" style="width:19px" onclick="passwordUser('{{ user.id }}','{{ user.username }}')">
+          <button class="w3-btn w3-border w3-blue w3-margin-bottom" style="width:19px" onclick="passwordUser('{{ user.id }}','{{ user.username }}','{{ user.role[0] }}')">
             <i class="fas fa-unlock-alt"></i>
           </button>
           {% if user.status == 1 %}
-          <button class="w3-btn w3-border w3-margin-bottom" style="width:19px" onclick="statusUserConfirm('{{ user.id }}','{{ user.username }}',0)">
+          <button class="w3-btn w3-border w3-margin-bottom" style="width:19px" onclick="statusUserConfirm('{{ user.id }}','{{ user.username }}','{{ user.role[0] }}',0)">
             <i class="w3-text-green far fa-check-circle" style="font-size:17px"></i>
           </button>
-          {% else %}
-          <button class="w3-btn w3-border w3-margin-bottom" style="width:19px" onclick="statusUserConfirm('{{ user.id }}','{{ user.username }}',1)">
+          {% else %} 
+          <button class="w3-btn w3-border w3-margin-bottom" style="width:19px" onclick="statusUserConfirm('{{ user.id }}','{{ user.username }}','{{ user.role[0] }}',1)">
             <i class="fas fa-ban w3-text-red" style="font-size:17px"></i>
           </button>
           {% endif %}
@@ -74,22 +74,23 @@ div.dataTables_length select {height: 50px}
 </div>
 
 <script>
- 
-function deleteUserConfirm(id,n){
+function deleteUserConfirm(id,n,role){
   $('#delete-user').html('<p class="w3-center w3-large">{%trans%}sure_delete{%endtrans%} <b>'+n+'</b> ?</p>')
   $('#user-id').val(id)
+  $('#user-role').val(role)
   $('#modal-delete-user').show()
 }
 
-function passwordUser(id,n){
+function passwordUser(id,n, role){
   $('.w3-overlay').show()
   setTimeout(function(){
     $.ajax({  
       url: '{{ path('password_user') }}',
       type: 'GET',
-      data: 'id='+id,
+      data: 'id='+id+'&role='+role,
       success: function(data){
         $('#set-user-id').val(id)
+        $('#set-user-role').val(role)
         $('.w3-overlay').hide()
         $('#set-password').html(data)
         $('#modal-edit-password').show()
@@ -102,14 +103,14 @@ function passwordUser(id,n){
   }, 500)
 }
 
-function deleteUser(id){
+function deleteUser(id, role){
   $('#modal-delete-user').hide()
   $('.w3-overlay').show()
   setTimeout(function(){
   $.ajax({  
     url:'{{ path('delete_user') }}',
     type: "POST",
-    data:'id='+id,
+    data:'id='+id+'&role='+role,
     success: function(data){
       $('.w3-overlay').hide()
       if (data.message == 'success')
@@ -127,21 +128,22 @@ function deleteUser(id){
 }, 500)
 }
 
-function statusUserConfirm(id,n,v){
+function statusUserConfirm(id,n,role, v){
+
   $('#confirm').html('<p class="w3-center w3-large">{%trans%}sure_access{%endtrans%} <b>'+n+'</b> ?</p>')
   $('#confirm-id').val(id)
-  $('#action-confirm').html('<span class="w3-green w3-border w3-btn w3-right" onclick="statusUser('+id+','+v+')"><i class="fas fa-check"></i> {%trans%}save{%endtrans%}</span>')
+  $('#action-confirm').html('<span class="w3-green w3-border w3-btn w3-right" onclick="statusUser('+id+',(\'' +role+ '\'),'+v+')"><i class="fas fa-check"></i> {%trans%}save{%endtrans%}</span>')
   $('#modal-confirm').show()
 }
 
-function statusUser(id,v){
+function statusUser(id, role, v){
   $('#modal-confirm').hide()
   $('.w3-overlay').show()
   setTimeout(function(){
   $.ajax({  
     url:'{{ path('status_user') }}',
     type: "POST",
-    data:'id='+id+'&status='+v,
+    data:'id='+id+'&status='+v+'&role='+role,
     success: function(data){
       $('.w3-overlay').hide()
       if (data.message == 'success')

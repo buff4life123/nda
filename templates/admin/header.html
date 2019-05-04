@@ -20,6 +20,7 @@
     <div class="w3-col s12 w3-center">
       <span>{%trans%}hello{%endtrans%}, 
         <b class="js-user-rating" style="text-transform:capitalize" data-is-authenticated="{{ app.user ? 'true' : 'false' }}">{{ app.user.username }}</b>
+    
       </span>
     </div>
   </div>
@@ -28,39 +29,41 @@
     <a href="#" onclick="ajaxUpload(this.id)" id="dashboard" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
       <i class="fas fa-tachometer-alt"></i> {%trans%}dash{%endtrans%}
     </a>
-    <div class="w3-dropdown-click">
-      <button onclick="dropDownMenu('company')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-         <i class="fa fa-home"></i> {%trans%}company{%endtrans%}
-      </button>
-      <div id="company" class="w3-dropdown-content w3-bar-block" style="position:relative">
-        <a href="#" onclick="ajaxUpload('company')" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-          <i class="far fa-edit fa-fw"></i> {%trans%}edit{%endtrans%}
-        </a>
-        <a href="#" onclick="ajaxUpload(this.id)" id="about-us" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-          <i class="far fa-file-alt"></i> {%trans%}about_us{%endtrans%}
-        </a>
-        <a href="#" onclick="ajaxUpload(this.id)" id="rgpd" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-          <i class="far fa-file-alt"></i> {%trans%}gdpr{%endtrans%}
-        </a>
-        <a href="#" onclick="ajaxUpload(this.id)" id="terms" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-          <i class="fas fa-asterisk"></i> {%trans%}terms_cond{%endtrans%}
-        </a>
-      </div>
-    </div>
-    <div class="w3-dropdown-click">
-      <button onclick="dropDownMenu('user')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-         <i class="fas fa-user-shield"></i> {%trans%}users{%endtrans%}
-      </button>
-      <div id="user" class="w3-dropdown-content w3-bar-block" style="position:relative">
-        <a href="#" onclick="newUserType(this.id)" id="user-new-btn" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
-          <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
-        </a>
-        <a href="#" onclick="ajaxUpload(this.id)" id="user-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
-          <i class="far fa-edit fa-fw"></i> {%trans%}list{%endtrans%}
-        </a>
-      </div>
-    </div>
-
+      {% if  app.user.className != "Manager" %}
+        <div class="w3-dropdown-click">
+          <button onclick="dropDownMenu('company')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
+            <i class="fa fa-home"></i> {%trans%}company{%endtrans%}
+          </button>
+          <div id="company" class="w3-dropdown-content w3-bar-block" style="position:relative">
+            <a href="#" onclick="ajaxUpload('company')" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+              <i class="far fa-edit fa-fw"></i> {%trans%}edit{%endtrans%}
+            </a>
+            <a href="#" onclick="ajaxUpload(this.id)" id="about-us" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+              <i class="far fa-file-alt"></i> {%trans%}about_us{%endtrans%}
+            </a>
+            <a href="#" onclick="ajaxUpload(this.id)" id="rgpd" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+              <i class="far fa-file-alt"></i> {%trans%}gdpr{%endtrans%}
+            </a>
+            <a href="#" onclick="ajaxUpload(this.id)" id="terms" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+              <i class="fas fa-asterisk"></i> {%trans%}terms_cond{%endtrans%}
+            </a>
+          </div>
+        </div>
+        
+        <div class="w3-dropdown-click">
+          <button onclick="dropDownMenu('user')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
+            <i class="fas fa-user-shield"></i> {%trans%}users{%endtrans%}
+          </button>
+          <div id="user" class="w3-dropdown-content w3-bar-block" style="position:relative">
+            <a href="#" onclick="newUserType(this.id)" id="user-new-btn" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
+              <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
+            </a>
+            <a href="#" onclick="ajaxUpload(this.id)" id="user-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
+              <i class="far fa-edit fa-fw"></i> {%trans%}list{%endtrans%}
+            </a>
+          </div>
+        </div>
+      {% endif %}
     <!-- <div class="w3-dropdown-click"> -->
       <!-- <button onclick="dropDownMenu('category')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown"> -->
         <!-- <i class="fas fa-project-diagram"></i> {%trans%}category{%endtrans%}</button> -->

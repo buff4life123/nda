@@ -2,6 +2,7 @@
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
+/src/Migrations/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

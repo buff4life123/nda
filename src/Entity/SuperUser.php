@@ -83,4 +83,9 @@ class SuperUser extends User
 
         return $this;
     }
+
+    public function getClassName()
+    {
+        return (new \ReflectionClass($this))->getShortName();
+    }
 }
