@@ -207,6 +207,7 @@ google.charts.setOnLoadCallback(function() { drawChart(a[0],0) })
 google.charts.setOnLoadCallback(function() { drawChart(a[1],1) })
 
   function drawChart(chrt,i) {
+
     var data = google.visualization.arrayToDataTable(chrt)
     if (i == 1 || i == 2)
     var options = {

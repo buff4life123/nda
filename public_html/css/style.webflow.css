@@ -247,7 +247,6 @@ body {
   width: 300px;
   height: 300px;
   padding-left: 20px;
-  /* background-image: url('../images/logo_nautic.png'), linear-gradient(180deg,  #1a1a1a, transparent);  */
   background-position: 50% 50%, 0px 0px;
   background-size: 240px, auto;
   background-repeat: no-repeat, repeat;
@@ -265,7 +264,6 @@ body {
 .slider-item {
   height: 950px;
   border-bottom: 1px none #fff;
-  /* background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url('../images/jet-ski-1125329_1920.jpg'); */
   background-position: 0px 0px, 50% 70%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -920,7 +918,7 @@ body {
   font-size: 18px;
 }
 
-.destaque-slogan-seas1 {
+.destaque-slogan {
   position: relative;
   display: block;
   width: 75%;
@@ -2149,7 +2147,6 @@ position: fixed;
   height: 250px;
   float: left;
 
-  /* background-image: url('../images/logo_nautic.png'), linear-gradient(180deg, rgb(49, 40, 40), transparent); */
   background-position: 50% 50%, 0px 0px;
   background-size: 80%, auto;
   background-repeat: no-repeat, repeat;
@@ -2242,7 +2239,7 @@ position: fixed;
   -ms-flex: 0 auto;
   flex: 0 auto;
   border-bottom: 1px solid #000;
-  /* background-image: url('../images/logo_nautic_trans.png'); */
+
   background-position: 0px 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -3974,7 +3971,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     font-size: 55px;
     line-height: 55px;
   }
-  .destaque-slogan-seas1 {
+  .destaque-slogan {
     width: 100%;
     margin-top: 0px;
     margin-left: 0px;
@@ -4511,7 +4508,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     margin-top: 4px;
     text-align: center;
   }
-  .destaque-slogan-seas1 {
+  .destaque-slogan {
     top: 0px;
     display: block;
     width: 85%;
@@ -5231,7 +5228,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     font-size: 30px;
     line-height: 35px;
   }
-  .destaque-slogan-seas1 {
+  .destaque-slogan {
     top: 0px;
     width: 100%;
     margin-top: 0px;

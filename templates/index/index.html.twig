@@ -37,8 +37,8 @@
                         <div class="text-block">PT</div>
                     </a>
                 {% endif %}
-
-                <a class="brand w-nav-brand" href="#" style="background-image: url(../upload/gallery/{{company.getLogo}}), linear-gradient(180deg,  #1a1a1a, transparent)"></a>
+                {% set path = asset('/upload/gallery/')  %}
+                <a class="brand w-nav-brand" href="#" style="background-image: url({{path}}{{company.getLogo}}), linear-gradient(180deg,  #1a1a1a, transparent)"></a>
 
                 <nav class="nav-menu w-nav-menu" role="navigation">
                     <a class="nav-link w-nav-link" href="#activities">{% trans %}activities{% endtrans %}</a>
@@ -59,7 +59,7 @@
                     <div class="slider-item w-slide" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url(../images/headerSlider/{{name}})">
                         <div class="div-block-5 w-clearfix">
                             <div class="free-transport-ini-pt"></div>
-                            <div class="destaque-slogan-seas1">
+                            <div class="destaque-slogan">
                                 <h1 class="heading-6">{% trans %}h3_3_head{%endtrans%}</h1>
                                 {# <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1> #}
                                 {# <p class="paragraph-5">{% trans %}h3_3_txt{%endtrans%}</p> #}
