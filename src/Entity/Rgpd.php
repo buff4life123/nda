@@ -28,7 +28,7 @@ class Rgpd
     */
     private $name;
     /**
-     *@ORM\ManyToOne(targetEntity="Locales", inversedBy="rgpd") */
+     *@ORM\ManyToOne(targetEntity="Locales") */
     private $locales;
     
     public function getId()
