@@ -258,22 +258,22 @@ Please feel free to contact us anytime.',
 
 
     //traduçoes do Menu
-    'menu' => array(
-        'about_us' => 'About Us',
-        'menu_boats' => array(
-            'boats'=> 'Boats',
-            'nauticDrive' => 'nauticDrive',
-            'nauticDrive2' => 'nauticDrive II',
-        ),
-        'menu_experiences' => array(
-            'experiences'=> 'Experiences',
-            'kayak' => 'Kayak Tour',
-            'ultimate' => 'Ulimate Tour',
-            'benagil_cave' => 'Benagil Cave',
-            'benagil_sunset' => 'Benagil Sunset',
-        ),
-        'contacts' => 'Contacts',
-    ),
+    // 'menu' => array(
+    //     'about_us' => 'About Us',
+    //     'menu_boats' => array(
+    //         'boats'=> 'Boats',
+    //         'nauticDrive' => 'nauticDrive',
+    //         'nauticDrive2' => 'nauticDrive II',
+    //     ),
+    //     'menu_experiences' => array(
+    //         'experiences'=> 'Experiences',
+    //         'kayak' => 'Kayak Tour',
+    //         'ultimate' => 'Ulimate Tour',
+    //         'benagil_cave' => 'Benagil Cave',
+    //         'benagil_sunset' => 'Benagil Sunset',
+    //     ),
+    //     'contacts' => 'Contacts',
+    // ),
     //traducoes da Home
     'home' => array(
         'title' => 'ALGARVE BOAT & CAVE TOURS',

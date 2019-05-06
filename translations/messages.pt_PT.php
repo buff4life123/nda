@@ -263,22 +263,22 @@ return array(
 
 
     //traduções do Menu
-    'menu' => array(
-        'about_us' => 'Sobre Nós',
-        'menu_boats' => array(
-            'boats'=> 'Barcos',
-            'nauticDrive' => 'nauticDrive',
-            'nauticDrive2' => 'nauticDrive II',
-        ),
-        'menu_experiences' => array(
-            'experiences'=> 'Experiências',
-            'kayak' => 'Passeio Caiaque',
-            'ultimate' => 'Passeio Derradeiro',
-            'benagil_cave' => 'Caverna Benagil',
-            'benagil_sunset' => 'Por do sol Benagil',
-        ),
-        'contacts' => 'Contactos',
-    ),
+    // 'menu' => array(
+    //     'about_us' => 'Sobre Nós',
+    //     'menu_boats' => array(
+    //         'boats'=> 'Barcos',
+    //         'nauticDrive' => 'nauticDrive',
+    //         'nauticDrive2' => 'nauticDrive II',
+    //     ),
+    //     'menu_experiences' => array(
+    //         'experiences'=> 'Experiências',
+    //         'kayak' => 'Passeio Caiaque',
+    //         'ultimate' => 'Passeio Derradeiro',
+    //         'benagil_cave' => 'Caverna Benagil',
+    //         'benagil_sunset' => 'Por do sol Benagil',
+    //     ),
+    //     'contacts' => 'Contactos',
+    // ),
     //traducoes da Home
     'home' => array(
         'title' => 'SECRETO DO ALGARVE',
