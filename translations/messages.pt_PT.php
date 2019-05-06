@@ -2,6 +2,8 @@
 
 return array(
 
+    'email' => 'email',
+    'Email' => 'Email',
     'follow_social_network' => 'Siga-nos nas nossas redes sociais ', 
     'aboutUs' => 'Sobre nós',
     'booking' => 'Reservar',

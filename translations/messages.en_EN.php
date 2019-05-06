@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'email' => 'email',
+    'Email' => 'Email',
     'follow_social_network' => 'Follow us on our social network ', 
      'prices' => 'Prices ', 
     'dependent' => 'Dependent ',
