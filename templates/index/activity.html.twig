@@ -212,10 +212,13 @@
     <div class="boarding-location w-clearfix">
         <div class="boarding-info">
             <h4 class="heading-16">{%trans%}where_going_to_be{%endtrans%}<br></h4>
-            <h4 class="heading-15">Centro de Esportes Aquáticos - Nauticdrive.
+            <h4 class="heading-15">
+                    {{products[0].where_going_to_be}}
+                {# Centro de Esportes Aquáticos - Nauticdrive.
                 <br>
                 {%trans%}address{%endtrans%}:
-                {{products[0].local}}, Olhos de Água 8200, Albufeira<br>
+                {{products[0].local}}, Olhos de Água 8200, Albufeira<br> #}
+                <br>
                 <a href="https://www.google.com/maps/dir//{{products[0].gps_coords}}" target="_blank">
                     {%trans%}openGoogleMaps{%endtrans%}
                     ⟶
