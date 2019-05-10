@@ -72,7 +72,7 @@ class Company
     */
     private $email_port;
     /**
-    * @ORM\Column(type="string", length=24, name="email_smtp")
+    * @ORM\Column(type="string", length=30, name="email_smtp")
     */
     private $email_smtp;
     /**
