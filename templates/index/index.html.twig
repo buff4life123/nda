@@ -314,11 +314,10 @@
             <div class="inst-head">{%trans%}follow_us{%endtrans%}</div>
             <!-- InstaWidget -->
             <div class="bg-instagram"> <div class="instagram">
+                <div id="instafeed"></div>
                 <!-- LightWidget WIDGET -->
-                <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-                <iframe src="//lightwidget.com/widgets/f4112973c0a85a9b8c15089fb713c010.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
-
-
+                {# <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+                <iframe src="//lightwidget.com/widgets/f4112973c0a85a9b8c15089fb713c010.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe> #}
 
             </div>
             </div>
@@ -394,6 +393,19 @@
             </div>
 
             <script>
+
+                var userFeed = new Instafeed({
+                    get: 'user',
+                    userId: 'c45c676652c34659b49d82efebdf73a9',
+                    accessToken: '13692227965.c45c676.d07eea7a54814b558e1dbdcfa52a4581',
+                    sortBy: 'most-recent',
+                    limit: 5,
+                    resolution: 'low_resolution',
+                    template: '<div> </div>'
+                });
+                userFeed.run();
+
+                console.log("ola"+userFeed);
 
                 function modalGDPR(head, content){
                     $('#modal-gdpr').show()
