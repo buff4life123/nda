@@ -54,3 +54,6 @@ vsCode:
 ctrl + P        - find file
 ctrl + alt + F  - format code
 alt f12         - quick edit
+
+git ftp catchup
+git ftp push
