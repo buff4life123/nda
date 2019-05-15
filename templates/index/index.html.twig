@@ -314,7 +314,9 @@
             <div class="inst-head">{%trans%}follow_us{%endtrans%}</div>
             <!-- InstaWidget -->
             <div class="bg-instagram"> <div class="instagram">
-                <div id="instafeed"></div>
+                <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<div class="elfsight-app-9661b4fe-d211-4618-a0af-276d8d25449f"></div>
+                {# <div id="instafeed"></div> #}
                 <!-- LightWidget WIDGET -->
                 {# <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
                 <iframe src="//lightwidget.com/widgets/f4112973c0a85a9b8c15089fb713c010.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe> #}
@@ -395,15 +397,30 @@
             <script>
 
                 var userFeed = new Instafeed({
+                get: 'user',
+                userId: '13692227965',
+                clientId: 'c45c676652c34659b49d82efebdf73a9',
+                accessToken: '13692227965.c45c676.d07eea7a54814b558e1dbdcfa52a4581',
+                resolution: 'standard_resolution',
+                template: '<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img src="{% verbatim %}{{image}}{% endverbatim %}" /></a>',
+                sortBy: 'most-recent',
+                limit: 4,
+                links: false
+                });
+                userFeed.run();
+                {# var userFeed = new Instafeed({
                     get: 'user',
-                    userId: 'c45c676652c34659b49d82efebdf73a9',
-                    accessToken: '13692227965.c45c676.d07eea7a54814b558e1dbdcfa52a4581',
+                    userId: '13692227965',
+                    accessToken: '13692227965.c45c676.d07eea7a54814b558e1dbdcfa52a4581', 
                     sortBy: 'most-recent',
                     limit: 5,
                     resolution: 'low_resolution',
-                    template: '<div> </div>'
+                    template: ''
                 });
-                userFeed.run();
+                var teste = userFeed.run(); #}
+
+
+
 
                 function modalGDPR(head, content){
                     $('#modal-gdpr').show()
@@ -469,6 +486,7 @@
                     }, 500)
                 }
             </script>
+
         {% endblock body %}
 
         {% block javascripts %}

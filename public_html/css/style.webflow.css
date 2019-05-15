@@ -5826,5 +5826,24 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   text-transform: uppercase
 }
 
+#instafeed {
+  max-width:1080px;
+  width: 30%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+#instafeed a {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 50%;
+  background: white;
+  
+}
 
+#instafeed img {
+  display: inline;
+  width: 100%;
+}
