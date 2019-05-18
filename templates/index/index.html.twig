@@ -191,7 +191,7 @@
                 <div class="w3-row-padding">
 
                     {%for product in products %}
-                        {% if  loop.index0 > 2 and loop.index0 < 13 %}
+                   {#   {% if  loop.index0 > 2 and loop.index0 < 13 %} #}
 
                             <div class="w3-col l4 m6 s12" data-ix="new-interaction" style="padding-bottom:24px">
                                 <div class="w3-white w3-card w3-border w3-round-large">
@@ -220,7 +220,7 @@
                                     </a>
                                 </div>
                             </div>
-                        {% endif %}
+                        {# {% endif %} #}
                     {% endfor %}
                 </div>
             </div>
