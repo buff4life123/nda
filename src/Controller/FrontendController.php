@@ -404,7 +404,7 @@ class FrontendController extends AbstractController
 	private function fileFinder($dir)
 	{
 		$icons_finder = new Finder();
-		$icons_finder->files()->in($dir);
+		$icons_finder->files()->in($dir)->sortByName();
 		$icons_name = array();
 		foreach ($icons_finder as $name) {
 			array_push($icons_name, basename($name));
