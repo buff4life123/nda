@@ -87,7 +87,7 @@ html.w-mod-touch * {
 .w-button {
   display: inline-block;
   padding: 9px 15px;
-  background-color: #0047b3;
+  background-color: #3898EC;
   color: white;
   border: 0;
   line-height: inherit;
@@ -1664,6 +1664,7 @@ textarea.w-select {
   left: 0;
   right: 0;
   width: 100%;
+  height: 500px;
 }
 .w-nav-overlay .w--nav-menu-open {
   top: 0;

@@ -45,11 +45,13 @@
 
                     <a class="nav-link w-nav-link" href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0" target="_blank">{% trans %}booking{% endtrans %}</a>
 
-                    <a href="{{path('about_us')}}" class="nav-link w-nav-link">{% trans %}aboutUs{% endtrans %}</a>
+                    <a class="nav-link w-nav-link" href="{{path('about_us')}}" >{% trans %}aboutUs{% endtrans %}</a>
 
                     <a class="nav-link w-nav-link" href="#contact">{% trans %}contact{% endtrans %}</a>
                 </nav>
-                <div class="menu-button w-nav-button"><div class="icon w-icon-nav-menu"></div></div>
+                <div class="menu-button w-nav-button">
+                    <div class="icon w-icon-nav-menu"></div>
+                </div>
             </div>
         </div>
 
@@ -314,13 +316,8 @@
             <div class="inst-head">{%trans%}follow_us{%endtrans%}</div>
             <!-- InstaWidget -->
             <div class="bg-instagram"> <div class="instagram">
-                <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-<div class="elfsight-app-9661b4fe-d211-4618-a0af-276d8d25449f"></div>
-                {# <div id="instafeed"></div> #}
-                <!-- LightWidget WIDGET -->
-                {# <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-                <iframe src="//lightwidget.com/widgets/f4112973c0a85a9b8c15089fb713c010.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe> #}
-
+                <div id="instafeed" class="multiple-item"></div>
+                
             </div>
             </div>
             {#FOOTER________________________________________________________________________________________________________________________________________________________________#}
@@ -398,29 +395,28 @@
 
                 var userFeed = new Instafeed({
                 get: 'user',
-                userId: '13692227965',
-                clientId: 'c45c676652c34659b49d82efebdf73a9',
-                accessToken: '13692227965.c45c676.d07eea7a54814b558e1dbdcfa52a4581',
+                userId: '2098052822',
+                clientId: 'a8b951370a7a47cb89bfda0236df6e56',
+                accessToken: '2098052822.1677ed0.05126d22e6bb41149120a64c277094b5',
                 resolution: 'standard_resolution',
-                template: '<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img src="{% verbatim %}{{image}}{% endverbatim %}" /></a>',
+                template: '<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img src="{% verbatim %}{{image}}{% endverbatim %}"/> <div class="footer"><div class="caption">{% verbatim %}{{caption}}{% endverbatim %}</div></div></a>',
+                /*'<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img src="{% verbatim %}{{image}}{% endverbatim %}"/><div class="footer"><div class="caption">{% verbatim %}{{caption}}{% endverbatim %}</div><div class="user"><img src="{% verbatim %}{{model.user.profile_picture}}{% endverbatim %}"/><span>{% verbatim %}{{model.user.username}}{% endverbatim %}</span></div></div></a>',
+                '<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img src="{% verbatim %}{{image}}{% endverbatim %}" /></a>' */
+                
                 sortBy: 'most-recent',
-                limit: 4,
-                links: false
+                limit: 12,
+                links: false,
+                after: function () {
+                    $('.multiple-item').slick({ 
+                        slidesToShow: 5,
+                        slidesToScroll: 1,
+                        autoplay: true,
+                        autoplaySpeed: 3000,
+                        arrows:false,
+                    });
+                }
                 });
                 userFeed.run();
-                {# var userFeed = new Instafeed({
-                    get: 'user',
-                    userId: '13692227965',
-                    accessToken: '13692227965.c45c676.d07eea7a54814b558e1dbdcfa52a4581', 
-                    sortBy: 'most-recent',
-                    limit: 5,
-                    resolution: 'low_resolution',
-                    template: ''
-                });
-                var teste = userFeed.run(); #}
-
-
-
 
                 function modalGDPR(head, content){
                     $('#modal-gdpr').show()

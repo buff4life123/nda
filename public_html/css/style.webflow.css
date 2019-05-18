@@ -1,3 +1,4 @@
+
 body {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   color: #333;
@@ -262,6 +263,7 @@ body {
 }
 
 .slider-item {
+  /* height: 950px; */
   height: 950px;
   border-bottom: 1px none #fff;
   background-position: 0px 0px, 50% 70%;
@@ -2896,7 +2898,7 @@ position: fixed;
   background-repeat: no-repeat; */
   /* border-style: solid; 
   border-color: #0047b3; */
-  background: #fff;
+  /* background: #fff; */
 }
 
 .section-2-about {
@@ -4042,6 +4044,10 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     float: none;
   }
 
+  .socialmedia-links {
+    display: none;
+  }
+
   .free-transport {
     position: relative;
     left: -62px;
@@ -4660,7 +4666,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .div-block-16 {
     display: block;
     width: 90%;
-    margin-top: 45px;
+    /* margin-top: 45px; */
     margin-right: auto;
     margin-left: auto;
     padding-left: 0px;
@@ -5827,11 +5833,12 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
 }
 
 #instafeed {
-  max-width:1080px;
-  width: 30%;
+  /* max-width:1080px; */
+  width: 100%;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+  /* height: -webkit-fill-available; */
 }
 
 #instafeed a {
@@ -5844,6 +5851,123 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
 }
 
 #instafeed img {
-  display: inline;
-  width: 100%;
+  /* display: inline; */
+
+  /* height: 100%;
+  object-fit: cover;
+  position: absolute;
+  width: 100%; */
 }
+
+
+/* the slides */
+.slick-slide img {
+  border:0px !important;display:block !important;width:100% !important;
+  /* border: 5px !important; */
+  width: 500px !important;
+  height: 354px !important;
+  object-fit: cover !important;
+}
+
+#instafeed a div.footer {
+  width: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .5rem 1rem;
+  background: rgba(30, 144, 255, 0.0);
+  font-size: .8rem;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* #instafeed a:hover div.footer {
+  background: rgba(30, 144, 255, 0.5);
+} */
+
+#instafeed a div.footer img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: .5rem;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+#instafeed a div.caption {
+  height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  word-break: break-all;
+}
+
+#instafeed a:hover .caption, #instafeed a:focus .caption {
+  /* margin: -.5rem -1rem .5rem;
+  padding: .5rem 1rem; */
+  opacity: 1;
+  height: auto;
+  background: rgba(30, 144, 255, 0.9);
+}
+
+#CDSWIDSSP {width: 90% !important;}
+
+#CDSWIDSSP.widSSPnarrow .widSSPData .widSSPBranding dd {width: 90% !important;}
+
+@media only screen and (max-width: 1024px)  {
+  .slick-slide img {
+    width: 200px !important;
+    height: 100px !important;
+  }
+
+  /* .socialmedia-links {
+    right: 45px;
+  } */
+
+}
+
+@media only screen and (max-width: 768px)  {
+
+  
+  .slider-item {
+    /* height: initial; */
+    height: 384px !important;
+    object-fit: cover !important;
+  }
+
+  .header-slider {
+    height: 384px;
+  }
+
+  .div-block-5 {
+    margin-top: 0;
+  }
+
+  .w-slider-nav {
+    margin-bottom: 45px;
+  }
+
+  .heading-4 {
+    letter-spacing: 0px;
+  }
+
+  .brand {
+    height: 150px;
+    background-size: 150px, auto;
+  }
+
+  /* .socialmedia-links {
+    right: 25px;
+  } */
+
+}
+
+@media only screen and (max-width: 480px)  {
+
+  /* .socialmedia-links {
+    right: 15px;
+  } */
+
+}
+

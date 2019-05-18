@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * Webflow: Front-end site library
  * @license MIT
  * Inline scripts may access the api using an async handler:
@@ -45,3 +45,4 @@ Webflow.require('ix').init([
   {"slug":"loop-seta","name":"loop seta","value":{"style":{},"triggers":[{"type":"load","selector":".seta-pdf","loopA":true,"loopB":true,"preserve3d":true,"stepsA":[{"transition":"transform 1000ms ease 0","x":"0px","y":"9px","z":"0px"},{"transition":"transform 600ms ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"preload","name":"preload","value":{"style":{},"triggers":[{"type":"load","preload":true,"stepsA":[{"wait":"250ms","transition":"transform 250ms ease 0"},{"opacity":0,"transition":"opacity 600ms ease 0"},{"wait":"0ms","display":"none"}],"stepsB":[]}]}}
 ]);
+
