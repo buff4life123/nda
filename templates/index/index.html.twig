@@ -228,7 +228,7 @@
 
         {#TESTEMONIALS________________________________________________________________________________________________________________________________________________________________#}
         <div class="testemonials-algarve">
-            <div class="algarve-tours w-slider" data-animation="slide" data-autoplay="1" data-delay="5000" data-duration="900" data-infinite="1">
+            <div class="algarve-tours w-slider" data-animation="slide" data-autoplay="1" data-delay="7000" data-duration="900" data-infinite="1">
                 <div class="w-slider-mask">
                     <div class="algarve-tours-test1 w-slide">
                         <div class="div-block-8">
@@ -363,30 +363,40 @@
 
                 <div class="icones-social">
                     <div class="text-block-19">{%trans%}follow_social_network{%endtrans%}</div>
-                    {%for name in social_network_icons %}
-                        {% if company.getLinksActive[loop.index0] == true %}
-                            <div class="icone-footer w-inline-block" onclick="openWindow('{{company.getLinks[loop.index0]}}')" style="background-image: url(../images/icons/{{name}})"></div>
-                        {%endif %}
-                    {% endfor %}
+                    <div class="footer-icons">
+                        {%for name in social_network_icons %}
+                            {% if company.getLinksActive[loop.index0] == true %}
+                                <div class="icone-footer w-inline-block" onclick="openWindow('{{company.getLinks[loop.index0]}}')" style="background-image: url(../images/icons/{{name}})"></div>
+                            {%endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="icones-social">
+                    <div class="footer-sponsors">
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/rnt.png)"> </div>
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/supalbufeira.png)"> </div>
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/patrocinadorAlbufeira.jpg)"> </div>
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/turismoDePortugal.jpg)"> </div>
+                        {# <div class="sponsor-footer w-inline-block" style="background-image: url(../images/turismoDePortugal.jpg)"> </div> #}
+                    </div>
                 </div>
              
                 <div class="footer-dir-local w-clearfix">
-                    <div class="text-block-5 more-info">
+                    {# <div class="text-block-5 more-info">
                         <div class="logo-footer-sub logo-pad" style="background-image: url(../images/rnt.png)"> </div>
                         <div class="logo-footer-sub logo-pad" style="background-image: url(../images/supalbufeira.png)"> </div>
                         <div class="logo-footer-sub logo-pad" style="background-image: url(../images/patrocinadorAlbufeira.jpg)"> </div>
                         <div class="logo-footer-sub logo-pad" style="background-image: url(../images/turismoDePortugal.jpg)"> </div>
                         
-                    </div>
-                    <div class="text-block-5">
+                    </div> #}
+                    <div class="footer-conditions text-block-5">
                     <a class="w-inline-block more-info" href="#" onclick="modalGDPR('{{rgpd.getName}}','{{rgpd.getRgpdHtml}}')">  {%trans%}gdpr{%endtrans%}</a>
                     <a class="w-inline-block more-info" href="#" onclick="modalTermosCondicoes('{{terms_conditions.getName}}','{{terms_conditions.getTermsHtml}}')">  {%trans%}terms_cond{%endtrans%}</a>
                     </div>
-                    <div class="text-block-5">
-                    </div>
+                    {# <div class="text-block-5"></div> #}
 
-                    <div class="text-block-7" id="footer-fullyear">{{company.name}}
-                    </div>
+                    <div class="text-block-7" id="footer-fullyear">{{company.name}}</div>
                 </div>
 
             </div>
@@ -410,7 +420,7 @@
                     $('.multiple-item').slick({ 
                         slidesToShow: 5,
                         slidesToScroll: 1,
-                        autoplay: true,
+                        autoplay: false,
                         autoplaySpeed: 3000,
                         arrows:false,
                     });
