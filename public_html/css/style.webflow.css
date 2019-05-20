@@ -6016,6 +6016,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .testemonials-algarve {
     background-position: 0% 0%;
     background-size: contain;
+    background-attachment: unset;
   }
 
 }
