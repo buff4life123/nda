@@ -67,7 +67,6 @@ class RegistrationController extends AbstractController
                         
                 $subject ='Registo efetuado';
 
-                $host = "https://".$request->getHost();
 
                 $message = (new \Swift_Message($subject))
                     ->setFrom([$company->getEmail() => $company->getName()])
@@ -78,7 +77,7 @@ class RegistrationController extends AbstractController
                             'emails/register.html.twig',
                             array(
                                 'username' => $user->getUsername(),
-                                'logo' => $host.'/upload/gallery/'.$company->getLogo(),
+                                'logo' => $this->getHost($request).'/upload/gallery/'.$company->getLogo(),
                                 'company_name' => $company->getName()
                             )
                         ),
@@ -149,5 +148,18 @@ class RegistrationController extends AbstractController
         return $err;
     }
 
+    /*check the current host*/
+    private function getHost(Request $request){
 
+        if(preg_match('/10.0.9/i', $request->getHttpHost()))
+            $host = 'http://'.$request->getHttpHost();
+
+        else if(preg_match('/demo/i', $request->getHttpHost()))
+            $host = 'https://demo.nauticdrive-algarve.com/';
+
+        else
+            $host = 'https://nauticdrive-algarve.com/';
+
+        return $host;
+    }
 }
