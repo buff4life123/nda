@@ -4230,7 +4230,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     height: 400px;
   }
   .slide-about {
-    height: 400px;
+    max-height: 290px;
     background-position: 50% 57%;
     background-size: auto 150%;
   }
@@ -4857,7 +4857,9 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .slide-about {
     background-position: 50% 40%;
     background-size: auto 200%;
+    max-height: 290px;
   }
+
   .div-block-1about {
     position: relative;
     left: 0px;
@@ -5670,16 +5672,16 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     width: 150px;
   }
   .slider-about-us {
-    height: 400px;
+    max-height: 290px;
   }
   .slide-about {
-    height: 400px;
+    max-height: 290px;
     background-position: 50% 12%;
     background-size: auto 100%; 
     object-fit: cover !important;
   }
   .section-2-about {
-    height: 400px;
+    max-height: 290px;
   }
   .div-block-34 {
     padding-top: 48px;
@@ -6083,9 +6085,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     /* border-top: 1px solid #414141; */
   }
 
-  /* .socialmedia-links {
-    right: 15px;
-  } */
+
 
 }
 
