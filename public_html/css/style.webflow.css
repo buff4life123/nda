@@ -1724,7 +1724,7 @@ position: fixed;
   margin-right: auto;
   margin-left: auto;
   /* background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(79, 175, 66, .55)), to(rgba(79, 175, 66, .55))), url('../images/fundo-azul.jpg'); */
-  background-image: linear-gradient(180deg, rgba(79, 175, 66, .55), rgba(79, 175, 66, .55)), url('../images/yate.png');
+  background-image: linear-gradient(180deg, rgba(79, 175, 66, .55), rgba(79, 175, 66, .55)), url('../images/testemonialBackground.jpg');
   /* background-image: linear-gradient(180deg, #3385ff, #0047b3); */
   background-position: 0px 0px, 50% 33%;
   background-size: auto, cover;
@@ -2917,7 +2917,7 @@ position: fixed;
 
 .slide-about {
   height: 550px;
-  background-image: url('../images/yate.png');
+  background-image: url('../images/testemonialBackground.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
