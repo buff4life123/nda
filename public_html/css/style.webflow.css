@@ -380,7 +380,7 @@ body {
 }
 
 .testemonials-algarve {
-  background-image: url('../images/yate.png'); 
+  background-image: url('../images/testemonialBackground.jpg'); 
   background-position: 50% 50%;
   background-size: cover;
   background-attachment: fixed;
@@ -6012,6 +6012,11 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   /* .socialmedia-links {
     right: 25px;
   } */
+
+  .testemonials-algarve {
+    background-position: 0% 0%;
+    background-size: contain;
+  }
 
 }
 
