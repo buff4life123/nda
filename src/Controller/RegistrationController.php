@@ -67,6 +67,8 @@ class RegistrationController extends AbstractController
                         
                 $subject ='Registo efetuado';
 
+                $host = "https://".$request->getHost();
+
                 $message = (new \Swift_Message($subject))
                     ->setFrom([$company->getEmail() => $company->getName()])
                     ->setTo([$user->getEmail() => $user->getUsername(), $company->getEmail() => $company->getName()])
@@ -76,7 +78,7 @@ class RegistrationController extends AbstractController
                             'emails/register.html.twig',
                             array(
                                 'username' => $user->getUsername(),
-                                'logo' => '/upload/gallery/'.$company->getLogo(),
+                                'logo' => $host.'/upload/gallery/'.$company->getLogo(),
                                 'company_name' => $company->getName()
                             )
                         ),

@@ -48,7 +48,10 @@ class FrontendController extends AbstractController
 			'header_slider_items'  => $header_slider_items,
 			'products' => $products['products'],
 			'exp_api_key' => $products['key'],
-			'url_api_key' => $products['url']));
+			'url_api_key' => $products['url'],
+		
+		));
+			
 	}
 
     public function aboutUs(Request $request)
