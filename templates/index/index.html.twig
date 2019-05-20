@@ -44,7 +44,7 @@
                 <nav class="nav-menu w-nav-menu" role="navigation">
                     <a class="nav-link w-nav-link" href="#activities">{% trans %}activities{% endtrans %}</a>
 
-                    <a class="nav-link w-nav-link" href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0" target="_blank">{% trans %}booking{% endtrans %}</a>
+                    <a class="nav-link w-nav-link" href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0&locale={{app.request.getLocale}}" target="_blank">{% trans %}booking{% endtrans %}</a>
 
                     <a class="nav-link w-nav-link" href="{{path('about_us')}}" >{% trans %}aboutUs{% endtrans %}</a>
 
@@ -67,7 +67,7 @@
                                 <h1 class="heading-6">{% trans %}h3_3_head{%endtrans%}</h1>
                                 {# <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1> #}
                                 {# <p class="paragraph-5">{% trans %}h3_3_txt{%endtrans%}</p> #}
-                                <a href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a>
+                                <a href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0&locale={{app.request.getLocale}}" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a>
                             </div>
 
 

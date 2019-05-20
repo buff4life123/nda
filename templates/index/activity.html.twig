@@ -46,7 +46,7 @@
                 {% if products[0].to_do == true %}
                     <p class="paragraph-8">{{products[0].to_do}}</p>
                 {%endif %}
-                <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{products[0].id}}" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{% endtrans %}</a>
+                <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{products[0].id}}&locale={{app.request.getLocale}}" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{% endtrans %}</a>
             </div>
         </div>
     </div>
