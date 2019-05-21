@@ -183,7 +183,20 @@ body {
   font-size: 13px;
   line-height: 18px;
   text-decoration: none;
+/* 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  height: 100%;
+
 }
+
+/* .paragraph-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ 
+} */
 
 .info-tour {
   position: absolute;
@@ -5970,8 +5983,10 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     height: 100px !important;
   }
 
-  /* .socialmedia-links {
-    right: 45px;
+  /* .paragraph {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   } */
 
 }
