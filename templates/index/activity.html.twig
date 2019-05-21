@@ -33,10 +33,10 @@
                 <div class="text-block-16">{% trans %}back_to_home{% endtrans %}</div>
             </a>
         </div>
+
         <div class="div-block-15 w-clearfix">
-            <div class="free-transport"></div>
-            <div
-                class="div-block-16">
+            <!-- <div class="free-transport"></div> -->
+            <div class="div-block-16">
                 {# <h2 class="heading-6">{{company.name}}
                                     WATERSPORTS</h2> #}
                 {% if products[0].title == true %}
@@ -49,10 +49,35 @@
                 <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{products[0].id}}&locale={{app.request.getLocale}}" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{% endtrans %}</a>
             </div>
         </div>
+
+        <div class="section-price div-block-15 w-clearfix">
+            <!-- <div class="div-block-16"> -->
+                <div class="section-price-layer">
+                    <div class="price-flex">
+                        <div class="div-block-20 w-clearfix">
+                            <div class="price-tit w-clearfix">
+                                <h3 class="heading-14">{% trans %}prices{% endtrans %}</h3>
+                            </div>
+                            {% if products[0].price == true %}
+                                {%for prices in products[0].price%}
+                                    <a class="adulto-tour-1 w-inline-block w-clearfix" href="#">
+                                        {% set price = prices|length > 0 ? "%.2f"|format(prices.price.amount/100) : '-/-' %}
+                                        <h3 class="price-ad ">{{price}}
+                                            {{prices.price.currency}}</h3>
+                                        <h3 class="heading-12">{{prices.name}}:</h3>
+                                    </a>
+                                {% endfor %}
+                            {%endif %}
+                        </div>
+                    </div>
+        
+                </div>
+            <!-- </div> -->
+        </div>
     </div>
 
     {#PRICE________________________________________________________________________________________________________________________________________________________________#}
-    <div class="section-price">
+    <!-- <div class="section-price">
         <div class="section-price-layer">
             <div class="price-flex">
                 <div class="div-block-20 w-clearfix">
@@ -73,7 +98,7 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 
     {#INFO________________________________________________________________________________________________________________________________________________________________#}
     <div class="section-3">
