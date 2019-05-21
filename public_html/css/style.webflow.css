@@ -2925,11 +2925,11 @@ position: fixed;
   position: absolute;
   z-index: 0;
   width: 100%;
-  height: 550px;
+  height: 650px;
 }
 
 .slide-about {
-  height: 550px;
+  height: 650px;
   background-image: url('../images/testemonialBackground.jpg');
   background-position: 50% 50%;
   background-size: cover;
@@ -2949,7 +2949,7 @@ position: fixed;
 
 .section-2-about {
   width: 100%;
-  height: 550px;
+  height: 650px;
   font-family: Barlow, sans-serif;
 }
 
@@ -4243,12 +4243,12 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     height: 400px;
   }
   .slide-about {
-    max-height: 290px;
-    background-position: 50% 57%;
-    background-size: auto 150%;
+    max-height: 400px;
+     /* background-position: 50% 57%;
+    background-size: auto 100%; */
   }
   .section-2-about {
-    height: 400px;
+    height: 400px; 
   }
   .div-block-34 {
     padding-right: 51px;
@@ -4868,9 +4868,9 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     width: 90%;
   }
   .slide-about {
-    background-position: 50% 40%;
+    /* background-position: 50% 40%;
     background-size: auto 200%;
-    max-height: 290px;
+    max-height: 290px; */
   }
 
   .div-block-1about {
