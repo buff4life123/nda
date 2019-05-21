@@ -1745,7 +1745,8 @@ position: fixed;
   background-repeat: repeat, no-repeat;
   background-attachment: scroll, scroll; */
   max-width: none;
-  margin-top: 112px;
+  /* margin-top: 112px; */
+  height: 366.5px;
 }
 
 .price-flex {
@@ -1814,6 +1815,7 @@ position: fixed;
   padding-top: 20px;
   padding-right: 16px;
   padding-left: 20px;
+  background-color: rgba(0, 71, 179, 0.7);
 }
 
 .heading-12 {
@@ -2503,7 +2505,7 @@ position: fixed;
 }
 
 .section-price-layer {
-  background-color: rgba(0, 71, 179, 0.7);
+  /* background-color: rgba(0, 71, 179, 0.7); */
   top: 0;
   left: 0;
   width: 100%;
