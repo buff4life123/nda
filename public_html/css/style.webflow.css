@@ -1931,6 +1931,14 @@ position: fixed;
 
 }
 
+.text-scroll {
+  overflow: overlay;
+  height: 100px;
+  width: 100%;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .div-block-22 {
   position: static;
   bottom: 999px;
