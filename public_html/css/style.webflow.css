@@ -4273,7 +4273,8 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     max-height: 700px;
   }
   .section-2 {
-    height: 750px;
+    /* height: 750px; */
+    height: auto;
   }
 
   /* .slide_tour{
@@ -4840,7 +4841,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     max-height: 600px;
   }
   .section-2 {
-    height: 750px;
+    height: auto; /*750px*/
   }
   .section-price {
     /* padding-bottom: 65.5px; */
