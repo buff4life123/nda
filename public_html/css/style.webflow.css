@@ -4845,6 +4845,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .section-price {
     /* padding-bottom: 65.5px; */
     margin-top: 7px;
+    height: auto;
   }
 
   .logo-e-gradiente {
@@ -5755,7 +5756,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     max-height: 290px;
   }
   .section-2 {
-    height: 650px;
+    height: auto;
   }
 
   .section-2-about {
