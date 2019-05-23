@@ -114,7 +114,7 @@
                                                 <div class="w3-col l6 m6 book-now-novo w3-margin-bottom">
                                                     <div class="text-block-8">{% trans %}more_info{%endtrans%}</div>
                                                 </div>
-                                                <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
+                                                <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}&locale={{app.request.getLocale}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
                                                     <div class="text-block-8">{% trans %}book_now{%endtrans%}</div>
                                                 </a>
                                                 <div class="w3-col l6 m6 s5 desdept w3-right-align">{% trans %}from{%endtrans%}</div>
@@ -212,7 +212,7 @@
                                             <div class="w3-col l6 m6 book-now-novo w3-margin-bottom">
                                                 <div class="text-block-8">{% trans %}more_info{%endtrans%}</div>
                                             </div>
-                                            <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
+                                            <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}&locale={{app.request.getLocale}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
                                                 <div class="text-block-8">{% trans %}book_now{%endtrans%}</div>
                                             </a>
                                             <div class="w3-col l6 m6 s5 desdept w3-right-align">{% trans %}from{%endtrans%}</div>
