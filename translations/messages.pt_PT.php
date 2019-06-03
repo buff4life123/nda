@@ -2,6 +2,30 @@
 
 return array(
 
+    'other_company_title' => 'Cruzeiros de luxo em',
+    'other_company_text' => 'Com uma velocidade de cruzeiro de 24 km e uma condução majestosa e poderosa, este navio de 19 metros é uma das construções mais bem sucedidas da famosa marca britânica Sunseeker.',
+    'other_company_detail_title' => 'Interior confortável',
+    'other_company_detail' => '
+        <ul>
+             <li>Interior acabado em folheados de cereja, tapete do deserto, lado de vinil champanhe e revestimento do teto e estofamento branco, com piso de cockpit de teca</ li>
+             <li> 3 quartos, 1 sala de estar e 2 banheiros </ li>
+             <li> Ar condicionado em todos os quartos </ li>
+             <li> Máquina de gelo e bebidas geladas </ li>
+             <li> Até 10 pessoas + 2 tripulantes </ li>
+         </ul>
+    ',
+    'other_company_technical_title' => 'Detalhes técnicos',
+    'other_company_technical' => '
+    <ul>
+        <li> 19,37m de comprimento </ li>
+        <li> feixe de 5,10 m </ li>
+        <li> lance máximo de 1,52 m </ li>
+        <li> capacidade de tanques de combustível 3000L </ li>
+        <li> capacidade de tanques de água doce 700L </ li>
+        <li> Motores V8 1600HP de porte duplo MAN </ li>
+        <li> Até 40 knots desempenho de nós </ li>
+    </ul>
+    ',
     'email' => 'email',
     'Email' => 'Email',
     'follow_social_network' => 'Siga-nos nas nossas redes sociais ', 

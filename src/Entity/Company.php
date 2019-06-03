@@ -26,12 +26,12 @@ class Company
 
     /**
     * @Assert\NotBlank(message="ADDRESS")
-    * @ORM\Column(type="string", length=50, name="address")
+    * @ORM\Column(type="string", length=95, name="address")
     */
     private $address;
     /**
     * @Assert\NotBlank(message="ADDRESS2")
-    * @ORM\Column(type="string", length=50, name="address2")
+    * @ORM\Column(type="string", length=95, name="address2")
     */
     private $address2;
     /**

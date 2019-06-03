@@ -457,7 +457,9 @@ user_create:
 # PAGES
 ###
 
-
+other_company:
+    path: /other_company
+    controller: App\Controller\FrontendController::otherCompany
 
 about_us:
     path: /about-us
