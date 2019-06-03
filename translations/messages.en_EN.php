@@ -1,6 +1,31 @@
 <?php
 
 return array(
+
+    'other_company_title' => 'Luxury cruises on',
+    'other_company_text' => 'With a cruising speed of 24 km and a majestic and powerful drive, this 19 metres vessel is one of most successful builds of the renowned British brand Sunseeker',
+    'other_company_detail_title' => 'Comfortable interior',
+    'other_company_detail' => '
+    <ul>
+    <li>Interior finished in cherry veneers, desert carpet, champagne vinyl side and roof lining &amp; white upholstery, with teak cockpit floor</li>
+    <li>3&nbsp;bedrooms, 1&nbsp;living room and 2&nbsp;bathrooms</li>
+    <li>Air&nbsp;conditioning in all rooms</li>
+    <li>Ice maker and cold beverages</li>
+    <li>For up to 10 people + 2 crew</li>
+    </ul>
+    ',
+    'other_company_technical_title' => 'Technical Details',
+    'other_company_technical' => '
+    <ul>
+    <li>19,37 m length</li>
+    <li>5,10 m beam</li>
+    <li>1,52 m max draft</li>
+    <li>3000 L fuel tanks capacity</li>
+    <li>700 L fresh water tanks capacity</li>
+    <li>Twin&nbsp;MAN&nbsp;V8 1600 HP engines</li>
+    <li>Up to 40 knots performance</li>
+    </ul>
+    ',
     'email' => 'email',
     'Email' => 'Email',
     'follow_social_network' => 'Follow us on our social network ', 

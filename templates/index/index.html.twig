@@ -7,7 +7,7 @@
     {% include '/page/javascript.html' %}
 
     {#SOCIAL MEDIA________________________________________________________________________________________________________________________________________________________________#}
-    <div class="w3-overlay"></div>
+    {# <div class="w3-overlay"></div> #}
     <div class="socialmedia-links" data-ix="social-interact">
         {%for name in social_network_icons %}
             {% if company.getLinksActive[loop.index0] == true %}
@@ -22,6 +22,15 @@
         {% endfor %}
     </div>
 
+   <div class="other-company-link" data-ix="social-interact">
+        <div class="social-media-link w-inline-block w-clearfix" onclick="openWindow('{{path('other_company')}}')">
+            <div class="social-media-ico" style="background-image: url(../images/atlanticQuest.png)"></div>
+
+            <div class="in-txt">
+                <div class="text-block-13">Atlantic Quest </div>
+            </div>
+        </div> 
+   </div>
     {#NAV AND SLIDER AND HIGHLIGHTS________________________________________________________________________________________________________________________________________________________________#}
     <div
         class="header">

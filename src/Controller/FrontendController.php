@@ -55,12 +55,26 @@ class FrontendController extends AbstractController
 	}
 
     public function aboutUs(Request $request)
-{	
+	{	
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 
 		return $this->render('index/about_us.html.twig',  array(
+			'page' => 'about_us',
+			'company' => $company,
+			// 't' => $request->getLocale(),
+			'about' => $about,
+		));
+	}
+	
+	public function otherCompany(Request $request)
+	{	
+		$em = $this->getDoctrine()->getManager();
+		$company = $em->getRepository(Company::class)->find(1);
+		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+
+		return $this->render('index/other_company.twig',  array(
 			'page' => 'about_us',
 			'company' => $company,
 			// 't' => $request->getLocale(),
