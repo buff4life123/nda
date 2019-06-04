@@ -2126,6 +2126,7 @@ position: fixed;
 .section-5 {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#000));
   background-image: linear-gradient(180deg, #000, #000);
+  position:relative;
 }
 
 .rodape-tour {
@@ -3004,7 +3005,7 @@ position: fixed;
 
 .section-2-about {
   width: 100%;
-  height: 535px;
+  height: 515px;
   font-family: Barlow, sans-serif;
 }
 
@@ -6312,4 +6313,11 @@ video {
 .other_company_detail {
   width: 70%;
   margin: 0 auto;
+}
+
+@media (min-width: 2529px) {
+.section-2-about {
+  min-height:800px;
+}
+
 }
