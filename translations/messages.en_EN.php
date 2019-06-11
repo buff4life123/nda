@@ -26,6 +26,7 @@ return array(
     <li>Up to 40 knots performance</li>
     </ul>
     ',
+    'company_name'=> 'NAUTICDRIVE - Watersports Activities at Rocha Baixinha Beach, Albufeira',
     'email' => 'email',
     'Email' => 'Email',
     'follow_social_network' => 'Follow us on our social network ', 

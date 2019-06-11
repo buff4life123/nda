@@ -26,6 +26,7 @@ return array(
         <li> Até 40 knots desempenho de nós </ li>
     </ul>
     ',
+    'company_name'=> 'NAUTICDRIVE - Desportos Náuticos na Praia da Rocha Baixinha, Albufeira',
     'email' => 'email',
     'Email' => 'Email',
     'follow_social_network' => 'Siga-nos nas nossas redes sociais ', 
