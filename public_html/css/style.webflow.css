@@ -409,12 +409,6 @@ body {
   /* background-color: rgba(0, 71, 179, 1); */
 }
 
-.algarve-tours-test1 {
-  font-family: Barlow, sans-serif;
-  color: #fff;
-  text-transform: uppercase;
-}
-
 .map {
   height: 550px;
 }
@@ -5300,12 +5294,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .algarve-tours {
     height: auto;
   }
-  .algarve-tours-test1 {
-    background-image: url('../images/fundo-azul.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/fundo-azul.jpg'), linear-gradient(180deg, transparent, transparent);
-    background-size: cover, auto;
-    background-repeat: no-repeat, repeat;
-  }
+
   .map {
     height: 400px;
   }
