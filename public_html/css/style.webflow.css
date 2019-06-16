@@ -43,8 +43,6 @@ body {
   position: relative;
   z-index: 10;
   width: 100%;
-  /* background-image: url('../images/fundo-azul.jpg'), -webkit-gradient(linear, left top, left bottom, from(#0047b3), to(#0047b3));
-  background-image: url('../images/fundo-azul.jpg'), linear-gradient(180deg, #0047b3, #0047b3); */
   background-position: 50% 50%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
@@ -1766,7 +1764,6 @@ position: fixed;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  /* background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(79, 175, 66, .55)), to(rgba(79, 175, 66, .55))), url('../images/fundo-azul.jpg'); */
   /* background-image: linear-gradient(180deg, rgba(79, 175, 66, .55), rgba(79, 175, 66, .55)), url('../images/testemonialBackground.jpg'); */
   /* background-image: linear-gradient(180deg, #3385ff, #0047b3); */
   /* background-position: 0px 0px, 50% 33%;
@@ -2509,13 +2506,6 @@ position: fixed;
   font-size: 15px;
 }
 
-.algarve-tours-test2 {
-  position: static;
-  font-family: Barlow, sans-serif;
-  color: #fff;
-  text-transform: uppercase;
-}
-
 .slide-snorkling-copy {
   /* background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
   background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5)); */
@@ -2555,7 +2545,6 @@ position: fixed;
 }
 
 .slide-4 {
-  /* background-image: url('../images/fundo-azul.jpg'); */
   background-position: 50% 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -3066,8 +3055,6 @@ position: fixed;
   height: auto;
   margin-right: auto;
   margin-left: auto;
-  /* background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(79, 175, 66, .55)), to(rgba(79, 175, 66, .55))), url('../images/fundo-azul.jpg');
-  background-image: linear-gradient(180deg, rgba(79, 175, 66, .55), rgba(79, 175, 66, .55)), url('../images/fundo-azul.jpg'); */
   background-position: 0px 0px, 50% 33%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -3271,8 +3258,7 @@ position: fixed;
   margin-left: auto;
   padding-top: 29px;
   padding-bottom: 29px;
-  /* background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(79, 175, 66, .55)), to(rgba(79, 175, 66, .55))), url('../images/fundo-azul.jpg');
-  background-image: linear-gradient(180deg, rgba(79, 175, 66, .55), rgba(79, 175, 66, .55)), url('../images/fundo-azul.jpg'); */
+
   background-position: 0px 0px, 50% 33%;
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
@@ -5674,12 +5660,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     margin-right: auto;
     margin-left: auto;
   }
-  .algarve-tours-test2 {
-    background-image: url('../images/fundo-azul.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/fundo-azul.jpg'), linear-gradient(180deg, transparent, transparent);
-    background-size: cover, auto;
-    background-repeat: no-repeat, repeat;
-  }
+
   .slide-snorkling-copy {
     background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
     background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, transparent, transparent);
