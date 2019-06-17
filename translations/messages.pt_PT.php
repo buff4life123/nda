@@ -195,6 +195,7 @@ return array(
     'users' => 'Utilizadores',
     'company' => 'Companhia',
     'bookings' => 'Reservas',
+    'photo_service' => 'Serviço de Fotos',
     'view_home' => 'Ver Site',
     'exit' => 'Sair',
     'new' => 'Novo',

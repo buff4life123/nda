@@ -131,6 +131,7 @@ return array(
     'users' => 'Users',
     'company' => 'Company',
     'bookings' => 'Bookings',
+    'photo_service' => 'Photo Service',
     'view_home' => 'See Homepage',
     'exit' => 'Exit',
     'new' => 'New',
