@@ -15,6 +15,8 @@ parameters:
     banner_images_width: '1920'
     banner_images_height: '1080'
 
+    photo_service_directory: '%kernel.project_dir%/public_html/upload/photo_service'
+
 
 services:
     # default configuration for services in *this* file
@@ -56,6 +58,11 @@ services:
         class: App\Service\FileUploader
         arguments:
             $targetDir: '%banner_images_directory%'
+
+    file_uploader.photo_service:
+        class: App\Service\FileUploader
+        arguments:
+            $targetDir: '%photo_service_directory%'
 
     App\Service\FileUploader: '@file_uploader.products'
 
@@ -111,6 +118,12 @@ services:
             App\Service\ImageResizer: '@image_resizer.banner'
         arguments:
             - '%banner_images_directory%'
+
+    App\Controller\PhotoServiceController:
+        bind:
+            App\Service\FileUploader: '@file_uploader.photo_service'
+        arguments:
+            - '%photo_service_directory%'
 
     App\Service\ExperienceApi:
         public: true

@@ -1,0 +1,119 @@
+
+<style>
+li { list-style-type:none}
+ul{padding: 0px}
+.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {border: 0px solid #FFF!important}
+.w3-input {border-bottom: 0px solid #05788d}
+input, select, textarea {color: #000!important}
+
+</style>
+<header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="far fa-images"></i> {%trans%}photo_service{%endtrans%}<i class="far fa-plus-square fa-fw"></i></b></h5>
+</header>
+
+<div class="w3-padding-16 w3-container">
+  
+
+  <div class="w3-border w3-sand">  
+  {{ form_start(form, {'attr': {'id': 'photo-service-form'}})  }}
+
+  <div class="w3-row-padding w3-margin-top w3-border-bottom">
+
+    <div class="w3-col s0 l3 m2 w3-hide-small">&nbsp;</div>
+
+    <div class="w3-col s12 l6 m8 w3-center" title="{%trans%}add_image{%endtrans%}">
+      <div class="w3-row-padding w3-margin-top w3-border-bottom">
+          <div class="w3-col l6 m6 s12 w3-margin-bottom">
+            {{ form_label(form.name)}}<br>
+            {{ form_widget(form.name)}}
+          </div>
+          <div class="w3-col l6 m6 s12 w3-margin-bottom">
+            {{ form_label(form.email)}}<br>
+            {{ form_widget(form.email)}}
+          </div>
+          <div class="w3-col l6 m6 s12 w3-margin-bottom">
+            {{ form_label(form.telephone)}}<br>
+            {{ form_widget(form.telephone)}}
+          </div>
+      </div>
+
+      <div class="w3-row-padding w3-margin-top w3-border-bottom">
+        <div class="w3-white w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
+          <i class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
+        </div>
+        <input type="file" id="" name="" class="w3-hide set-image" onchange="loadFile(event)" multiple>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="w3-hide">
+      {{ form_widget(form.submit)}}
+    </div>
+  </div>
+    <div class="w3-row-padding w3-margin-top w3-border-bottom">
+      <div class="w3-col s12 w3-margin-bottom">
+        <span class="w3-btn w3-border w3-green w3-right w3-margin-top" onclick="$('#photo-service-form').trigger('submit')">
+            <i class="fa fa-check"></i> {%trans%}save{%endtrans%}
+          </span>
+      </div>
+    </div>
+    {{ form_end(form) }}
+  </div>
+</div>
+
+<script>
+
+  var loadFile = function(event) {
+    console.log(event);
+    $('.set-image-container').html('<img id="output" class="w3-image w3-animate-zoom">')
+    var output = document.getElementById('output')
+    output.src = URL.createObjectURL(event.target.files[0])
+  }
+
+
+  $('#photo-service-form').on('submit',function(e){
+  obj=''
+
+  arr = []
+
+ /* $('input[name=locale]').each(function( index ) {
+    arr.push({id:$(this).attr('data-local-id'), name:$(this).val()})
+  })
+
+  form = new FormData($(this)[0])
+
+  form.append('locale',JSON.stringify(arr)) */
+
+  e.preventDefault()
+  $('.w3-overlay').show()
+  $('.required').addClass('w3-hide')
+  //setTimeout(function(){
+    $.ajax({  
+      url:'{{ path('admin_gallery_add') }}',
+      type: "POST",
+      data: form,
+      processData: false,
+      contentType: false,
+      cache: false,
+      success: function(data){  
+        $('.w3-overlay').hide()
+        if (data.status == 1){
+          ajaxUpload('gallery-new')
+        }
+        else {
+          for(i=0;i<data.data.length;i++)
+            obj += data.data[i]+'<br>'
+          $('#set-fields').html(obj)
+          $('#modal-fields').show()
+        }
+      },
+      error:function(data){
+        $('.w3-overlay').hide()
+        $('#modal-error').show()
+      }
+    })
+  //}, 500)
+})
+</script>
+

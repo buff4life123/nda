@@ -21,6 +21,19 @@ class FileUploader
 		
 		return $fileName;
 	}
+
+	// public function uploads(UploadedFile $files[])
+	// {	
+	// 	for () {
+	// 		$file->move($this->targetDir, $fileName[]);
+
+	// 		// generate a unique name for the file before saving it
+	// 		$fileName = md5(uniqid()).'.'.$files[]->guessExtension();
+	// 		$fileNames[] = $fileName;
+	// 	}
+		
+	// 	return $fileNames;
+	// }
 	
 	public function removeUpload($filename)
 	{

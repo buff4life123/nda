@@ -79,11 +79,16 @@ admin_company_edit:
     controller: App\Controller\CompanyController::companyEdit
     condition: 'request.isXmlHttpRequest()'
 
-
-
+##
+# Photo Service
+##
+admin_photo_service_new:
+    path: /admin-photo-service-new/
+    controller: App\Controller\PhotoServiceController::photoServiceNew
 
 ##
 # PRODUCTS
+
 ##
 
 admin_product_new:

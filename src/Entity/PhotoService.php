@@ -6,8 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="gallery")
- * @ORM\Entity(repositoryClass="App\Repository\GalleryRepository")
+ * @ORM\Table(name="photo_service")
+ * @ORM\Entity(repositoryClass="App\Repository\PhotoServiceRepository")
  */
 
 class PhotoService
@@ -20,90 +20,70 @@ class PhotoService
     private $id;
     /**
     * @ORM\Column(type="string", length=50)
-    * @Assert\NotBlank(message="client_name")
+    * @Assert\NotBlank(message="name")
     */
-    private $client_name;
+    private $name;
     /**
     * @ORM\Column(type="string", length=50)
-    * @Assert\NotBlank(message="client_email")
+    * @Assert\NotBlank(message="email")
     */
-    private $client_email;
+    private $email;
     /**
      * @ORM\Column(type="string", length=20, name="telephone", nullable=true)
      */
-    private $client_telephone;
+    private $telephone;
     /**
     * @ORM\Column(type="datetime") 
     */
-    private $createdAt;
+    private $created_date;
     /**
     * @ORM\Column(type="string", length=50)
     */
-    private $folder_name;
+    private $folder;
 
-    public function __construct()
-    {       
-        $this->translation = new ArrayCollection();   
-    }
-
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
     
-    public function getOrderBy()
-    {
-        return $this->orderBy;
-    }
-
-    public function setOrderBy($orderBy)
-    {
-        $this->orderBy = $orderBy;
-    }
-
-
-    public function getIsActive() {
-        return $this->isActive;
-    }
-
-    public function setIsActive($isActive) {
-        $this->isActive = $isActive;
-    }
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function getTranslation()
-    {
-        return $this->translation;
+    public function getName() {
+        return $this->name;
     }
 
-    public function setTranslation(GalleryTranslation $translation)
-    {
-        $this->translation = $translation;
+    public function setName($name) {
+        $this->name = $name;
     }
 
-    public function getCurrentTranslation(Locales $locales)
-    {
-        $txt = '';
-        
-        if($this->getTranslation()){
-
-            foreach ($this->getTranslation() as $translation){
-                if( $locales->getName() == $translation->getLocales()->getName())
-                    $txt = $translation->getName();
-            }
-        }
-        return $txt;
+    public function getEmail() {
+        return $this->email;
     }
 
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+
+    public function getTelephone() {
+        return $this->telephone;
+    }
+
+    public function setTelephone($telephone) {
+        $this->telephone = $telephone;
+    }
+
+    public function getCreatedDate() {
+        return $this->created_date;
+    }
+
+    public function setCreatedDate($created_date) {
+        $this->created_date = $created_date;
+    }
+
+    public function getFolder() {
+        return $this->folder;
+    }
+
+    public function setFolder($folder) {
+        $this->folder = $folder;
+    }
 }
