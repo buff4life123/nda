@@ -38,106 +38,91 @@ class PhotoServiceController extends AbstractController
         $form = $this->createForm(PhotoServiceType::class, $photoService);
         
         $form->handleRequest($request);
+
+        // $today = new \Datetime('now');
+        // $form->get('created_date')->setData($today->format('Y-m-d H:i:s'));
+        // $dechex = dechex($today->format('U'));
+        // $form->get('folder')->setData($dechex);
+
         return $this->render('admin/photo-service-new.html',array(
             'form' => $form->createView(),
-            //'locales' => $locales)
             ));
     }
 
 
-    public function galleryAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer)
+    public function photoServiceAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer)
     {
-        $gallery = new Gallery();
+        $photoService = new PhotoService();
 
-        $s = json_decode($request->request->get('locale'));
-
-        $em = $this->getDoctrine()->getManager();
-
-        $locales = $em->getRepository(Locales::class)->findAll();
-
-        $totals = $em->getRepository(Gallery::class)->findAll();
-
-        $form = $this->createForm(GalleryType::class, $gallery);
+        $form = $this->createForm(PhotoServiceType::class, $photoService);
 
         $form->handleRequest($request);
 
-            if($form->isSubmitted()){
-                
-                if($form->isValid()){
+        if($form->isSubmitted()){
+            
+            if($form->isValid()){
 
-                    $em = $this->getDoctrine()->getManager();
+                $em = $this->getDoctrine()->getManager();
 
-                    $file = $gallery->getImage();
+                //$file = //$photoService->getImage();
 
-                    if ($file) {
-                        $fileName = $fileUploader->upload($file);               
-                        $imageResizer->resize($fileName);
-                        $gallery->setImage($fileName);
+                // if ($file) {
+                //     $fileName = $fileUploader->upload($file);               
+                //     $imageResizer->resize($fileName);
+                //     $photoService->setImage($fileName);
+                // }
+                // else{
+                //     $photoService->setImage($this->photo_service_directory.'/no-image.png');
+                // }
+
+            try {
+                    $today = new \Datetime('now');
+                    $dechex = dechex($today->format('U'));
+
+                    $photoService->setCreatedDate($today);
+                    $photoService->setFolder($dechex);
+
+                    $filesystem = new Filesystem();
+                    try {
+                        $filesystem->mkdir("../public_html/upload/photo_service/".$dechex);
+                    } catch (IOExceptionInterface $exception) {
+                        echo "An error occurred while creating your directory at ".$exception->getPath();
                     }
-                    else{
-                        $gallery->setImage($this->photo_service_directory.'/no-image.png');
-                    }
 
-                try {
-
-                    foreach ($s as $translated) {
-
-                        $locales = $em->getRepository(Locales::class)->find($translated->id);
-                        
-                        $galleryTranslation = new GalleryTranslation();
-                        
-                        $galleryTranslation->setLocales($locales);
-                        $galleryTranslation->setName($translated->name);
-                        $galleryTranslation->setGallery($gallery);
-                        $em->persist($galleryTranslation);
-                    }
-                    
-                    $gallery->setOrderBy(count($totals)+1);
-                    $em->persist($gallery);
+                    $em->persist($photoService);
                     $em->flush();
 
                     $response = array(
                         'status' => 1,
                         'message' => 'success',
-                        'data' => $gallery->getId(),
-                        'form' => $request->request->get('locale'),
-                        'ff' => $s[0]->id
+                        'data' => $photoService->getId(),
+                        "dump" => $request->request->get('previews'),
                     );
+                } 
+                catch(DBALException $e)
+                {
+                    $a = array("Contate administrador sistema sobre: ".$e->getMessage());
 
-
-
-                    $gallery->setOrderBy(count($totals)+1);
-                    $em->persist($gallery);
-                    $em->flush();
-
-                    $response = array(
-                        'status' => 1,
-                        'message' => 'success',
-                        'data' => $gallery->getId());
-                    } 
-                    catch(DBALException $e){
-
-                            $a = array("Contate administrador sistema sobre: ".$e->getMessage());
-
-                        $response = array(
-                            'status' => 0,
-                            'message' => 'fail',
-                            'data' => $a);
-                    }
-                }
-                else{   
                     $response = array(
                         'status' => 0,
                         'message' => 'fail',
-                        'data' => $this->getErrorMessages($form)
+                        'data' => $a
                     );
                 }
             }
-            else
+            else{   
                 $response = array(
-                    'status' => 2,
-                    'message' => 'fail not submitted',
-                    'data' => '');
+                    'status' => 0,
+                    'message' => 'fail',
+                    'data' => $this->getErrorMessages($form)
+                );
+            }
+        }
+        else
+            $response = array(
+                'status' => 2,
+                'message' => 'fail not submitted',
+                'data' => '');
 
         return new JsonResponse($response);
     }

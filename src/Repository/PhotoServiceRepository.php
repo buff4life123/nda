@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\ClientPhotoService;
+use App\Entity\PhotoService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -13,11 +13,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method ClientPhotoService[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 
-class ClientPhotoServiceRepository extends ServiceEntityRepository
+class PhotoServiceRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ClientPhotoService::class);
+        parent::__construct($registry, PhotoService::class);
     }
 
     /*

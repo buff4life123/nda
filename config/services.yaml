@@ -16,7 +16,8 @@ parameters:
     banner_images_height: '1080'
 
     photo_service_directory: '%kernel.project_dir%/public_html/upload/photo_service'
-
+    photo_service_width: '1920'
+    photo_service_height: '1080'
 
 services:
     # default configuration for services in *this* file
@@ -86,6 +87,14 @@ services:
             $path: '%banner_images_directory%'
             $width: '%banner_images_width%'
             $height: '%banner_images_height%'
+
+    image_resizer.photo_service:
+        class: App\Service\ImageResizer
+        arguments:
+            $path: '%photo_service_directory%'
+            $width: '%photo_service_width%'
+            $height: '%photo_service_height%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
@@ -122,6 +131,7 @@ services:
     App\Controller\PhotoServiceController:
         bind:
             App\Service\FileUploader: '@file_uploader.photo_service'
+            App\Service\ImageResizer: '@image_resizer.photo_service'
         arguments:
             - '%photo_service_directory%'
 
