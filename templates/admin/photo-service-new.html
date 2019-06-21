@@ -57,7 +57,7 @@ input, select, textarea {color: #000!important}
   </div>
     <div class="w3-row-padding w3-margin-top w3-border-bottom">
       <div class="w3-col s12 w3-margin-bottom">
-        <span class="w3-btn w3-border w3-green w3-right w3-margin-top" onclick="$('#photo-service-form').trigger('submit')">
+        <span id="submit-button" class="w3-btn w3-border w3-green w3-right w3-margin-top" style="pointer-events:none;opacity:0.5;" onclick="$('#photo-service-form').trigger('submit')" disabled>
             <i class="fa fa-check"></i> {%trans%}save{%endtrans%}
           </span>
       </div>
@@ -72,6 +72,14 @@ input, select, textarea {color: #000!important}
   var previews = document.getElementById('previews');    
 
   fileInput.addEventListener('change', function(e) {
+
+    if( e.target.files.length > 0) 
+    $submitButtonCss = {"pointer-events": "auto","opacity": 1}
+    else
+    $submitButtonCss = {"pointer-events": "none","opacity": 0.5}
+
+    $("#submit-button").css($submitButtonCss);
+
     // Remove existing preview images
     while (previews.firstChild) {
         previews.removeChild(previews.firstChild);
@@ -98,7 +106,7 @@ input, select, textarea {color: #000!important}
 
     e.preventDefault()
     $('.w3-overlay').show()
-    $('.required').addClass('w3-hide')
+    //$('.required').addClass('w3-hide')
     //setTimeout(function(){
       $.ajax({  
         url:'{{ path('admin_photo_service_add') }}',

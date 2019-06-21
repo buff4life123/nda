@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType; 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,10 +26,10 @@ class PhotoServiceType extends AbstractType
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'name']
             ))
 
-            ->add('email', TextType::class,
+            ->add('email', EmailType::class,
             array(
-                'required' => true,
                 'label' => 'Email',
+                'required' => true,
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email']
             ))
 
@@ -41,7 +42,7 @@ class PhotoServiceType extends AbstractType
 
             ->add('imageFile', FileType::class, [
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'multiple' => true,
                 'attr'     => [
                     'accept' => 'image/*',

@@ -208,6 +208,7 @@ return array(
     'telephone' => 'Telephone',
     'address' => 'Address',
     'location' => 'Location',
+    'photo_service' => 'Photo Service',
 
     'h3_1_head' => 'nauticDrive',
     'h3_1_sub_head' => 'Algarve Boat & cave tours',

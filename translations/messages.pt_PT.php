@@ -69,6 +69,7 @@ return array(
     'telephone' =>'Telefone',
     'address' => 'Endreço',
     'location' => 'Localização',
+    'photo_service' => 'Serviço de Fotos',
 
     'back_to_home' =>'Retroceder',
     'h3_1_head' => 'Descubra o local mais',
