@@ -23,5 +23,16 @@ class ImageResizer
 		
 		$thumb->resizeToBestFit($this->width, $this->height);
 		$thumb->save($pathname);
+	}
+	
+	public function resizeMultiple($filesName, $folder)
+	{
+		foreach($filesName as $name) {
+			$pathname = $this->path.'/'.$folder.'/'.$name;
+			$thumb = new ImageResize($pathname);
+			
+			$thumb->resizeToBestFit($this->width, $this->height);
+			$thumb->save($pathname);
+		}
 	}	
 }

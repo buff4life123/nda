@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Doctrine\ORM\EntityRepository;
@@ -38,6 +39,16 @@ class PhotoServiceType extends AbstractType
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'telephone']
             ))
 
+            ->add('imageFile', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'multiple' => true,
+                'attr'     => [
+                    'accept' => 'image/*',
+                    'multiple' => 'multiple'
+                ],
+                'attr' => ['class' => 'w3-hide set-image', 'id' => 'previews']
+            ])
             // ->add('created_date', HiddenType::class,
             // array(
             //     'required' => false,

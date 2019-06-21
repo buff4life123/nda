@@ -39,11 +39,6 @@ class PhotoServiceController extends AbstractController
         
         $form->handleRequest($request);
 
-        // $today = new \Datetime('now');
-        // $form->get('created_date')->setData($today->format('Y-m-d H:i:s'));
-        // $dechex = dechex($today->format('U'));
-        // $form->get('folder')->setData($dechex);
-
         return $this->render('admin/photo-service-new.html',array(
             'form' => $form->createView(),
             ));
@@ -63,18 +58,7 @@ class PhotoServiceController extends AbstractController
             if($form->isValid()){
 
                 $em = $this->getDoctrine()->getManager();
-
-                //$file = //$photoService->getImage();
-
-                // if ($file) {
-                //     $fileName = $fileUploader->upload($file);               
-                //     $imageResizer->resize($fileName);
-                //     $photoService->setImage($fileName);
-                // }
-                // else{
-                //     $photoService->setImage($this->photo_service_directory.'/no-image.png');
-                // }
-
+                
             try {
                     $today = new \Datetime('now');
                     $dechex = dechex($today->format('U'));
@@ -84,7 +68,10 @@ class PhotoServiceController extends AbstractController
 
                     $filesystem = new Filesystem();
                     try {
-                        $filesystem->mkdir("../public_html/upload/photo_service/".$dechex);
+                        $filesystem->mkdir("../public_html/upload/photo_service/".$dechex); //dd()
+                        $uploadedFile = $form['imageFile']->getData();
+                        $fileName = $fileUploader->uploads($uploadedFile, $dechex);
+                        $imageResizer->resizeMultiple($fileName, $dechex);
                     } catch (IOExceptionInterface $exception) {
                         echo "An error occurred while creating your directory at ".$exception->getPath();
                     }
@@ -92,11 +79,12 @@ class PhotoServiceController extends AbstractController
                     $em->persist($photoService);
                     $em->flush();
 
+                    //dd(phpinfo());
                     $response = array(
                         'status' => 1,
                         'message' => 'success',
                         'data' => $photoService->getId(),
-                        "dump" => $request->request->get('previews'),
+                        'fileName' => $fileName,
                     );
                 } 
                 catch(DBALException $e)

@@ -39,14 +39,15 @@ input, select, textarea {color: #000!important}
 
         </div>
 
-      <input type="number" name="number">
+      <!-- <input type="number" name="number"> -->
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
         <div id="previews" class="w3-white w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
           <i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
         </div>
-        <input type="file" name="previews" class="set-image" multiple>
+        {{ form_widget(form.imageFile)}}
+        <!-- <input type="file" name="previews" class="set-image" multiple> -->
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 
