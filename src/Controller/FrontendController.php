@@ -91,9 +91,14 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 
+		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+
 		return $this->render('index/photo_service.twig',  array(
 			//'page' => 'about_us',
 			'company' => $company,
+			'rgpd' => $rgpd,
+			'terms_conditions' => $terms_conditions,
 			// 't' => $request->getLocale(),
 			//'about' => $about,
 		));

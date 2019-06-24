@@ -2,6 +2,7 @@
 
 return array(
 
+
     'other_company_title' => 'Luxury cruises on',
     'other_company_text' => 'With a cruising speed of 24 km and a majestic and powerful drive, this 19 metres vessel is one of most successful builds of the renowned British brand Sunseeker',
     'other_company_detail_title' => 'Comfortable interior',
@@ -146,6 +147,10 @@ return array(
     'today' => 'Today',
     'tomorrow' => 'Tomorrow',
     'terms_cond' => 'Terms & Conditions',
+    'and' => 'and',
+    'terms_cond_agree' => 'I agree to the', //Terms of Service & Privacy Policy.
+    'marketing_agree' => ' I would like to receive marketing communication from NauticDrive regarding NauticDrive’s products, services, and events.',
+    'accept_conditions' => 'Please read and accept the Terms of Service and Privacy Policy',
     'demograph' => 'Demographic',
     'system' => 'System',
     'about_us' => 'About us',

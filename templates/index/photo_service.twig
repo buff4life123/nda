@@ -19,9 +19,15 @@
                <form id="photo-service">
                   <input type="text"  id="inputCode"  name="inputCode"  class="form-control" placeholder="{%trans%}insert_code{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="">
                   <input type="text" id="inputEmail" name="inputEmail" class="form-control" placeholder="{%trans%}insert_email{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="">
-                  <input type="checkbox" name="acceptCode" value=""> RGPD<br>
-                  <input type="checkbox" name="acceptCode" value=""> NEWSLATER<br>
+                  <input type="checkbox" name="marketing-agree" value=""> {% trans %}marketing_agree{% endtrans %}<br>
+                  <input type="checkbox" id="terms-cond-agree" name="terms-cond-agree" value=""> {% trans %}terms_cond_agree{% endtrans %}
+                  <a class="w-inline-block " href="#" onclick="modalTermosCondicoes('{{terms_conditions.getName}}','{{terms_conditions.getTermsHtml}}')">{%trans%}terms_cond{%endtrans%}</a>
+                  {% trans %}and{% endtrans %}
+                  <a class="w-inline-block " href="#" onclick="modalGDPR('{{rgpd.getName}}','{{rgpd.getRgpdHtml}}')">  {%trans%}gdpr{%endtrans%}</a>
+                  <br>
                   <button class="boto-destaque-1 w-button" type="submit">{% trans %}get_photos{% endtrans %}</button>
+                 
+                 
                </form>
             <div class="photos-link"></div>
             
@@ -44,9 +50,26 @@
       </div>
 
       <script>
+
+        $("form[id=photo-service]").parsley()
+
         $('#photo-service').on('submit',function(e){
          e.preventDefault()
          $('.w3-overlay').show()
+
+         var termsConfirm = $('#terms-cond-agree').val();
+         if(!termsConfirm){
+            var response = [];
+            response.item = "terms-cond-agree";
+            response.message = '{%trans%}accept_conditions{%endtrans%} ....';
+
+            var FieldInstance = $('#' + response.item).parsley(),
+                        errorName = response.item + '-custom';
+
+            window.ParsleyUI.removeError(FieldInstance, errorName);
+            window.ParsleyUI.addError(FieldInstance, errorName, response.message);
+
+         }
  
          $.ajax({  
             url:"{{ path('photo_service_download') }}",
@@ -55,7 +78,6 @@
             success: function(data){  
                $('.w3-overlay').hide()
 
-var html =''
                if (data.status == 1){
                   console.log(data)
                
@@ -89,7 +111,7 @@ var html =''
 {% endblock %}
 
 {% block javascripts %}
-    <script crossorigin="anonymous" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
+    //<script crossorigin="anonymous" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="{{ asset('/js/webflow.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/main.js') }}" type="text/javascript"></script>
 {% endblock %}

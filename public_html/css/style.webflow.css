@@ -6392,3 +6392,9 @@ card-container.card {
   border: 1px solid rgba(0,0,0,.125);
   border-radius: .25rem;
 }
+
+.parsley-required, .parsley-type, .parsley-pattern, .parsley-min, .parsley-max, .parsley-length, .parsley-photo_service_email-custom, .parsley-photo_service_telephone-custom {
+  color: #f44336!important;
+  padding: 8px 4px;
+  animation: animatezoom 0.6s;
+}

@@ -74,6 +74,7 @@ return array(
     'insert_code'=> "Inserir código",
     'insert_email'=> "Inserir email",
     'invalid_field' => 'Inválido',
+    'and' => 'e',
 
     'back_to_home' =>'Retroceder',
     'h3_1_head' => 'Descubra o local mais',
@@ -212,6 +213,9 @@ return array(
     'today' => 'Hoje',
     'tomorrow' => 'Amanhã',
     'terms_cond' => 'Termos & Condições',
+    'terms_cond_agree' => 'Eu concordo com os', //Termos de Serviço e Política de Privacidade.
+    'marketing_agree' => 'Eu gostaria de receber comunicações de marketing da NauticDrive sobre os produtos, serviços e eventos da NauticDrive.',
+    'accept_conditions' => 'Por favor, leia e aceite os Termos de Serviço e a Política de Privacidade.',
     'demograph' => 'Demografico',
     'system' => 'Sistema',
     'about_us' => 'Sobre nós',
