@@ -6,6 +6,11 @@ body {
   line-height: 20px;
 }
 
+h1 {
+  color: #04408A;
+  font-size: 1.6em;
+}
+
 .slider {
   height: 850px;
 }
@@ -1452,12 +1457,17 @@ position: fixed;
   height:auto;
 }
 
+.algarve-tours {
+  font-family: Barlow, sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+}
 
-.other-company-link {
+.other-link,.photo-service-link {
   position: fixed;
     /* top: 102px; */
     right: 0px;
-    bottom: 35%;
+    bottom: 25%;
     z-index: 9999;
     display: -webkit-box;
     display: -webkit-flex;
@@ -1484,6 +1494,15 @@ position: fixed;
     background-image: linear-gradient(180deg, rgba(0, 0, 0, .63), rgba(0, 0, 0, .63));
     transform: translateX(118px) translateY(0px) translateZ(0px);
     height:auto;
+   
+  }
+
+  .photo-service-link {
+    bottom: 19%;
+  }
+
+  .photo-service-link:hover {
+    width: 190px;
   }
 
 .div-block-13 {
@@ -2984,6 +3003,26 @@ position: fixed;
   border-color: #0047b3; */
   /* background: #fff; */
 }
+
+.section-fill-available {
+  width: 100%;
+  height: -webkit-fill-available;
+  font-family: Barlow, sans-serif;
+}
+/* 
+.transparent-layer {
+  height: -webkit-fill-available;
+  background-color: rgba(0, 71, 179, 0.7);
+} */
+
+.bg-image {
+  background-image: url('../images/testemonialBackground.jpg'); 
+  background-position: 50% 50%;
+  background-size: cover;
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 100vmax rgba(0, 71, 179, 0.7);
+}
+
 
 .section-2-about {
   width: 100%;
@@ -6282,4 +6321,74 @@ video {
 .other_company_detail {
   width: 70%;
   margin: 0 auto;
+}
+
+.photo-service-container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  /* margin-right: auto;
+  margin-left: auto; */
+  margin: auto;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.aligner-item--bottom {
+  align-self: flex-end;
+}
+
+@media (min-width: 992px) {
+  .photo-service-container {
+      max-width: 960px;
+  }
+}
+
+@media (min-width: 768px) {
+  .photo-service-container {
+      max-width: 720px;
+  }
+
+}
+@media (min-width: 576px) {
+  .photo-service-container {
+      max-width: 540px;
+  }
+}
+
+
+
+card-container.card {
+  max-width: 400px;
+  padding: 20px 50px;
+}
+
+.card {
+  background-color: #F7F7F7;
+  padding: 10px 20px 20px;
+  margin: 0 auto 25px;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.text-center {
+  text-align: center!important;
+}
+.card {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
 }

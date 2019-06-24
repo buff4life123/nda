@@ -70,6 +70,8 @@ return array(
     'address' => 'Endreço',
     'location' => 'Localização',
     'photo_service' => 'Serviço de Fotos',
+    'get_photos' => 'Obter fotos',
+    'insert_code'=> "Inserir código",
 
     'back_to_home' =>'Retroceder',
     'h3_1_head' => 'Descubra o local mais',

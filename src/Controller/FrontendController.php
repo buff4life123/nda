@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Company;
+use App\Entity\PhotoService;
 use App\Entity\AboutUs;
 use App\Entity\Rgpd;
 use App\Entity\TermsConditions;
@@ -17,6 +18,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use EmailValidator\EmailValidator;
 use Symfony\Component\Finder\Finder;
 use App\Service\ExperienceApi;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 
 class FrontendController extends AbstractController
 {
@@ -80,6 +84,73 @@ class FrontendController extends AbstractController
 			// 't' => $request->getLocale(),
 			'about' => $about,
 		));
+	}
+	
+	public function photoService(Request $request)
+	{	
+		$em = $this->getDoctrine()->getManager();
+		$company = $em->getRepository(Company::class)->find(1);
+
+		return $this->render('index/photo_service.twig',  array(
+			//'page' => 'about_us',
+			'company' => $company,
+			// 't' => $request->getLocale(),
+			//'about' => $about,
+		));
+	}
+	
+	public function photoServiceDownload(Request $request)
+	{	
+		$em = $this->getDoctrine()->getManager();
+		$company = $em->getRepository(Company::class)->find(1);
+
+		$code = $request->request->get("inputCode");
+
+		$result = $em->getRepository(PhotoService::class)->findOneBy(['folder' => $code]);
+
+		$folder = $result->getFolder();
+
+		$publicResourcesFolderPath = $this->getParameter('kernel.project_dir') . '/public_html/upload/photo_service/' . $folder . '/';
+
+		$files = $this-> fileFinder($publicResourcesFolderPath);
+
+		$images = [];
+		foreach ($files as $file) {	
+			$images[] = ($publicResourcesFolderPath . $folder . $file);
+		}
+		
+		$response = array(
+			'status' => 1,
+			'data' => $images);
+
+		
+		return new JsonResponse($response);	
+		// $images = [];
+		// //dd($publicResourcesFolderPath);
+
+		// foreach ($files as $file) {	
+		// 	$response = new BinaryFileResponse($publicResourcesFolderPath.$file);
+
+		// 	// To generate a file download, you need the mimetype of the file
+		// 	$mimeTypeGuesser = new FileinfoMimeTypeGuesser();
+
+		// 	// Set the mimetype with the guesser or manually
+		// 	if($mimeTypeGuesser->isSupported()){
+		// 		// Guess the mimetype of the file according to the extension of the file
+		// 		$response->headers->set('Content-Type', $mimeTypeGuesser->guess($publicResourcesFolderPath.$file));
+		// 	}else{
+		// 		// Set the mimetype of the file manually, in this case for a text file is text/plain
+		// 		$response->headers->set('Content-Type', 'text/plain');
+		// 	}
+
+		// 	// Set content disposition inline of the file
+		// 	$images[] = $response->setContentDisposition(
+		// 		ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+		// 		$file
+		// 	);
+		// }
+		
+		// return $images;
     }
 
 	function activity($id, $text, Request $request,  ExperienceApi $experience)

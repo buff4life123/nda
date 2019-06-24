@@ -22,7 +22,7 @@
         {% endfor %}
     </div>
 
-   <div class="other-company-link" data-ix="social-interact">
+   <div class="other-link" data-ix="social-interact">
         <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('other_company')}}'">
             <div class="social-media-ico" style="background-image: url(../images/atlanticQuest.png)"></div>
 
@@ -30,14 +30,19 @@
                 <div class="text-block-13">Atlantic Quest </div>
             </div>
         </div> 
-        <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('other_company')}}'">
+   </div>
+
+   <div class="photo-service-link" data-ix="social-interact">
+        <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('photo_service')}}'">
             <div class="social-media-ico" style="background-image: url(../images/photoService.png)"></div>
 
             <div class="in-txt">
-                <div class="text-block-13">{% trans %}photo_service{% endtrans %} </div>
+                <div class="text-block-13 w3-hide txt-hover">{% trans %}photo_service{% endtrans %} </div>
             </div>
         </div> 
-   </div>
+    </div>
+
+   
     {#NAV AND SLIDER AND HIGHLIGHTS________________________________________________________________________________________________________________________________________________________________#}
     <div
         class="header">
@@ -249,7 +254,7 @@
         <div class="testemonials-algarve">
             <div class="algarve-tours w-slider" data-animation="slide" data-autoplay="1" data-delay="7000" data-duration="900" data-infinite="1">
                 <div class="w-slider-mask">
-                    <div class="algarve-tours-test1 w-slide">
+                    <div class="algarve-tours w-slide">
                         <div class="div-block-8">
 
                             <br><br><h3 class="heading-10">&quot;{% trans %}key_title{%endtrans%}&quot;</h3><br>
@@ -258,7 +263,7 @@
                             <div class="div-block-9"></div>
                         </div>
                     </div>
-                    <div class="algarve-tours-test2 w-slide">
+                    <div class="algarve-tours w-slide">
                         <div class="div-block-8">
 
                             <br><br><h3 class="heading-10">&quot;{% trans %}focus_title{%endtrans%}&quot;</h3><br>
@@ -267,7 +272,7 @@
                             <div class="div-block-9"></div>
                         </div>
                     </div>
-                    <div class="algarve-tours-test2 w-slide">
+                    <div class="algarve-tours w-slide">
                         <div class="div-block-8">
 
                             <br><br><h3 class="heading-10">&quot;{% trans %}ambition_title{%endtrans%}&quot;</h3><br>
@@ -422,6 +427,16 @@
             </div>
 
             <script>
+
+                $( ".photo-service-link").hover(
+                function() {
+                    $(".txt-hover").removeClass("w3-hide");
+                    
+                },
+                function () {
+                    $(".txt-hover").addClass("w3-hide");
+                }
+                );
 
                 var userFeed = new Instafeed({
                 get: 'user',

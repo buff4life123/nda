@@ -132,6 +132,8 @@ return array(
     'company' => 'Company',
     'bookings' => 'Bookings',
     'photo_service' => 'Photo Service',
+    'get_photos' => 'Get Photos',
+    'insert_code'=> "Insert your code",
     'view_home' => 'See Homepage',
     'exit' => 'Exit',
     'new' => 'New',
