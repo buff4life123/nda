@@ -114,14 +114,20 @@ class FrontendController extends AbstractController
 
 		$files = $this-> fileFinder($publicResourcesFolderPath);
 
-		$images = [];
+		$images = array();
 		foreach ($files as $file) {	
-			$images[] = ($publicResourcesFolderPath . $folder . $file);
+			//$images[] = $this->file($publicResourcesFolderPath . $file);
+			$images[] = "/upload/photo_service/" . $folder . "/" . $file;
+			
+			//$result = $this-> file($publicResourcesFolderPath . $file);
+			//dd($result);
+			//return $images;
+			
 		}
-		
+
 		$response = array(
 			'status' => 1,
-			'data' => $images);
+			'images' => $images);
 
 		
 		return new JsonResponse($response);	

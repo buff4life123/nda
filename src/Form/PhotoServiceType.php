@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType; 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -21,21 +22,21 @@ class PhotoServiceType extends AbstractType
         $builder
             ->add('name', TextType::class,
             array(
-                'required' => false,
+                'required' => true,
                 'label' => 'name',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'name']
             ))
 
             ->add('email', EmailType::class,
             array(
-                'label' => 'Email',
                 'required' => true,
+                'label' => 'Email',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email']
             ))
 
-            ->add('telephone', TextType::class,
+            ->add('telephone', TelType::class,
             array(
-                'required' => false,
+                'required' => true,
                 'label' => 'telephone',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'telephone']
             ))
@@ -44,11 +45,7 @@ class PhotoServiceType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'multiple' => true,
-                'attr'     => [
-                    'accept' => 'image/*',
-                    'multiple' => 'multiple'
-                ],
-                'attr' => ['class' => 'w3-hide set-image', 'id' => 'previews']
+                'attr' => ['class' => 'w3-hide set-image', 'id' => 'previews', 'accept' => 'image/*' ]
             ])
             // ->add('created_date', HiddenType::class,
             // array(

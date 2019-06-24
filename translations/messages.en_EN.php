@@ -134,6 +134,7 @@ return array(
     'photo_service' => 'Photo Service',
     'get_photos' => 'Get Photos',
     'insert_code'=> "Insert your code",
+    'insert_email'=> "Insert your email",
     'view_home' => 'See Homepage',
     'exit' => 'Exit',
     'new' => 'New',
@@ -211,6 +212,7 @@ return array(
     'address' => 'Address',
     'location' => 'Location',
     'photo_service' => 'Photo Service',
+    'invalid_field' => 'Invalid',
 
     'h3_1_head' => 'nauticDrive',
     'h3_1_sub_head' => 'Algarve Boat & cave tours',

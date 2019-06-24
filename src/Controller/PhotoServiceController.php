@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use App\Form\PhotoServiceType;
 use App\Service\FileUploader;
 use App\Service\ImageResizer;
+use App\Service\Validations;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
@@ -45,7 +46,7 @@ class PhotoServiceController extends AbstractController
     }
 
 
-    public function photoServiceAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer)
+    public function photoServiceAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer, Validations $validations)
     {
         $photoService = new PhotoService();
 
@@ -53,11 +54,32 @@ class PhotoServiceController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
-            
-            if($form->isValid()){
+        $noFakeEmails = $validations -> noFakeEmails($photoService->getEmail());
+        $validatePhone = $validations -> validatePhone($photoService->getTelephone());
 
-                $em = $this->getDoctrine()->getManager();
+        if ($noFakeEmails){
+            $response = array(
+                'status' => 0,
+                'message' => 'photo_service_email',
+            ); 
+
+            return new JsonResponse($response);
+        }
+
+        if ($validatePhone){
+            $response = array(
+                'status' => 0,
+                'message' => 'photo_service_telephone',
+            ); 
+
+            return new JsonResponse($response);
+        }
+
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+            $em = $this->getDoctrine()->getManager();
                 
             try {
                     $today = new \Datetime('now');
@@ -86,9 +108,7 @@ class PhotoServiceController extends AbstractController
                         'data' => $photoService->getId(),
                         'fileName' => $fileName,
                     );
-                } 
-                catch(DBALException $e)
-                {
+                } catch(DBALException $e){
                     $a = array("Contate administrador sistema sobre: ".$e->getMessage());
 
                     $response = array(
@@ -97,20 +117,11 @@ class PhotoServiceController extends AbstractController
                         'data' => $a
                     );
                 }
-            }
-            else{   
-                $response = array(
-                    'status' => 0,
-                    'message' => 'fail',
-                    'data' => $this->getErrorMessages($form)
-                );
-            }
-        }
-        else
+        }else 
             $response = array(
                 'status' => 2,
                 'message' => 'fail not submitted',
-                'data' => '');
+                'data' => $this->getErrorMessages($form));
 
         return new JsonResponse($response);
     }

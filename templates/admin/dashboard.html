@@ -1,4 +1,4 @@
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 
 <style>
 .chart_wrap {
@@ -186,59 +186,3 @@
   </div>
 {% endif %}
 
-<script type="text/javascript">
-
-google.charts.load('current', {'packages':['corechart']})
-
-a = []
-
-{%if bookings %}
-
-{% for charts in bookings.chart%}
-
-  a.push({{ charts|json_encode|raw }})
-
-{% endfor %}
-
-{% endif %}
-
-
-google.charts.setOnLoadCallback(function() { drawChart(a[0],0) })
-google.charts.setOnLoadCallback(function() { drawChart(a[1],1) })
-
-  function drawChart(chrt,i) {
-
-    var data = google.visualization.arrayToDataTable(chrt)
-    if (i == 1 || i == 2)
-    var options = {
-      legend: { position: 'bottom', alignment: 'start' },
-      width: '100%',
-      is3D:true,
-      colors: ['#f44336', '#2196F3', '#4CAF50'],
-      height: '250px',
-      slices: {
-        1: {offset: 0.3},
-        2: {offset: 0.3},
-        3: {offset: 0.3},
-      },
-    }
-    else
-    var options = {
-      legend: { position: 'bottom', alignment: 'start' },
-      width: '100%',
-      is3D:true,
-      height: '250px',
-      slices: {
-        1: {offset: 0.2},
-        2: {offset: 0.2},
-        3: {offset: 0.2},
-        4: {offset: 0.2},
-        5: {offset: 0.2},
-        6: {offset: 0.2},
-      },
-    }
-    var chart = new google.visualization.PieChart(document.getElementById('chart'+i));
-    chart.draw(data, options)
-  }
-
-</script>

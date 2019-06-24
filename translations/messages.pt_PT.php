@@ -72,6 +72,8 @@ return array(
     'photo_service' => 'Serviço de Fotos',
     'get_photos' => 'Obter fotos',
     'insert_code'=> "Inserir código",
+    'insert_email'=> "Inserir email",
+    'invalid_field' => 'Inválido',
 
     'back_to_home' =>'Retroceder',
     'h3_1_head' => 'Descubra o local mais',

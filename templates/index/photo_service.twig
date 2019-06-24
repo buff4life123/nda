@@ -17,9 +17,14 @@
             <div class="card card-container text-center"> 
                <h1 class="text-uppercase"><strong>{% trans %}photo_service{% endtrans %}</strong></h1>
                <form id="photo-service">
-                  <input type="text" id="inputCode" name="inputCode" class="form-control" placeholder="{%trans%}insert_code{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="">
+                  <input type="text"  id="inputCode"  name="inputCode"  class="form-control" placeholder="{%trans%}insert_code{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="">
+                  <input type="text" id="inputEmail" name="inputEmail" class="form-control" placeholder="{%trans%}insert_email{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="">
+                  <input type="checkbox" name="acceptCode" value=""> RGPD<br>
+                  <input type="checkbox" name="acceptCode" value=""> NEWSLATER<br>
                   <button class="boto-destaque-1 w-button" type="submit">{% trans %}get_photos{% endtrans %}</button>
                </form>
+            <div class="photos-link"></div>
+            
             </div>
          </div>
          
@@ -50,26 +55,23 @@
             success: function(data){  
                $('.w3-overlay').hide()
 
+var html =''
                if (data.status == 1){
                   console.log(data)
-
+               
                   var link = document.createElement('a');
-                  //link.setAttribute('download', null);
+                  link.setAttribute('download', '');
                   link.style.display = 'none';
                   document.body.appendChild(link);
 
                   //var str="{{ asset("+data.images[i]+") }}";
 
                   for(i in data.images){
-
                      link.setAttribute('href', data.images[i]);
-                     link.setAttribute('download', data.images[i]);
-                     alert(link);
                      link.click();
                   }
-
-                  document.body.removeChild(link);
-                  //window.location="download.action?para1=" .data.images[0];
+               
+               document.body.removeChild(link);
                   
                }else{
             
@@ -91,4 +93,5 @@
     <script src="{{ asset('/js/webflow.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/main.js') }}" type="text/javascript"></script>
 {% endblock %}
+
 

@@ -89,6 +89,7 @@ admin_photo_service_new:
 admin_photo_service_add:
     path: /admin-photo-service-add/
     controller: App\Controller\PhotoServiceController::photoServiceAdd
+
     #condition: 'request.isXmlHttpRequest()'
 
 ##

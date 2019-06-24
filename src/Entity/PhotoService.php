@@ -29,7 +29,8 @@ class PhotoService
     */
     private $email;
     /**
-     * @ORM\Column(type="string", length=20, name="telephone", nullable=true)
+     * @ORM\Column(type="string", length=20, name="telephone")
+     * @Assert\NotBlank(message="telephone")
      */
     private $telephone;
     /**
