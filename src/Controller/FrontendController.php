@@ -109,59 +109,42 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 
-		$code = $request->request->get("inputCode");
+		$code  = $request->request->get("photo-service-code");
+		$email = $request->request->get("photo-service-email");
+		$marketing = $request->request->get("marketing-agree");
 
-		$result = $em->getRepository(PhotoService::class)->findOneBy(['folder' => $code]);
+		$photoService = $em->getRepository(PhotoService::class)->findOneBy(['folder' => $code,'email' => $email]);
 
-		$folder = $result->getFolder();
+		//dd($marketing);
+		if($photoService) {
+			$folder = $photoService->getFolder();
+			$id = $photoService->getId();
 
-		$publicResourcesFolderPath = $this->getParameter('kernel.project_dir') . '/public_html/upload/photo_service/' . $folder . '/';
+			$publicResourcesFolderPath = $this->getParameter('kernel.project_dir') . '/public_html/upload/photo_service/' . $folder . '/';
 
-		$files = $this-> fileFinder($publicResourcesFolderPath);
+			$files = $this-> fileFinder($publicResourcesFolderPath);
 
-		$images = array();
-		foreach ($files as $file) {	
-			//$images[] = $this->file($publicResourcesFolderPath . $file);
-			$images[] = "/upload/photo_service/" . $folder . "/" . $file;
-			
-			//$result = $this-> file($publicResourcesFolderPath . $file);
-			//dd($result);
-			//return $images;
-			
+			$images = array();
+			foreach ($files as $file) {	
+				$images[] = "/upload/photo_service/" . $folder . "/" . $file;
+			}
+
+			$response = array(
+				'status' => 1,
+				'images' => $images);
+				
+			$photoService->setGdpr(1);
+			$photoService->setMarketing($marketing);
+			$em->persist($photoService);
+			$em->flush();
+		}else
+		{
+			$response = array(
+				'status' => 0
+				);
 		}
-
-		$response = array(
-			'status' => 1,
-			'images' => $images);
-
 		
 		return new JsonResponse($response);	
-		// $images = [];
-		// //dd($publicResourcesFolderPath);
-
-		// foreach ($files as $file) {	
-		// 	$response = new BinaryFileResponse($publicResourcesFolderPath.$file);
-
-		// 	// To generate a file download, you need the mimetype of the file
-		// 	$mimeTypeGuesser = new FileinfoMimeTypeGuesser();
-
-		// 	// Set the mimetype with the guesser or manually
-		// 	if($mimeTypeGuesser->isSupported()){
-		// 		// Guess the mimetype of the file according to the extension of the file
-		// 		$response->headers->set('Content-Type', $mimeTypeGuesser->guess($publicResourcesFolderPath.$file));
-		// 	}else{
-		// 		// Set the mimetype of the file manually, in this case for a text file is text/plain
-		// 		$response->headers->set('Content-Type', 'text/plain');
-		// 	}
-
-		// 	// Set content disposition inline of the file
-		// 	$images[] = $response->setContentDisposition(
-		// 		ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-		// 		$file
-		// 	);
-		// }
-		
-		// return $images;
     }
 
 	function activity($id, $text, Request $request,  ExperienceApi $experience)

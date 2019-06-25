@@ -36,3 +36,14 @@ window.onclick = function(event) {
     }
 
 }
+
+function customError (fieldId, errorMessage) {
+    var response = [];
+    response.item = fieldId;
+    response.message = errorMessage;
+    response.errorName = response.item + '-custom';
+
+    var FieldInstance = $('#' + response.item).parsley();
+    FieldInstance.removeError(response.errorName);
+    FieldInstance.addError(response.errorName, {message: response.message});
+}

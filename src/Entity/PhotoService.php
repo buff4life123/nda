@@ -42,6 +42,11 @@ class PhotoService
     */
     private $folder;
 
+    /** @ORM\Column(type="boolean", name="marketing", options={"default":0}) */
+    private $marketing;
+
+    /** @ORM\Column(type="boolean", name="gdpr", options={"default":0}) */
+    private $gdpr;
     
     public function getId()
     {
@@ -86,5 +91,21 @@ class PhotoService
 
     public function setFolder($folder) {
         $this->folder = $folder;
+    }
+
+    public function getMarketing() {
+        return $this->marketing;
+    }
+
+    public function setMarketing($marketing) {
+        $this->marketing = $marketing;
+    }
+
+    public function getGdpr() {
+        return $this->gdpr;
+    }
+
+    public function setGdpr($gdpr) {
+        $this->gdpr = $gdpr;
     }
 }

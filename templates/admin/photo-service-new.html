@@ -129,12 +129,11 @@ input, select, textarea {color: #000!important}
             var response = [];
             response.item = data.message;
             response.message = '{%trans%}invalid_field{%endtrans%} ....';
+            response.errorName = response.item + '-custom';
 
-            var FieldInstance = $('#' + response.item).parsley(),
-                        errorName = response.item + '-custom';
-
-            window.ParsleyUI.removeError(FieldInstance, errorName);
-            window.ParsleyUI.addError(FieldInstance, errorName, response.message);
+            var FieldInstance = $('#' + response.item).parsley();
+            FieldInstance.removeError(response.errorName);
+            FieldInstance.addError(response.errorName, {message: response.message});
           }
         },
         error:function(data){

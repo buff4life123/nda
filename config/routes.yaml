@@ -80,7 +80,7 @@ admin_company_edit:
     condition: 'request.isXmlHttpRequest()'
 
 ##
-# Photo Service
+# PhotoService
 ##
 admin_photo_service_new:
     path: /admin-photo-service-new/
@@ -89,6 +89,15 @@ admin_photo_service_new:
 admin_photo_service_add:
     path: /admin-photo-service-add/
     controller: App\Controller\PhotoServiceController::photoServiceAdd
+
+admin_photo_service_list:
+    path: /admin-photo-service-list/
+    controller: App\Controller\PhotoServiceController::photoServiceList
+
+admin_photo_service_search:
+    path: /admin-photo-service-search
+    controller: App\Controller\PhotoServiceController::photoServiceSearch
+    condition: 'request.isXmlHttpRequest()'
 
     #condition: 'request.isXmlHttpRequest()'
 

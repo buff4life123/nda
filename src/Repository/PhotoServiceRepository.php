@@ -20,6 +20,40 @@ class PhotoServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, PhotoService::class);
     }
 
+    public function filter($start, $end){
+
+        if ($start && $end)
+
+            $filter = $this->createQueryBuilder('b')
+                ->andWhere('b.dateEvent >= :start')
+                ->andWhere('b.dateEvent <= :end')
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->orderBy('b.dateEvent, b.timeEvent', 'ASC')
+                ->getQuery();
+
+        else if($start){
+    
+            $filter = $this->createQueryBuilder('b')
+                ->andWhere('b.dateEvent = :start')
+                ->setParameter('start', $start)
+                ->orderBy('b.dateEvent, b.timeEvent', 'ASC')
+                ->getQuery();
+        }
+
+        else if($end){
+    
+            $filter = $this->createQueryBuilder('b')
+                ->andWhere('b.dateEvent = :end')
+                ->setParameter('end', $end)
+                ->orderBy('b.dateEvent, b.timeEvent', 'ASC')
+                ->getQuery();
+        }
+
+        return $filter->execute();
+
+    }
+
     /*
     public function findBySomething($value)
     {

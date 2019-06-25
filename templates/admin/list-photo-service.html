@@ -1,0 +1,488 @@
+
+<style>
+.dt-button{background: #FFF;border:1px solid #ccc;
+ display: inline-block; padding: 8px 16px; vertical-align: middle;overflow: hidden;text-decoration: none; color: inherit;
+    background-color: inherit;text-align: center; cursor: pointer; white-space: nowrap;color: #000!important;background-color: #87CEEB!important;font-size:18px}
+select.input-sm, input .form-control .input-sm {height: 36px}
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+    height: 24px;width: 24px;border-radius: 16px; text-align: center;line-height: 23px;font-size: 24px;border-radius: 0px;border: 1px solid #ddd;box-shadow: 0 0 0 #000}
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {padding-left: 38px}
+.dt-button-collection{ width:100%;background: rgba(0,0,0,0.3);position: fixed;left:0px;padding: 96px 16px; z-index:99999;margin-top: 0px!important;top:0px}
+::-webkit-input-placeholder {opacity: 0.3}
+::-moz-placeholder {opacity: 0.3}
+:-ms-input-placeholder{opacity: 0.3}
+:-moz-placeholder {opacity: 0.3}
+.w3-input {border-bottom: 0px solid #05788d}
+input, select, textarea {color: #000!important}
+.form-control{ border: 1px solid #ccc!important;height: 50px;padding: 0px 0px 0px 4px;padding-bottom: 0px}
+div.dataTables_length select {height: 50px}
+</style>
+<header class="w3-container" style="padding-top:22px">
+   <h5><b><i class="far fa-images"></i> {%trans%}photo_service{%endtrans%}</b></h5>
+</header>
+
+<div class="w3-row-padding">
+
+  <form id="photo-service-search" >
+    <div class="w3-col l3 m6 s12 w3-margin-bottom">
+      <input autocomplete="nope" type="text" id="photo-service-email" name="photo-service-email" class="w3-input w3-border w3-white" placeholder="Email" pattern=".{5,}" title="5 characters minimum" autofocus="">
+    </div>
+    <div class="w3-col l3 m6 s12 w3-margin-bottom">
+      <input autocomplete="nope" type="text" id="photo-service-telephone"  name="photo-service-telephone"  class="w3-input w3-border w3-white" placeholder="{%trans%}telephone{%endtrans%}" pattern=".{5,}" title="5 characters minimum" autofocus="">
+    </div>
+    <div class="w3-col l3 m6 s12 w3-margin-bottom">
+        <input autocomplete="nope" class="w3-input w3-border w3-white" id='startDate' name="startDate" readonly type="text" placeholder="&#xF274; {%trans%}start{%endtrans%}" style="font-family:Raleway, FontAwesome;cursor:pointer">
+    </div>
+      <div class="w3-col l3 m6 s12 w3-margin-bottom">
+        <input autocomplete="nope" class="w3-input w3-border w3-white" id='endDate' name="endDate" readonly type="text" placeholder="&#xF273; {%trans%}end{%endtrans%}" style="font-family:Raleway, FontAwesome;cursor:pointer">
+    </div>
+    {# <button class="boto-destaque-1 w-button" type="submit">{% trans %}search{% endtrans %}</button> #}
+    <div class="w3-col l2 m6 s6 w3-right">
+      <button class="w3-light-green w3-border w3-btn w3-block" type="submit"><i class="fab fa-searchengin"></i> <span class="w3-hide-small">{%trans%}search{%endtrans%}</span></button>
+    </div>
+    <div class="w3-col l2 m6 s6  w3-right">
+      <button class="w3-white w3-border w3-btn w3-block" onclick="clearSearch()"><i class="fas fa-eraser"></i> <span class="w3-hide-small">{%trans%}clear{%endtrans%}</span></button> 
+    </div>
+  </form>
+
+  <div class="w3-col s12"></div>
+  <table id="dataTable" class="w3-border table table-striped centered hover table-bordered" style="width:100%">
+    <thead class="w3-sand">
+      <tr>   
+      <th style="text-align: center">{%trans%}name{%endtrans%}</th>    
+      <th style="text-align: center">Email</th>
+      <th style="text-align: center">{%trans%}telephone{%endtrans%}</th>
+      <th style="text-align: center">{%trans%}created_date{%endtrans%}</th>
+      <th style="text-align: center">{%trans%}code{%endtrans%}</th>  
+      <th style="text-align: center">Marketing</th>
+      <th style="text-align: center">{%trans%}gdpr{%endtrans%}</th>          
+      </tr>
+    </thead>
+    <tbody>
+      {% set ok =  '<i class="w3-text-green fa fa-check w3-large"></i>' %}
+      {% set ko =  '<i class="fas fa-times w3-text-red w3-large"></i>' %}
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      {# {% for item in photoService %}
+       <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.telephone }}</td>
+        <td>{{ item.createdDate.format('d/m/Y H:i:s') }}</td>
+        <td>{{ item.folder }}</td>
+        <td class="w3-center">{{ (item.marketing ? ok : ko) | raw }}</td>
+        <td class="w3-center">{{ (item.gdpr ? ok : ko) | raw }}</td>
+      </tr>
+    {% endfor %} #}
+    </tbody>
+    <tfoot class="w3-sand">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+</div>
+
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('js/ui.datepicker-pt-BR.js') }}"></script>
+<script>
+
+  $(document).ready(function() { 
+    $('#photo-service-email').change(function() { 
+      $('#photo-service-telephone, #startDate, #endDate').val("");
+    })
+    $('#photo-service-telephone').change(function() { 
+      $('#photo-service-email, #startDate, #endDate').val("");
+    })
+    $('#startDate, #endDate').change(function() { 
+      $('#photo-service-email, #photo-service-telephone').val("");
+    })
+  });
+
+  jQuery('#startDate').datepicker({
+      language:'pt-BR',
+      format: 'dd/mm/yyyy',
+      weekStart: 1,
+      todayHighlight: true,
+      autoclose: true,
+    }).on("changeDate",function (e) {
+      jQuery('#endDate').datepicker("setStartDate", e.date)
+    })
+
+  jQuery('#endDate').datepicker({
+    language:'pt-BR',
+    format: 'dd/mm/yyyy',
+    todayHighlight: true,
+    weekStart: 1,
+    autoclose: true
+  }).on("changeDate",function (e) {
+    jQuery('#startDate').datepicker("setEndDate", e.date)
+  })
+
+  function clearSearch(){
+    //$('#startDate, #endDate').datepicker('clearDates')
+    $('#photo-service-search').closest('form').find("input[type=text], textarea").val("");
+  }
+
+  $('#photo-service-search').on('submit',function(e){
+    e.preventDefault();
+    data = $('#photo-service-search').serialize()//'startDate='+$('#startDate').val()+'&endDate='+$('#endDate').val() 
+
+    setTimeout(function(){
+      table = $('#dataTables').DataTable({
+      dom: 'lBfrtip',
+      rowId: "id",
+      "paging": true,
+      "serverside":true,
+      "drawCallback": function( settings ) {},
+      "ajax": 
+        {
+        "url" :'{{ path('admin_photo_service_search') }}?'+data,
+        "dataSrc": function (j) {  
+        //console.log(j.data)
+        $('.w3-overlay, .table-overlay').hide()
+        if( j.options > 1500){
+          $('#results_txt').html('{%trans%}more_1500{%endtrans%}')
+          $('#results').removeClass('w3-hide')
+          j.data = []
+          $('.set-total, .set-canceled, .set-confirmed, .set-pending').text('-/-')
+          return j.data
+        }
+        else if (j.options == 0)
+        {
+          $('#results_txt').html('0 resultados')
+          $('#results').removeClass('w3-hide')
+          j.data = []
+          $('.set-total, .set-canceled, .set-confirmed, .set-pending').text('0')
+          return j.data
+        } 
+        else
+        {
+          $('.set-total').text(j.options)
+          $('.set-canceled').text(j.canceled)
+          $('.set-confirmed').text(j.confirmed)
+          $('.set-pending').text(j.pending)
+
+          return j.data
+        }
+      }
+      },
+      order:[],
+      columns: [
+      { data: "booking"},
+      { data: "status", render: function(data, type,row){
+        if (data == 'pending') color = 'w3-red'
+        else if (data == 'canceled') color = 'w3-blue'
+        else if (data == 'confirmed') color = 'w3-green'
+        
+        wp = row.wp ? '<button class="w3-btn w3-border w3-indigo" style="margin-left:4px" onclick="modalToCardData('+row.booking+')"><i class="far fa-credit-card"></i></button>'
+      : '<button disabled class="w3-btn w3-border w3-indigo" style="margin-left:4px"><i class="far fa-credit-card"></i></button>'
+
+        return '<button id="'+row.booking+'" class="'+color+' w3-btn w3-border" onclick="modalBookingSetStatus('+row.booking+')">#'+row.booking+' '+data+'</button>'+wp
+      }},
+      { data: "tour"},
+      { data: "date"},
+      { data: "hour"},
+      { data: "adult"},
+      { data: "children"},
+      { data: "baby"},
+      { data: "total"},
+      { data: "notes"},
+      { data: "username"},
+      { data: "email"},
+      { data: "address"},
+      { data: "telephone"},
+      { data: "posted_at"},
+      { data: "wp"}
+    ],
+     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    buttons: [
+        {
+        extend:    'excelHtml5',
+        text:      '<i class="far fa-file-excel"></i>',
+        titleAttr: 'Excel',
+        exportOptions: {
+          columns: ':visible'
+          }
+        },
+        {
+        extend:    'pdfHtml5',
+        text:      '<i class="far fa-file-pdf"></i>',
+        titleAttr: 'PDF',
+        exportOptions: {
+          columns: ':visible'
+          },
+          customize: function (doc) {
+            //doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('')
+              doc['footer']=(function(page, pages) {
+                return {
+                  columns: [
+                    {
+                      alignment: 'right',
+                      text: ['']
+                    },
+                  ],
+                  margin: 20
+                }
+              })
+            }
+        },
+        {
+        extend: 'colvis',
+        columns: ':gt(0)',
+        text:      '<i class="far fa-eye-slash"></i>',
+        titleAttr: '{%trans%}columns_show_hide{%endtrans%}',
+        exportOptions: {
+         columns: ':visible'
+        }
+      }
+    ],
+    columnDefs: [
+      //{ className:"my_class", "targets": [4] },
+    //  { "orderData":[ 1 ],   "targets": [ 2 ] },
+        {
+          "visible": false
+          //"searchable": false
+        }
+    ],
+    language: {
+        "lengthMenu": "{%trans%}show{%endtrans%} _MENU_ {%trans%}per_page{%endtrans%}",
+        "zeroRecords": "0 {%trans%}results{%endtrans%}",
+        "info": "{%trans%}show{%endtrans%} _PAGE_ {%trans%}of{%endtrans%} _PAGES_",
+        "infoEmpty": "{%trans%}without{%endtrans%} {%trans%}results{%endtrans%}",
+        "search": "{%trans%}search{%endtrans%}",
+        "paginate": {
+        "previous": "{%trans%}previous{%endtrans%}",
+        "next": "{%trans%}next{%endtrans%}",
+      }
+    },
+    "footerCallback": function ( row, data, start, end, display ) {
+          var api = this.api(), data
+          // Remove the formatting to get integer data for summation
+          var intVal = function ( i ) {
+            return typeof i === 'string' ?
+              i.replace(/[\€,]/g, '')*1 :
+              typeof i === 'number' ?
+              i : 0;
+          }
+          // Total over all pages
+        
+        for (k = 5; k<9;k++){
+          total = api
+            .column( k )
+            .data()
+            .reduce( function (a, b) {
+              return intVal(a) + intVal(b)
+            }, 0 )
+            // Total over this page
+            pageTotal = api
+              .column( k, { page: 'current'} )
+              .data()
+              .reduce( function (a, b) {
+                  return intVal(a) + intVal(b);
+              }, 0 )
+            // Update footer
+            k == 8 ? 
+            $( api.column( k ).footer() ).html(parseFloat(total).toFixed(2)+'€ ('+parseFloat(total).toFixed(2)+'€)')
+            : 
+            $( api.column( k ).footer() ).html(pageTotal+' ('+total+')')
+          }
+        },
+    "destroy": true,
+    responsive: true
+    })
+    .on( 'error.dt', function ( e, settings, techNote, message ) {
+      $('.w3-overlay').hide()
+      $('#modal-error').show()
+      return true
+    })
+    //table.ajax.reload()
+    // table.colReorder.order(orderby)
+    //table.draw()
+    /*DATATABLE NO ALERT*/
+    $.fn.dataTable.ext.errMode = 'none'
+    $('#dataTables_length, .dt-buttons').addClass('w3-center w3-col s12 m6 l4 w3-section')
+    $('#dataTables_filter').addClass('w3-col s8 m12 l4 w3-center w3-section')
+    }, 750)
+  })
+
+  function deleteUserConfirm(id,n,role){
+    $('#delete-user').html('<p class="w3-center w3-large">{%trans%}sure_delete{%endtrans%} <b>'+n+'</b> ?</p>')
+    $('#user-id').val(id)
+    $('#user-role').val(role)
+    $('#modal-delete-user').show()
+  }
+
+  function passwordUser(id,n, role){
+    $('.w3-overlay').show()
+    setTimeout(function(){
+      $.ajax({  
+        url: '{{ path('password_user') }}',
+        type: 'GET',
+        data: 'id='+id+'&role='+role,
+        success: function(data){
+          $('#set-user-id').val(id)
+          $('#set-user-role').val(role)
+          $('.w3-overlay').hide()
+          $('#set-password').html(data)
+          $('#modal-edit-password').show()
+        },
+        error:function(data){
+          $('.w3-overlay').hide()
+          $('#modal-error').show()
+        }
+      })
+    }, 500)
+  }
+
+  function deleteUser(id, role){
+    $('#modal-delete-user').hide()
+    $('.w3-overlay').show()
+    setTimeout(function(){
+    $.ajax({  
+      url:'{{ path('delete_user') }}',
+      type: "POST",
+      data:'id='+id+'&role='+role,
+      success: function(data){
+        $('.w3-overlay').hide()
+        if (data.message == 'success')
+          ajaxUpload('app-users')
+        else{
+          $('#modal-fields').show()
+          $('#set-fields').html(data.data)
+        }
+      },
+      error:function(data){
+        $('.w3-overlay').hide()
+        $('#modal-error').show()
+      }
+    })
+  }, 500)
+  }
+
+  function statusUserConfirm(id,n,role, v){
+
+    $('#confirm').html('<p class="w3-center w3-large">{%trans%}sure_access{%endtrans%} <b>'+n+'</b> ?</p>')
+    $('#confirm-id').val(id)
+    $('#action-confirm').html('<span class="w3-green w3-border w3-btn w3-right" onclick="statusUser('+id+',(\'' +role+ '\'),'+v+')"><i class="fas fa-check"></i> {%trans%}save{%endtrans%}</span>')
+    $('#modal-confirm').show()
+  }
+
+  function statusUser(id, role, v){
+    $('#modal-confirm').hide()
+    $('.w3-overlay').show()
+    setTimeout(function(){
+    $.ajax({  
+      url:'{{ path('status_user') }}',
+      type: "POST",
+      data:'id='+id+'&status='+v+'&role='+role,
+      success: function(data){
+        $('.w3-overlay').hide()
+        if (data.message == 'success')
+        ajaxUpload('app-users')
+        else{
+          $('#modal-fields').show()
+          $('#set-fields').html(data.data)
+        }
+      },
+      error:function(data){
+        $('.w3-overlay').hide()
+        $('#modal-error').show()
+      }
+    })
+  }, 500)
+  }
+
+
+
+  $(function(){
+
+    table = $('#dataTable').DataTable({
+          dom: 'lBfrtip',
+          order: [ 3, "ASC" ],
+          buttons: [
+          {
+          extend:    'excelHtml5',
+          text:      '<i class="far fa-file-excel"></i>',
+          titleAttr: 'Excel',
+          exportOptions: {
+            columns: [ 0, 1, 2, 3]
+            }
+          },
+          {
+          extend:    'pdfHtml5',
+          text:      '<i class="far fa-file-pdf"></i>',
+          titleAttr: 'PDF',
+          exportOptions: {
+            columns: [ 0, 1, 2, 3]
+            },
+            customize: function (doc) {
+              doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('')
+                doc['footer']=(function(page, pages) {
+                  return {
+                    columns: [
+                      {
+                        alignment: 'right',
+                        text: ['']
+                      },
+                    ],
+                    margin: 20
+                  }
+                })
+              }
+          },
+          {
+          extend: 'colvis',
+          columns: ':gt(0)',
+          text:      '<i class="far fa-eye-slash"></i>',
+          titleAttr: '{%trans%}columns_show_hide{%endtrans%}',
+          exportOptions: {
+            columns: [ 0, 1, 2, 3, 4, 5]
+          }
+        }
+      ],
+      "columnDefs": [
+        //{ className:"my_class", "targets": [4] },
+        //{ "orderData":[ 2 ], "targets": [ 3 ] },
+          {
+            //"targets": stored,
+            "visible": false
+            //"searchable": false
+          }
+      ],
+      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "{%trans%}all{%endtrans%}"]],
+        responsive: true,
+        searching: true,
+          language: {
+          "lengthMenu": "{%trans%}show{%endtrans%} _MENU_ {%trans%}per_page{%endtrans%}",
+          "zeroRecords": "0 {%trans%}results{%endtrans%}",
+          "info": "{%trans%}show{%endtrans%} _PAGE_ {%trans%}of{%endtrans%} _PAGES_",
+          "infoEmpty": "{%trans%}without{%endtrans%} {%trans%}results{%endtrans%}",
+          "search": "{%trans%}search{%endtrans%}",
+          "paginate": {
+          "previous": "{%trans%}previous{%endtrans%}",
+          "next": "{%trans%}next{%endtrans%}",
+        }
+      },
+      order: [[ 1, 'asc' ]]
+    })
+    $('#dataTable_length, .dt-buttons').addClass('w3-center w3-col s12 m6 l4 w3-section')
+    $('#dataTable_filter').addClass('w3-col s8 m12 l4 w3-center w3-section')
+  })
+
+</script>

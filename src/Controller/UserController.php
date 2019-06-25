@@ -35,7 +35,7 @@ class UserController extends AbstractController
             $users      = array_merge($this -> dataUser($admins), $this -> dataUser($managers));
         }
            
-        return $this->render('admin/app-users.html', array(
+        return $this->render('admin/list-users.html', array(
             'users' =>  $users,
             )
         );

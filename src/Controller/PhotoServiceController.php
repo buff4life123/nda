@@ -126,283 +126,110 @@ class PhotoServiceController extends AbstractController
         return new JsonResponse($response);
     }
 
-    public function galleryOrder(Request $request)
+    public function photoServiceList(Request $request, ValidatorInterface $validator)
     {
-        $result = $request->request->get('result');
-
-        if (!$result)
+        $em               = $this->getDoctrine()->getManager();
+        $photoService     = $em->getRepository(PhotoService::class)->findAll();
         
-           return new JsonResponse(array('status'=> 0, 'message' => 'nada para ordenar', 'data' => null));
+        //dd($photoService);
 
-        $order = json_decode($result);
-    
-        $em = $this->getDoctrine()->getManager();  
-
-        foreach ($order as $orderBy) {
-            $gallery = $em->getRepository(Gallery::class)->find($orderBy->id);
-            $gallery->setOrderBy($orderBy->to);
-            $em->persist($gallery);
-            $em->flush();
-        }
-
-        $response = array('status'=> 1, 'message' => 'success', 'data' => count($order));
-        
-        return new JsonResponse($response);
-
+        return $this->render('admin/list-photo-service.html', array(
+            'photoService' =>  $photoService,
+            )
+        );
     }
 
-
-
-
-
-    public function galleryList(Request $request)
+    public function photoServiceSearch(Request $request, ValidatorInterface $validator)
     {
-
         $em = $this->getDoctrine()->getManager();
 
-        $galleries = $em->getRepository(Gallery::class)->findAll([],['orderBy' => 'ASC']);
+        $start = $request->query->get('startDate') ?  \DateTime::createFromFormat('d/m/Y', $request->query->get('startDate')) : null; 
+        $end = $request->query->get('endDate') ? \DateTime::createFromFormat("d/m/Y", $request->query->get('endDate')) : null; 
 
-        $locales = $em->getRepository(Locales::class)->findAll();
+        dd($start);
+    //     $start = $start != null ? $start->format('Y-m-d') : null;
+    //     $end = $end != null ? $end->format('Y-m-d') : null;
 
-        $b = array();
-        
-        foreach ($galleries as $gallery) {
+    // if ($start || $end){
 
-            $t = array();
+    //     $canceled = 0;
+    //     $pending = 0;
+    //     $confirmed = 0;
 
-           foreach($gallery->getTranslation() as $translated){
-                $t[] = array(
-                    'local' => $translated->getLocales()->getName(),
-                    'name' => $translated->getName(),
-                    'local_id' => $translated->getLocales()->getId(),
-                );
-           }
-            $b[] = array(
-                'id' => $gallery->getId(),
-                'image' => $gallery->getImage(),
-                'is_active' => $gallery->getIsActive(),
-                'order_by' => $gallery->getOrderBy(),
-                'locales_translated' => $t,
-            );
-        }
+    //     $booking = $this->getDoctrine()->getManager()->getRepository(Booking::class)->bookingFilter($start, $end);
 
-        return $this->render('admin/gallery-list.html',array(
-            'galleries' =>  $b,
-            'locales' => $locales));
-    }
+    //     if ($booking){
 
-
-
-    public function galleryShowEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
-    {
-        
-        $em = $this->getDoctrine()->getManager();
-
-        $id = $request->request->get('id');
-        
-        $locales = $em->getRepository(Locales::class)->findAll();
-
-        $totals = $em->getRepository(Gallery::class)->findAll();
-
-        $gallery = $em->getRepository(Gallery::class)->find($id);
-
-        if ($gallery->getImage()) {
-
-            $path = file_exists($this->photo_service_directory.'/'.$gallery->getImage()) ?
-                $this->photo_service_directory.'/'.$gallery->getImage()
-                :
-                $this->photo_service_directory.'/no-image.png';
-
-            $gallery->setImage(new File($path));
-        }
-
-        else
-            $gallery->setImage(new File($this->photo_service_directory.'/no-image.png'));
-
-        $form = $this->createForm(GalleryType::class, $gallery);
-
-        if($gallery) {
-
-            $t = array();
-
-           foreach($gallery->getTranslation() as $translated){
-                $t[] = array(
-                    'local' => $translated->getLocales()->getName(),
-                    'name' => $translated->getName(),
-                    'local_id' => $translated->getId(),
-                );
-           }
-            $b[] = array(
-                'id' => $gallery->getId(),
-                'image' => $gallery->getImage(),
-                'is_active' => $gallery->getIsActive(),
-                'order_by' => $gallery->getOrderBy(),
-                'locales_translated' => $t,
-            );
-        }
-
-        return $this->render('admin/gallery-edit.html',array(
-            'form' => $form->createView(),
-            'gallery' => $gallery,
-            'locales' => $locales,
-            'totals' => count($totals)
-            ));
-    }
-
-
-
-
-    public function galleryEdit(Request $request, ValidatorInterface $validator, FileUploader $fileUploader, ImageResizer $imageResizer)
-    {
-
-        $id = $request->request->get('id');
-        
-        $em = $this->getDoctrine()->getManager();
-
-        $gallery = $em->getRepository(Gallery::class)->find($id);
-
-        $img = $gallery->getImage();
-
-        if ($gallery->getImage()) {
+    //         foreach ($booking as $bookings) {
             
-            $path = file_exists($this->photo_service_directory.'/'.$gallery->getImage()) ?
-
-            $this->photo_service_directory.'/'.$gallery->getImage()
-            :
-            $this->photo_service_directory.'/no-image.png';
-
-            $gallery->setImage(new File($path));
-        }
-
-        else
-
-            $gallery->setImage(new File($this->photo_service_directory.'/no-image.png'));
-
-        $form = $this->createForm(GalleryType::class, $gallery);
-
-        $form->handleRequest($request);
-            
-        if($form->isSubmitted()){
+    //             if ($bookings->getStatus() ==='canceled')
+    //                 $canceled = $canceled+1;
+    //             else if ($bookings->getStatus() ==='pending')
+    //                 $pending = $pending+1;
+    //             else if ($bookings->getStatus() ==='confirmed')
+    //                 $confirmed = $confirmed+1;
                 
-            if($form->isValid()){ 
-                
-                $deleted = 1;
-                $gallery = $form->getData();
-                $file = $gallery->getImage();
+    //             $client = $bookings->getClient();
 
-                if (is_object($file)) {
-                    $fileName = $fileUploader->upload($file);               
-                    $imageResizer->resize($fileName);
-                    $gallery->setImage($fileName);
-                    
-                    //remove from folder older image
-
-                    $fileSystem = new Filesystem();
-
-                    if ($img && $img != 'no-image.png') {
-                        try {
-                            $fileSystem->remove($this->photo_service_directory.'/'.$img);
-                        } 
-                        catch (IOExceptionInterface $exception) {
-                            $deleted = '0 '.$exception->getPath();
-                        }
-                    }
-                }
-                else
-                    $gallery->setImage($img);
-
-                try {
-
-                    $t = json_decode($request->request->get('translated'));
-
-                    foreach ($t as $translated) {
-                    
-                        $galleryTranslation = $em->getRepository(GalleryTranslation::class)->find($translated->id);
-                    
-                        if(!$galleryTranslation){
-
-                            $locales = $em->getRepository(Locales::class)->find($translated->locale_id);
-                        
-                            $galleryTranslation = new galleryTranslation();
-                        
-                            $galleryTranslation->setLocales($locales);
-                            $galleryTranslation->setName($translated->name);
-                            $galleryTranslation->setGallery($gallery);
-                            $em->persist($galleryTranslation);
-                        }
-                        else{
-                            $galleryTranslation->setName($translated->name);
-                            $em->persist($galleryTranslation);
-                        }
-                    }
+    //             $seeBookings[] =
+    //                 array(
+    //                 'booking' => $bookings->getId(),
+    //                 'adult' => $bookings->getAdult(),
+    //                 'children' => $bookings->getChildren(),
+    //                 'baby' => $bookings->getBaby(),
+    //                 'status' => $bookings->getStatus(),
+    //                 'date' => $bookings->getDateEvent()->format('d/m/Y'),
+    //                 'hour' => $bookings->getTimeEvent()->format('H:i'),
+    //                 'tour' => $bookings->getAvailable()->getProduct()->getNamePt(),
+    //                 'notes' => $bookings->getNotes(),
+    //                 'user_id' => $client->getId(),   
+    //                 'username' => $client->getUsername(),
+    //                 'address' => $client->getAddress(),
+    //                 'email' => $client->getEmail(),          
+    //                 'telephone' => $client->getTelephone(),
+    //                 'total' => $moneyFormatter->format($bookings->getAmount()).'€',
+    //                 'wp' => $client->getCvv() ? 1 : 0,
+    //                 'posted_at' => $bookings->getPostedAt()->format('d/m/Y'),
+    //                 );
+    //         }
 
 
-                    $gallery->setOrderBy($request->request->get('order_by'));
-                    $em->persist($gallery);
-                    $em->flush();
-
-                    $response = array(
-                        'status' => 1,
-                        'message' => 'success',
-                        'image' => $deleted,
-                        'data' => $gallery->getId());
-                } 
-                catch(DBALException $e){
-
-                        $a = array("Contate administrador sistema sobre: ".$e->getMessage());
-
-                    $response = array(
-                        'status' => 0,
-                        'message' => 'fail',
-                        'data' => $a);
-                }
-            }
+    //         $counter = count($seeBookings);
             
-            else{   
-                $response = array(
-                    'status' => 0,
-                    'message' => 'fail',
-                    'data' => $this->getErrorMessages($form)
-                );
-            }
-        }
-        
-        return new JsonResponse($response);
-    }
-
-    public function galleryDelete(Request $request)
-    {
-        $deleted = 1;
-        $response = array();
-        $galleryId = $request->request->get('id');
-        $em = $this->getDoctrine()->getManager();
-
-        $gallery = $em->getRepository(Gallery::class)->find($galleryId);
-       
-        if (!$gallery) {
-            $response = array('status' => 0, 'message' => 'Galeria #'.$galleryId .' não existe.', 'data' => null);
-        }
-        else{
-            $img = $gallery->getImage();
-            $em->remove($gallery);
-            $em->flush();
-
-            //remove from folder image
-
-            $fileSystem = new Filesystem();
-
-            if ($img && $img != 'no-image.png') {
-                try {
-                    $fileSystem->remove($this->photo_service_directory.'/'.$img);
-                } 
-                catch (IOExceptionInterface $exception) {
-                    $deleted = '0 '.$exception->getPath();
-                }
-            }
+    //         if ($counter > 0 && $counter <= 1500)
             
-            $response = array('status'=> 1, 'data' => $deleted, 'message' => $galleryId);
-        }
-        return new JsonResponse($response);
+    //             $response = array(
+    //                 'data' => $seeBookings, 
+    //                 'options' => $counter, 
+    //                 'pending' => $pending, 
+    //                 'confirmed' => $confirmed, 
+    //                 'canceled' => $canceled);
+    //         else 
+    //             $response = array(
+    //                 'data' => '', 
+    //                 'options' => $counter, 
+    //                 'pending' => '', 
+    //                 'confirmed' => '', 
+    //                 'canceled' => '');
+
+    //     }
+    //     else 
+    //         $response = array(
+    //             'data' => '', 
+    //             'options' => 0, 
+    //             'pending' => '', 
+    //             'confirmed' => '', 
+    //             'canceled' => '');
+    //     }
+    //     else 
+    //         $response = array(
+    //             'data' => 'fields', 
+    //             'options' => 0, 
+    //             'pending' => '', 
+    //             'confirmed' => '', 
+    //             'canceled' => '');
+
+    //     return new JsonResponse($response);
     }
 
     protected function getErrorMessages(\Symfony\Component\Form\Form $form) 
