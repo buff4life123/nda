@@ -41,6 +41,7 @@ class PhotoServiceExpireCommand extends ContainerAwareCommand
         
         $photoService = $em->getRepository(PhotoService::class)->deleteExpiredFolders($startDateTime);
         
+        //$photoService = $em->getRepository(PhotoService::class)->deleteExpiredFolders($startDateTime);
 
         //AFTER 30 DAYS REMOVE FOLDERS
         //SET FOLDERS TO EMPTY IN TABLE
@@ -51,6 +52,10 @@ class PhotoServiceExpireCommand extends ContainerAwareCommand
                 $filesystem->remove(['../public_html/upload/photo_service/'.$p->getFolder()]);
                 $p->setFolder('');
                 $em->persist($p);
+                
+                if($p->getGdpr() != 1){
+                    $em->remove($p);
+                }
             }
             $em->flush();
         }
