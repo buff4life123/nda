@@ -95,9 +95,9 @@ admin_photo_service_list:
     controller: App\Controller\PhotoServiceController::photoServiceList
 
 admin_photo_service_search:
-    path: /admin-photo-service-search
+    path: /admin-photo-service-search/
     controller: App\Controller\PhotoServiceController::photoServiceSearch
-    condition: 'request.isXmlHttpRequest()'
+    #condition: 'request.isXmlHttpRequest()'
 
     #condition: 'request.isXmlHttpRequest()'
 

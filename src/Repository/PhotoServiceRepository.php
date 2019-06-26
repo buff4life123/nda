@@ -25,28 +25,28 @@ class PhotoServiceRepository extends ServiceEntityRepository
         if ($start && $end)
 
             $filter = $this->createQueryBuilder('b')
-                ->andWhere('b.dateEvent >= :start')
-                ->andWhere('b.dateEvent <= :end')
+                ->andWhere('b.created_date >= :start')
+                ->andWhere('b.created_date <= :end')
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
-                ->orderBy('b.dateEvent, b.timeEvent', 'ASC')
+                ->orderBy('b.created_date', 'ASC')
                 ->getQuery();
 
         else if($start){
     
             $filter = $this->createQueryBuilder('b')
-                ->andWhere('b.dateEvent = :start')
+                ->andWhere('b.created_date = :start')
                 ->setParameter('start', $start)
-                ->orderBy('b.dateEvent, b.timeEvent', 'ASC')
+                ->orderBy('b.created_date', 'ASC')
                 ->getQuery();
         }
 
         else if($end){
     
             $filter = $this->createQueryBuilder('b')
-                ->andWhere('b.dateEvent = :end')
+                ->andWhere('b.created_date = :end')
                 ->setParameter('end', $end)
-                ->orderBy('b.dateEvent, b.timeEvent', 'ASC')
+                ->orderBy('b.created_date', 'ASC')
                 ->getQuery();
         }
 

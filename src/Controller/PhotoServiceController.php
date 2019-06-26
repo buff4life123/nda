@@ -145,91 +145,108 @@ class PhotoServiceController extends AbstractController
 
         $start = $request->query->get('startDate') ?  \DateTime::createFromFormat('d/m/Y', $request->query->get('startDate')) : null; 
         $end = $request->query->get('endDate') ? \DateTime::createFromFormat("d/m/Y", $request->query->get('endDate')) : null; 
+        $email = $request->query->get('photo-service-email');
+        $telephone = $request->query->get('photo-service-telephone');
 
-        dd($start);
-    //     $start = $start != null ? $start->format('Y-m-d') : null;
-    //     $end = $end != null ? $end->format('Y-m-d') : null;
+        if ($start || $end){
+            $photoService = $this->getDoctrine()->getManager()->getRepository(PhotoService::class)->filter($start, $end);
 
-    // if ($start || $end){
+            if ($photoService){
 
-    //     $canceled = 0;
-    //     $pending = 0;
-    //     $confirmed = 0;
+                foreach ($photoService as $photoService) {
+                    $seePhotoService[] =
+                        array(
+                        'name' => $photoService->getName(),
+                        'email' => $photoService->getEmail(),
+                        'telephone' => $photoService->getTelephone(),
+                        'created_date' => $photoService->getCreatedDate()->format('d/m/Y'),
+                        'folder' => $photoService->getFolder(),
+                        'marketing' => $photoService->getMarketing(),
+                        'gdpr' => $photoService->getGdpr(),
+                        );
+                }
 
-    //     $booking = $this->getDoctrine()->getManager()->getRepository(Booking::class)->bookingFilter($start, $end);
 
-    //     if ($booking){
-
-    //         foreach ($booking as $bookings) {
-            
-    //             if ($bookings->getStatus() ==='canceled')
-    //                 $canceled = $canceled+1;
-    //             else if ($bookings->getStatus() ==='pending')
-    //                 $pending = $pending+1;
-    //             else if ($bookings->getStatus() ==='confirmed')
-    //                 $confirmed = $confirmed+1;
+                $counter = count($seePhotoService);
                 
-    //             $client = $bookings->getClient();
+                if ($counter > 0 && $counter <= 1500)
+                
+                    $response = array(
+                        'data' => $seePhotoService, 
+                        'options' => $counter, 
+                        );
+                else 
+                    $response = array(
+                        'data' => '', 
+                        'options' => $counter, 
+                    );
 
-    //             $seeBookings[] =
-    //                 array(
-    //                 'booking' => $bookings->getId(),
-    //                 'adult' => $bookings->getAdult(),
-    //                 'children' => $bookings->getChildren(),
-    //                 'baby' => $bookings->getBaby(),
-    //                 'status' => $bookings->getStatus(),
-    //                 'date' => $bookings->getDateEvent()->format('d/m/Y'),
-    //                 'hour' => $bookings->getTimeEvent()->format('H:i'),
-    //                 'tour' => $bookings->getAvailable()->getProduct()->getNamePt(),
-    //                 'notes' => $bookings->getNotes(),
-    //                 'user_id' => $client->getId(),   
-    //                 'username' => $client->getUsername(),
-    //                 'address' => $client->getAddress(),
-    //                 'email' => $client->getEmail(),          
-    //                 'telephone' => $client->getTelephone(),
-    //                 'total' => $moneyFormatter->format($bookings->getAmount()).'€',
-    //                 'wp' => $client->getCvv() ? 1 : 0,
-    //                 'posted_at' => $bookings->getPostedAt()->format('d/m/Y'),
-    //                 );
-    //         }
+            }
+            else 
+                $response = array(
+                    'data' => '', 
+                    'options' => 0, 
+                    );
+            }
+            else if ($email) {
+                $photoService = $em->getRepository(PhotoService::class)->findOneBy(['email' => $email]);
 
+                if ($photoService) {
+                    $seePhotoService[] =
+                    array(
+                    'name' => $photoService->getName(),
+                    'email' => $photoService->getEmail(),
+                    'telephone' => $photoService->getTelephone(),
+                    'created_date' => $photoService->getCreatedDate()->format('d/m/Y'),
+                    'folder' => $photoService->getFolder(),
+                    'marketing' => $photoService->getMarketing(),
+                    'gdpr' => $photoService->getGdpr(),
+                    );
 
-    //         $counter = count($seeBookings);
-            
-    //         if ($counter > 0 && $counter <= 1500)
-            
-    //             $response = array(
-    //                 'data' => $seeBookings, 
-    //                 'options' => $counter, 
-    //                 'pending' => $pending, 
-    //                 'confirmed' => $confirmed, 
-    //                 'canceled' => $canceled);
-    //         else 
-    //             $response = array(
-    //                 'data' => '', 
-    //                 'options' => $counter, 
-    //                 'pending' => '', 
-    //                 'confirmed' => '', 
-    //                 'canceled' => '');
+                    $response = array(
+                        'data' => $seePhotoService, 
+                        'options' => 1, 
+                        );
+                }
+                else 
+                $response = array(
+                    'data' => '', 
+                    'options' => 0, 
+                );
+            }
+            else if ($telephone) {
+                $photoService = $em->getRepository(PhotoService::class)->findOneBy(['telephone' => $telephone]);
+                
+                if ($photoService) {
+                    $seePhotoService[] =
+                    array(
+                    'name' => $photoService->getName(),
+                    'email' => $photoService->getEmail(),
+                    'telephone' => $photoService->getTelephone(),
+                    'created_date' => $photoService->getCreatedDate()->format('d/m/Y'),
+                    'folder' => $photoService->getFolder(),
+                    'marketing' => $photoService->getMarketing(),
+                    'gdpr' => $photoService->getGdpr(),
+                    );
 
-    //     }
-    //     else 
-    //         $response = array(
-    //             'data' => '', 
-    //             'options' => 0, 
-    //             'pending' => '', 
-    //             'confirmed' => '', 
-    //             'canceled' => '');
-    //     }
-    //     else 
-    //         $response = array(
-    //             'data' => 'fields', 
-    //             'options' => 0, 
-    //             'pending' => '', 
-    //             'confirmed' => '', 
-    //             'canceled' => '');
+                    $response = array(
+                        'data' => $seePhotoService, 
+                        'options' => 1, 
+                        );
+                }
+                else 
+                $response = array(
+                    'data' => '', 
+                    'options' => 0, 
+                );
+            }
+            else 
+                $response = array(
+                    'data' => 'fields', 
+                    'options' => 0, 
+                );
 
-    //     return new JsonResponse($response);
+            return new JsonResponse($response);
     }
 
     protected function getErrorMessages(\Symfony\Component\Form\Form $form) 

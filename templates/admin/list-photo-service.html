@@ -15,15 +15,17 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child, table.dataTa
 .w3-input {border-bottom: 0px solid #05788d}
 input, select, textarea {color: #000!important}
 .form-control{ border: 1px solid #ccc!important;height: 50px;padding: 0px 0px 0px 4px;padding-bottom: 0px}
-div.dataTables_length select {height: 50px}
+div.dataTable_length select {height: 50px}
 </style>
 <header class="w3-container" style="padding-top:22px">
    <h5><b><i class="far fa-images"></i> {%trans%}photo_service{%endtrans%}</b></h5>
 </header>
 
-<div class="w3-row-padding">
+<div id="results" class="w3-hide" style="top:66px;right:16px;position: fixed;z-index: 9999999">
+  <span class="w3-center w3-padding w3-light-blue w3-large w3-animate-right" id="results_txt"></span>
+</div>
 
-  <form id="photo-service-search" >
+<form id="photo-service-search" class="w3-row-padding">
     <div class="w3-col l3 m6 s12 w3-margin-bottom">
       <input autocomplete="nope" type="text" id="photo-service-email" name="photo-service-email" class="w3-input w3-border w3-white" placeholder="Email" pattern=".{5,}" title="5 characters minimum" autofocus="">
     </div>
@@ -45,8 +47,10 @@ div.dataTables_length select {height: 50px}
     </div>
   </form>
 
+<div class="w3-row-padding">
+
   <div class="w3-col s12"></div>
-  <table id="dataTable" class="w3-border table table-striped centered hover table-bordered" style="width:100%">
+  <table id="dataTable" class="w3-border table table-striped centered hover table-bordered w3-hide" style="width:100%">
     <thead class="w3-sand">
       <tr>   
       <th style="text-align: center">{%trans%}name{%endtrans%}</th>    
@@ -59,8 +63,8 @@ div.dataTables_length select {height: 50px}
       </tr>
     </thead>
     <tbody>
-      {% set ok =  '<i class="w3-text-green fa fa-check w3-large"></i>' %}
-      {% set ko =  '<i class="fas fa-times w3-text-red w3-large"></i>' %}
+      <!-- {% set ok =  '<i class="w3-text-green fa fa-check w3-large"></i>' %}
+      {% set ko =  '<i class="fas fa-times w3-text-red w3-large"></i>' %} -->
       
       <tr>
         <td></td>
@@ -71,17 +75,16 @@ div.dataTables_length select {height: 50px}
         <td></td>
         <td></td>
       </tr>
-      {# {% for item in photoService %}
        <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.telephone }}</td>
-        <td>{{ item.createdDate.format('d/m/Y H:i:s') }}</td>
-        <td>{{ item.folder }}</td>
-        <td class="w3-center">{{ (item.marketing ? ok : ko) | raw }}</td>
-        <td class="w3-center">{{ (item.gdpr ? ok : ko) | raw }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
-    {% endfor %} #}
+
     </tbody>
     <tfoot class="w3-sand">
       <tr>
@@ -101,6 +104,9 @@ div.dataTables_length select {height: 50px}
 <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('js/ui.datepicker-pt-BR.js') }}"></script>
 <script>
+
+  var ok =  '<i class="w3-text-green fa fa-check w3-large"></i>' 
+  var ko =  '<i class="fas fa-times w3-text-red w3-large"></i>'
 
   $(document).ready(function() { 
     $('#photo-service-email').change(function() { 
@@ -141,10 +147,10 @@ div.dataTables_length select {height: 50px}
 
   $('#photo-service-search').on('submit',function(e){
     e.preventDefault();
-    data = $('#photo-service-search').serialize()//'startDate='+$('#startDate').val()+'&endDate='+$('#endDate').val() 
+    data = $(this).serialize()
 
     setTimeout(function(){
-      table = $('#dataTables').DataTable({
+      table = $('#dataTable').DataTable({
       dom: 'lBfrtip',
       rowId: "id",
       "paging": true,
@@ -154,8 +160,8 @@ div.dataTables_length select {height: 50px}
         {
         "url" :'{{ path('admin_photo_service_search') }}?'+data,
         "dataSrc": function (j) {  
-        //console.log(j.data)
-        $('.w3-overlay, .table-overlay').hide()
+        //console.log(j.options)
+        //$('.w3-overlay, .table-overlay').hide()
         if( j.options > 1500){
           $('#results_txt').html('{%trans%}more_1500{%endtrans%}')
           $('#results').removeClass('w3-hide')
@@ -165,7 +171,7 @@ div.dataTables_length select {height: 50px}
         }
         else if (j.options == 0)
         {
-          $('#results_txt').html('0 resultados')
+          $('#results_txt').html('{%trans%}results_empty{%endtrans%}')
           $('#results').removeClass('w3-hide')
           j.data = []
           $('.set-total, .set-canceled, .set-confirmed, .set-pending').text('0')
@@ -173,44 +179,21 @@ div.dataTables_length select {height: 50px}
         } 
         else
         {
-          $('.set-total').text(j.options)
-          $('.set-canceled').text(j.canceled)
-          $('.set-confirmed').text(j.confirmed)
-          $('.set-pending').text(j.pending)
-
+          $('#results').addClass('w3-hide')
           return j.data
         }
       }
       },
-      order:[],
       columns: [
-      { data: "booking"},
-      { data: "status", render: function(data, type,row){
-        if (data == 'pending') color = 'w3-red'
-        else if (data == 'canceled') color = 'w3-blue'
-        else if (data == 'confirmed') color = 'w3-green'
-        
-        wp = row.wp ? '<button class="w3-btn w3-border w3-indigo" style="margin-left:4px" onclick="modalToCardData('+row.booking+')"><i class="far fa-credit-card"></i></button>'
-      : '<button disabled class="w3-btn w3-border w3-indigo" style="margin-left:4px"><i class="far fa-credit-card"></i></button>'
-
-        return '<button id="'+row.booking+'" class="'+color+' w3-btn w3-border" onclick="modalBookingSetStatus('+row.booking+')">#'+row.booking+' '+data+'</button>'+wp
-      }},
-      { data: "tour"},
-      { data: "date"},
-      { data: "hour"},
-      { data: "adult"},
-      { data: "children"},
-      { data: "baby"},
-      { data: "total"},
-      { data: "notes"},
-      { data: "username"},
+      { data: "name"},
       { data: "email"},
-      { data: "address"},
       { data: "telephone"},
-      { data: "posted_at"},
-      { data: "wp"}
+      { data: "created_date"},
+      { data: "folder"},
+      { data: "marketing", render: function(data, type,row){return (data ? ok : ko);}},
+      { data: "gdpr", render: function(data, type,row){return (data ? ok : ko);}}
     ],
-     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
     buttons: [
         {
         extend:    'excelHtml5',
@@ -252,14 +235,6 @@ div.dataTables_length select {height: 50px}
         }
       }
     ],
-    columnDefs: [
-      //{ className:"my_class", "targets": [4] },
-    //  { "orderData":[ 1 ],   "targets": [ 2 ] },
-        {
-          "visible": false
-          //"searchable": false
-        }
-    ],
     language: {
         "lengthMenu": "{%trans%}show{%endtrans%} _MENU_ {%trans%}per_page{%endtrans%}",
         "zeroRecords": "0 {%trans%}results{%endtrans%}",
@@ -271,44 +246,13 @@ div.dataTables_length select {height: 50px}
         "next": "{%trans%}next{%endtrans%}",
       }
     },
-    "footerCallback": function ( row, data, start, end, display ) {
-          var api = this.api(), data
-          // Remove the formatting to get integer data for summation
-          var intVal = function ( i ) {
-            return typeof i === 'string' ?
-              i.replace(/[\€,]/g, '')*1 :
-              typeof i === 'number' ?
-              i : 0;
-          }
-          // Total over all pages
-        
-        for (k = 5; k<9;k++){
-          total = api
-            .column( k )
-            .data()
-            .reduce( function (a, b) {
-              return intVal(a) + intVal(b)
-            }, 0 )
-            // Total over this page
-            pageTotal = api
-              .column( k, { page: 'current'} )
-              .data()
-              .reduce( function (a, b) {
-                  return intVal(a) + intVal(b);
-              }, 0 )
-            // Update footer
-            k == 8 ? 
-            $( api.column( k ).footer() ).html(parseFloat(total).toFixed(2)+'€ ('+parseFloat(total).toFixed(2)+'€)')
-            : 
-            $( api.column( k ).footer() ).html(pageTotal+' ('+total+')')
-          }
-        },
     "destroy": true,
     responsive: true
     })
     .on( 'error.dt', function ( e, settings, techNote, message ) {
       $('.w3-overlay').hide()
       $('#modal-error').show()
+      console.log( e, settings, techNote, message)
       return true
     })
     //table.ajax.reload()
@@ -316,8 +260,9 @@ div.dataTables_length select {height: 50px}
     //table.draw()
     /*DATATABLE NO ALERT*/
     $.fn.dataTable.ext.errMode = 'none'
-    $('#dataTables_length, .dt-buttons').addClass('w3-center w3-col s12 m6 l4 w3-section')
-    $('#dataTables_filter').addClass('w3-col s8 m12 l4 w3-center w3-section')
+    $('#dataTable_length, .dt-buttons').addClass('w3-center w3-col s12 m6 l4 w3-section')
+    $('#dataTable_filter').addClass('w3-col s8 m12 l4 w3-center w3-section')
+    $("#dataTable").removeClass('w3-hide')
     }, 750)
   })
 
@@ -407,82 +352,5 @@ div.dataTables_length select {height: 50px}
     })
   }, 500)
   }
-
-
-
-  $(function(){
-
-    table = $('#dataTable').DataTable({
-          dom: 'lBfrtip',
-          order: [ 3, "ASC" ],
-          buttons: [
-          {
-          extend:    'excelHtml5',
-          text:      '<i class="far fa-file-excel"></i>',
-          titleAttr: 'Excel',
-          exportOptions: {
-            columns: [ 0, 1, 2, 3]
-            }
-          },
-          {
-          extend:    'pdfHtml5',
-          text:      '<i class="far fa-file-pdf"></i>',
-          titleAttr: 'PDF',
-          exportOptions: {
-            columns: [ 0, 1, 2, 3]
-            },
-            customize: function (doc) {
-              doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('')
-                doc['footer']=(function(page, pages) {
-                  return {
-                    columns: [
-                      {
-                        alignment: 'right',
-                        text: ['']
-                      },
-                    ],
-                    margin: 20
-                  }
-                })
-              }
-          },
-          {
-          extend: 'colvis',
-          columns: ':gt(0)',
-          text:      '<i class="far fa-eye-slash"></i>',
-          titleAttr: '{%trans%}columns_show_hide{%endtrans%}',
-          exportOptions: {
-            columns: [ 0, 1, 2, 3, 4, 5]
-          }
-        }
-      ],
-      "columnDefs": [
-        //{ className:"my_class", "targets": [4] },
-        //{ "orderData":[ 2 ], "targets": [ 3 ] },
-          {
-            //"targets": stored,
-            "visible": false
-            //"searchable": false
-          }
-      ],
-      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "{%trans%}all{%endtrans%}"]],
-        responsive: true,
-        searching: true,
-          language: {
-          "lengthMenu": "{%trans%}show{%endtrans%} _MENU_ {%trans%}per_page{%endtrans%}",
-          "zeroRecords": "0 {%trans%}results{%endtrans%}",
-          "info": "{%trans%}show{%endtrans%} _PAGE_ {%trans%}of{%endtrans%} _PAGES_",
-          "infoEmpty": "{%trans%}without{%endtrans%} {%trans%}results{%endtrans%}",
-          "search": "{%trans%}search{%endtrans%}",
-          "paginate": {
-          "previous": "{%trans%}previous{%endtrans%}",
-          "next": "{%trans%}next{%endtrans%}",
-        }
-      },
-      order: [[ 1, 'asc' ]]
-    })
-    $('#dataTable_length, .dt-buttons').addClass('w3-center w3-col s12 m6 l4 w3-section')
-    $('#dataTable_filter').addClass('w3-col s8 m12 l4 w3-center w3-section')
-  })
 
 </script>
