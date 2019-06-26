@@ -1498,7 +1498,8 @@ position: fixed;
   }
 
   .photo-service-link {
-    bottom: 19%;
+    /* //bottom: 19%; */
+    margin-bottom: -60px;
   }
 
   .photo-service-link:hover {
