@@ -32,25 +32,6 @@ class PhotoServiceController extends AbstractController
 
     public function photoServiceNew(Request $request)
     {
-        // $now = new \DateTime('now');
-        // //INTERVAL IS SET TO 30 DAYS (after 30 days remove folders)
-        // $interval = new \DateInterval('P2D');
-        // $now->sub($interval);
-        // $startDateTime = \DateTime::createFromFormat('U', ($now->format('U') ));
-        // $startDateTime->format("Y-m-d H:i:s");
-
-        // $em = $this->getDoctrine()->getManager();
-
-        // $expiredPhotoService = $em->getRepository(PhotoService::class)->deleteExpiredFolders($startDateTime);
-        // $filesystem = new Filesystem();
-        // foreach($expiredPhotoService as $p){
-        //     $filesystem->remove(['../public_html/upload/photo_service/'.$p->getFolder()]);
-        //     $p->setFolder('');
-        //     $em->persist($p);
-        // }
-        // $em->flush();
-        // dd($expiredPhotoService);
-
         $photoService = new PhotoService();
 
         $em = $this->getDoctrine()->getManager();

@@ -59,3 +59,6 @@ alt f12         - quick edit
 
 git ftp catchup
 git ftp push
+
+
+php bin/console app:remove-folder
