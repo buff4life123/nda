@@ -100,13 +100,13 @@ class PhotoServiceController extends AbstractController
                     $em->persist($photoService);
                     $em->flush();
 
-                    // $photoService->getLocales()->getId() == 1 
-                    // ? $smsLanguage = "To download your photos, please tap"
-                    // : $smsLanguage = "Para baixar suas fotos, por favor clique";
+                    $photoService->getLocales()->getId() == 1 
+                    ? $smsLanguage = "To download your photos, please tap"
+                    : $smsLanguage = "Para baixar suas fotos, por favor clique";
 
-                    // $sms = $smsLanguage." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
-                    // $sms = str_replace(" ","+", $sms);
-                    // $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $sms);
+                    $sms = $smsLanguage." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
+                    $sms = str_replace(" ","+", $sms);
+                    $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $sms);
 
                     $response = array(
                         'status' => 1,
