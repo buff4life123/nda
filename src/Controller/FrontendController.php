@@ -94,11 +94,25 @@ class FrontendController extends AbstractController
 		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 
+		$code = null;
+		$email= null;
+
+		if($request->query->get("c")){
+			$param = explode('e=',$request->query->get("c"));
+
+			if (count($param) > 1){
+				$code = $param[0];
+				$email = $param[1];
+			}
+		}
+
 		return $this->render('index/photo_service.twig',  array(
 			//'page' => 'about_us',
 			'company' => $company,
 			'rgpd' => $rgpd,
 			'terms_conditions' => $terms_conditions,
+			'email' => $email,
+			'code' => $code,
 			// 't' => $request->getLocale(),
 			//'about' => $about,
 		));

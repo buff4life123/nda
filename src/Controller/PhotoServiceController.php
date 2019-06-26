@@ -14,9 +14,11 @@ use App\Form\PhotoServiceType;
 use App\Service\FileUploader;
 use App\Service\ImageResizer;
 use App\Service\Validations;
+use App\Service\EnjoyApi;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
+
 
 
 class PhotoServiceController extends AbstractController
@@ -30,6 +32,25 @@ class PhotoServiceController extends AbstractController
 
     public function photoServiceNew(Request $request)
     {
+        // $now = new \DateTime('now');
+        // //INTERVAL IS SET TO 30 DAYS (after 30 days remove folders)
+        // $interval = new \DateInterval('P2D');
+        // $now->sub($interval);
+        // $startDateTime = \DateTime::createFromFormat('U', ($now->format('U') ));
+        // $startDateTime->format("Y-m-d H:i:s");
+
+        // $em = $this->getDoctrine()->getManager();
+
+        // $expiredPhotoService = $em->getRepository(PhotoService::class)->deleteExpiredFolders($startDateTime);
+        // $filesystem = new Filesystem();
+        // foreach($expiredPhotoService as $p){
+        //     $filesystem->remove(['../public_html/upload/photo_service/'.$p->getFolder()]);
+        //     $p->setFolder('');
+        //     $em->persist($p);
+        // }
+        // $em->flush();
+        // dd($expiredPhotoService);
+
         $photoService = new PhotoService();
 
         $em = $this->getDoctrine()->getManager();
@@ -46,7 +67,7 @@ class PhotoServiceController extends AbstractController
     }
 
 
-    public function photoServiceAdd(Request $request, ValidatorInterface $validator, FileUploader $fileUploader,ImageResizer $imageResizer, Validations $validations)
+    public function photoServiceAdd(Request $request, FileUploader $fileUploader,ImageResizer $imageResizer, Validations $validations, EnjoyApi $enjoyapi)
     {
         $photoService = new PhotoService();
 
@@ -89,19 +110,23 @@ class PhotoServiceController extends AbstractController
                     $photoService->setFolder($dechex);
 
                     $filesystem = new Filesystem();
-                    try {
-                        $filesystem->mkdir("../public_html/upload/photo_service/".$dechex); //dd()
-                        $uploadedFile = $form['imageFile']->getData();
-                        $fileName = $fileUploader->uploads($uploadedFile, $dechex);
-                        $imageResizer->resizeMultiple($fileName, $dechex);
-                    } catch (IOExceptionInterface $exception) {
-                        echo "An error occurred while creating your directory at ".$exception->getPath();
-                    }
+    
+                    $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
+                    $uploadedFile = $form['imageFile']->getData();
+                    $fileName = $fileUploader->uploads($uploadedFile, $photoService->getFolder());
+                    $imageResizer->resizeMultiple($fileName, $photoService->getFolder());
 
                     $em->persist($photoService);
                     $em->flush();
 
-                    //dd(phpinfo());
+                    $photoService->getLocales()->getId() == 1 
+                    ? $smsLanguage = "To download your photos, please tap"
+                    : $smsLanguage = "Para baixar suas fotos, por favor clique";
+
+                    $sms = $smsLanguage."https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
+                    $sms = str_replace(" ","+", $sms);
+                    $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $sms);
+
                     $response = array(
                         'status' => 1,
                         'message' => 'success',
@@ -123,18 +148,17 @@ class PhotoServiceController extends AbstractController
                 'message' => 'fail not submitted',
                 'data' => $this->getErrorMessages($form));
 
+      
         return new JsonResponse($response);
     }
 
     public function photoServiceList(Request $request, ValidatorInterface $validator)
     {
-        $em               = $this->getDoctrine()->getManager();
-        $photoService     = $em->getRepository(PhotoService::class)->findAll();
-        
-        //dd($photoService);
+        // $em               = $this->getDoctrine()->getManager();
+        // $photoService     = $em->getRepository(PhotoService::class)->findAll();
 
         return $this->render('admin/list-photo-service.html', array(
-            'photoService' =>  $photoService,
+            //'photoService' =>  $photoService,
             )
         );
     }

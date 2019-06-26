@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\PhotoService;
+use App\Entity\Locales;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType; 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Doctrine\ORM\EntityRepository;
@@ -41,12 +43,20 @@ class PhotoServiceType extends AbstractType
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'telephone']
             ))
 
+            ->add('locales', EntityType::class, array(
+                'class' => Locales::class,
+                'choice_label' => 'name',
+                'label' => 'language_sms',
+                'attr' => ['class' => 'w3-input w3-select w3-border w3-white']
+            ))
+        
             ->add('imageFile', FileType::class, [
                 'mapped' => false,
                 'required' => true,
                 'multiple' => true,
                 'attr' => ['class' => 'w3-hide set-image', 'id' => 'previews', 'accept' => 'image/*' ]
             ])
+            
             // ->add('created_date', HiddenType::class,
             // array(
             //     'required' => false,

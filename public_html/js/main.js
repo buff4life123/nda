@@ -5,7 +5,8 @@ function getFullYear() {
     return new Date().getFullYear();
 }
 //Add current year to footer
-document.getElementById("footer-fullyear").innerHTML +=  " " + getFullYear(); 
+if(document.getElementById("footer-fullyear"))
+    document.getElementById("footer-fullyear").innerHTML +=  " " + getFullYear(); 
 
 
 
@@ -38,6 +39,7 @@ window.onclick = function(event) {
 }
 
 function customError (fieldId, errorMessage) {
+    //console.log(fieldId, errorMessage);
     var response = [];
     response.item = fieldId;
     response.message = errorMessage;

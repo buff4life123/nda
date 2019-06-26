@@ -224,6 +224,7 @@ return array(
     'accept_conditions' => 'Por favor, leia e aceite os Termos de Serviço e a Política de Privacidade.',
     'demograph' => 'Demografico',
     'system' => 'Sistema',
+    'language_sms' => 'Língua sms',
     'about_us' => 'Sobre nós',
     'gdpr' => 'R.G.P.D.',
     'about_title' => 'Sobre nós',

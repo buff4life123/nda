@@ -20,6 +20,20 @@ class PhotoServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, PhotoService::class);
     }
 
+    public function deleteExpiredFolders($startDateTime) {
+
+        if ($startDateTime) 
+            $filter = $this->createQueryBuilder('p')
+            ->andWhere('p.created_date <= :start')
+            ->andWhere('p.folder != :f')
+            ->setParameter('start', $startDateTime)
+            ->setParameter('f', "")
+            ->orderBy('p.created_date', 'ASC')
+            ->getQuery();
+
+        return $filter->execute();
+    }
+    
     public function filter($start, $end){
 
         if ($start && $end)

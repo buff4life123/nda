@@ -156,6 +156,7 @@ return array(
     'accept_conditions' => 'Please read and accept the Terms of Service and Privacy Policy',
     'demograph' => 'Demographic',
     'system' => 'System',
+    'language_sms' => 'Language sms',
     'about_us' => 'About us',
     'gdpr' => 'G.D.P.R.',
     'about_title' => 'About Us',

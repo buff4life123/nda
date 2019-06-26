@@ -42,11 +42,15 @@ class PhotoService
     */
     private $folder;
 
-    /** @ORM\Column(type="boolean", name="marketing", options={"default":0}) */
+    /** @ORM\Column(type="boolean", name="marketing", nullable=true, options={"default":0}) */
     private $marketing;
 
-    /** @ORM\Column(type="boolean", name="gdpr", options={"default":0}) */
+    /** @ORM\Column(type="boolean", name="gdpr", nullable=true, options={"default":0}) */
     private $gdpr;
+    /** 
+    * @ORM\ManyToOne(targetEntity="Locales")
+    */
+    private $locales;
     
     public function getId()
     {
@@ -107,5 +111,15 @@ class PhotoService
 
     public function setGdpr($gdpr) {
         $this->gdpr = $gdpr;
+    }
+
+    public function getLocales()
+    {
+        return $this->locales;
+    }
+
+    public function setLocales(Locales $locales)
+    {
+        $this->locales = $locales;
     }
 }

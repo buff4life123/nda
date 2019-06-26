@@ -6,7 +6,7 @@ ul{padding: 0px}
 .w3-input {border-bottom: 0px solid #05788d}
 input, select, textarea {color: #000!important}
 
-.parsley-required, .parsley-type, .parsley-pattern, .parsley-min, .parsley-max, .parsley-length, .parsley-photo_service_email-custom, .parsley-photo_service_telephone-custom {
+.parsley-required, .parsley-type, .parsley-pattern, .parsley-min, .parsley-max, .parsley-length, .parsley-errors-list {
     color: #f44336!important;
     padding: 8px 4px;
     animation: animatezoom 0.6s;
@@ -42,7 +42,11 @@ input, select, textarea {color: #000!important}
             {{ form_label(form.telephone)}}<br>
             {{ form_widget(form.telephone)}}
           </div>
-
+          <div class="w3-col l6 m6 s12 w3-margin-bottom">
+            {{ form_label(form.locales)}}<br>
+            {{ form_widget(form.locales)}}
+          </div>
+          
         </div>
 
       <!-- <input type="number" name="number"> -->
@@ -72,8 +76,8 @@ input, select, textarea {color: #000!important}
   </div>
 </div>
 
+<script src="{{ asset('/js/main.js') }}" type="text/javascript"></script>
 <script>
-
   //<ul class="parsley-errors-list filled" id="parsley-id-44"><li class="parsley-required">Obrigatório *</li></ul>
 
   var fileInput = document.querySelector('input[type="file"]');
@@ -126,14 +130,10 @@ input, select, textarea {color: #000!important}
             ajaxUpload('photo-service-new')
           }
           else {
-            var response = [];
-            response.item = data.message;
-            response.message = '{%trans%}invalid_field{%endtrans%} ....';
-            response.errorName = response.item + '-custom';
-
-            var FieldInstance = $('#' + response.item).parsley();
-            FieldInstance.removeError(response.errorName);
-            FieldInstance.addError(response.errorName, {message: response.message});
+            if(data.message === "fail")
+              customError("previews", '{%trans%}error{%endtrans%} ....')
+            else
+              customError(data.message, '{%trans%}invalid_field{%endtrans%} ....')
           }
         },
         error:function(data){

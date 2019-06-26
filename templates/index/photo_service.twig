@@ -17,8 +17,8 @@
             <div class="card card-container text-center"> 
                <h1 class="text-uppercase"><strong>{% trans %}photo_service{% endtrans %}</strong></h1>
                <form id="photo-service">
-                  <input type="text"  id="photo-service-code"  name="photo-service-code"  class="form-control" placeholder="{%trans%}insert_code{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="">
-                  <input type="text" id="photo-service-email" name="photo-service-email" class="form-control" placeholder="{%trans%}insert_email{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="">
+                  <input type="text"  id="photo-service-code"  name="photo-service-code"  class="form-control" placeholder="{%trans%}insert_code{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="" value="{{code}}">
+                  <input type="text" id="photo-service-email" name="photo-service-email" class="form-control" placeholder="{%trans%}insert_email{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="" value="{{email}}">
                   <input type="checkbox" name="marketing-agree" value="1"> {% trans %}marketing_agree{% endtrans %}<br>
                   <input type="checkbox" id="terms-cond-agree" name="terms-cond-agree"> {% trans %}terms_cond_agree{% endtrans %}
                   <a class="w-inline-block " href="#" onclick="modalTermosCondicoes('{{terms_conditions.getName}}','{{terms_conditions.getTermsHtml}}')">{%trans%}terms_of_service{%endtrans%}</a>
@@ -101,8 +101,6 @@
          })
 
          }
- 
-         
 
          })
       </script>
