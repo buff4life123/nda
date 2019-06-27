@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\PhotoService;
+use App\Entity\Company;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,7 @@ use App\Service\FileUploader;
 use App\Service\ImageResizer;
 use App\Service\Validations;
 use App\Service\EnjoyApi;
+use App\Service\Host;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
@@ -48,7 +50,7 @@ class PhotoServiceController extends AbstractController
     }
 
 
-    public function photoServiceAdd(Request $request, FileUploader $fileUploader,ImageResizer $imageResizer, Validations $validations, EnjoyApi $enjoyapi)
+    public function photoServiceAdd(Request $request, FileUploader $fileUploader,ImageResizer $imageResizer, Validations $validations, EnjoyApi $enjoyapi, Host $host)
     {
         $photoService = new PhotoService();
 
@@ -99,14 +101,49 @@ class PhotoServiceController extends AbstractController
 
                     $em->persist($photoService);
                     $em->flush();
+                    
+                    if ($photoService->getLocales()->getId() == 1){
+                        $subject = "Photos";
+                        $msgLang = "to download your photos, please tap";
+                    } else {
+                        $subject = "Fotografias";
+                        $msgLang = "para baixar suas fotos, por favor clique";
+                    }
 
-                    $photoService->getLocales()->getId() == 1 
-                    ? $smsLanguage = "To download your photos, please tap"
-                    : $smsLanguage = "Para baixar suas fotos, por favor clique";
+                    $msg = $msgLang." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
+                    $msgSMS = str_replace(" ","+", $msg);
 
-                    $sms = $smsLanguage." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
-                    $sms = str_replace(" ","+", $sms);
-                    $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $sms);
+                    //phone
+                    $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
+
+                    //email
+                    $company = $em->getRepository(Company::class)->find(1);
+                    $locale = $request->getlocale();
+
+                    $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
+                        ->setUsername($company->getEmail())
+                        ->setPassword($company->getEmailPass());       
+
+                    $mailer = new \Swift_Mailer($transport);
+
+                    $message = (new \Swift_Message($subject))
+                        ->setFrom([$company->getEmail() => $company->getName()])
+                        ->setTo([$photoService->getEmail() => $photoService->getName(), $company->getEmail() => $company->getName()])
+                        ->addPart($subject, 'text/plain')
+                        ->setBody(
+                            $this->renderView(
+                                'emails/photoService-'.$photoService->getLocales()->getName().'.twig',
+                                array(
+                                    'msg' => $msg,
+                                    'username' => $photoService->getName(),
+                                    'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
+                                    'company_name' => $company->getName()
+                                )
+                            ),
+                        'text/html'
+                    );
+
+                    $mailer->send($message);
 
                     $response = array(
                         'status' => 1,

@@ -16,26 +16,26 @@ class AdminType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('address', TextType::class, array(
-                'label'=>'address',
-                'required' => true,
-                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'address']
-            ))
-            ->add('location', TextType::class, array(
-                'label'=>'location',
-                'required' => true,
-                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'location']
-            ))
-            ->add('postalCode', TextType::class, array(
-                'label'=>'postal_code',
-                'required' => true,
-                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'postal_code']
-            ))
-            ->add('nif', TextType::class, array(
-                'label'=>'NIF',
-                'required' => true,
-                'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'NIF']
-            ))
+        // ->add('address', TextType::class, array(
+        //         'label'=>'address',
+        //         'required' => true,
+        //         'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'address']
+        //     ))
+        //     ->add('location', TextType::class, array(
+        //         'label'=>'location',
+        //         'required' => true,
+        //         'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'location']
+        //     ))
+        //     ->add('postalCode', TextType::class, array(
+        //         'label'=>'postal_code',
+        //         'required' => true,
+        //         'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'postal_code']
+        //     ))
+        //     ->add('nif', TextType::class, array(
+        //         'label'=>'NIF',
+        //         'required' => true,
+        //         'attr' => ['class' => 'w3-input w3-padding-16','placeholder'=>'NIF']
+        //     ))
             ->add('email', EmailType::class,
             array(
                 'label'=>'email',

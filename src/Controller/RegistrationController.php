@@ -2,18 +2,19 @@
 namespace App\Controller;
 
 use App\Form\UserType;
-use App\Entity\User;
-
 use App\Form\AdminType;
+use App\Entity\User;
 use App\Entity\Admin;
 use App\Entity\Manager;
+use App\Entity\Company;
+use App\Service\Host;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\DBAL\DBALException;
-use App\Entity\Company;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class RegistrationController extends AbstractController
 {
@@ -35,7 +36,7 @@ class RegistrationController extends AbstractController
     }
 
 
-    public function userCreate(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
+    public function userCreate(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer, Host $host)
     {
         //$request -> request -> get("type");
         //$user = new Admin();
@@ -77,7 +78,7 @@ class RegistrationController extends AbstractController
                             'emails/register.html.twig',
                             array(
                                 'username' => $user->getUsername(),
-                                'logo' => $this->getHost($request).'/upload/gallery/'.$company->getLogo(),
+                                'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
                                 'company_name' => $company->getName()
                             )
                         ),
@@ -148,18 +149,4 @@ class RegistrationController extends AbstractController
         return $err;
     }
 
-    /*check the current host*/
-    private function getHost(Request $request){
-
-        if(preg_match('/10.0.9/i', $request->getHttpHost()))
-            $host = 'http://'.$request->getHttpHost();
-
-        else if(preg_match('/demo/i', $request->getHttpHost()))
-            $host = 'https://demo.nauticdrive-algarve.com/';
-
-        else
-            $host = 'https://nauticdrive-algarve.com/';
-
-        return $host;
-    }
 }

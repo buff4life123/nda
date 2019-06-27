@@ -2,7 +2,7 @@
 
 return array(
 
-
+    'sucess_msg' => "Sucess!",
     'other_company_title' => 'Luxury cruises on',
     'other_company_text' => 'With a cruising speed of 24 km and a majestic and powerful drive, this 19 metres vessel is one of most successful builds of the renowned British brand Sunseeker',
     'other_company_detail_title' => 'Comfortable interior',
@@ -156,7 +156,7 @@ return array(
     'accept_conditions' => 'Please read and accept the Terms of Service and Privacy Policy',
     'demograph' => 'Demographic',
     'system' => 'System',
-    'language_sms' => 'Language sms',
+    'language_sms' => 'Language',
     'about_us' => 'About us',
     'gdpr' => 'G.D.P.R.',
     'about_title' => 'About Us',

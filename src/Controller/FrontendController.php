@@ -446,7 +446,7 @@ class FrontendController extends AbstractController
                         'email' => $email,
                         'telephone' => $telephone,
                         'message' => $information,
-                        'logo' => 'https://'.$host.'/images/'.$company->getLogo()
+                        'logo' => $this->getHost($request).'/upload/gallery/'.$company->getLogo(),
                     )
                 ),
                 'text/html'

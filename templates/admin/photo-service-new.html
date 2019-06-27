@@ -11,6 +11,9 @@ input, select, textarea {color: #000!important}
     padding: 8px 4px;
     animation: animatezoom 0.6s;
 }
+.sucess-msg {
+    color: #33ff00!important;
+}
 
 </style>
 <header class="w3-container" style="padding-top:22px">
@@ -127,7 +130,13 @@ input, select, textarea {color: #000!important}
           $('.w3-overlay').hide()
           //console.log("data:"+ data);
           if (data.status == 1){
-            ajaxUpload('photo-service-new')
+            $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
+
+            setTimeout(
+            function() 
+            {
+              ajaxUpload('photo-service-new')
+            }, 4000);
           }
           else {
             if(data.message === "fail")
