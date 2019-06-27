@@ -259,9 +259,9 @@ class PhotoServiceController extends AbstractController
         if ($start || $end)
             $photoService = $em->getRepository(PhotoService::class)->filter($start, $end);
         else if ($email) 
-            $photoService = $em->getRepository(PhotoService::class)->findAll(['email' => $email]);
+            $photoService = $em->getRepository(PhotoService::class)->findBy(['email' => $email]);
         else if ($telephone) 
-            $photoService = $em->getRepository(PhotoService::class)->findAll(['telephone' => $telephone]);
+            $photoService = $em->getRepository(PhotoService::class)->findBy(['telephone' => $telephone]);
 
 
         if ($photoService) {
