@@ -114,36 +114,36 @@ class PhotoServiceController extends AbstractController
                     $msgSMS = str_replace(" ","+", $msg);
 
                     //phone
-                    //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
+                    $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
 
                     //email
-                    // $company = $em->getRepository(Company::class)->find(1);
-                    // $locale = $request->getlocale();
+                    $company = $em->getRepository(Company::class)->find(1);
+                    $locale = $request->getlocale();
 
-                    // $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
-                    //     ->setUsername($company->getEmail())
-                    //     ->setPassword($company->getEmailPass());       
+                    $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
+                        ->setUsername($company->getEmail())
+                        ->setPassword($company->getEmailPass());       
 
-                    // $mailer = new \Swift_Mailer($transport);
+                    $mailer = new \Swift_Mailer($transport);
 
-                    // $message = (new \Swift_Message($subject))
-                    //     ->setFrom([$company->getEmail() => $company->getName()])
-                    //     ->setTo([$photoService->getEmail() => $photoService->getName(), $company->getEmail() => $company->getName()])
-                    //     ->addPart($subject, 'text/plain')
-                    //     ->setBody(
-                    //         $this->renderView(
-                    //             'emails/photoService-'.$photoService->getLocales()->getName().'.twig',
-                    //             array(
-                    //                 'msg' => $msg,
-                    //                 'username' => $photoService->getName(),
-                    //                 'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
-                    //                 'company_name' => $company->getName()
-                    //             )
-                    //         ),
-                    //     'text/html'
-                    // );
+                    $message = (new \Swift_Message($subject))
+                        ->setFrom([$company->getEmail() => $company->getName()])
+                        ->setTo([$photoService->getEmail() => $photoService->getName(), $company->getEmail() => $company->getName()])
+                        ->addPart($subject, 'text/plain')
+                        ->setBody(
+                            $this->renderView(
+                                'emails/photoService-'.$photoService->getLocales()->getName().'.twig',
+                                array(
+                                    'msg' => $msg,
+                                    'username' => $photoService->getName(),
+                                    'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
+                                    'company_name' => $company->getName()
+                                )
+                            ),
+                        'text/html'
+                    );
 
-                    // $mailer->send($message);
+                    $mailer->send($message);
 
                     $response = array(
                         'status' => 1,

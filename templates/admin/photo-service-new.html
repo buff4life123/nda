@@ -184,11 +184,21 @@ input, select, textarea {color: #000!important}
   function errorHandler(event) {
     $("#status").html("Upload Failed");
     $('.w3-overlay').hide()
+    setTimeout(
+            function() 
+            {
+              ajaxUpload('photo-service-new')
+            }, 4000);
   }
 
   function abortHandler(event) {
     $("#status").html("Upload Aborted");
     $('.w3-overlay').hide()
+    setTimeout(
+            function() 
+            {
+              ajaxUpload('photo-service-new')
+            }, 4000);
   }
 
 
