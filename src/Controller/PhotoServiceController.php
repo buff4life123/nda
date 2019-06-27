@@ -259,9 +259,9 @@ class PhotoServiceController extends AbstractController
         if ($start || $end)
             $photoService = $em->getRepository(PhotoService::class)->filter($start, $end);
         else if ($email) 
-            $photoService = $em->getRepository(PhotoService::class)->findOneBy(['email' => $email]);
+            $photoService = $em->getRepository(PhotoService::class)->findAll(['email' => $email]);
         else if ($telephone) 
-            $photoService = $em->getRepository(PhotoService::class)->findOneBy(['telephone' => $telephone]);
+            $photoService = $em->getRepository(PhotoService::class)->findAll(['telephone' => $telephone]);
 
 
         if ($photoService) {
@@ -280,18 +280,6 @@ class PhotoServiceController extends AbstractController
                     'gdpr' => $item->getGdpr(),
                     );
                 }
-            }else {
-                $seePhotoService[] =
-                array(
-                'id' => $photoService->getId(),
-                'name' => $photoService->getName(),
-                'email' => $photoService->getEmail(),
-                'telephone' => $photoService->getTelephone(),
-                'created_date' => $photoService->getCreatedDate()->format('d/m/Y'),
-                'folder' => $photoService->getFolder(),
-                'marketing' => $photoService->getMarketing(),
-                'gdpr' => $photoService->getGdpr(),
-                );
             }
 
             $response = array(
