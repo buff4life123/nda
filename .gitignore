@@ -1,15 +1,16 @@
 
 ###> symfony/framework-bundle ###
 .env
-/public/bundles/
+/public_html/bundles/
 /src/Migrations/
 /var/
 /vendor/
+/public_html/upload/photo_service
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-pack ###
 /node_modules/
-/public/build/
+/public_html/build/
 ###< symfony/webpack-encore-pack ###
 
 ###> symfony/phpunit-bridge ###

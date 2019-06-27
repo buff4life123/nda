@@ -52,7 +52,8 @@ div.dataTable_length select {height: 50px}
   <div class="w3-col s12"></div>
   <table id="dataTable" class="w3-border table table-striped centered hover table-bordered w3-hide" style="width:100%">
     <thead class="w3-sand">
-      <tr>   
+      <tr>
+      <th style="text-align: center">{%trans%}send_email{%endtrans%}</th>   
       <th style="text-align: center">{%trans%}name{%endtrans%}</th>    
       <th style="text-align: center">Email</th>
       <th style="text-align: center">{%trans%}telephone{%endtrans%}</th>
@@ -74,8 +75,10 @@ div.dataTable_length select {height: 50px}
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
       </tr>
        <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -95,6 +98,7 @@ div.dataTable_length select {height: 50px}
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
       </tr>
     </tfoot>
   </table>
@@ -104,7 +108,6 @@ div.dataTable_length select {height: 50px}
 <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('js/ui.datepicker-pt-BR.js') }}"></script>
 <script>
-
   var ok =  '<i class="w3-text-green fa fa-check w3-large"></i>' 
   var ko =  '<i class="fas fa-times w3-text-red w3-large"></i>'
 
@@ -160,7 +163,7 @@ div.dataTable_length select {height: 50px}
         {
         "url" :'{{ path('admin_photo_service_search') }}?'+data,
         "dataSrc": function (j) {  
-        //console.log(j.options)
+        //console.log(j)
         //$('.w3-overlay, .table-overlay').hide()
         if( j.options > 1500){
           $('#results_txt').html('{%trans%}more_1500{%endtrans%}')
@@ -185,6 +188,11 @@ div.dataTable_length select {height: 50px}
       }
       },
       columns: [
+      { data: "id", render: function(data, type,row){
+
+        var disabled = row.folder == "" ? "disabled" : ""
+        return ('<button class="w3-btn w3-border w3-blue w3-margin-bottom" style="width:19px" onclick="sendEmail('+data+') "'+disabled+'> <i class="fa fa-paper-plane"  aria-hidden="true"></i> </button>');
+        }},
       { data: "name"},
       { data: "email"},
       { data: "telephone"},
@@ -353,4 +361,31 @@ div.dataTable_length select {height: 50px}
   }, 500)
   }
 
+  function sendEmail(id){
+    $('#modal-confirm').hide()
+    $('.w3-overlay').show()
+    setTimeout(function(){
+    $.ajax({  
+      url:'{{ path('admin_photo_service_sendEmail') }}',
+      type: "POST",
+      data:'id='+id,
+      success: function(data){
+        console.log(data);
+        $('.w3-overlay').hide()
+        if (data.message == 'success'){
+          $('#modal-success').show()
+        }
+        //ajaxUpload('app-users')
+        else{
+          //$('#modal-fields').show()
+          //$('#set-fields').html(data.data)
+        }
+      },
+      error:function(data){
+        $('.w3-overlay').hide()
+        $('#modal-error').show()
+      }
+    })
+  }, 500)
+  }
 </script>

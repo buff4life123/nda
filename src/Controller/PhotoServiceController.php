@@ -170,6 +170,70 @@ class PhotoServiceController extends AbstractController
         return new JsonResponse($response);
     }
 
+    public function photoServiceSendEmail(Request $request, Host $host)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $photoService = $em->getRepository(photoService::class)->find($request->request->get("id"));
+
+        if(!$photoService){
+
+            $response = array(
+                'status' => 0,
+                'message' => 'fail',
+                'data' => null
+            );
+
+            return new JsonResponse($response);
+        }
+
+        if ($photoService->getLocales()->getId() == 1){
+            $subject = "Photos";
+            $msgLang = "to download your photos, please tap";
+        } else {
+            $subject = "Fotografias";
+            $msgLang = "para baixar suas fotos, por favor clique";
+        }
+
+        $msg = $msgLang." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
+
+        //email
+        $company = $em->getRepository(Company::class)->find(1);
+        $locale = $request->getlocale();
+
+        $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
+            ->setUsername($company->getEmail())
+            ->setPassword($company->getEmailPass());       
+
+        $mailer = new \Swift_Mailer($transport);
+
+        $message = (new \Swift_Message($subject))
+            ->setFrom([$company->getEmail() => $company->getName()])
+            ->setTo([$photoService->getEmail() => $photoService->getName(), $company->getEmail() => $company->getName()])
+            ->addPart($subject, 'text/plain')
+            ->setBody(
+                $this->renderView(
+                    'emails/photoService-'.$photoService->getLocales()->getName().'.twig',
+                    array(
+                        'msg' => $msg,
+                        'username' => $photoService->getName(),
+                        'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
+                        'company_name' => $company->getName()
+                    )
+                ),
+            'text/html'
+        );
+
+        $mailer->send($message);
+
+        $response = array(
+            'status' => 1,
+            'message' => 'success',
+            'data' => $photoService->getId(),
+        );
+
+        return new JsonResponse($response);
+    }
+
     public function photoServiceList(Request $request, ValidatorInterface $validator)
     {
         // $em               = $this->getDoctrine()->getManager();
@@ -190,105 +254,58 @@ class PhotoServiceController extends AbstractController
         $email = $request->query->get('photo-service-email');
         $telephone = $request->query->get('photo-service-telephone');
 
-        if ($start || $end){
-            $photoService = $this->getDoctrine()->getManager()->getRepository(PhotoService::class)->filter($start, $end);
+        $photoService = '';
 
-            if ($photoService){
-
-                foreach ($photoService as $photoService) {
-                    $seePhotoService[] =
-                        array(
-                        'name' => $photoService->getName(),
-                        'email' => $photoService->getEmail(),
-                        'telephone' => $photoService->getTelephone(),
-                        'created_date' => $photoService->getCreatedDate()->format('d/m/Y'),
-                        'folder' => $photoService->getFolder(),
-                        'marketing' => $photoService->getMarketing(),
-                        'gdpr' => $photoService->getGdpr(),
-                        );
-                }
+        if ($start || $end)
+            $photoService = $em->getRepository(PhotoService::class)->filter($start, $end);
+        else if ($email) 
+            $photoService = $em->getRepository(PhotoService::class)->findOneBy(['email' => $email]);
+        else if ($telephone) 
+            $photoService = $em->getRepository(PhotoService::class)->findOneBy(['telephone' => $telephone]);
 
 
-                $counter = count($seePhotoService);
-                
-                if ($counter > 0 && $counter <= 1500)
-                
-                    $response = array(
-                        'data' => $seePhotoService, 
-                        'options' => $counter, 
-                        );
-                else 
-                    $response = array(
-                        'data' => '', 
-                        'options' => $counter, 
-                    );
-
-            }
-            else 
-                $response = array(
-                    'data' => '', 
-                    'options' => 0, 
-                    );
-            }
-            else if ($email) {
-                $photoService = $em->getRepository(PhotoService::class)->findOneBy(['email' => $email]);
-
-                if ($photoService) {
+        if ($photoService) {
+            
+            if(is_array($photoService)){
+                foreach($photoService as $item){
                     $seePhotoService[] =
                     array(
-                    'name' => $photoService->getName(),
-                    'email' => $photoService->getEmail(),
-                    'telephone' => $photoService->getTelephone(),
-                    'created_date' => $photoService->getCreatedDate()->format('d/m/Y'),
-                    'folder' => $photoService->getFolder(),
-                    'marketing' => $photoService->getMarketing(),
-                    'gdpr' => $photoService->getGdpr(),
+                    'id' => $item->getId(),
+                    'name' => $item->getName(),
+                    'email' => $item->getEmail(),
+                    'telephone' => $item->getTelephone(),
+                    'created_date' => $item->getCreatedDate()->format('d/m/Y'),
+                    'folder' => $item->getFolder(),
+                    'marketing' => $item->getMarketing(),
+                    'gdpr' => $item->getGdpr(),
                     );
-
-                    $response = array(
-                        'data' => $seePhotoService, 
-                        'options' => 1, 
-                        );
                 }
-                else 
-                $response = array(
-                    'data' => '', 
-                    'options' => 0, 
+            }else {
+                $seePhotoService[] =
+                array(
+                'id' => $photoService->getId(),
+                'name' => $photoService->getName(),
+                'email' => $photoService->getEmail(),
+                'telephone' => $photoService->getTelephone(),
+                'created_date' => $photoService->getCreatedDate()->format('d/m/Y'),
+                'folder' => $photoService->getFolder(),
+                'marketing' => $photoService->getMarketing(),
+                'gdpr' => $photoService->getGdpr(),
                 );
             }
-            else if ($telephone) {
-                $photoService = $em->getRepository(PhotoService::class)->findOneBy(['telephone' => $telephone]);
-                
-                if ($photoService) {
-                    $seePhotoService[] =
-                    array(
-                    'name' => $photoService->getName(),
-                    'email' => $photoService->getEmail(),
-                    'telephone' => $photoService->getTelephone(),
-                    'created_date' => $photoService->getCreatedDate()->format('d/m/Y'),
-                    'folder' => $photoService->getFolder(),
-                    'marketing' => $photoService->getMarketing(),
-                    'gdpr' => $photoService->getGdpr(),
-                    );
 
-                    $response = array(
-                        'data' => $seePhotoService, 
-                        'options' => 1, 
-                        );
-                }
-                else 
-                $response = array(
-                    'data' => '', 
-                    'options' => 0, 
+            $response = array(
+                'data' => $seePhotoService, 
+                'options' => count($seePhotoService), 
                 );
-            }
-            else 
-                $response = array(
-                    'data' => 'fields', 
-                    'options' => 0, 
-                );
-
-            return new JsonResponse($response);
+        }
+        else 
+        $response = array(
+            'data' => '', 
+            'options' => 0, 
+        );
+            
+        return new JsonResponse($response);
     }
 
     protected function getErrorMessages(\Symfony\Component\Form\Form $form) 

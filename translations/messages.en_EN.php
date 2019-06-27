@@ -1,7 +1,7 @@
 <?php
 
 return array(
-
+    'send_email' => "Send Email",
     'sucess_msg' => "Sucess!",
     'other_company_title' => 'Luxury cruises on',
     'other_company_text' => 'With a cruising speed of 24 km and a majestic and powerful drive, this 19 metres vessel is one of most successful builds of the renowned British brand Sunseeker',

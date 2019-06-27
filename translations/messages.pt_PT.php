@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'send_email' => "Enviar Email",
     'sucess_msg' => "Sucesso!",
     'other_company_title' => 'Cruzeiros de luxo em',
     'other_company_text' => 'Com uma velocidade de cruzeiro de 24 km e uma condução majestosa e poderosa, este navio de 19 metros é uma das construções mais bem sucedidas da famosa marca britânica Sunseeker.',
