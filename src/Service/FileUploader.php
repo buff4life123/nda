@@ -44,8 +44,8 @@ class FileUploader
 		//exit;
 		$result = $this->createZip($pathZip,$this->targetDir.'/'.$folder.'.zip', false, $folder);
 
-		//$filesystem = new Filesystem();
-		//$filesystem->remove(['../public_html/upload/photo_service/'.$folder]);
+		$filesystem = new Filesystem();
+		$filesystem->remove(['../public_html/upload/photo_service/'.$folder]);
 
 		return $result;
 	}
