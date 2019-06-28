@@ -159,13 +159,12 @@ input, select, textarea {color: #000!important}
           //console.log("data:"+ data.id);
           if (data.status == 1){
 
-            startZipRequest(data.id);
-
             $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
 
             setTimeout(
             function() 
             {
+              startZipRequest(data.id);
               ajaxUpload('photo-service-new')
             }, 4000);
           }
