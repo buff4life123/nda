@@ -51,9 +51,10 @@ input, select, textarea {color: #000!important}
           </div>
           
         </div>
-
+        
       <!-- <input type="number" name="number"> -->
       <div class="w3-row-padding w3-margin-top ">
+        <label class="w3-text-red">{%trans%}max_selected_images{%endtrans%}: 300</label>
         <div id="previews" class="w3-white w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" title="{%trans%}add_image{%endtrans%}" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
           <i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
         </div>
@@ -98,6 +99,14 @@ input, select, textarea {color: #000!important}
 
     $imgSelectedTranslate = e.target.files.length > 1 ? (e.target.files.length + " " + '{%trans%}selected_images{%endtrans%}') : e.target.files[0].name;
     $("#previews").html($imgSelectedTranslate);
+
+    $maxFileUploads = 300;
+    if (e.target.files.length > $maxFileUploads){
+      $("#previews").html('{%trans%}upload_maximum{%endtrans%} ' + $maxFileUploads + ' {%trans%}images{%endtrans%}');
+      $("#submit-button").addClass("w3-hide");
+     } else {
+      $("#submit-button").removeClass("w3-hide");
+     }
     /*
     var img, i;
     for (i = 0; i < e.target.files.length; i++) {
