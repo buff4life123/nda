@@ -98,6 +98,10 @@ admin_photo_service_search:
     path: /admin-photo-service-search/
     controller: App\Controller\PhotoServiceController::photoServiceSearch
 
+admin_photo_service_zip:
+    path: /admin-photo-service-zip/
+    controller: App\Controller\PhotoServiceController::photoServiceZip
+
 admin_photo_service_sendEmail:
     path: /admin-photo-sendEmail/
     controller: App\Controller\PhotoServiceController::photoServiceSendEmail

@@ -156,8 +156,11 @@ input, select, textarea {color: #000!important}
         success: function(data){  
           $('.w3-overlay').hide()
           
-          //console.log("data:"+ data);
+          //console.log("data:"+ data.id);
           if (data.status == 1){
+
+            startZipRequest(data.id);
+
             $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
 
             setTimeout(
@@ -181,6 +184,25 @@ input, select, textarea {color: #000!important}
     //}, 500)
   }) 
 
+  function startZipRequest(id) {
+
+    $.ajax({  
+      url:'{{ path('admin_photo_service_zip') }}',
+      type: "POST",
+      data: 'id='+id,
+      success: function(data){
+
+        if (data.status == 1){
+            console.log("sucess");
+        }else {
+          console.log("error");
+        }
+          
+      }
+    })
+
+  }
+
 
   function progressHandler(event) {
 
@@ -191,10 +213,14 @@ input, select, textarea {color: #000!important}
     progressBar.value = Math.round(percent);
     $("#status").html(Math.round(percent) + "% uploaded... please wait");
 
+    //if(Math.round(percent) == 100) {
+    //  $("#status").html("compressing images... please wait");
+    //}
+
   }
 
   function completeHandler(event) {
-    console.log(event)
+    //console.log(event)
     $("#status").html(event.target.responseText.message);
     progressBar.value = 0; //wil clear progress bar after successful upload
   }

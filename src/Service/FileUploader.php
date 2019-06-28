@@ -34,20 +34,13 @@ class FileUploader
 			
 			$fileNames[] = $fileName;
 
-			$pathZip[] = 'upload/photo_service/'.$folder .'/'.$fileName;
-
 			$file->move($this->targetDir.'/'.$folder, $fileName);
 		}
 
 		//if true, good; if false, zip creation failed
 		//dd($fileNames);
 		//exit;
-		$result = $this->createZip($pathZip,$this->targetDir.'/'.$folder.'.zip', false, $folder);
-
-		$filesystem = new Filesystem();
-		$filesystem->remove(['../public_html/upload/photo_service/'.$folder]);
-
-		return $result;
+		return $fileNames;
 	}
 	
 	public function removeUpload($filename)
@@ -62,7 +55,7 @@ class FileUploader
 
 
 	/* creates a compressed zip file */
-	private function createZip($files = array(),$destination = '',$overwrite = false, $folder) {
+	public function createZip($files = array(),$destination = '',$overwrite = false, $folder) {
 		//if the zip file already exists and overwrite is false, return false
 		if(file_exists($destination) && !$overwrite) { return false; }
 		//vars
