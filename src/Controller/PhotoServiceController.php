@@ -52,6 +52,7 @@ class PhotoServiceController extends AbstractController
 
     public function photoServiceAdd(Request $request, FileUploader $fileUploader,ImageResizer $imageResizer, Validations $validations, EnjoyApi $enjoyapi, Host $host)
     {
+        
         $photoService = new PhotoService();
 
         $form = $this->createForm(PhotoServiceType::class, $photoService);
@@ -97,6 +98,8 @@ class PhotoServiceController extends AbstractController
                     $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
                     $uploadedFile = $form['imageFile']->getData();
                     $fileName = $fileUploader->uploads($uploadedFile, $photoService->getFolder());
+
+
                     //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
 
                     $em->persist($photoService);
@@ -114,7 +117,7 @@ class PhotoServiceController extends AbstractController
                     $msgSMS = str_replace(" ","+", $msg);
 
                     //phone
-                    $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
+                    //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
 
                     //email
                     $company = $em->getRepository(Company::class)->find(1);
@@ -143,7 +146,7 @@ class PhotoServiceController extends AbstractController
                         'text/html'
                     );
 
-                    $mailer->send($message);
+                    //$mailer->send($message);
 
                     $response = array(
                         'status' => 1,

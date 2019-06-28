@@ -133,19 +133,20 @@ class FrontendController extends AbstractController
 		if($photoService) {
 			$folder = $photoService->getFolder();
 			$id = $photoService->getId();
+			$path = "/upload/photo_service/";
 
-			$publicResourcesFolderPath = $this->getParameter('kernel.project_dir') . '/public_html/upload/photo_service/' . $folder . '/';
+			// $publicResourcesFolderPath = $this->getParameter('kernel.project_dir') . '/public_html/upload/photo_service/' . $folder . '/';
 
-			$files = $this-> fileFinder($publicResourcesFolderPath);
+			// $files = $this-> fileFinder($publicResourcesFolderPath);
 
-			$images = array();
-			foreach ($files as $file) {	
-				$images[] = "/upload/photo_service/" . $folder . "/" . $file;
-			}
+			// $images = array();
+			// foreach ($files as $file) {	
+			// 	$images[] = "/upload/photo_service/" . $folder . "/" . $file;
+			// }
 
 			$response = array(
 				'status' => 1,
-				'images' => $images);
+				'folder' => "/upload/photo_service/" .$folder.'.zip');
 				
 			$photoService->setGdpr(1);
 			$photoService->setMarketing($marketing);

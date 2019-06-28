@@ -75,12 +75,8 @@
                   link.style.display = 'none';
                   document.body.appendChild(link);
 
-                  //var str="{{ asset("+data.images[i]+") }}";
-
-                  for(i in data.images){
-                     link.setAttribute('href', data.images[i]);
-                     link.click();
-                  }
+                  link.setAttribute('href', data.folder);
+                  link.click();
                
                document.body.removeChild(link);
 

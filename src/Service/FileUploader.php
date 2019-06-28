@@ -2,6 +2,9 @@
 namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use ZipArchive; 
 
 class FileUploader
 {
@@ -31,10 +34,20 @@ class FileUploader
 			
 			$fileNames[] = $fileName;
 
+			$pathZip[] = 'upload/photo_service/'.$folder .'/'.$fileName;
+
 			$file->move($this->targetDir.'/'.$folder, $fileName);
 		}
-		
-		return $fileNames;
+
+		//if true, good; if false, zip creation failed
+		//dd($fileNames);
+		//exit;
+		$result = $this->createZip($pathZip,$this->targetDir.'/'.$folder.'.zip', false, $folder);
+
+		$filesystem = new Filesystem();
+		$filesystem->remove(['../public_html/upload/photo_service/'.$folder]);
+
+		return $result;
 	}
 	
 	public function removeUpload($filename)
@@ -46,4 +59,48 @@ class FileUploader
 	{
 		return $this->targetDir;
 	}	
+
+
+	/* creates a compressed zip file */
+	private function createZip($files = array(),$destination = '',$overwrite = false, $folder) {
+		//if the zip file already exists and overwrite is false, return false
+		if(file_exists($destination) && !$overwrite) { return false; }
+		//vars
+		$valid_files = array();
+		//if files were passed in...
+		if(is_array($files)) {
+			//cycle through each file
+			foreach($files as $file) {
+				//make sure the file exists
+				if(file_exists($file)) {
+					$valid_files[] = $file;
+				}
+			}
+		}
+		//if we have good files...
+		if(count($valid_files)) {
+			//create the archive
+			$zip = new \ZipArchive();
+			if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
+				return false;
+			}
+			//add the files
+			foreach($valid_files as $file) {
+				$tofolder = str_replace("upload/photo_service/".$folder,"", $file);
+				$zip->addFile($file,$tofolder);
+			}
+			//debug
+			//echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
+			
+			//close the zip -- done!
+			$zip->close();
+			
+			//check to make sure the file exists
+			return file_exists($destination);
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
