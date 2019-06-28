@@ -31,7 +31,7 @@ input, select, textarea {color: #000!important}
 
     <div class="w3-col s0 l3 m2 w3-hide-small">&nbsp;</div>
 
-    <div class="w3-col s12 l6 m8 w3-center" title="{%trans%}add_image{%endtrans%}">
+    <div class="w3-col s12 l6 m8 w3-center">
       <div class="w3-row-padding w3-margin-top w3-border-bottom">
           <div class="w3-col l6 m6 s12 w3-margin-bottom">
             {{ form_label(form.name)}}<br>
@@ -53,16 +53,16 @@ input, select, textarea {color: #000!important}
         </div>
 
       <!-- <input type="number" name="number"> -->
-      <div class="w3-row-padding w3-margin-top w3-border-bottom">
-        <div id="previews" class="w3-white w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
+      <div class="w3-row-padding w3-margin-top ">
+        <div id="previews" class="w3-white w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" title="{%trans%}add_image{%endtrans%}" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
           <i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
         </div>
         {{ form_widget(form.imageFile)}}
-        <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-        <h3 id="status"></h3>
-        <p id="loaded_n_total"></p>
         <!-- <input type="file" name="previews" class="set-image" multiple> -->
         </div>
+        <progress id="progressBar" class="w3-margin-top w3-hide" value="0" max="100" style="width:300px;"></progress>
+        <h3 id="status"></h3>
+        <p id="loaded_n_total"></p>
       </div> 
     </div>
   </div>
@@ -87,7 +87,7 @@ input, select, textarea {color: #000!important}
   //<ul class="parsley-errors-list filled" id="parsley-id-44"><li class="parsley-required">Obrigatório *</li></ul>
   var progressBar = document.getElementById('progressBar');  
   var fileInput = document.querySelector('input[type="file"]');
-  var previews = document.getElementById('previews');    
+  //var previews = document.getElementById('previews');    
 
   fileInput.addEventListener('change', function(e) {
 
@@ -95,7 +95,10 @@ input, select, textarea {color: #000!important}
     while (previews.firstChild) {
         previews.removeChild(previews.firstChild);
     }
-    
+
+    $imgSelectedTranslate = e.target.files.length > 1 ? (e.target.files.length + " " + '{%trans%}selected_images{%endtrans%}') : e.target.files[0].name;
+    $("#previews").html($imgSelectedTranslate);
+    /*
     var img, i;
     for (i = 0; i < e.target.files.length; i++) {
         img = new Image();
@@ -107,7 +110,8 @@ input, select, textarea {color: #000!important}
             window.URL.revokeObjectURL(this.src);
             
         };
-    }
+    }*/
+
   }, false);
 
   $("form[id=photo-service-form]").parsley()
@@ -120,6 +124,7 @@ input, select, textarea {color: #000!important}
 
     e.preventDefault()
     $('.w3-overlay').show()
+    $('#progressBar').removeClass("w3-hide");
     //$('.required').addClass('w3-hide')
     //setTimeout(function(){
       $.ajax({  
@@ -141,6 +146,7 @@ input, select, textarea {color: #000!important}
         },
         success: function(data){  
           $('.w3-overlay').hide()
+          
           //console.log("data:"+ data);
           if (data.status == 1){
             $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
@@ -168,7 +174,10 @@ input, select, textarea {color: #000!important}
 
 
   function progressHandler(event) {
-    $("#loaded_n_total").html("Uploaded " + event.loaded + " bytes of " + event.total);
+
+    $("#loaded_n_total").html("Uploaded " + parseFloat(event.loaded * Math.pow(10,-6)).toFixed(1) 
+    + " Mb of " + parseFloat(event.total * Math.pow(10,-6)).toFixed(1)+ " Mb");
+    
     var percent = (event.loaded / event.total) * 100;
     progressBar.value = Math.round(percent);
     $("#status").html(Math.round(percent) + "% uploaded... please wait");

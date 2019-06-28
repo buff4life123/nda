@@ -95,6 +95,7 @@ return array(
     'search' => 'Search',
     'error' => 'Error',
     'success' => 'Success',
+    'selected_images' => 'selected images',
     'close' =>'Close',
     'sorry'=>'Sorry',
     'save' => 'Save',

@@ -168,6 +168,7 @@ return array(
     'search' => 'Procurar',
     'error' => 'Erro',
     'success' => 'Sucesso',
+    'selected_images' => 'imagens selecionadas',
     'close' =>'Fechar',
     'save' => 'Guardar',
     'sorry'=>'Lamentamos',
