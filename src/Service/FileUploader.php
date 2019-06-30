@@ -40,7 +40,7 @@ class FileUploader
 		//if true, good; if false, zip creation failed
 		//dd($fileNames);
 		//exit;
-		return $fileNames;
+		//return $fileNames;
 	}
 	
 	public function removeUpload($filename)

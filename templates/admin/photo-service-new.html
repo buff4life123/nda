@@ -87,19 +87,13 @@ input, select, textarea {color: #000!important}
 <script>
   //<ul class="parsley-errors-list filled" id="parsley-id-44"><li class="parsley-required">Obrigatório *</li></ul>
   var progressBar = document.getElementById('progressBar');  
-  var fileInput = document.querySelector('input[type="file"]');
-  //var previews = document.getElementById('previews');    
+  var fileInput = document.querySelector('input[type="file"]');  
 
   fileInput.addEventListener('change', function(e) {
 
-    // Remove existing preview images
-    while (previews.firstChild) {
-        previews.removeChild(previews.firstChild);
-    }
-
     $imgSelectedTranslate = e.target.files.length > 1 ? (e.target.files.length + " " + '{%trans%}selected_images{%endtrans%}') : e.target.files[0].name;
     $("#previews").html($imgSelectedTranslate);
-
+     
     $maxFileUploads = 300;
     if (e.target.files.length > $maxFileUploads){
       $("#previews").html('{%trans%}upload_maximum{%endtrans%} ' + $maxFileUploads + ' {%trans%}images{%endtrans%}');
@@ -107,20 +101,6 @@ input, select, textarea {color: #000!important}
      } else {
       $("#submit-button").removeClass("w3-hide");
      }
-    /*
-    var img, i;
-    for (i = 0; i < e.target.files.length; i++) {
-        img = new Image();
-        img.src = URL.createObjectURL(e.target.files[i]);
-        img.onload = function() {
-            //this.setAttribute('title', 'Original size: ' + "this.naturalWidth" + 'x' + this.naturalHeight);
-            this.setAttribute('style', 'width:10px;height:auto;');
-            previews.appendChild(this);
-            window.URL.revokeObjectURL(this.src);
-            
-        };
-    }*/
-
   }, false);
 
   $("form[id=photo-service-form]").parsley()
@@ -133,7 +113,7 @@ input, select, textarea {color: #000!important}
 
     e.preventDefault()
     $('.w3-overlay').show()
-    $('#progressBar').removeClass("w3-hide");
+    $('#progressBar,#status,#loaded_n_total').removeClass("w3-hide");
     //$('.required').addClass('w3-hide')
     //setTimeout(function(){
       $.ajax({  
@@ -160,19 +140,28 @@ input, select, textarea {color: #000!important}
           if (data.status == 1){
 
             $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
+            //$("#photo-service-form").closest('form').find("input[type=text], textarea").val("");
+
+            $('#photo-service-form')[0].reset();
+            $("#previews").html('<i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>');
+            $('#progressBar,#status,#loaded_n_total').addClass("w3-hide");
+     
 
             setTimeout(
             function() 
             {
-              startZipRequest(data.id);
-              ajaxUpload('photo-service-new')
-            }, 4000);
+              $(".sucess-msg").remove();
+            }, 1000);
+   
+            startZipRequest(data.id);
           }
           else {
             if(data.message === "fail")
               customError("previews", '{%trans%}error{%endtrans%} ....')
-            else
+            else{
               customError(data.message, '{%trans%}invalid_field{%endtrans%} ....')
+            }
+
           }
         },
         error:function(data){
