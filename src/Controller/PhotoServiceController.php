@@ -17,6 +17,7 @@ use App\Service\FileUploader;
 use App\Service\Validations;
 use App\Service\EnjoyApi;
 use App\Service\Host;
+use App\Service\ImageResizer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
@@ -50,7 +51,7 @@ class PhotoServiceController extends AbstractController
     }
 
 
-    public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations)
+    public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations, ImageResizer $imageResizer)
     {
         
         $photoService = new PhotoService();
