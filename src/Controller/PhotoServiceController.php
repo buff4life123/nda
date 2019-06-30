@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Finder\Finder;
 use App\Form\PhotoServiceType;
 use App\Service\FileUploader;
-use App\Service\ImageResizer;
 use App\Service\Validations;
 use App\Service\EnjoyApi;
 use App\Service\Host;
@@ -51,7 +50,7 @@ class PhotoServiceController extends AbstractController
     }
 
 
-    public function photoServiceAdd(Request $request, FileUploader $fileUploader,ImageResizer $imageResizer, Validations $validations)
+    public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations)
     {
         
         $photoService = new PhotoService();
@@ -60,26 +59,26 @@ class PhotoServiceController extends AbstractController
 
         $form->handleRequest($request);
 
-        // $noFakeEmails = $validations -> noFakeEmails($photoService->getEmail());
-        // $validatePhone = $validations -> validatePhone($photoService->getTelephone());
+        $noFakeEmails = $validations -> noFakeEmails($photoService->getEmail());
+        $validatePhone = $validations -> validatePhone($photoService->getTelephone());
 
-        // if ($noFakeEmails){
-        //     $response = array(
-        //         'status' => 0,
-        //         'message' => 'photo_service_email',
-        //     ); 
+        if ($noFakeEmails){
+            $response = array(
+                'status' => 0,
+                'message' => 'photo_service_email',
+            ); 
 
-        //     return new JsonResponse($response);
-        // }
+            return new JsonResponse($response);
+        }
 
-        // if ($validatePhone){
-        //     $response = array(
-        //         'status' => 0,
-        //         'message' => 'photo_service_telephone',
-        //     ); 
+        if ($validatePhone){
+            $response = array(
+                'status' => 0,
+                'message' => 'photo_service_telephone',
+            ); 
 
-        //     return new JsonResponse($response);
-        // }
+            return new JsonResponse($response);
+        }
 
 
         if($form->isSubmitted() && $form->isValid())
@@ -97,22 +96,22 @@ class PhotoServiceController extends AbstractController
                     $filesystem = new Filesystem();
                     $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
 
-                    //place this before any script you want to calculate time
-                    $time_start = microtime(true);
+                    // //place this before any script you want to calculate time
+                    // $time_start = microtime(true);
 
                     $uploadedFile = $form['imageFile']->getData();
 
-                    // Display Script End time
-                    $time_end = microtime(true);
+                    // // Display Script End time
+                    // $time_end = microtime(true);
 
-                    //dividing with 60 will give the execution time in minutes other wise seconds
-                    $execution_time = ($time_end - $time_start)/60;
+                    // //dividing with 60 will give the execution time in minutes other wise seconds
+                    // $execution_time = ($time_end - $time_start)/60;
 
-                    //execution time of the script
-                    $uploadedFileTime = '<b>Total Execution Time:</b> '.$execution_time.' Mins';
+                    // //execution time of the script
+                    // $uploadedFileTime = '<b>Total Execution Time:</b> '.$execution_time.' Mins';
                     
                     $fileName = $fileUploader->uploads($uploadedFile, $photoService->getFolder());
-                    //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
+      
 
                     $em->persist($photoService);
                     $em->flush();
@@ -122,7 +121,7 @@ class PhotoServiceController extends AbstractController
                         'message' => 'success',
                         'id' => $photoService->getId(),
                         //'fileName' => $fileName,
-                        'uploadedFileTime' => $uploadedFileTime,
+                        //'uploadedFileTime' => $uploadedFileTime,
                     );
                 } catch(DBALException $e){
                     $a = array("Contate administrador sistema sobre: ".$e->getMessage());
@@ -172,7 +171,7 @@ class PhotoServiceController extends AbstractController
             $msgSMS = str_replace(" ","+", $msg);
 
             //phone
-            //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
+            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
 
             //email
             $company = $em->getRepository(Company::class)->find(1);
@@ -201,7 +200,7 @@ class PhotoServiceController extends AbstractController
                 'text/html'
             );
 
-            //$mailer->send($message);
+            $mailer->send($message);
 
         }
 
