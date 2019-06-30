@@ -96,7 +96,22 @@ class PhotoServiceController extends AbstractController
 
                     $filesystem = new Filesystem();
                     $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
-                    $fileUploader->uploads($form['imageFile']->getData(), $photoService->getFolder());
+
+                    //place this before any script you want to calculate time
+                    $time_start = microtime(true);
+
+                    $uploadedFile = $form['imageFile']->getData();
+
+                    // Display Script End time
+                    $time_end = microtime(true);
+
+                    //dividing with 60 will give the execution time in minutes other wise seconds
+                    $execution_time = ($time_end - $time_start)/60;
+
+                    //execution time of the script
+                    $uploadedFileTime = '<b>Total Execution Time:</b> '.$execution_time.' Mins';
+                    
+                    $fileName = $fileUploader->uploads($uploadedFile, $photoService->getFolder());
                     //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
 
                     $em->persist($photoService);
@@ -107,6 +122,7 @@ class PhotoServiceController extends AbstractController
                         'message' => 'success',
                         'id' => $photoService->getId(),
                         //'fileName' => $fileName,
+                        'uploadedFileTime' => $uploadedFileTime,
                     );
                 } catch(DBALException $e){
                     $a = array("Contate administrador sistema sobre: ".$e->getMessage());
