@@ -132,7 +132,6 @@ input, select, textarea {color: #000!important}
     //$('.required').addClass('w3-hide')
     //setTimeout(function(){
 
-      /*
       $.ajax({  
         url:'{{ path('admin_photo_service_add') }}',
         type: "POST",
@@ -186,7 +185,7 @@ input, select, textarea {color: #000!important}
           $('#modal-error').show()
         }
       })
-    //}, 500) */
+    //}, 500) 
   }) 
 
   function startZipRequest(id) {
@@ -263,16 +262,16 @@ input, select, textarea {color: #000!important}
     FieldInstance.addError(response.errorName, {message: response.message});
 }
 
-$(function () {
-  $('#fileupload').fileupload({
-      dataType: 'json',
-      done: function (e, data) {
-          $.each(data.result.files, function (index, file) {
-              $('<p/>').text(file.name).appendTo(document.body);
-          });
-      }
-  });
-});
+// $(function () {
+//   $('#fileupload').fileupload({
+//       dataType: 'json',
+//       done: function (e, data) {
+//           $.each(data.result.files, function (index, file) {
+//               $('<p/>').text(file.name).appendTo(document.body);
+//           });
+//       }
+//   });
+// });
 
 
 </script>

@@ -61,26 +61,26 @@ class PhotoServiceController extends AbstractController
         //$form = $this->createForm(PhotoServiceType::class, $photoService);
         //$form->handleRequest($request);
 
-        $noFakeEmails = $validations -> noFakeEmails($request->request->get("email"));
-        $validatePhone = $validations -> validatePhone($request->request->get("telephone"));
+        // $noFakeEmails = $validations -> noFakeEmails($request->request->get("email"));
+        // $validatePhone = $validations -> validatePhone($request->request->get("telephone"));
 
-        if ($noFakeEmails){
-            $response = array(
-                'status' => 0,
-                'message' => 'photo_service_email',
-            ); 
+        // if ($noFakeEmails){
+        //     $response = array(
+        //         'status' => 0,
+        //         'message' => 'photo_service_email',
+        //     ); 
 
-            return new JsonResponse($response);
-        }
+        //     return new JsonResponse($response);
+        // }
 
-        if ($validatePhone){
-            $response = array(
-                'status' => 0,
-                'message' => 'photo_service_telephone',
-            ); 
+        // if ($validatePhone){
+        //     $response = array(
+        //         'status' => 0,
+        //         'message' => 'photo_service_telephone',
+        //     ); 
 
-            return new JsonResponse($response);
-        }
+        //     return new JsonResponse($response);
+        // }
 
 
         // if($form->isSubmitted() && $form->isValid())
@@ -89,7 +89,7 @@ class PhotoServiceController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
                 
-        try {
+        // try {
             $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
 
             $today = new \Datetime('now');
@@ -108,7 +108,7 @@ class PhotoServiceController extends AbstractController
             $filesystem = new Filesystem();
             $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
             // $uploadedFile = $form['imageFile']->getData();
-            // $fileName = $fileUploader->uploads($request->files->get("images"), $photoService->getFolder());
+            // $fileName = $fileUploader->uploads($request->files->get("files"), $photoService->getFolder());
             //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
 
             $em->persist($photoService);
@@ -120,15 +120,15 @@ class PhotoServiceController extends AbstractController
                 'id' => $photoService->getId(),
                 //'fileName' => $fileName,
             );
-        } catch(DBALException $e){
-            $a = array("Contate administrador sistema sobre: ".$e->getMessage());
+        // } catch(DBALException $e){
+        //     $a = array("Contate administrador sistema sobre: ".$e->getMessage());
 
-            $response = array(
-                'status' => 0,
-                'message' => 'fail',
-                'data' => $a
-            );
-        }
+        //     $response = array(
+        //         'status' => 0,
+        //         'message' => 'fail',
+        //         'data' => $a
+        //     );
+        // }
         // }else 
         //     $response = array(
         //         'status' => 2,
