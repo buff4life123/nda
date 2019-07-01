@@ -107,8 +107,8 @@ class PhotoServiceController extends AbstractController
 
             $filesystem = new Filesystem();
             $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
-            // $uploadedFile = $form['imageFile']->getData();
-            // $fileName = $fileUploader->uploads($request->files->get("files"), $photoService->getFolder());
+            $uploadedFile = $request->files->get("files");//$form['imageFile']->getData();
+            //$fileName = $fileUploader->uploads($request->files->get("files"), $photoService->getFolder());
             //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
 
             $em->persist($photoService);
