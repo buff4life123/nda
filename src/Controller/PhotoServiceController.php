@@ -15,10 +15,10 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Finder\Finder;
 use App\Form\PhotoServiceType;
 use App\Service\FileUploader;
-use App\Service\ImageResizer;
 use App\Service\Validations;
 use App\Service\EnjoyApi;
 use App\Service\Host;
+use App\Service\ImageResizer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
@@ -53,7 +53,7 @@ class PhotoServiceController extends AbstractController
     }
 
 
-    public function photoServiceAdd(Request $request, FileUploader $fileUploader,ImageResizer $imageResizer, Validations $validations)
+    public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations, ImageResizer $imageResizer)
     {
         
         $photoService = new PhotoService();
@@ -64,23 +64,23 @@ class PhotoServiceController extends AbstractController
         $noFakeEmails = $validations -> noFakeEmails($request->request->get("email"));
         $validatePhone = $validations -> validatePhone($request->request->get("telephone"));
 
-        if ($noFakeEmails){
-            $response = array(
-                'status' => 0,
-                'message' => 'photo_service_email',
-            ); 
+        // if ($noFakeEmails){
+        //     $response = array(
+        //         'status' => 0,
+        //         'message' => 'photo_service_email',
+        //     ); 
 
-            return new JsonResponse($response);
-        }
+        //     return new JsonResponse($response);
+        // }
 
-        if ($validatePhone){
-            $response = array(
-                'status' => 0,
-                'message' => 'photo_service_telephone',
-            ); 
+        // if ($validatePhone){
+        //     $response = array(
+        //         'status' => 0,
+        //         'message' => 'photo_service_telephone',
+        //     ); 
 
-            return new JsonResponse($response);
-        }
+        //     return new JsonResponse($response);
+        // }
 
 
         // if($form->isSubmitted() && $form->isValid())
