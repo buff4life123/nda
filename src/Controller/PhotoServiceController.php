@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\PhotoService;
 use App\Entity\Company;
+use App\Entity\Locales;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,14 +40,15 @@ class PhotoServiceController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        //$locales = $em->getRepository(Locales::class)->findAll();
-
-        $form = $this->createForm(PhotoServiceType::class, $photoService);
+        $locales = $em->getRepository(Locales::class)->findAll();
+    
+        //$form = $this->createForm(PhotoServiceType::class, $photoService);
         
-        $form->handleRequest($request);
+        // $form->handleRequest($request);
 
         return $this->render('admin/photo-service-new.html',array(
-            'form' => $form->createView(),
+            //'form' => $form->createView(),
+            'locales' => $locales,
             ));
     }
 
@@ -56,12 +58,11 @@ class PhotoServiceController extends AbstractController
         
         $photoService = new PhotoService();
 
-        $form = $this->createForm(PhotoServiceType::class, $photoService);
+        //$form = $this->createForm(PhotoServiceType::class, $photoService);
+        //$form->handleRequest($request);
 
-        $form->handleRequest($request);
-
-        $noFakeEmails = $validations -> noFakeEmails($photoService->getEmail());
-        $validatePhone = $validations -> validatePhone($photoService->getTelephone());
+        $noFakeEmails = $validations -> noFakeEmails($request->request->get("email"));
+        $validatePhone = $validations -> validatePhone($request->request->get("telephone"));
 
         if ($noFakeEmails){
             $response = array(
@@ -82,49 +83,58 @@ class PhotoServiceController extends AbstractController
         }
 
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        // if($form->isSubmitted() && $form->isValid())
+        // {
 
-            $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+
                 
-            try {
-                    $today = new \Datetime('now');
-                    $dechex = dechex($today->format('U'));
+        try {
 
-                    $photoService->setCreatedDate($today);
-                    $photoService->setFolder($dechex);
+                $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
 
-                    $filesystem = new Filesystem();
-                    $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
-                    $uploadedFile = $form['imageFile']->getData();
-                    $fileName = $fileUploader->uploads($uploadedFile, $photoService->getFolder());
-                    //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
+                $today = new \Datetime('now');
+                $dechex = dechex($today->format('U'));
 
-                    $em->persist($photoService);
-                    $em->flush();
+                $photoService->setCreatedDate($today);
+                $photoService->setFolder($dechex);
 
-                    $response = array(
-                        'status' => 1,
-                        'message' => 'success',
-                        'id' => $photoService->getId(),
-                        'fileName' => $fileName,
-                    );
-                } catch(DBALException $e){
-                    $a = array("Contate administrador sistema sobre: ".$e->getMessage());
+               
+                $photoService->setName($request->request->get("name"));
+                $photoService->setEmail($request->request->get("email"));
+                $photoService->setTelephone($request->request->get("telephone"));
+                
+                $photoService->setLocales($locales);
 
-                    $response = array(
-                        'status' => 0,
-                        'message' => 'fail',
-                        'data' => $a
-                    );
-                }
-        }else 
+                $filesystem = new Filesystem();
+                $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
+                // $uploadedFile = $form['imageFile']->getData();
+                $fileName = $fileUploader->uploads($request->files->get("images"), $photoService->getFolder());
+                //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
+
+                $em->persist($photoService);
+                $em->flush();
+
+                $response = array(
+                    'status' => 1,
+                    'message' => 'success',
+                    'id' => $photoService->getId(),
+                    'fileName' => $fileName,
+                );
+        } catch(DBALException $e){
+            $a = array("Contate administrador sistema sobre: ".$e->getMessage());
+
             $response = array(
-                'status' => 2,
-                'message' => 'fail not submitted',
-                'data' => $this->getErrorMessages($form));
-
-      
+                'status' => 0,
+                'message' => 'fail',
+                'data' => $a
+            );
+        }
+        // }else 
+        //     $response = array(
+        //         'status' => 2,
+        //         'message' => 'fail not submitted',
+        //         'data' => $this->getErrorMessages($form));
         return new JsonResponse($response);
     }
 
