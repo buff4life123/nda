@@ -108,10 +108,14 @@ class PhotoServiceController extends AbstractController
             
             // $filesystem = new Filesystem();
             // $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
-            $folderPath ='../public_html/upload/photo_service/'.$photoService->getFolder();
+            //$folderPath ='../public_html/upload/photo_service/'.$photoService->getFolder().'.zip';
+            $folderPath ='../public_html/upload/photo_service/';
             $uploadedFiles = $request->files->get("files");//$form['imageFile']->getData();
-            // dd($uploadedFiles);
-            $result = $fileUploader->createZip($uploadedFiles, $folderPath.$photoService->getFolder().'.zip', false, $photoService->getFolder());
+            //dd($uploadedFiles);
+
+
+            //$result = $fileUploader->createZip($files, $folderPath, false, $photoService->getFolder());
+            $resultZip = $this -> zipDownloadDocumentsAction($uploadedFiles, $folderPath, $photoService->getFolder().'.zip');
 
             $em->persist($photoService);
             $em->flush();
@@ -120,7 +124,7 @@ class PhotoServiceController extends AbstractController
                 'status' => 1,
                 'message' => 'success',
                 'id' => $photoService->getId(),
-                'result' => $result,
+                'resultZip' => $resultZip,
                 // 'files' => $request->files->get("files"),
                 // 'path' => $folderPath,
                 // 'folder' => $photoService->getFolder(),
@@ -149,7 +153,7 @@ class PhotoServiceController extends AbstractController
     * @param array $documents
     * @return Symfony\Component\HttpFoundation\Response
     */
-    public function zipDownloadDocumentsAction(array $documents)
+    public function zipDownloadDocumentsAction(array $documents, $path, $folder)
     {
         $files = [];
         $em = $this->getDoctrine()->getManager();
@@ -157,17 +161,18 @@ class PhotoServiceController extends AbstractController
         foreach ($documents as $document) {
             array_push($files, $document);
         }
-
+        
         // Create new Zip Archive.
         $zip = new \ZipArchive();
 
         // The name of the Zip documents.
-        $zipName = 'Documents.zip';
+        $zipName = $path.$folder;
 
         $zip->open($zipName,  \ZipArchive::CREATE);
         foreach ($files as $file) {
-            $zip->addFromString(basename($file),  file_get_contents($file));
+            $zip->addFromString($file->getClientOriginalName(),  file_get_contents($file));
         }
+     
         // $zip->close();
 
 
