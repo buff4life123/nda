@@ -110,8 +110,8 @@ class PhotoServiceController extends AbstractController
             // $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
             $folderPath ='../public_html/upload/photo_service/'.$photoService->getFolder();
             $uploadedFiles = $request->files->get("files");//$form['imageFile']->getData();
-            dd($uploadedFiles);
-            $result = $fileUploader->createZip($uploadedFile, $folderPath.$photoService->getFolder().'.zip', false, $photoService->getFolder());
+            // dd($uploadedFiles);
+            $result = $fileUploader->createZip($uploadedFiles, $folderPath.$photoService->getFolder().'.zip', false, $photoService->getFolder());
 
             $em->persist($photoService);
             $em->flush();
