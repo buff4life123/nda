@@ -64,23 +64,23 @@ class PhotoServiceController extends AbstractController
         $noFakeEmails = $validations -> noFakeEmails($request->request->get("email"));
         $validatePhone = $validations -> validatePhone($request->request->get("telephone"));
 
-        // if ($noFakeEmails){
-        //     $response = array(
-        //         'status' => 0,
-        //         'message' => 'photo_service_email',
-        //     ); 
+        if ($noFakeEmails){
+            $response = array(
+                'status' => 0,
+                'message' => 'photo_service_email',
+            ); 
 
-        //     return new JsonResponse($response);
-        // }
+            return new JsonResponse($response);
+        }
 
-        // if ($validatePhone){
-        //     $response = array(
-        //         'status' => 0,
-        //         'message' => 'photo_service_telephone',
-        //     ); 
+        if ($validatePhone){
+            $response = array(
+                'status' => 0,
+                'message' => 'photo_service_telephone',
+            ); 
 
-        //     return new JsonResponse($response);
-        // }
+            return new JsonResponse($response);
+        }
 
 
         // if($form->isSubmitted() && $form->isValid())
