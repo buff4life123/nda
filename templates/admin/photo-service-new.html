@@ -68,7 +68,7 @@ input, select, textarea {color: #000!important}
         <div id="previews" class="w3-white w3-center w3-margin-bottom w3-border w3-imput w3-section set-image-container w3-padding" title="{%trans%}add_image{%endtrans%}" style="cursor:pointer"onclick="$('.set-image').trigger('click')">
           <i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>
         </div>
-        <input id="images" class="w3-hide set-image" type="file" accept="image/*" name="images[]" required multiple>
+        <input id="fileupload" class="w3-hide set-image" type="file" accept="image/*" name="files[]" required multiple>
         {# {{ form_widget(form.imageFile)}} #}
         {# <input type="file" name="previews" class="set-image" multiple> #}
         </div>
@@ -96,7 +96,9 @@ input, select, textarea {color: #000!important}
   </div>
 </div>
 
-
+<script src="{{ asset('assets/js/jqueryFileUpload/vendor/jquery.ui.widget.js')}}"></script>
+<script src="{{ asset('assets/js/jqueryFileUpload/jquery.iframe-transport.js')}}"></script>
+<script src="{{ asset('assets/js/jqueryFileUpload/jquery.fileupload.js')}}"></script>
 <script>
   //<ul class="parsley-errors-list filled" id="parsley-id-44"><li class="parsley-required">Obrigatório *</li></ul>
   var progressBar = document.getElementById('progressBar');  
@@ -129,6 +131,8 @@ input, select, textarea {color: #000!important}
     $('#progressBar,#status,#loaded_n_total').removeClass("w3-hide");
     //$('.required').addClass('w3-hide')
     //setTimeout(function(){
+
+      /*
       $.ajax({  
         url:'{{ path('admin_photo_service_add') }}',
         type: "POST",
@@ -166,7 +170,7 @@ input, select, textarea {color: #000!important}
               $(".sucess-msg").remove();
             }, 1000);
    
-            startZipRequest(data.id);
+            //startZipRequest(data.id);
           }
           else {
             if(data.message === "fail")
@@ -182,7 +186,7 @@ input, select, textarea {color: #000!important}
           $('#modal-error').show()
         }
       })
-    //}, 500)
+    //}, 500) */
   }) 
 
   function startZipRequest(id) {
@@ -258,6 +262,17 @@ input, select, textarea {color: #000!important}
     FieldInstance.removeError(response.errorName);
     FieldInstance.addError(response.errorName, {message: response.message});
 }
+
+$(function () {
+  $('#fileupload').fileupload({
+      dataType: 'json',
+      done: function (e, data) {
+          $.each(data.result.files, function (index, file) {
+              $('<p/>').text(file.name).appendTo(document.body);
+          });
+      }
+  });
+});
 
 
 </script>

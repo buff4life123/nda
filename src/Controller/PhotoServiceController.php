@@ -108,7 +108,7 @@ class PhotoServiceController extends AbstractController
             $filesystem = new Filesystem();
             $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
             // $uploadedFile = $form['imageFile']->getData();
-            $fileName = $fileUploader->uploads($request->files->get("images"), $photoService->getFolder());
+            // $fileName = $fileUploader->uploads($request->files->get("images"), $photoService->getFolder());
             //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
 
             $em->persist($photoService);
@@ -118,7 +118,7 @@ class PhotoServiceController extends AbstractController
                 'status' => 1,
                 'message' => 'success',
                 'id' => $photoService->getId(),
-                'fileName' => $fileName,
+                //'fileName' => $fileName,
             );
         } catch(DBALException $e){
             $a = array("Contate administrador sistema sobre: ".$e->getMessage());
