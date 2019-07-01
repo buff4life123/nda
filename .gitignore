@@ -1,6 +1,7 @@
 
 ###> symfony/framework-bundle ###
 .env
+*.zip
 /public_html/bundles/
 /src/Migrations/
 /var/
