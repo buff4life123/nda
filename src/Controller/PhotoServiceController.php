@@ -22,7 +22,7 @@ use App\Service\ImageResizer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 class PhotoServiceController extends AbstractController
@@ -105,11 +105,16 @@ class PhotoServiceController extends AbstractController
             
             $photoService->setLocales($locales);
 
-            $filesystem = new Filesystem();
-            $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
+            
+            // $filesystem = new Filesystem();
+            // $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
+            $folderPath ='../public_html/upload/photo_service/';
             $uploadedFile = $request->files->get("files");//$form['imageFile']->getData();
+            
+            $result = $fileUploader->createZip($uploadedFile, $folderPath.$photoService->getFolder().'.zip', false, $photoService->getFolder());
+            // $zipResult = $this -> zipDownloadDocumentsAction($uploadedFile);
+            dd($result);
             //$fileName = $fileUploader->uploads($request->files->get("files"), $photoService->getFolder());
-            //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
 
             $em->persist($photoService);
             $em->flush();
@@ -135,6 +140,40 @@ class PhotoServiceController extends AbstractController
         //         'message' => 'fail not submitted',
         //         'data' => $this->getErrorMessages($form));
         return new JsonResponse($response);
+    }
+
+    /**
+    * Create and download some zip documents.
+    *
+    * @param array $documents
+    * @return Symfony\Component\HttpFoundation\Response
+    */
+    public function zipDownloadDocumentsAction(array $documents)
+    {
+        $files = [];
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($documents as $document) {
+            array_push($files, $document);
+        }
+
+        // Create new Zip Archive.
+        $zip = new \ZipArchive();
+
+        // The name of the Zip documents.
+        $zipName = 'Documents.zip';
+
+        $zip->open($zipName,  \ZipArchive::CREATE);
+        foreach ($files as $file) {
+            $zip->addFromString(basename($file),  file_get_contents($file));
+        }
+        // $zip->close();
+
+
+        @unlink($zipName);
+
+        //upload();
+        return $zip;
     }
 
     public function photoServiceZip(Request $request, FileUploader $fileUploader,  EnjoyApi $enjoyapi, Host $host)
