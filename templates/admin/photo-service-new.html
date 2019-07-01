@@ -131,6 +131,7 @@ input, select, textarea {color: #000!important}
     //setTimeout(function(){
       $.ajax({  
         url:'{{ path('admin_photo_service_add') }}',
+        timeout: 8000,
         type: "POST",
         data: form,
         processData: false,
@@ -143,6 +144,7 @@ input, select, textarea {color: #000!important}
         xhr.addEventListener("load", completeHandler, false);
         xhr.addEventListener("error", errorHandler, false);
         xhr.addEventListener("abort", abortHandler, false);
+        xhr.timeout = 8000;
        
         return xhr ;
         },
