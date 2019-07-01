@@ -146,12 +146,12 @@ input, select, textarea {color: #000!important}
         xhr.addEventListener("abort", abortHandler, false);
         xhr.timeout = 8000;
        
-        return xhr ;
+        return xhr;
         },
         success: function(data){  
           $('.w3-overlay').hide()
           
-          //console.log("data:"+ data.id);
+          console.log("data:"+ data);
           if (data.status == 1){
 
             $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");

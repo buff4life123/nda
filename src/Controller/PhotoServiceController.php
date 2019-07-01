@@ -90,37 +90,36 @@ class PhotoServiceController extends AbstractController
 
                 
         try {
+            $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
 
-                $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
+            $today = new \Datetime('now');
+            $dechex = dechex($today->format('U'));
 
-                $today = new \Datetime('now');
-                $dechex = dechex($today->format('U'));
+            $photoService->setCreatedDate($today);
+            $photoService->setFolder($dechex);
 
-                $photoService->setCreatedDate($today);
-                $photoService->setFolder($dechex);
+            
+            $photoService->setName($request->request->get("name"));
+            $photoService->setEmail($request->request->get("email"));
+            $photoService->setTelephone($request->request->get("telephone"));
+            
+            $photoService->setLocales($locales);
 
-               
-                $photoService->setName($request->request->get("name"));
-                $photoService->setEmail($request->request->get("email"));
-                $photoService->setTelephone($request->request->get("telephone"));
-                
-                $photoService->setLocales($locales);
+            $filesystem = new Filesystem();
+            $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
+            // $uploadedFile = $form['imageFile']->getData();
+            $fileName = $fileUploader->uploads($request->files->get("images"), $photoService->getFolder());
+            //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
 
-                $filesystem = new Filesystem();
-                $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
-                // $uploadedFile = $form['imageFile']->getData();
-                $fileName = $fileUploader->uploads($request->files->get("images"), $photoService->getFolder());
-                //$imageResizer->resizeMultiple($fileName, $photoService->getFolder());
+            $em->persist($photoService);
+            $em->flush();
 
-                $em->persist($photoService);
-                $em->flush();
-
-                $response = array(
-                    'status' => 1,
-                    'message' => 'success',
-                    'id' => $photoService->getId(),
-                    'fileName' => $fileName,
-                );
+            $response = array(
+                'status' => 1,
+                'message' => 'success',
+                'id' => $photoService->getId(),
+                'fileName' => $fileName,
+            );
         } catch(DBALException $e){
             $a = array("Contate administrador sistema sobre: ".$e->getMessage());
 
