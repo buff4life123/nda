@@ -152,7 +152,7 @@ input, select, textarea {color: #000!important}
         success: function(data){  
           $('.w3-overlay').hide()
           
-          console.log("data:"+ data);
+          console.log("data:"+ data.files[0]);
           if (data.status == 1){
 
             $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");

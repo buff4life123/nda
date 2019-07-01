@@ -108,13 +108,10 @@ class PhotoServiceController extends AbstractController
             
             // $filesystem = new Filesystem();
             // $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
-            $folderPath ='../public_html/upload/photo_service/';
-            $uploadedFile = $request->files->get("files");//$form['imageFile']->getData();
-            
+            $folderPath ='../public_html/upload/photo_service/'.$photoService->getFolder();
+            $uploadedFiles = $request->files->get("files");//$form['imageFile']->getData();
+            dd($uploadedFiles);
             $result = $fileUploader->createZip($uploadedFile, $folderPath.$photoService->getFolder().'.zip', false, $photoService->getFolder());
-            // $zipResult = $this -> zipDownloadDocumentsAction($uploadedFile);
-            dd($result);
-            //$fileName = $fileUploader->uploads($request->files->get("files"), $photoService->getFolder());
 
             $em->persist($photoService);
             $em->flush();
@@ -123,7 +120,11 @@ class PhotoServiceController extends AbstractController
                 'status' => 1,
                 'message' => 'success',
                 'id' => $photoService->getId(),
-                //'fileName' => $fileName,
+                'result' => $result,
+                // 'files' => $request->files->get("files"),
+                // 'path' => $folderPath,
+                // 'folder' => $photoService->getFolder(),
+
             );
         // } catch(DBALException $e){
         //     $a = array("Contate administrador sistema sobre: ".$e->getMessage());
