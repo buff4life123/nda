@@ -75,6 +75,7 @@ input, select, textarea {color: #000!important}
         <progress id="progressBar" class="w3-margin-top w3-hide" value="0" max="100" style="width:300px;"></progress>
         <h3 id="status"></h3>
         <p id="loaded_n_total"></p>
+        <h1 class='sucess-msg w3-center w3-hide'>  {%trans%}sucess_msg{%endtrans%}</h1>
       </div> 
     </div>
   </div>
@@ -92,6 +93,7 @@ input, select, textarea {color: #000!important}
       </div>
     </div>
     {# {{ form_end(form) }} #}
+
   </form>
   </div>
 </div>
@@ -161,20 +163,19 @@ input, select, textarea {color: #000!important}
     if(Math.round(percent) == 100) {
       //$("#status").html("compressing images... please wait");
       $('.w3-overlay').hide()
- 
-      $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
 
       $('#photo-service-form')[0].reset();
       $("#previews").html('<i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>');
       $('#progressBar,#status,#loaded_n_total').addClass("w3-hide");
 
+
+      $(".sucess-msg").removeClass("w3-hide");
+      
       setTimeout(
       function() 
       {
-        $(".sucess-msg").remove();
-      }, 1000);
-
-   
+        $(".sucess-msg").addClass("w3-hide");
+      }, 3000);
     }
 
   }
