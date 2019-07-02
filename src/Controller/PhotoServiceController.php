@@ -119,8 +119,9 @@ class PhotoServiceController extends AbstractController
             $em->persist($photoService);
             $em->flush();
 
-            $resultZip = $this -> zipDownloadDocumentsAction($uploadedFiles, $folderPath, $photoService->getFolder().'.zip');
-            
+            $folder = $em->getRepository(photoService::class)->find($dechex);
+            $resultZip = $this -> zipDownloadDocumentsAction($uploadedFiles, $folderPath, $folder.'.zip');
+
             $response = array(
                 'status' => 1,
                 'message' => 'success',
@@ -176,7 +177,7 @@ class PhotoServiceController extends AbstractController
             $zip->addFromString($file->getClientOriginalName(),  file_get_contents($file));
         }
      
-        $zip->close();
+        //$zip->close();
 
 
         @unlink($zipName);
