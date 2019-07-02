@@ -79,8 +79,7 @@ class FileUploader
 			//add the files
 			foreach($valid_files as $file) {
 				//$tofolder = str_replace("upload/photo_service/".$folder,"", $file);
-				//$zip->addFile($file,$tofolder);
-				$zip->addFromString($file->getClientOriginalName(),  file_get_contents($file));
+				$zip->addFile($file->getPathname(),$file->getClientOriginalName());
 			}
 			//debug
 			//echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
