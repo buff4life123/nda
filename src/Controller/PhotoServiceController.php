@@ -55,134 +55,86 @@ class PhotoServiceController extends AbstractController
 
     public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations, ImageResizer $imageResizer)
     {
-        
         $photoService = new PhotoService();
 
-        //$form = $this->createForm(PhotoServiceType::class, $photoService);
-        //$form->handleRequest($request);
-
-        // $noFakeEmails = $validations -> noFakeEmails($request->request->get("email"));
-        // $validatePhone = $validations -> validatePhone($request->request->get("telephone"));
-
-        // if ($noFakeEmails){
-        //     $response = array(
-        //         'status' => 0,
-        //         'message' => 'photo_service_email',
-        //     ); 
-
-        //     return new JsonResponse($response);
-        // }
-
-        // if ($validatePhone){
-        //     $response = array(
-        //         'status' => 0,
-        //         'message' => 'photo_service_telephone',
-        //     ); 
-
-        //     return new JsonResponse($response);
-        // }
-
-
-        // if($form->isSubmitted() && $form->isValid())
-        // {
-
         $em = $this->getDoctrine()->getManager();
 
-                
-        // try {
-            $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
+        $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
 
-            $today = new \Datetime('now');
-            $dechex = dechex($today->format('U'));
+        $today = new \Datetime('now');
+        $dechex = dechex($today->format('U'));
 
-            $photoService->setCreatedDate($today);
-            $photoService->setFolder($dechex);
+        $photoService->setCreatedDate($today);
+        $photoService->setFolder($dechex);
 
-            
-            $photoService->setName($request->request->get("name"));
-            $photoService->setEmail($request->request->get("email"));
-            $photoService->setTelephone($request->request->get("telephone"));
-            
-            $photoService->setLocales($locales);
+        
+        $photoService->setName($request->request->get("name"));
+        $photoService->setEmail($request->request->get("email"));
+        $photoService->setTelephone($request->request->get("telephone"));
+        
+        $photoService->setLocales($locales);
 
-            
-            // $filesystem = new Filesystem();
-            // $filesystem->mkdir("../public_html/upload/photo_service/".$photoService->getFolder()); 
-            //$folderPath ='../public_html/upload/photo_service/'.$photoService->getFolder().'.zip';
-            $folderPath ='../public_html/upload/photo_service/';
-            $uploadedFiles = $request->files->get("files");//$form['imageFile']->getData();
-            //dd($uploadedFiles);
+        $folderPath = $this->photo_service_directory.'/'.$photoService->getFolder().'.zip';
+        $uploadedFiles = $request->files->get("files");
 
+        $zipResult = $fileUploader->createZip($uploadedFiles, $folderPath, false, $photoService->getFolder());
 
-            //$result = $fileUploader->createZip($files, $folderPath, false, $photoService->getFolder());
+        $em->persist($photoService);
+        $em->flush();
 
-            $em->persist($photoService);
-            $em->flush();
+        
+        if($zipResult){
+            if ($photoService->getLocales()->getId() == 1){
+                $subject = "Photos";
+                $msgLang = "to download your photos, please tap";
+            } else {
+                $subject = "Fotografias";
+                $msgLang = "para baixar suas fotos, por favor clique";
+            }
 
-            $resultZip = $this -> zipDownloadDocumentsAction($uploadedFiles, $folderPath, $dechex.'.zip');
+            $msg = $msgLang." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
+            $msgSMS = str_replace(" ","+", $msg);
 
-            $response = array(
-                'status' => 1,
-                'message' => 'success',
-                'id' => $photoService->getId(),
-                'resultZip' => $resultZip,
-                // 'files' => $request->files->get("files"),
-                // 'path' => $folderPath,
-                // 'folder' => $photoService->getFolder(),
+            //phone
+            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
 
+            //email
+            $company = $em->getRepository(Company::class)->find(1);
+            $locale = $request->getlocale();
+
+            $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
+                ->setUsername($company->getEmail())
+                ->setPassword($company->getEmailPass());       
+
+            $mailer = new \Swift_Mailer($transport);
+
+            $message = (new \Swift_Message($subject))
+                ->setFrom([$company->getEmail() => $company->getName()])
+                ->setTo([$photoService->getEmail() => $photoService->getName(), $company->getEmail() => $company->getName()])
+                ->addPart($subject, 'text/plain')
+                ->setBody(
+                    $this->renderView(
+                        'emails/photoService-'.$photoService->getLocales()->getName().'.twig',
+                        array(
+                            'msg' => $msg,
+                            'username' => $photoService->getName(),
+                            'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
+                            'company_name' => $company->getName()
+                        )
+                    ),
+                'text/html'
             );
 
+            $mailer->send($message);
+        }
 
-        // } catch(DBALException $e){
-        //     $a = array("Contate administrador sistema sobre: ".$e->getMessage());
-
-        //     $response = array(
-        //         'status' => 0,
-        //         'message' => 'fail',
-        //         'data' => $a
-        //     );
-        // }
-        // }else 
-        //     $response = array(
-        //         'status' => 2,
-        //         'message' => 'fail not submitted',
-        //         'data' => $this->getErrorMessages($form));
+        $response = array(
+            'status' => 1,
+            'message' => 'success',
+            'id' => $photoService->getId(),
+            'zipResult' => $zipResult,
+        );
         return new JsonResponse($response);
-    }
-
-    /**
-    * Create and download some zip documents.
-    *
-    * @param array $documents
-    * @return Symfony\Component\HttpFoundation\Response
-    */
-    public function zipDownloadDocumentsAction(array $documents, $path, $folder)
-    {
-        $files = [];
-        $em = $this->getDoctrine()->getManager();
-
-        foreach ($documents as $document) {
-            array_push($files, $document);
-        }
-        
-        // Create new Zip Archive.
-        $zip = new \ZipArchive();
-
-        // The name of the Zip documents.
-        $zipName = $path.$folder;
-
-        $zip->open($zipName,  \ZipArchive::CREATE);
-        foreach ($files as $file) {
-            $zip->addFromString($file->getClientOriginalName(),  file_get_contents($file));
-        }
-     
-        //$zip->close();
-
-
-        @unlink($zipName);
-
-        //upload();
-        return $zip;
     }
 
     public function photoServiceZip(Request $request, FileUploader $fileUploader,  EnjoyApi $enjoyapi, Host $host)

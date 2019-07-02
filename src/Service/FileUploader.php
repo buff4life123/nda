@@ -36,11 +36,7 @@ class FileUploader
 
 			$file->move($this->targetDir.'/'.$folder, $fileName);
 		}
-
-		//if true, good; if false, zip creation failed
-		//dd($fileNames);
-		//exit;
-		//return $fileNames;
+		return $fileNames;
 	}
 	
 	public function removeUpload($filename)
@@ -56,8 +52,10 @@ class FileUploader
 
 	/* creates a compressed zip file */
 	public function createZip($files = array(),$destination = '',$overwrite = false, $folder) {
+		
 		//if the zip file already exists and overwrite is false, return false
 		if(file_exists($destination) && !$overwrite) { return false; }
+
 		//vars
 		$valid_files = array();
 		//if files were passed in...
@@ -70,17 +68,19 @@ class FileUploader
 				}
 			}
 		}
+
 		//if we have good files...
 		if(count($valid_files)) {
 			//create the archive
 			$zip = new \ZipArchive();
 			if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
-				return false;
+				return 1;
 			}
 			//add the files
 			foreach($valid_files as $file) {
-				$tofolder = str_replace("upload/photo_service/".$folder,"", $file);
-				$zip->addFile($file,$tofolder);
+				//$tofolder = str_replace("upload/photo_service/".$folder,"", $file);
+				//$zip->addFile($file,$tofolder);
+				$zip->addFromString($file->getClientOriginalName(),  file_get_contents($file));
 			}
 			//debug
 			//echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
