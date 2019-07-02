@@ -161,7 +161,7 @@ input, select, textarea {color: #000!important}
     $("#status").html(Math.round(percent) + "% uploaded... please wait");
 
     
-    if(Math.round(percent) == 100 || progressHandlerFlag == false) {
+    if(Math.round(percent) == 100 && progressHandlerFlag == false) {
       progressHandlerFlag = true;
       $('.w3-overlay').hide()
       console.log("teste");
