@@ -159,23 +159,10 @@ input, select, textarea {color: #000!important}
     progressBar.value = Math.round(percent);
     $("#status").html(Math.round(percent) + "% uploaded... please wait");
 
-    if(Math.round(percent) == 100) {
-      $('.w3-overlay').hide()
-
-      $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
-
-      $('#photo-service-form')[0].reset();
-      $("#previews").html('<i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>');
-      $('#progressBar,#status,#loaded_n_total').addClass("w3-hide");
-
-
-      setTimeout(
-      function() 
-      {
-        $(".sucess-msg").remove();
-      }, 1000);
+    //if(Math.round(percent) == 100) {
+     
       //$("#status").html("compressing images... please wait");
-    }
+    //}
 
   }
 
@@ -183,6 +170,21 @@ input, select, textarea {color: #000!important}
     //console.log(event)
     $("#status").html(event.target.responseText.message);
     progressBar.value = 0; //wil clear progress bar after successful upload
+    
+    $('.w3-overlay').hide()
+
+    $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
+
+    $('#photo-service-form')[0].reset();
+    $("#previews").html('<i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>');
+    $('#progressBar,#status,#loaded_n_total').addClass("w3-hide");
+
+
+    setTimeout(
+    function() 
+    {
+      $(".sucess-msg").remove();
+    }, 1000);
     
   }
 
