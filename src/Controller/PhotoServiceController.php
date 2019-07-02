@@ -119,8 +119,7 @@ class PhotoServiceController extends AbstractController
             $em->persist($photoService);
             $em->flush();
 
-            $folder = $em->getRepository(photoService::class)->find($dechex);
-            $resultZip = $this -> zipDownloadDocumentsAction($uploadedFiles, $folderPath, $folder.'.zip');
+            $resultZip = $this -> zipDownloadDocumentsAction($uploadedFiles, $folderPath, $dechex.'.zip');
 
             $response = array(
                 'status' => 1,
