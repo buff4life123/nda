@@ -53,7 +53,7 @@ class PhotoServiceController extends AbstractController
     }
 
 
-    public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations, ImageResizer $imageResizer)
+    public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations, ImageResizer $imageResizer, EnjoyApi $enjoyapi, Host $host)
     {
         $photoService = new PhotoService();
 
@@ -137,76 +137,6 @@ class PhotoServiceController extends AbstractController
         return new JsonResponse($response);
     }
 
-    public function photoServiceZip(Request $request, FileUploader $fileUploader,  EnjoyApi $enjoyapi, Host $host)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $photoService = $em->getRepository(photoService::class)->find($request->request->get("id"));
-
-        $filesystem = new Filesystem();
-        $folderPath ='../public_html/upload/photo_service/';
-        $publicResourcesFolderPath = $this->getParameter('kernel.project_dir') . '/public_html/upload/photo_service/' . $photoService->getFolder() . '/';
-        $files = $this-> fileFinder($publicResourcesFolderPath);
-
-        foreach($files as $file) {
-            $pathZip[] = 'upload/photo_service/'.$photoService->getFolder() .'/'.$file;
-        }
-
-		$result = $fileUploader->createZip($pathZip, $folderPath.'/'.$photoService->getFolder().'.zip', false, $photoService->getFolder());
-        
-        if($result){
-            if ($photoService->getLocales()->getId() == 1){
-                $subject = "Photos";
-                $msgLang = "to download your photos, please tap";
-            } else {
-                $subject = "Fotografias";
-                $msgLang = "para baixar suas fotos, por favor clique";
-            }
-
-            $msg = $msgLang." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
-            $msgSMS = str_replace(" ","+", $msg);
-
-            //phone
-            //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
-
-            //email
-            $company = $em->getRepository(Company::class)->find(1);
-            $locale = $request->getlocale();
-
-            $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
-                ->setUsername($company->getEmail())
-                ->setPassword($company->getEmailPass());       
-
-            $mailer = new \Swift_Mailer($transport);
-
-            $message = (new \Swift_Message($subject))
-                ->setFrom([$company->getEmail() => $company->getName()])
-                ->setTo([$photoService->getEmail() => $photoService->getName(), $company->getEmail() => $company->getName()])
-                ->addPart($subject, 'text/plain')
-                ->setBody(
-                    $this->renderView(
-                        'emails/photoService-'.$photoService->getLocales()->getName().'.twig',
-                        array(
-                            'msg' => $msg,
-                            'username' => $photoService->getName(),
-                            'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
-                            'company_name' => $company->getName()
-                        )
-                    ),
-                'text/html'
-            );
-
-            //$mailer->send($message);
-
-        }
-
-        $response = array(
-            'status' => $result,
-        );
-
-        $filesystem->remove(['../public_html/upload/photo_service/'.$photoService->getFolder()]);
-        
-        return new JsonResponse($response);
-    }
 
     private function fileFinder($dir)
 	{
