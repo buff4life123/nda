@@ -77,7 +77,7 @@ class PhotoServiceController extends AbstractController
         $folderPath = $this->photo_service_directory.'/'.$photoService->getFolder().'.zip';
         $uploadedFiles = $request->files->get("files");
 
-        $zipResult = $fileUploader->createZip($uploadedFiles, $folderPath, false, $photoService->getFolder());
+        $zipResult = $fileUploader->createZip($uploadedFiles, $folderPath, false, $dechex);
 
         $em->persist($photoService);
         $em->flush();
