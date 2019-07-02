@@ -148,7 +148,7 @@ input, select, textarea {color: #000!important}
 
   }) 
 
-  //var progressHandlerFlag = false;
+  var progressHandlerFlag = false;
   function progressHandler(event) {
 
     $('.w3-overlay').show()
@@ -161,7 +161,8 @@ input, select, textarea {color: #000!important}
     $("#status").html(Math.round(percent) + "% uploaded... please wait");
 
     
-    if(Math.round(percent) == 100) {
+    if(Math.round(percent) == 100 || progressHandlerFlag == false) {
+      progressHandlerFlag = true;
       $('.w3-overlay').hide()
       console.log("teste");
       $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
