@@ -96,9 +96,6 @@ input, select, textarea {color: #000!important}
   </div>
 </div>
 
-<script src="{{ asset('assets/js/jqueryFileUpload/vendor/jquery.ui.widget.js')}}"></script>
-<script src="{{ asset('assets/js/jqueryFileUpload/jquery.iframe-transport.js')}}"></script>
-<script src="{{ asset('assets/js/jqueryFileUpload/jquery.fileupload.js')}}"></script>
 <script>
   //<ul class="parsley-errors-list filled" id="parsley-id-44"><li class="parsley-required">Obrigatório *</li></ul>
   var progressBar = document.getElementById('progressBar');  
@@ -127,10 +124,7 @@ input, select, textarea {color: #000!important}
     form = new FormData($(this)[0])
 
     e.preventDefault()
-    $('.w3-overlay').show()
     $('#progressBar,#status,#loaded_n_total').removeClass("w3-hide");
-    //$('.required').addClass('w3-hide')
-    //setTimeout(function(){
 
       $.ajax({  
         url:'{{ path('admin_photo_service_add') }}',
@@ -149,67 +143,15 @@ input, select, textarea {color: #000!important}
         xhr.addEventListener("abort", abortHandler, false);
        
         return xhr;
-        },
-        success: function(data){  
-          $('.w3-overlay').hide()
-          
-          if (data.status == 1){
-
-            $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
-            //$("#photo-service-form").closest('form').find("input[type=text], textarea").val("");
-
-            $('#photo-service-form')[0].reset();
-            $("#previews").html('<i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>');
-            $('#progressBar,#status,#loaded_n_total').addClass("w3-hide");
-     
-
-            setTimeout(
-            function() 
-            {
-              $(".sucess-msg").remove();
-            }, 1000);
-   
-            //startZipRequest(data.id);
-          }
-          else {
-            if(data.message === "fail")
-              customError("previews", '{%trans%}error{%endtrans%} ....')
-            else{
-              customError(data.message, '{%trans%}invalid_field{%endtrans%} ....')
-            }
-              
-          }
-        },
-        error:function(data){
-          $('.w3-overlay').hide()
-          $('#modal-error').show()
         }
-      })
-    //}, 500) 
+      }) 
+
   }) 
-
-  function startZipRequest(id) {
-
-    $.ajax({  
-      url:'{{ path('admin_photo_service_zip') }}',
-      type: "POST",
-      data: 'id='+id,
-      success: function(data){
-
-        if (data.status == 1){
-            console.log("sucess");
-        }else {
-          console.log("error");
-        }
-          
-      }
-    })
-
-  }
-
 
   function progressHandler(event) {
 
+    $('.w3-overlay').show()
+    
     $("#loaded_n_total").html("Uploaded " + parseFloat(event.loaded * Math.pow(10,-6)).toFixed(1) 
     + " Mb of " + parseFloat(event.total * Math.pow(10,-6)).toFixed(1)+ " Mb");
     
@@ -217,9 +159,23 @@ input, select, textarea {color: #000!important}
     progressBar.value = Math.round(percent);
     $("#status").html(Math.round(percent) + "% uploaded... please wait");
 
-    //if(Math.round(percent) == 100) {
-    //  $("#status").html("compressing images... please wait");
-    //}
+    if(Math.round(percent) == 100) {
+      $('.w3-overlay').hide()
+
+      $("#photo-service-form").append("<h1 class='sucess-msg w3-center'>  {%trans%}sucess_msg{%endtrans%}</h1>");
+
+      $('#photo-service-form')[0].reset();
+      $("#previews").html('<i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>');
+      $('#progressBar,#status,#loaded_n_total').addClass("w3-hide");
+
+
+      setTimeout(
+      function() 
+      {
+        $(".sucess-msg").remove();
+      }, 1000);
+      //$("#status").html("compressing images... please wait");
+    }
 
   }
 
@@ -227,6 +183,7 @@ input, select, textarea {color: #000!important}
     //console.log(event)
     $("#status").html(event.target.responseText.message);
     progressBar.value = 0; //wil clear progress bar after successful upload
+    
   }
 
   function errorHandler(event) {
@@ -261,18 +218,6 @@ input, select, textarea {color: #000!important}
     FieldInstance.removeError(response.errorName);
     FieldInstance.addError(response.errorName, {message: response.message});
 }
-
-// $(function () {
-//   $('#fileupload').fileupload({
-//       dataType: 'json',
-//       done: function (e, data) {
-//           $.each(data.result.files, function (index, file) {
-//               $('<p/>').text(file.name).appendTo(document.body);
-//           });
-//       }
-//   });
-// });
-
 
 </script>
 
