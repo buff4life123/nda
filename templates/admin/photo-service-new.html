@@ -149,7 +149,6 @@ input, select, textarea {color: #000!important}
 
   }) 
 
-  var progressHandlerFlag = false;
   function progressHandler(event) {
     $("#loaded_n_total").html("Uploaded " + parseFloat(event.loaded * Math.pow(10,-6)).toFixed(1) 
     + " Mb of " + parseFloat(event.total * Math.pow(10,-6)).toFixed(1)+ " Mb");
@@ -159,7 +158,7 @@ input, select, textarea {color: #000!important}
     $("#status").html(Math.round(percent) + "% uploaded... please wait");
 
     
-    if(Math.round(percent) == 100 && progressHandlerFlag == false) {
+    if(Math.round(percent) == 100) {
       //$("#status").html("compressing images... please wait");
       $('.w3-overlay').hide()
  
@@ -168,8 +167,6 @@ input, select, textarea {color: #000!important}
       $('#photo-service-form')[0].reset();
       $("#previews").html('<i id="no-image" class="fa fa-camera w3-jumbo" style="color:#05788d"></i>');
       $('#progressBar,#status,#loaded_n_total').addClass("w3-hide");
-
-      progressHandlerFlag = true;
 
       setTimeout(
       function() 
