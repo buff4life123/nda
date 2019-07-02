@@ -49,7 +49,8 @@ class PhotoServiceExpireCommand extends ContainerAwareCommand
         {
             $filesystem = new Filesystem();
             foreach($photoService as $p){
-                $filesystem->remove(['../public_html/upload/photo_service/'.$p->getFolder()]);
+                $file = $p->getFolder().'.zip';
+                $filesystem->remove(['%kernel.project_dir%/public_html/upload/photo_service/'.$file]);
                 $p->setFolder('');
                 $em->persist($p);
                 
