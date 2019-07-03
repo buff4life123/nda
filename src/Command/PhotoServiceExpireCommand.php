@@ -47,20 +47,25 @@ class PhotoServiceExpireCommand extends ContainerAwareCommand
         //SET FOLDERS TO EMPTY IN TABLE
         if ($photoService)
         {
+            $path = $this->getContainer()->get('kernel')->getProjectDir().'/public_html/upload/photo_service/';
+
             $filesystem = new Filesystem();
             foreach($photoService as $p){
                 $file = $p->getFolder().'.zip';
-                $filesystem->remove(['%kernel.project_dir%/public_html/upload/photo_service/'.$file]);
-                $p->setFolder('');
-                $em->persist($p);
+                $filesystem->remove([$path.$file]);
+                // $p->setFolder('');
+                // $em->persist($p);
                 
-                if($p->getGdpr() != 1){
-                    $em->remove($p);
-                }
+                // if($p->getGdpr() != 1){
+                //     $em->remove($p);
+                // }
             }
             $em->flush();
+
+          
         }
         // outputs a message followed by a "\n"
+        
         $output->writeln( count($photoService). ' folders removed with sucess !');       
     }
 
