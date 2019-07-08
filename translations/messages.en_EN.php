@@ -96,6 +96,7 @@ return array(
     'error' => 'Error',
     'success' => 'Success',
     'images' => 'images',
+    'preview' => 'Preview',
     'selected_images' => 'selected images',
     'max_selected_images' => 'Max selected images',
     'upload_maximum' => 'You can only upload a maximum of',

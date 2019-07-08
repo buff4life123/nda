@@ -53,12 +53,16 @@ class PhotoServiceExpireCommand extends ContainerAwareCommand
             foreach($photoService as $p){
                 $file = $p->getFolder().'.zip';
                 $filesystem->remove([$path.$file]);
-                // $p->setFolder('');
-                // $em->persist($p);
+
+                $file = $p->getFolder();
+                $filesystem->remove([$path.$file]);
+
+                $p->setFolder('');
+                $em->persist($p);
                 
-                // if($p->getGdpr() != 1){
-                //     $em->remove($p);
-                // }
+                if($p->getGdpr() != 1){
+                    $em->remove($p);
+                }
             }
             $em->flush();
 

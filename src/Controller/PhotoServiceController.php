@@ -74,11 +74,15 @@ class PhotoServiceController extends AbstractController
         
         $photoService->setLocales($locales);
 
+        $filesystem = new Filesystem();
+        $filesystem->mkdir($this->photo_service_directory.'/'.$photoService->getFolder());
+
         $folderPath = $this->photo_service_directory.'/'.$photoService->getFolder().'.zip';
         $uploadedFiles = $request->files->get("files");
 
-        //proc_nice(9);
         $zipResult = $fileUploader->createZip($uploadedFiles, $folderPath, false, $dechex);
+        $fileName = $fileUploader->uploads($uploadedFiles, $photoService->getFolder()); 
+        
 
         $em->persist($photoService);
         $em->flush();
@@ -97,7 +101,7 @@ class PhotoServiceController extends AbstractController
             $msgSMS = str_replace(" ","+", $msg);
 
             //phone
-            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
+            //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
 
             //email
             $company = $em->getRepository(Company::class)->find(1);
@@ -126,7 +130,7 @@ class PhotoServiceController extends AbstractController
                 'text/html'
             );
 
-            $mailer->send($message);
+            //$mailer->send($message);
         }
 
         $response = array(

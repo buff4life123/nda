@@ -169,6 +169,7 @@ return array(
     'error' => 'Erro',
     'success' => 'Sucesso',
     'images' => 'imagens',
+    'preview' => 'Pré-visualizar',
     'selected_images' => 'imagens selecionadas',
     'max_selected_images' => 'Max imagens selecionadas',
     'upload_maximum' => 'Você só pode fazer um upload no máximo com',

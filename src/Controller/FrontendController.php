@@ -121,6 +121,48 @@ class FrontendController extends AbstractController
 			//'about' => $about,
 		));
 	}
+
+	public function photoServicePreview(Request $request)
+	{	
+		$em = $this->getDoctrine()->getManager();
+		$company = $em->getRepository(Company::class)->find(1);
+
+		$code  = $request->request->get("photo-service-code");
+		$email = $request->request->get("photo-service-email");
+		$marketing = $request->request->get("marketing-agree");
+
+		$photoService = $em->getRepository(PhotoService::class)->findOneBy(['folder' => $code,'email' => $email]);
+
+		//dd($marketing);
+		if($photoService) {
+			$folder = $photoService->getFolder();
+			$id = $photoService->getId();
+			
+			$publicResourcesFolderPath = $this->appKernel->getProjectDir(). '/public_html/upload/photo_service/' . $folder . '/';
+			$files = $this-> fileFinder($publicResourcesFolderPath);
+
+			$images = array();
+			foreach ($files as $file) {	
+			 	$images[] = "/upload/photo_service/" . $folder . "/" . $file;
+			}
+
+			$response = array(
+				'status' => 1,
+				'images' => $images);
+				
+			$photoService->setGdpr(1);
+			$photoService->setMarketing($marketing);
+			$em->persist($photoService);
+			$em->flush();
+		}else
+		{
+			$response = array(
+				'status' => 0
+				);
+		}
+		
+		return new JsonResponse($response);	
+    }
 	
 	public function photoServiceDownload(Request $request)
 	{	

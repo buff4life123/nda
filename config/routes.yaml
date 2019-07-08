@@ -493,6 +493,10 @@ photo_service_download:
     path: /photo_service_download
     controller: App\Controller\FrontendController::photoServiceDownload
 
+photo_service_preview:
+    path: /photo_service_preview
+    controller: App\Controller\FrontendController::photoServicePreview
+
 about_us:
     path: /about-us
     controller: App\Controller\FrontendController::aboutUs

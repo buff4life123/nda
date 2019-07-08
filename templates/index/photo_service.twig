@@ -24,14 +24,18 @@
                   <a class="w-inline-block " href="#" onclick="modalTermosCondicoes('{{terms_conditions.getName}}','{{terms_conditions.getTermsHtml}}')">{%trans%}terms_of_service{%endtrans%}</a>
                   {% trans %}and{% endtrans %}
                   <a class="w-inline-block " href="#" onclick="modalGDPR('{{rgpd.getName}}','{{rgpd.getRgpdHtml}}')">  {%trans%}privacy_policy{%endtrans%}</a>
-                  <br>
+                  <br><br>
+                  <span id="preview" class="w-button">{% trans %}preview{% endtrans %}</span><br>
                   <button class="boto-destaque-1 w-button" type="submit">{% trans %}get_photos{% endtrans %}</button>
-                 
                  
                </form>
             <div class="photos-link"></div>
             
             </div>
+         </div>
+         
+         <div id="preview-container" class="">
+
          </div>
          
       </div>
@@ -50,8 +54,51 @@
       </div>
 
       <script>
+      
+         $('#preview').on('click',function(e){
+            $('#preview').hide();
+            $('.w3-overlay').show()
+         
+            if(!$('#terms-cond-agree').is(':checked')){
+               customError("terms-cond-agree", '{%trans%}accept_conditions{%endtrans%} ....')
+            }else { 
+               $.ajax({  
+               url:"{{ path('photo_service_preview') }}",
+               type: "POST",
+               data: $('#photo-service').serialize(),
+               success: function(data){  
+                  $('.w3-overlay').hide()
 
-        $("form[id=photo-service]").parsley()
+                  if (data.status == 1){
+                     //console.log(data)
+                     $("form[id=photo-service]").parsley().reset();
+                     for(i in data.images){
+                        var link = document.createElement('a');
+                        link.setAttribute('download', '');
+                        link.setAttribute('href', data.images[i]);
+                        link.setAttribute('target', "_self");
+                        $('#preview-container').append(link)
+
+                        var img = document.createElement('img');
+                        img.setAttribute('src', data.images[i]);
+                        link.append(img);
+                     }
+               
+                  }else{
+                     customError("terms-cond-agree", '{%trans%}invalid_code_email{%endtrans%} ....')
+                  }
+               },
+               error:function(data){
+               $('.w3-overlay').hide()
+               $('#modal-error').show()
+               }
+            })
+
+            }
+
+         })
+
+         $("form[id=photo-service]").parsley()
 
         $('#photo-service').on('submit',function(e){
          e.preventDefault()
@@ -68,7 +115,8 @@
                $('.w3-overlay').hide()
 
                if (data.status == 1){
-                  console.log(data)
+                  //console.log(data)
+                  $("form[id=photo-service]").parsley().reset();
                
                   var link = document.createElement('a');
                   link.setAttribute('download', '');
