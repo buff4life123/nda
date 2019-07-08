@@ -15,9 +15,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 use EmailValidator\EmailValidator;
 use Symfony\Component\Finder\Finder;
 use App\Service\ExperienceApi;
+
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -25,10 +27,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class FrontendController extends AbstractController
 {
 	private $session;
+	private $appKernel;
 
-	public function __construct(SessionInterface $session)
+	public function __construct(SessionInterface $session, KernelInterface $appKernel)
 	{
-       $this->session = $session;
+	   $this->session = $session;
+	   $this->appKernel = $appKernel;
 	}
 
     public function home(Request $request, ExperienceApi $experience)
@@ -133,8 +137,11 @@ class FrontendController extends AbstractController
 		if($photoService) {
 			$folder = $photoService->getFolder();
 			$id = $photoService->getId();
-			$path = "/upload/photo_service/";
-
+			//$path = "/upload/photo_service/";
+			// $path = $this->appKernel->getProjectDir().'/public_html/upload/photo_service/';
+			// $isExtracted = $fileUploader->extractTo($path,$path.$folder.'.zip');
+			// dd($isExtracted);
+			
 			// $publicResourcesFolderPath = $this->getParameter('kernel.project_dir') . '/public_html/upload/photo_service/' . $folder . '/';
 
 			// $files = $this-> fileFinder($publicResourcesFolderPath);
@@ -146,7 +153,7 @@ class FrontendController extends AbstractController
 
 			$response = array(
 				'status' => 1,
-				'folder' => "/upload/photo_service/" .$folder.'.zip');
+				'folder' => $path.$folder.'.zip');
 				
 			$photoService->setGdpr(1);
 			$photoService->setMarketing($marketing);

@@ -47,7 +47,21 @@ class FileUploader
 	public function getTargetDir()
 	{
 		return $this->targetDir;
-	}	
+	}
+
+	
+	public function extractTo($destination, $folder)
+	{
+		$zip = new ZipArchive;
+		if ($zip->open($folder) === TRUE) {
+			
+			$zip->extractTo($destination);
+			$zip->close();
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
 	/* creates a compressed zip file */
