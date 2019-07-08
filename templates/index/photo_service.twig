@@ -83,6 +83,10 @@
                         img.setAttribute('src', data.images[i]);
                         link.append(img);
                      }
+
+                     $('html, body').animate({
+                        scrollTop: $("#preview-container").offset().top
+                     }, 2000);
                
                   }else{
                      customError("terms-cond-agree", '{%trans%}invalid_code_email{%endtrans%} ....')
