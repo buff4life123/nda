@@ -56,7 +56,6 @@
       <script>
       
          $('#preview').on('click',function(e){
-            $('#preview').hide();
             $('.w3-overlay').show()
          
             if(!$('#terms-cond-agree').is(':checked')){
@@ -71,6 +70,7 @@
 
                   if (data.status == 1){
                      //console.log(data)
+                     $('#preview').hide();
                      $("form[id=photo-service]").parsley().reset();
                      for(i in data.images){
                         var link = document.createElement('a');
