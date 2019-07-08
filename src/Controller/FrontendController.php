@@ -137,7 +137,7 @@ class FrontendController extends AbstractController
 		if($photoService) {
 			$folder = $photoService->getFolder();
 			$id = $photoService->getId();
-			//$path = "/upload/photo_service/";
+			$path = "/upload/photo_service/";
 			// $path = $this->appKernel->getProjectDir().'/public_html/upload/photo_service/';
 			// $isExtracted = $fileUploader->extractTo($path,$path.$folder.'.zip');
 			// dd($isExtracted);
