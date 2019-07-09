@@ -118,7 +118,7 @@ class PhotoServiceController extends AbstractController
             $msgSMS = str_replace(" ","+", $msg);
 
             //phone
-            //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
+            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
 
             //email
             $company = $em->getRepository(Company::class)->find(1);
