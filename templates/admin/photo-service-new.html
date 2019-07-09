@@ -37,18 +37,20 @@ input, select, textarea {color: #000!important}
               {%trans%}name{%endtrans%}<br>
               <input class="w3-input w3-border w3-white" type="text" name="name"  required>
           </div>
-          <div class="w3-col l6 m6 s12 w3-margin-bottom">
+          <!-- <div class="w3-col l6 m6 s12 w3-margin-bottom"> -->
             {# {{ form_label(form.email)}}<br>
             {{ form_widget(form.email)}} #}
-            Email<br>
-            <input class="w3-input w3-border w3-white" type="email" name="email"  pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required>
-          </div>
+          <!-- </div> -->
           <div class="w3-col l6 m6 s12 w3-margin-bottom">
             {# {{ form_label(form.telephone)}}<br>
             {{ form_widget(form.telephone)}} #}
             {%trans%}telephone{%endtrans%}<br>
             <input class="w3-input w3-border w3-white" type="tel" name="telephone" pattern="^[0-9-+s()]*$" required>
           </div>
+          <div class="w3-col l6 m6 s12 w3-margin-bottom">
+              Email<br>
+              <input class="w3-input w3-border w3-white" type="email" name="email"  pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required>
+            </div>
           <div class="w3-col l6 m6 s12 w3-margin-bottom">
             {# {{ form_label(form.locales)}}<br>
             {{ form_widget(form.locales)}} #}
@@ -62,6 +64,16 @@ input, select, textarea {color: #000!important}
           
         </div>
         
+      <div id="contacts-container" class="w3-row-padding w3-margin-top w3-border-bottom">
+        <div class="w3-row">
+            <!-- <label>Emails:</label> -->
+
+            <span class="w3-button w3-border w3-blue" style="margin:-7px 0px 8px 0px" onclick="addNewContact()">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <i class="fa fa-plus"></i></span>
+        </div>
+          
+      </div>
       <!-- <input type="number" name="number"> -->
       <div class="w3-row-padding w3-margin-top ">
         <label class="w3-text-red">{%trans%}max_selected_images{%endtrans%}: 300</label>
@@ -99,6 +111,20 @@ input, select, textarea {color: #000!important}
 </div>
 
 <script>
+  
+  function deleteContact(element) {
+    $(element).parent().remove()
+  }
+
+  function addNewContact() {
+    $('#contacts-container').append(
+      '<div class="w3-col l6 m6 s12 w3-margin-bottom w3-border">Email<br>'
+        +'<input class="w3-input w3-border w3-white" type="email" name="contacts[]"  pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required>'
+        +'<span class="w3-button w3-red w3-border w3-right" style="margin: 1% 1%" onclick="deleteContact(this)"><i class="fa fa-trash"></i></span>'
+    +'</div>'
+       )
+  }
+
   //<ul class="parsley-errors-list filled" id="parsley-id-44"><li class="parsley-required">Obrigatório *</li></ul>
   var progressBar = document.getElementById('progressBar');  
   var fileInput = document.querySelector('input[type="file"]');  

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\PhotoService;
+use App\Entity\PhotoServiceContacts;
 use App\Entity\Company;
 use App\Entity\Locales;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,6 +56,9 @@ class PhotoServiceController extends AbstractController
 
     public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations, ImageResizer $imageResizer, EnjoyApi $enjoyapi, Host $host)
     {
+
+        //dd($request->request->get("contacts"));
+
         $photoService = new PhotoService();
 
         $em = $this->getDoctrine()->getManager();
@@ -71,7 +75,20 @@ class PhotoServiceController extends AbstractController
         $photoService->setName($request->request->get("name"));
         $photoService->setEmail($request->request->get("email"));
         $photoService->setTelephone($request->request->get("telephone"));
-        
+
+        $contacts = $request->request->get("contacts");
+        //dd($contacts);
+        if($contacts){
+            foreach ($contacts as $contact) {
+                $photoServiceContacts = new PhotoServiceContacts();
+                $photoServiceContacts->setEmail($contact);
+                $photoServiceContacts->setPhotoService($photoService);
+                $photoService->addContacts($photoServiceContacts);
+                $em->persist($photoServiceContacts);
+                //$em->flush();
+            }
+        }
+
         $photoService->setLocales($locales);
 
         $filesystem = new Filesystem();
@@ -101,11 +118,22 @@ class PhotoServiceController extends AbstractController
             $msgSMS = str_replace(" ","+", $msg);
 
             //phone
-            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
+            //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
 
             //email
             $company = $em->getRepository(Company::class)->find(1);
             $locale = $request->getlocale();
+            
+            $userMail = array();
+
+            if($photoService->getContacts()){
+                foreach($photoService->getContacts() as $emailToUser){
+                    array_push($userMail, $emailToUser->getEmail());
+
+                }
+            }
+
+            //dd($userMail);
 
             $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
                 ->setUsername($company->getEmail())
@@ -115,6 +143,7 @@ class PhotoServiceController extends AbstractController
 
             $message = (new \Swift_Message($subject))
                 ->setFrom([$company->getEmail() => $company->getName()])
+                ->setBcc($userMail)
                 ->setTo([$photoService->getEmail() => $photoService->getName(), $company->getEmail() => $company->getName()])
                 ->addPart($subject, 'text/plain')
                 ->setBody(

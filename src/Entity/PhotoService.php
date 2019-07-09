@@ -51,7 +51,15 @@ class PhotoService
     * @ORM\ManyToOne(targetEntity="Locales")
     */
     private $locales;
-    
+    /**
+    *@ORM\OneToMany(targetEntity="PhotoServiceContacts", mappedBy="photo_service", cascade={"persist", "remove"}) */
+    private $contacts;
+
+    public function __construct()
+    {       
+        $this->contacts = new ArrayCollection();   
+    }
+
     public function getId()
     {
         return $this->id;
@@ -121,5 +129,25 @@ class PhotoService
     public function setLocales(Locales $locales)
     {
         $this->locales = $locales;
+    }
+
+    
+    public function addContacts(PhotoServiceContacts $contacts) {
+        $contacts->setPhotoService($this);
+        $this->contacts->add($contacts);
+    }
+
+    public function removeContacts(PhotoServiceContacts $contacts){
+        $this->contacts->removeElement($contacts);
+    }
+
+    public function getContacts()
+    {
+        return $this->contacts;
+    }
+
+    public function setContacts(ArrayCollection $contacts)
+    {
+        $this->contacts = $contacts;
     }
 }
