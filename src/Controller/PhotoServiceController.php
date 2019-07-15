@@ -24,6 +24,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Translation\TranslatorInterface;
 
 
 class PhotoServiceController extends AbstractController
@@ -54,7 +55,7 @@ class PhotoServiceController extends AbstractController
     }
 
 
-    public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations, ImageResizer $imageResizer, EnjoyApi $enjoyapi, Host $host)
+    public function photoServiceAdd(Request $request, FileUploader $fileUploader, Validations $validations, ImageResizer $imageResizer, EnjoyApi $enjoyapi, Host $host, TranslatorInterface $translator)
     {
 
         //dd($request->request->get("contacts"));
@@ -104,7 +105,6 @@ class PhotoServiceController extends AbstractController
         $em->persist($photoService);
         $em->flush();
 
-        
         if($zipResult){
             if ($photoService->getLocales()->getId() == 1){
                 $subject = "Photos";
@@ -113,12 +113,12 @@ class PhotoServiceController extends AbstractController
                 $subject = "Fotografias";
                 $msgLang = "para baixar suas fotos, por favor clique";
             }
-
-            $msg = $msgLang." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
+            $photoServiceUrl = $this->createDownloadUrl($photoService->getFolder(), $photoService->getEmail(), $translator);
+            $msg = $msgLang." ".$photoServiceUrl;
             $msgSMS = str_replace(" ","+", $msg);
 
             //phone
-            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
+            //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $msgSMS);
 
             //email
             $company = $em->getRepository(Company::class)->find(1);
@@ -150,7 +150,7 @@ class PhotoServiceController extends AbstractController
                     $this->renderView(
                         'emails/photoService-'.$photoService->getLocales()->getName().'.twig',
                         array(
-                            'msg' => $msg,
+                            'link' => $photoServiceUrl,
                             'username' => $photoService->getName(),
                             'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
                             'company_name' => $company->getName()
@@ -184,7 +184,7 @@ class PhotoServiceController extends AbstractController
 		return $icons_name;
 	}
 
-    public function photoServiceSendEmail(Request $request, Host $host)
+    public function photoServiceSendEmail(Request $request, Host $host, TranslatorInterface $translator)
     {
         $em = $this->getDoctrine()->getManager();
         $photoService = $em->getRepository(photoService::class)->find($request->request->get("id"));
@@ -207,9 +207,10 @@ class PhotoServiceController extends AbstractController
             $subject = "Fotografias";
             $msgLang = "para baixar suas fotos, por favor clique";
         }
+        $photoServiceUrl = $this->createDownloadUrl($photoService->getFolder(), $photoService->getEmail(), $translator);
+        $msg = $msgLang.$photoServiceUrl;
 
-        $msg = $msgLang." https://nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail();
-
+        
         //email
         $company = $em->getRepository(Company::class)->find(1);
         $locale = $request->getlocale();
@@ -329,6 +330,11 @@ class PhotoServiceController extends AbstractController
         }
 
         return $err;
+    }
+
+    private function createDownloadUrl($folder, $email, $translator)
+    {
+        return '<a target="_blank" href="https://nauticdrive-algarve.com/photo_service?c='.$folder.'e='.$email.'">'.$translator->trans('here').'</a>';
     }
 
 }

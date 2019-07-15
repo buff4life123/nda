@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'here' => "Clique aqui",
     'send_email' => "Enviar Email",
     'sucess_msg' => "Sucesso!",
     'other_company_title' => 'Cruzeiros de luxo em',
