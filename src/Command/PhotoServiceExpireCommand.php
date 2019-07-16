@@ -1,16 +1,16 @@
 <?php
 namespace App\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+//use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use App\Entity\PhotoService;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class PhotoServiceExpireCommand extends ContainerAwareCommand
+class PhotoServiceExpireCommand extends Command
 {
     protected function configure()
     {
@@ -29,8 +29,8 @@ class PhotoServiceExpireCommand extends ContainerAwareCommand
         ]);
 
         $now = new \DateTime('now');
-        //INTERVAL IS SET TO 30 DAYS (after 30 days remove folders)
-        $interval = new \DateInterval('P30D');
+        //INTERVAL IS SET TO 8 DAYS (after 8 days remove folders)
+        $interval = new \DateInterval('P8D');
         $now->sub($interval);
         $startDateTime = \DateTime::createFromFormat('U', ($now->format('U') ));
         $startDateTime->format("Y-m-d H:i:s");
@@ -43,7 +43,7 @@ class PhotoServiceExpireCommand extends ContainerAwareCommand
         
         //$photoService = $em->getRepository(PhotoService::class)->deleteExpiredFolders($startDateTime);
 
-        //AFTER 30 DAYS REMOVE FOLDERS
+        //AFTER 8 DAYS REMOVE FOLDERS
         //SET FOLDERS TO EMPTY IN TABLE
         if ($photoService)
         {

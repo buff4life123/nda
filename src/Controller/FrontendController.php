@@ -90,7 +90,7 @@ class FrontendController extends AbstractController
 		));
 	}
 	
-	public function photoService(Request $request)
+	public function photoService(Request $request, TranslatorInterface $translator)
 	{	
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
@@ -100,6 +100,7 @@ class FrontendController extends AbstractController
 
 		$code = null;
 		$email= null;
+		$local= null;
 
 		if($request->query->get("c")){
 			$param = explode('e=',$request->query->get("c"));
@@ -107,6 +108,12 @@ class FrontendController extends AbstractController
 			if (count($param) > 1){
 				$code = $param[0];
 				$email = $param[1];
+				$local = $request->query->get("local");
+
+				if($this-> defaultUserLocale($request)->getName() != $local){
+					$this->session->set('_locale', $local);
+					$translator->setLocale($local);
+				}
 			}
 		}
 
@@ -117,6 +124,7 @@ class FrontendController extends AbstractController
 			'terms_conditions' => $terms_conditions,
 			'email' => $email,
 			'code' => $code,
+			'local' => $local,
 			// 't' => $request->getLocale(),
 			//'about' => $about,
 		));

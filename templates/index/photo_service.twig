@@ -1,6 +1,11 @@
 {% extends 'index/base.html.twig' %}
-
 {% block body %}
+      {# <script>
+         if(!"{{app.request.getLocale() == local}}"){
+            window.location.reload();
+         }
+      </script> #}
+       {# {% redirect path('index') %} #}
       <div class="section-fill-available bg-image flex-container">
          <div class="topo-pag-tour w-clearfix ">
             <a href="{{path('index')}}">
@@ -54,7 +59,6 @@
       </div>
 
       <script>
-      
          $('#preview').on('click',function(e){
             $('.w3-overlay').show()
          

@@ -2,13 +2,16 @@
 <body style="padding:64px 8px;background:#EEE;margin:0px;font-family:Lato,sans-serif">
 <div style="background: #fdf5e6;border: 1px solid #999;max-width:500px; margin:0 auto">
 <div style="padding:12px 8px">	
-<h4>Olá {{ username }},<br> 
-Bem-Vindo ao NauticDrive enviamos por este meio as fotos da sua experiência.<br>
-{{link|raw}}<br><br>
+<h4>Olá {{ username }}<br><br>
+Bem-Vindo ao NauticDrive, enviamos por este meio as fotos da sua experiência.
+{% set experationDate = 'now'|date_modify("+8 day") %}
+As fotos estarão disponíveis até dia {{ experationDate|date('d/m/Y') }}.<br>
+{{link|raw}}<br><br><br>
 
-Faça o seu coméntario no tripAdvisor.<br>
-Estamos a sua disposição para novas experiencias.<br>
-Visite-nos em www.nauticdrive-algarve.com.<br>
+
+Faça o seu comentário no <a target="_blank" href="{{tripAdvisorUrl}}">tripadvisor</a>.<br>
+Estamos a sua disposição para novas experiências.<br>
+Visite-nos em <a target="_blank" href="https://www.nauticdrive-algarve.com">nauticdrive-algarve.com</a>.<br>
 Equipa {{ company_name }}.<br>
 <img src='{{ logo }}'  style=" width:80;">
 </h4>

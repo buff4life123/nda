@@ -100,7 +100,7 @@ admin_photo_service_search:
 
 admin_photo_service_sendEmail:
     path: /admin-photo-sendEmail/
-    controller: App\Controller\PhotoServiceController::photoServiceSendEmail
+    controller: App\Controller\PhotoServiceController::photoServiceResendEmail
     #condition: 'request.isXmlHttpRequest()'
 
     #condition: 'request.isXmlHttpRequest()'
