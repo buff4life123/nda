@@ -6,12 +6,24 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 //use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\Command;
 use App\Entity\PhotoService;
 
 class PhotoServiceExpireCommand extends Command
 {
+
+    private $projectDir;
+    private $container;
+
+    public function __construct($projectDir, ContainerInterface $container)
+    {
+        $this->projectDir = $projectDir;
+        $this->container = $container;
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this->setName('app:remove-folder')
@@ -35,7 +47,7 @@ class PhotoServiceExpireCommand extends Command
         $startDateTime = \DateTime::createFromFormat('U', ($now->format('U') ));
         $startDateTime->format("Y-m-d H:i:s");
         
-        $doctrine = $this->getContainer()->get('doctrine');
+        $doctrine = $this->container->get('doctrine');
 
         $em = $doctrine->getEntityManager();
         
@@ -47,7 +59,7 @@ class PhotoServiceExpireCommand extends Command
         //SET FOLDERS TO EMPTY IN TABLE
         if ($photoService)
         {
-            $path = $this->getContainer()->get('kernel')->getProjectDir().'/public_html/upload/photo_service/';
+            $path = $this->projectDir.'/public_html/upload/photo_service/';
 
             $filesystem = new Filesystem();
             foreach($photoService as $p){

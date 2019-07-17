@@ -27,6 +27,8 @@ services:
         public: false       # Allows optimizing the container by removing unused services; this also means
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
+        bind:
+            $projectDir: '%kernel.project_dir%' # matches on constructor argument name
 
     # translation default pt or user set locale in session
     App\EventSubscriber\LocaleSubscriber:
