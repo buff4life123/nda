@@ -67,13 +67,13 @@ class PhotoServiceExpireCommand extends Command
                 $filesystem->remove([$path.$file]);
 
                 $p->setFolder('');
-                $em->persist($p);
+                $this->entityManager->persist($p);
                 
                 if($p->getGdpr() != 1){
-                    $em->remove($p);
+                    $this->entityManager->remove($p);
                 }
             }
-            $em->flush();
+            $this->entityManager->flush();
 
           
         }
