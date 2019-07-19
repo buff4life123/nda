@@ -6,8 +6,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-//use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Component\Console\Command\Command;
 use App\Entity\PhotoService;
 
@@ -15,12 +15,12 @@ class PhotoServiceExpireCommand extends Command
 {
 
     private $projectDir;
-    private $container;
+    private $entityManager;
 
-    public function __construct($projectDir, ContainerInterface $container)
+    public function __construct($projectDir, EntityManagerInterface $entityManager)
     {
         $this->projectDir = $projectDir;
-        $this->container = $container;
+        $this->entityManager = $entityManager;
         parent::__construct();
     }
 
@@ -47,11 +47,8 @@ class PhotoServiceExpireCommand extends Command
         $startDateTime = \DateTime::createFromFormat('U', ($now->format('U') ));
         $startDateTime->format("Y-m-d H:i:s");
         
-        $doctrine = $this->container->get('doctrine');
-
-        $em = $doctrine->getEntityManager();
         
-        $photoService = $em->getRepository(PhotoService::class)->deleteExpiredFolders($startDateTime);
+        $photoService = $this->entityManager->getRepository(PhotoService::class)->deleteExpiredFolders($startDateTime);
         
         //$photoService = $em->getRepository(PhotoService::class)->deleteExpiredFolders($startDateTime);
 
