@@ -98,32 +98,32 @@ class FrontendController extends AbstractController
 		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 
-		// $code = null;
-		// $email= null;
-		// $local= null;
+		$code = null;
+		$email= null;
+		$local= null;
 
-		// if($request->query->get("c")){
-		// 	$param = explode('e=',$request->query->get("c"));
+		if($request->query->get("c")){
+			$param = explode('e=',$request->query->get("c"));
 
-		// 	if (count($param) > 1){
-		// 		$code = $param[0];
-		// 		$email = $param[1];
-		// 		$local = $request->query->get("local") ? $request->query->get("local") :'pt_PT';
+			if (count($param) > 1){
+				$code = $param[0];
+				$email = $param[1];
+				$local = $request->query->get("local") ? $request->query->get("local") :'pt_PT';
 
-		// 		if($this-> defaultUserLocale($request)->getName() != $local){
-		// 			$this->session->set('_locale', $local);
-		// 			$translator->setLocale($local);
-		// 		}
-		// 	}
-		// }
+				if($this-> defaultUserLocale($request)->getName() != $local){
+					$this->session->set('_locale', $local);
+					$translator->setLocale($local);
+				}
+			}
+		}
 
 		return $this->render('index/photo_service.twig',  array(
 			//'page' => 'about_us',
 			'company' => $company,
 			'rgpd' => $rgpd,
 			'terms_conditions' => $terms_conditions,
-			'email' => "teste",//$email,
-			'code' => "teste",//$code,
+			'email' => $email,
+			'code' => $code,
 			// 't' => $request->getLocale(),
 			//'about' => $about,
 		));
