@@ -124,7 +124,7 @@ class FrontendController extends AbstractController
 			'terms_conditions' => $terms_conditions,
 			'email' => $email,
 			'code' => $code,
-			'local' => $local,
+			'local' => "pt_PT",
 			// 't' => $request->getLocale(),
 			//'about' => $about,
 		));
