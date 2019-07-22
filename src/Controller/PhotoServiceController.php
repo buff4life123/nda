@@ -254,7 +254,7 @@ class PhotoServiceController extends AbstractController
             $domain = ".pt";
         }
         $tripAdvisorUrl = "https://www.tripadvisor".$domain."/UserReviewEdit-g189112-d13795619-Nauticdrive-Albufeira_Faro_District_Algarve.html";
-        $PhotoServiceUrl = "https://nauticdrive-algarve.com/photo_service?c=".$folder."e=".$email."&local=".$local->getName()."";
+        $PhotoServiceUrl = "https://www.nauticdrive-algarve.com/photo_service?c=".$folder."e=".$email."&local=".$local->getName()."";
 
         $photoServiceUrl ='<a target="_blank" href="'.$PhotoServiceUrl.'">'
         .$translator->trans('here',array(), 'messages', $local->getName()).'</a>';
