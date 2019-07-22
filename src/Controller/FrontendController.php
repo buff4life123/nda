@@ -108,7 +108,7 @@ class FrontendController extends AbstractController
 			if (count($param) > 1){
 				$code = $param[0];
 				$email = $param[1];
-				$local = $request->query->get("local");
+				$local = $request->query->get("local") ? $request->query->get("local") :'pt_PT';
 
 				if($this-> defaultUserLocale($request)->getName() != $local){
 					$this->session->set('_locale', $local);
