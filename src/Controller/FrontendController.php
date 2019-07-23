@@ -46,6 +46,8 @@ class FrontendController extends AbstractController
 
 		$social_network_icons = $this-> fileFinder("../public_html/images/icons");
 		$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
+		$locales = $this-> defaultUserLocale($request);
+		$local = $locales->getName() == "pt_PT"?"pt":"en";
 
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
@@ -57,6 +59,7 @@ class FrontendController extends AbstractController
 			'products' => $products['products'],
 			'exp_api_key' => $products['key'],
 			'url_api_key' => $products['url'],
+			'local' => $local,
 		
 		));
 			
