@@ -46,17 +46,9 @@ class FrontendController extends AbstractController
 
 		$social_network_icons = $this-> fileFinder("../public_html/images/icons");
 		$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
-		$locales = $this-> defaultUserLocale($request);
-		$local = $locales->getName() == "pt_PT"?"pt":"en";
 
-		switch($locales->getName()){
-			case "pt_PT": $local = "pt-pt";
-			break;
-			case "en_EN": $local = "en-pt";
-			break;
-			default:
-				$local = "x-default";
-		}
+
+		$local = $this->langCode($this-> defaultUserLocale($request));
 
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
@@ -79,12 +71,14 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+		$local = $this->langCode($this-> defaultUserLocale($request));
 
 		return $this->render('index/about_us.html.twig',  array(
 			'page' => 'about_us',
 			'company' => $company,
 			// 't' => $request->getLocale(),
 			'about' => $about,
+			'local' => $local,
 		));
 	}
 	
@@ -93,12 +87,14 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+		$local = $this->langCode($this-> defaultUserLocale($request));
 
 		return $this->render('index/other_company.twig',  array(
 			'page' => 'about_us',
 			'company' => $company,
 			// 't' => $request->getLocale(),
 			'about' => $about,
+			'local' => $local,
 		));
 	}
 	
@@ -109,6 +105,7 @@ class FrontendController extends AbstractController
 
 		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+		$local = $this->langCode($this-> defaultUserLocale($request));
 
 		$code = null;
 		$email= null;
@@ -136,6 +133,7 @@ class FrontendController extends AbstractController
 			'terms_conditions' => $terms_conditions,
 			'email' => $email,
 			'code' => $code,
+			'local' => $local,
 			// 't' => $request->getLocale(),
 			//'about' => $about,
 		));
@@ -235,14 +233,17 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$products = $experience->getProduct($request->getLocale(), $id);
-		
+		$local = $this->langCode($this-> defaultUserLocale($request));
 
     	return $this->render('index/activity.html.twig', array(
 			'page'=> 'activity',
 			'company' => $company,
 			'products' => $products['products'],
 			'exp_api_key' => $products['key'],
-			'url_api_key' => $products['url']));
+			'url_api_key' => $products['url'],
+			'local' => $local,
+		));
+	
 
 	}
 
@@ -583,5 +584,21 @@ class FrontendController extends AbstractController
 		$defaultUserLocale = $request->getLocale() == "en" || $request->getLocale() == "en_EN" ? 'en_EN':'pt_PT';
 		$userLocale = $em->getRepository(Locales::class)->findOneBy(['name'=> $defaultUserLocale]);
 		return $userLocale;
+	}
+
+	
+		
+	private function langCode($locales) {
+
+		switch($locales->getName()){
+
+			case "pt_PT": return "pt-pt";
+			break;
+			case "en_EN":return "en-pt";
+			break;
+			default:
+			 			return "x-default";
+		}
+
 	}
 }
