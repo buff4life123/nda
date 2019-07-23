@@ -49,6 +49,15 @@ class FrontendController extends AbstractController
 		$locales = $this-> defaultUserLocale($request);
 		$local = $locales->getName() == "pt_PT"?"pt":"en";
 
+		switch($locales->getName()){
+			case "pt_PT": $local = "pt-pt";
+			break;
+			case "en_EN": $local = "en-pt";
+			break;
+			default:
+				$local = "x-default";
+		}
+
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
 			'company' => $company,
