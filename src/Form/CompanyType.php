@@ -89,31 +89,26 @@ class CompanyType extends AbstractType
             ->add('email', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Email 1',
+                'label' => 'Email',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email']
             ))
-            ->add('email2', TextType::class,
+            ->add('emails', TextareaType::class,
             array(
                 'required' => true,
-                'label' => 'Email 2',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email 2']
+                'label' => 'Emails',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Emails', 'rows' => 3]
             ))
-            ->add('email3', TextType::class,
-            array(
-                'required' => true,
-                'label' => 'Email 3',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email 3']
-            ))
+
             ->add('email_smtp', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Email 1 SMTP *',
+                'label' => 'Email SMTP *',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email SMTP*']
             ))
             ->add('email_pass', TextType::class,
             array(
                 'required' => true,
-                'label' => 'Email 1 Pass *',
+                'label' => 'Email Pass *',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Email Pass *']
             ))
             ->add('email_port', IntegerType::class,
@@ -128,17 +123,11 @@ class CompanyType extends AbstractType
                 'label' => 'email_cert',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'ssl, tls']
             ))
-            ->add('telephone', TextType::class,
+            ->add('telephones', TextareaType::class,
             array(
                 'required' => false,
-                'label' => 'phone',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'phone']
-            ))
-            ->add('telephone2', TextType::class,
-            array(
-                'required' => false,
-                'label' => 'phone2',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'phone2']
+                'label' => 'phones',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'phones', 'rows' => 3]
             ))
             ->add('fiscal_number', IntegerType::class,
             array(
@@ -146,15 +135,10 @@ class CompanyType extends AbstractType
                 'label' => 'fiscal_n',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'fiscal_n']
             ))
-            ->add('coords_google_maps', TextType::class, array(
+            ->add('coords_google_maps', TextareaType::class, array(
                 'required' => true,
-                'label' => 'Google Maps Coords 1 *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Google Maps Coords 1 *']
-            ))
-            ->add('coords_google_maps2', TextType::class, array(
-                'required' => true,
-                'label' => 'Google Maps Coords 2 *',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Google Maps Coords 2 *']
+                'label' => 'Google Maps Coords*',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Google Maps Coords 1 *', 'rows' => 3]
             ))
             ->add('google_maps_api_key', TextType::class, array(
                 'required' => true,

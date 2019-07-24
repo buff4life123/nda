@@ -293,7 +293,8 @@
         </div>
 
         {#GOOGLE MAPS________________________________________________________________________________________________________________________________________________________________#}
-        <div id="themap" class="map" data-company-name='{{company.name}}' data-coords="{{company.getCoordsGoogleMaps}}" data-coords2="{{company.getCoordsGoogleMaps2}}"></div>
+        {% set getCoordsGoogleMaps = company.getCoordsGoogleMaps|split('\n') %}
+        <div id="themap" class="map" data-company-name='{{company.name}}' data-coords="{{getCoordsGoogleMaps[0]}}" data-coords2="{{getCoordsGoogleMaps[1]}}"></div>
 
         {#CONTACT FORM________________________________________________________________________________________________________________________________________________________________#}
         <div class="form-contact" id="contact">
@@ -360,10 +361,10 @@
                                 {{company.getPCode2}}
                                 {{company.getCity2}}</div>
                             <div class="text-block-3">
-                                {{company.getTelephone}} | {{company.getTelephone2}}</div>
-                            <div class="text-block-4"> {{company.getEmail2}}
-                                <br>{{company.getEmail3}}<br>
-                                {{company.getEmail}}</div>
+                                {{company.getTelephones | replace({"\n":"|"})}}</div>
+                                <div class="text-block-4">
+                                    {{company.getEmails|nl2br}} 
+                                </div>
                         </div>
                     </div>
 

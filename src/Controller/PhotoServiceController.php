@@ -294,7 +294,7 @@ class PhotoServiceController extends AbstractController
             $message = (new \Swift_Message($notice["subject"]))
                 ->setFrom([$company->getEmail() => $company->getName()])
                 ->setBcc($userMail)
-                ->setTo([$photoService->getEmail() => $photoService->getName(), $company->getEmail2() => $company->getName()])
+                ->setTo([$photoService->getEmail() => $photoService->getName(), "nauticdrive.fotos@gmail.com" => $company->getName()]) //$company->getEmail2()
                 ->addPart($notice["subject"], 'text/plain')
                 ->setBody(
                     $this->renderView(

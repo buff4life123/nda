@@ -81,25 +81,15 @@ class Company
     private $email_certificade;
 
     /**
-    * @Assert\NotBlank(message="EMAIL2")
-    * @ORM\Column(type="string", length=30, name="email2")
+    * @Assert\NotBlank(message="EMAILS")
+    * @ORM\Column(type="text", name="emails")
     */
-    private $email2;
-    /**
-    * @Assert\NotBlank(message="EMAIL3")
-    * @ORM\Column(type="string", length=30, name="email3")
-    */
-    private $email3;
+    private $emails;
 
     /**
-     * @ORM\Column(type="string", length=20, name="telephone", nullable=true)
+     * @ORM\Column(type="text", name="telephones", nullable=true)
      */
-    private $telephone;
-    /**
-     * @ORM\Column(type="string", length=20, name="telephone2", nullable=true)
-     */
-    private $telephone2;
-
+    private $telephones;
     /**
     * @ORM\Column(type="text", name="meta_keywords", nullable=true)
     */
@@ -117,15 +107,10 @@ class Company
      */
     private $fiscal_number;
     /**
-     * @ORM\Column(type="string", length=50, name="coords_google_maps")
+     * @ORM\Column(type="text", name="coords_google_maps")
      * @Assert\NotBlank(message="COORDS_GOOGLE_MAPS")
      */
     private $coords_google_maps;
-        /**
-     * @ORM\Column(type="string", length=50, name="coords_google_maps2")
-     * @Assert\NotBlank(message="COORDS_GOOGLE_MAPS2")
-     */
-    private $coords_google_maps2;
     /**
      * @ORM\Column(type="string", length=50, name="google_maps_api_key")
      * @Assert\NotBlank(message="GOOGLE_MAPS_API_KEY")
@@ -340,43 +325,24 @@ class Company
         $this->email_pass = $email_pass;
     }
 
-    public function getEmail2()
+    public function getEmails()
     {
-        return $this->email2;
+        return $this->emails;
     }
 
-    public function setEmail2($email2)
+    public function setEmails($emails)
     {
-        $this->email2 = str_replace("'","’",$email2);
-    }
-    public function getEmail3()
-    {
-        return $this->email3;
+        $this->emails = str_replace("'","’",$emails);
     }
 
-    public function setEmail3($email3)
+    public function getTelephones()
     {
-        $this->email3 = str_replace("'","’",$email3);
+        return $this->telephones;
     }
 
-    public function getTelephone()
+    public function setTelephones($telephones)
     {
-        return $this->telephone;
-    }
-
-    public function setTelephone($telephone)
-    {
-        $this->telephone = str_replace("'","’",$telephone);
-    }
-
-    public function getTelephone2()
-    {
-        return $this->telephone2;
-    }
-
-    public function setTelephone2($telephone2)
-    {
-        $this->telephone2 = str_replace("'","’",$telephone2);
+        $this->telephones = str_replace("'","’",$telephones);
     }
 
     public function getFiscalNumber()
@@ -397,17 +363,6 @@ class Company
     public function setCoordsGoogleMaps($coords_google_maps)
     {
         $this->coords_google_maps = str_replace("'","’",$coords_google_maps);
-    }
-
-    
-    public function getCoordsGoogleMaps2()
-    {
-        return $this->coords_google_maps2;
-    }
-
-    public function setCoordsGoogleMaps2($coords_google_maps2)
-    {
-        $this->coords_google_maps2 = str_replace("'","’",$coords_google_maps2);
     }
 
     public function getGoogleMapsApiKey()

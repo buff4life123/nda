@@ -103,20 +103,12 @@
       {{ form_widget(form.email_smtp)}}
     </div>
     <div class="w3-col s12 l3 m4 w3-margin-bottom">
-      {{ form_label(form.email2)}}<br>
-      {{ form_widget(form.email2)}}
+      {{ form_label(form.emails)}}<br>
+      {{ form_widget(form.emails)}}
     </div>
     <div class="w3-col s12 l3 m4 w3-margin-bottom">
-      {{ form_label(form.email3)}}<br>
-      {{ form_widget(form.email3)}}
-    </div>
-    <div class="w3-col s12 l3 m4 w3-margin-bottom">
-      {{ form_label(form.telephone)}}<br>
-      {{ form_widget(form.telephone)}}
-    </div>
-    <div class="w3-col s12 l3 m4 w3-margin-bottom">
-      {{ form_label(form.telephone2)}}<br>
-      {{ form_widget(form.telephone2)}}
+      {{ form_label(form.telephones)}}<br>
+      {{ form_widget(form.telephones)}}
     </div>
     <div class="w3-col s12 l3 m6 w3-margin-bottom">
       {{ form_label(form.link_my_domain)}}<br>
@@ -139,10 +131,6 @@
     <div class="w3-col s12 l4 m5 w3-margin-bottom">
       {{ form_label(form.coords_google_maps)}}<br>
       {{ form_widget(form.coords_google_maps)}}
-    </div>
-    <div class="w3-col s12 l4 m5 w3-margin-bottom">
-      {{ form_label(form.coords_google_maps2)}}<br>
-      {{ form_widget(form.coords_google_maps2)}}
     </div>
     <div class="w3-col s12 l6 m7 w3-margin-bottom">
       {{ form_label(form.google_maps_api_key)}}<br>
@@ -244,6 +232,28 @@
 </div>
 
 <script>
+  const telephones = $("#company_telephones");
+  const emails     = $("#company_emails");
+  const coords     = $("#company_coords_google_maps");
+
+  telephones.keypress(function(event) {
+          if (event.keyCode == 32) {
+            telephones.val(telephones.val()+"\n");
+          }
+  });
+
+  emails.keypress(function(event) {
+          if (event.keyCode == 32) {
+              emails.val(emails.val()+"\n");
+          }
+  });
+
+  coords.keypress(function(event) {
+          if (event.keyCode == 32) {
+            coords.val(coords.val()+"\n");
+          }
+  });
+
 
   var loadFile = function(event) {
     $('.set-image-container').html('<img id="output" class="w3-image w3-animate-zoom">')

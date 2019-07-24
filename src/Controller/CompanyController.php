@@ -127,14 +127,18 @@ class CompanyController extends AbstractController
 
             $company->setLogo(new File($path));
         }
-
         else
             $company->setLogo(new File($this->gallery_images_directory.'/no-image.png'));
 
         $form = $this->createForm(CompanyType::class, $company);
 
+        $formView = $form->createView();
+                
+        //var_dump("teste");
+        //exit;
+
         return $this->render('admin/company-edit.html',array(
-            'form' => $form->createView(),
+            'form' => $formView,
             'company' => $company
         ));
     }
