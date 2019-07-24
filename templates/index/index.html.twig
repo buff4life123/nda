@@ -32,7 +32,7 @@
         </div> 
    </div>
 
-   <div class="photo-service-link" data-ix="social-interact">
+   {# <div class="photo-service-link" data-ix="social-interact">
         <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('photo_service')}}'">
             <div class="social-media-ico" style="background-image: url(../images/photoService.png)"></div>
 
@@ -40,7 +40,7 @@
                 <div class="text-block-13 w3-hide txt-hover">{% trans %}photo_service{% endtrans %} </div>
             </div>
         </div> 
-    </div>
+    </div> #}
 
    
     {#NAV AND SLIDER AND HIGHLIGHTS________________________________________________________________________________________________________________________________________________________________#}
@@ -425,7 +425,7 @@
 
             <script>
 
-                $( ".photo-service-link").hover(
+                {# $( ".photo-service-link").hover(
                 function() {
                     $(".txt-hover").removeClass("w3-hide");
                     
@@ -433,7 +433,7 @@
                 function () {
                     $(".txt-hover").addClass("w3-hide");
                 }
-                );
+                ); #}
 
                 var userFeed = new Instafeed({
                 get: 'user',
