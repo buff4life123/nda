@@ -4929,6 +4929,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   .link-block {
     position: absolute;
     margin-top: 19px;
+    display:none
   }
   
   .right-arrow-3 {
@@ -5667,6 +5668,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
+    display:none;
   }
 
   .aboutus-link-block {
