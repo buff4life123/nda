@@ -186,7 +186,7 @@ h1 {
   font-size: 13px;
   line-height: 18px;
   text-decoration: none;
-  overflow: overlay;
+  overflow: auto;
 /* 
   white-space: nowrap;
   overflow: hidden;

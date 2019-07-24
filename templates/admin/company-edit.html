@@ -62,24 +62,6 @@
     </div>
 
   </div>
-
-  <div  class="w3-row-padding w3-margin-top w3-border-bottom">
-    <div class="w3-col l6 m6 s12 w3-margin-bottom">
-      {{ form_label(form.address2) }}
-      {{ form_widget(form.address2) }}
-    </div>
-
-    <div class="w3-col l4 m6 s5 w3-margin-bottom">
-      {{ form_label(form.p_code2) }}
-      {{ form_widget(form.p_code2) }}
-    </div>
-
-    <div class="w3-col l4 m6 s7 w3-margin-bottom">
-      {{ form_label(form.city2) }}
-      {{ form_widget(form.city2) }}
-    </div>
-  </div>
-
   <div class="w3-row-padding w3-margin-top w3-border-bottom">
     <div class="w3-col s12 l3 m4 w3-margin-bottom">
       {{ form_label(form.email)}}<br>
@@ -101,6 +83,13 @@
     <div class="w3-col s12 l3 m4 w3-margin-bottom">
       {{ form_label(form.email_smtp)}}<br>
       {{ form_widget(form.email_smtp)}}
+    </div>
+  </div>
+  
+  <div  class="w3-row-padding w3-margin-top w3-border-bottom">
+    <div class="w3-col l6 m6 s12 w3-margin-bottom">
+      {{ form_label(form.addresses) }}
+      {{ form_widget(form.addresses) }}
     </div>
     <div class="w3-col s12 l3 m4 w3-margin-bottom">
       {{ form_label(form.emails)}}<br>
@@ -235,6 +224,13 @@
   const telephones = $("#company_telephones");
   const emails     = $("#company_emails");
   const coords     = $("#company_coords_google_maps");
+  const addresses     = $("#company_addresses");
+
+  addresses.keypress(function(event) {
+          if (event.keyCode == 32) {
+            addresses.val(addresses.val()+"\n");
+          }
+  });
 
   telephones.keypress(function(event) {
           if (event.keyCode == 32) {

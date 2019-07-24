@@ -353,19 +353,14 @@
                     <div class="footer-esq w-clearfix">
                         <div class="logo-footer" style="background-image: url(../upload/gallery/{{company.getLogo}})"></div>
                         <div class="txt-info-footer">
-                            <div class="text-block-2">{{company.getAddress}}
-                                .
-                                {{company.getPCode}}
-                                {{company.getCity}}</div>
-                            <div class="text-block-2">{{company.getAddress2}}
-                                .
-                                {{company.getPCode2}}
-                                {{company.getCity2}}</div>
+                            <div class="text-block-2">{{company.getAddresses|nl2br}}</div>
+                            
                             <div class="text-block-3">
-                                {{company.getTelephones | replace({"\n":"|"})}}</div>
-                                <div class="text-block-4">
-                                    {{company.getEmails|nl2br}} 
-                                </div>
+                                {{company.getTelephones | replace({"\n":"|"})}}
+                            </div>
+                            <div class="text-block-4">
+                                {{company.getEmails|nl2br}} 
+                            </div>
                         </div>
                     </div>
 

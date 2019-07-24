@@ -30,30 +30,20 @@ class Company
     */
     private $address;
     /**
-    * @Assert\NotBlank(message="ADDRESS2")
-    * @ORM\Column(type="string", length=95, name="address2")
+    * @Assert\NotBlank(message="ADDRESSES")
+    * @ORM\Column(type="text", name="addresses")
     */
-    private $address2;
+    private $addresses;
     /**
     * @Assert\NotBlank(message="P_CODE")
     * @ORM\Column(type="string", length=10, name="p_code")
     */
     private $p_code;
     /**
-    * @Assert\NotBlank(message="P_CODE2")
-    * @ORM\Column(type="string", length=10, name="p_code2")
-    */
-    private $p_code2;
-    /**
     * @Assert\NotBlank(message="CITY")
     * @ORM\Column(type="string", length=10, name="city")
     */
     private $city;
-    /**
-    * @Assert\NotBlank(message="CITY2")
-    * @ORM\Column(type="string", length=10, name="city2")
-    */
-    private $city2;
     /**
     *@ORM\ManyToOne(targetEntity="Countries") */
     private $country;
@@ -235,14 +225,14 @@ class Company
         $this->address = str_replace("'","’",$address);
     }
 
-    public function getAddress2()
+    public function getAddresses()
     {
-        return $this->address2;
+        return $this->addresses;
     }
 
-    public function setAddress2($address2)
+    public function setAddresses($addresses)
     {
-        $this->address2 = str_replace("'","’",$address2);
+        $this->addresses = str_replace("'","’",$addresses);
     }
 
     public function getCurrency()
@@ -265,16 +255,6 @@ class Company
         $this->p_code = str_replace("'","’",$p_code);
     }
 
-    public function getPCode2()
-    {
-        return $this->p_code2;
-    }
-
-    public function setPCode2($p_code2)
-    {
-        $this->p_code2 = str_replace("'","’",$p_code2);
-    }
-
     public function getCity()
     {
         return $this->city;
@@ -283,16 +263,6 @@ class Company
     public function setCity($city)
     {
         $this->city = str_replace("'","’",$city);
-    }
-
-    public function getCity2()
-    {
-        return $this->city2;
-    }
-
-    public function setCity2($city2)
-    {
-        $this->city2 = str_replace("'","’",$city2);
     }
 
     public function getCountry()

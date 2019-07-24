@@ -51,11 +51,11 @@ class CompanyType extends AbstractType
                 'label' => 'address',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'address']
             ))
-            ->add('address2', TextType::class,
+            ->add('addresses', TextareaType::class,
             array(
                 'required' => true,
-                'label' => 'address2',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'address2']
+                'label' => 'addresses',
+                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'addresses', 'rows' => 3]
             ))
             ->add('p_code', TextType::class,
             array(
@@ -63,18 +63,7 @@ class CompanyType extends AbstractType
                 'label' => 'postal_code',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'postal_code']
             ))
-            ->add('p_code2', TextType::class,
-            array(
-                'required' => true,
-                'label' => 'postal_code',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'postal_code']
-            ))
             ->add('city', TextType::class, array(
-                'required' => true,
-                'label' => 'city',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'city']
-            ))
-            ->add('city2', TextType::class, array(
                 'required' => true,
                 'label' => 'city',
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'city']

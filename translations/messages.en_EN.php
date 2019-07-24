@@ -2,6 +2,7 @@
 
 return array(
     'here' => "Click here",
+    'addresses' => 'Addresses',
     'send_email' => "Send Email",
     'sucess_msg' => "Sucess!",
     'other_company_title' => 'Luxury cruises on',
