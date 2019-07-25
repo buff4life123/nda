@@ -15,31 +15,31 @@
         <meta content="summary" name="twitter:card">
         <meta content="width=device-width, initial-scale=1" name="viewport">
         <meta content="Webflow" name="generator">
-        <meta name="keywords" content="{{company.metaKeywords}}">
+        <meta name="keywords" content="{{seo.keywords}}">
         <link rel="alternate" hreflang="{{local}}" href="https://www.nauticdrive-algarve.com">
-        <meta name="description" content="{{company.metaDescription}}">
+        <meta name="description" content="{{seo.description}}">
         
         <meta name="robots" content="index,nofollow">
  		
  		<!-- Google / Search Engine Tags -->
-        <meta itemprop="name" content="NAUTICDRIVE - Desportos Náuticos na Praia da Rocha Baixinha, Albufeira">
-        <meta itemprop="description" content="NAUTICDRIVE - Desportos Náuticos na Praia da Rocha Baixinha, Albufeira">
+        <meta itemprop="name" content="{{seo.title}}">
+        <meta itemprop="description" content="{{seo.description}}">
         <meta itemprop="image" content="https://nauticdrive-algarve.com/upload/gallery/f210acf07c12fc46a7457dbec347270c.png">
         
         <!-- Facebook Meta Tags -->
         <meta property="og:url" content="https://nauticdrive-algarve.com">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="NAUTICDRIVE - Desportos Náuticos na Praia da Rocha Baixinha, Albufeira">
-        <meta property="og:description" content="NAUTICDRIVE - Desportos Náuticos na Praia da Rocha Baixinha, Albufeira">
+        <meta property="og:title" content="{{seo.title}}">
+        <meta property="og:description" content="{{seo.description}}">
         <meta property="og:image" content="https://nauticdrive-algarve.com/upload/gallery/f210acf07c12fc46a7457dbec347270c.png">
         
         <!-- Twitter Meta Tags -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="NAUTICDRIVE - Desportos Náuticos na Praia da Rocha Baixinha, Albufeira">
-        <meta name="twitter:description" content="NAUTICDRIVE - Desportos Náuticos na Praia da Rocha Baixinha, Albufeira">
+        <meta name="twitter:title" content="{{seo.title}}">
+        <meta name="twitter:description" content="{{seo.description}}">
         <meta name="twitter:image" content="https://nauticdrive-algarve.com/upload/gallery/f210acf07c12fc46a7457dbec347270c.png">
         
-        <title>{% block title %}{% trans %}company_name{%endtrans%}{% endblock %}</title>
+        <title>{% block title %}{{seo.title}}{% endblock %}</title>
         
         {% block stylesheets %}
             <!--Import slick.css-->

@@ -1,61 +1,59 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\AboutUs;
+use App\Entity\Seo;
 use App\Entity\Locales;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use App\Form\AboutUsType;
+use App\Form\SeoType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
 
-class AboutUsController extends AbstractController
+class SeoController extends AbstractController
 {
-
-    public function aboutUs(Request $request, ValidatorInterface $validator)
+    public function seo(Request $request, ValidatorInterface $validator)
     {
         $em = $this->getDoctrine()->getManager();
 
         if($request->request->get('id')){
-            $aboutUs = $em->getRepository(AboutUs::class)->find($request->request->get('id'));
-            $form = $this->createForm(AboutUsType::class, $aboutUs);
+            $seo = $em->getRepository(Seo::class)->find($request->request->get('id'));
+            $form = $this->createForm(Seo::class, $seo);
         }
         else
         {
-            $aboutUs = $em->getRepository(AboutUs::class)->findAll();
-            $form = $this->createForm(AboutUsType::class);
+            $seo = $em->getRepository(Seo::class)->findAll();
+            $form = $this->createForm(SeoType::class);
 
         } 
         
         $locales = $em->getRepository(Locales::class)->findAll();
-
-      
+   
         if ($request->isXmlHttpRequest() && $request->request->get($form->getName())) {
 
             $form->submit($request->request->get($form->getName()));
             
             if($form->isSubmitted()){
 
-                $aboutUs->setLocales($locales);
+                $seo->setLocales($locales);
 
                 if($form->isValid()){
 
                     $em = $this->getDoctrine()->getManager();
-                    $aboutUs = $form->getData();
+                    $seo = $form->getData();
 
-                    $aboutUs->setLocales($locales);
+                    $seo->setLocales($locales);
 
-                    $em->persist($aboutUs);
+                    $em->persist($seo);
                     $em->flush();
 
                     $response = array(
                         'result' => 1,
                         'message' => 'success',
-                        'data' => $aboutUs->getId());
+                        'data' => $seo->getId());
                 }
                 else{   
                     $response = array(
@@ -73,24 +71,24 @@ class AboutUsController extends AbstractController
                     'data' => '');
                 return new JsonResponse($response);
         }
-        return $this->render('admin/about-us.html',array(
+
+        return $this->render('admin/seo.html',array(
             'form' => $form->createView(),
-            'aboutUs' => $aboutUs,
+            'seos' => $seo,
             'locales' => $locales
         ));
 
-        return $this->render('admin/about-us.html');
+        return $this->render('admin/seo.html');
     }
 
 
-
-    public function aboutUsEdit(Request $request, ValidatorInterface $validator)
+    public function seoEdit(Request $request, ValidatorInterface $validator)
     {
         $em = $this->getDoctrine()->getManager();
+        
+        $seo = $em->getRepository(Seo::class)->find($request->request->get('id'));
 
-        $aboutUs = $em->getRepository(AboutUs::class)->find($request->request->get('id'));
-
-        $form = $this->createForm(AboutUsType::class, $aboutUs);
+        $form = $this->createForm(SeoType::class, $seo);
 
         $form->handleRequest($request);
             
@@ -98,16 +96,16 @@ class AboutUsController extends AbstractController
                 
             if($form->isValid()){ 
 
-            $aboutUs = $form->getData();
+            $seo = $form->getData();
 
                 try {
-                    $em->persist($aboutUs);
+                    $em->persist($seo);
                     $em->flush();
 
                     $response = array(
                         'status' => 1,
                         'message' => 'Sucesso',
-                        'data' => 'O registo '.$aboutUs->getId().' foi gravado.');
+                        'data' => 'O registo '.$seo->getId().' foi gravado.');
                 } 
                 catch(DBALException $e){
 
@@ -132,22 +130,22 @@ class AboutUsController extends AbstractController
     }
 
 
-    public function aboutUsDelete(Request $request){
+    public function seoDelete(Request $request){
 
         $response = array();
-        $aboutUsId = $request->request->get('id');
+        $seoId = $request->request->get('id');
         $em = $this->getDoctrine()->getManager();
         
-        $aboutUs = $em->getRepository(AboutUs::class)->find($aboutUsId);
+        $seo = $em->getRepository(Seo::class)->find($seo);
        
-        if (!$aboutUs) {
-            $response = array('message'=>'fail', 'status' => 'Registo #'.$aboutUsId . ' não existe.');
+        if (!$seo) {
+            $response = array('message'=>'fail', 'status' => 'Registo #'.$seo . ' não existe.');
         }
         else{
-            $em->remove($aboutUs);
+            $em->remove($seo);
             $em->flush();
 
-            $response = array('message'=>'success', 'status' => $aboutUsId);
+            $response = array('message'=>'success', 'status' => $seoId);
         }
         return new JsonResponse($response);
     }
@@ -161,12 +159,12 @@ class AboutUsController extends AbstractController
 
         $locales = $em->getRepository(Locales::class)->findOneBy(['name' => $this->session->get('_locale')->getName()]);
 
-        $aboutUs = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $locales]);
+        $seo = $em->getRepository(SeoData::class)->findOneBy(['locales' => $locales]);
        
-        $response = !$aboutUs ?
+        $response = !$seo ?
             array('status' => 0, 'message' => 'Registo não encontrado', 'data' => null)
             :
-            array('status' => 1, 'message' => $aboutUs->getName(), 'data' => $aboutUs->getRgpdHtml());
+            array('status' => 1, 'message' => $seo->getName(), 'data' => $seo->getRgpdHtml());
         return new JsonResponse($response);
     }
 

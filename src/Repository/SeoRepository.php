@@ -2,15 +2,15 @@
 
 namespace App\Repository;
 
-use App\Entity\SearchEngineData;
+use App\Entity\Seo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class SearchEngineDataRepository extends ServiceEntityRepository
+class SeoRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, SearchEngineData::class);
+        parent::__construct($registry, Seo::class);
     }
 
     /*

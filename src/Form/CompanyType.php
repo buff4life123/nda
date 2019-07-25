@@ -27,18 +27,18 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('meta_keywords', TextareaType::class,
-                array(
-                    'required' => false,
-                    'label' => 'Meta Keywords',
-                    'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Meta Keywords', 'rows' => 4]
-                ))
-            ->add('meta_description', TextareaType::class,
-            array(
-                'required' => false,
-                'label' => 'Meta Description',
-                'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Meta Description', 'rows' => 4]
-            ))
+        //   ->add('meta_keywords', TextareaType::class,
+        //         array(
+        //             'required' => false,
+        //             'label' => 'Meta Keywords',
+        //             'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Meta Keywords', 'rows' => 4]
+        //         ))
+        //     ->add('meta_description', TextareaType::class,
+        //     array(
+        //         'required' => false,
+        //         'label' => 'Meta Description',
+        //         'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'Meta Description', 'rows' => 4]
+        //     ))
             ->add('name', TextType::class,
             array(
                 'required' => false,

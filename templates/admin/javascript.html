@@ -57,9 +57,13 @@ function ajaxUpload(block, userType){
         case 'company': 
             url = '{{ path("admin_company_show_edit") }}' 
         break
+        case 'seo': 
+            url = '{{ path("admin_seo") }}' 
+        break
         case 'about-us': 
             url = '{{ path("admin_about_us") }}' 
         break
+        
         case 'banner-new': 
             url = '{{ path("admin_banner_new") }}' 
         break

@@ -36,6 +36,7 @@ return array(
     'dependent' => 'Dependent ',
     'amount' => 'Amount ',
     'description' => 'Description ', 
+    'keywords' => 'Keywords ', 
     'product' => 'Product',
     'title' => 'Title',
     'local' => 'Local',

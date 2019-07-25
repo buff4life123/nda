@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Company;
+use App\Entity\Seo;
 use App\Entity\PhotoService;
 use App\Entity\AboutUs;
 use App\Entity\Rgpd;
@@ -39,6 +40,7 @@ class FrontendController extends AbstractController
     {
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
+		$seo = $em->getRepository(Seo::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 		$products = $experience->getProducts($request->getLocale());
 
 		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
@@ -53,6 +55,7 @@ class FrontendController extends AbstractController
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
 			'company' => $company,
+			'seo' => $seo,
 			'rgpd' => $rgpd,
 			'terms_conditions' => $terms_conditions,
 			'social_network_icons' => $social_network_icons,

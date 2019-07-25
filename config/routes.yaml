@@ -235,6 +235,17 @@ index_rgpd:
     controller: App\Controller\RgpdController::rgpdShow
     #condition: 'request.isXmlHttpRequest()'
 
+##
+# SEO
+##
+admin_seo:
+    path: /admin-seo/
+    controller: App\Controller\SeoController::seo
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_seo_edit:
+    path: /admin-seo-edit/
+    controller: App\Controller\SeoController::seoEdit
 
 ##
 # ABOUT-US

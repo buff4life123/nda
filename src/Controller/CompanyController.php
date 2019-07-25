@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Company;
+use App\Entity\SearchEngineData;
 use App\Entity\Locales;
 use App\Entity\CompanyTranslation;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Form\CompanyType;
 use App\Form\CompanyTranslationType;
+use App\Form\SearchEngineDataType;
 use App\Service\FileUploader;
 use App\Service\ImageResizer;
 use Symfony\Component\Filesystem\Filesystem;
@@ -131,9 +133,7 @@ class CompanyController extends AbstractController
             $company->setLogo(new File($this->gallery_images_directory.'/no-image.png'));
 
         $form = $this->createForm(CompanyType::class, $company);
-
-        $formView = $form->createView();
-                
+        $formView = $form->createView();       
         //var_dump("teste");
         //exit;
 
