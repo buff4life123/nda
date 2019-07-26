@@ -161,8 +161,10 @@ class MenuController extends AbstractController
            }
             $b[] = array(
                 'id' => $menu->getId(),
-                'is_active' => $menu->getIsActive(),
+                'active' => $menu->getActive(),
                 'order_by' => $menu->getOrderBy(),
+                'icon' => $menu->geIcon(),
+                'path' => $menu->getPath(),
                 'locales_translated' => $t,
             );
         }
@@ -285,7 +287,7 @@ class MenuController extends AbstractController
            }
             $b[] = array(
                 'id' => $menu->getId(),
-                'is_active' => $menu->getIsActive(),
+                'active' => $menu->getActive(),
                 'order_by' => $menu->getOrderBy(),
                 'locales_translated' => $t,
             );

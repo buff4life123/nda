@@ -25,8 +25,15 @@ class Menu
     /** @ORM\Column(type="integer", name="order_by", nullable=true)*/
     private $orderBy;
 
-    /** @ORM\Column(type="boolean", name="is_active", options={"default":0})*/
-    private $is_active;
+    /** @ORM\Column(type="boolean", name="active", options={"default":0})*/
+    private $active;
+
+    /** @ORM\Column(type="string", length=100, name="icon")*/
+    private $icon;
+
+    /** @ORM\Column(type="string", length=200, name="path")*/
+    private $path;
+    
 
     public function __construct()
     {       
@@ -48,14 +55,34 @@ class Menu
         $this->translation = $translation;
     }
 
-    public function getIsActive()
+    public function getActive()
     {
-        return $this->is_active;
+        return $this->active;
     }
 
-    public function setIsActive($is_active)
+    public function setActive($active)
     {
-        $this->is_active = $is_active;
+        $this->active = $active;
+    }
+
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+    }
+
+    public function getIPath()
+    {
+        return $this->path;
+    }
+
+    public function setPath($path)
+    {
+        $this->path = $path;
     }
 
     public function getOrderBy()

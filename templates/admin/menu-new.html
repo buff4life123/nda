@@ -74,12 +74,12 @@ input, select, textarea {color: #000!important}
     $.ajax({  
       url:'{{ path('admin_menu_add') }}',
       type: "POST",
-      data: $('#category-form').serialize()+'&locale='+JSON.stringify(arr),
+      data: $('#menu-form').serialize()+'&locale='+JSON.stringify(arr),
       success: function(data){  
         console.log(data)
         $('.w3-overlay').hide()
         if (data.status == 1){
-          ajaxUpload('category-new')
+          ajaxUpload('menu-new')
         }
         else {
           for(i=0;i<data.data.length;i++)

@@ -1,6 +1,9 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Menu;
+use App\Entity\MenuTranslation;
+use App\Entity\Locales;
 use App\Entity\Gallery;
 use App\Entity\Product;
 use App\Entity\Blockdates;
@@ -30,8 +33,12 @@ class AdminController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $booking = array();//$em->getRepository(Booking::class)->dashboardValues();
         $company = $em->getRepository(Company::class)->find(1);
+        $locales = $em->getRepository(Locales::class)->findOneBy(['name' =>"en_EN"]);
+        $menus = $em->getRepository(MenuTranslation::class)->getMenuTranslation($locales);
         $ua = $this->getBrowser();
-        return $this->render('admin/base.html.twig',['browser' => $ua, 'bookings' => $booking, 'company' => $company]);
+
+        return $this->render('admin/base.html.twig',['bookings'=>$booking, 'browser' => $ua, 'company' => $company, 'menus' => $menus]);
+
     }
 
 

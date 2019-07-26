@@ -3,6 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Menu;
+use App\Entity\Locales;
+use App\Entity\MenuTranslation;
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -12,6 +15,7 @@ class MenuRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Menu::class);
     }
+
 
     /*
     public function findBySomething($value)
