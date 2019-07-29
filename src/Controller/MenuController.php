@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Entity\Menu;
 use App\Entity\MenuTranslation;
+use App\Entity\Submenu;
+use App\Entity\SubmenuTranslation;
 use App\Entity\Locales;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,18 +58,26 @@ class MenuController extends AbstractController
                 if($form->isValid()){
 
                 try {
-
+        
                     foreach ($s as $translated) {
-
-                        $locales = $em->getRepository(Locales::class)->find($translated->id);
-                        
-                        $menuTranslation = new MenuTranslation();
-                        
-                        $menuTranslation->setLocales($locales);
-                        $menuTranslation->setName($translated->name);
-                        $menuTranslation->setMenu($menu);
-                        $em->persist($menuTranslation);
+                        if ( isset($translated->id)){
+                            $locales = $em->getRepository(Locales::class)->find($translated->id);
+                            
+                            $menuTranslation = new MenuTranslation();
+                            
+                            $menuTranslation->setLocales($locales);
+                            $menuTranslation->setName($translated->name);
+                            $menuTranslation->setMenu($menu);
+                            $em->persist($menuTranslation);
+                        }
                     }
+
+                    $roles = [];
+                    array_push($roles,  isset($request->request->get('menu')['superuser']) ?"superuser":false);
+                    array_push($roles,  isset($request->request->get('menu')['admin']) ?"admin":false);
+                    array_push($roles,  isset($request->request->get('menu')['manager']) ?"manager":false);
+
+                    $menu->setRoles($roles);
                     
                     $menu->setOrderBy(count($totals)+1);
                     $em->persist($menu);
@@ -148,9 +158,16 @@ class MenuController extends AbstractController
 
         $form = $this->createForm(MenuType::class, $menu);
 
+        // dd($menu->getRoles());
+
         if($menu) {
 
             $t = array();
+
+            $superUser  = $menu->getRoles()[0] == "superuser"?"checked":false;
+            $admin      = $menu->getRoles()[1] == "admin"?"checked":false;
+            $manager    = $menu->getRoles()[2] == "manager"?"checked":false;
+
 
            foreach($menu->getTranslation() as $translated){
                 $t[] = array(
@@ -159,14 +176,21 @@ class MenuController extends AbstractController
                     'local_id' => $translated->getId(),
                 );
            }
-            $b[] = array(
+
+            $b = array(
                 'id' => $menu->getId(),
                 'active' => $menu->getActive(),
                 'order_by' => $menu->getOrderBy(),
-                'icon' => $menu->geIcon(),
+                'icon' => $menu->getIcon(),
                 'path' => $menu->getPath(),
+                'superuser' =>  $superUser,
+                'admin' => $admin,
+                'manager' => $manager,
+                'submenu' => $menu->getIsSubmenu(),
                 'locales_translated' => $t,
             );
+
+            // dd($b);
         }
        
 
@@ -174,7 +198,8 @@ class MenuController extends AbstractController
             'form' => $form->createView(),
             'menu' => $menu,
             'locales' => $locales,
-            'totals' => count($totals)
+            'totals' => count($totals),
+            'b' => $b
         ));
     }
 
@@ -229,6 +254,12 @@ class MenuController extends AbstractController
                             $em->persist($menuTranslation);
                         }
                     }
+                    $roles = [];
+                    array_push($roles,  isset($request->request->get('menu')['superuser']) ?"superuser":false);
+                    array_push($roles,  isset($request->request->get('menu')['admin']) ?"admin":false);
+                    array_push($roles,  isset($request->request->get('menu')['manager']) ?"manager":false);
+
+                    $menu->setRoles($roles);
 
                     $menu->setOrderBy($request->request->get('order_by'));
                     $em->persist($menu);

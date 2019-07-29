@@ -21,6 +21,29 @@ class MenuType extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'w3-check']
             ))
+            ->add('isSubmenu', CheckboxType::class, array(
+                'label'    => 'Submenu',
+                'required' => false,
+                'attr' => ['class' => 'w3-check']
+            ))
+            ->add('superuser', CheckboxType::class, array(
+                'mapped' => false,
+                'label'    => 'SuperUser',
+                'required' => false,
+                'attr' => ['class' => 'w3-check']
+            ))
+            ->add('admin', CheckboxType::class, array(
+                'mapped' => false,
+                'label'    => 'Admin',
+                'required' => false,
+                'attr' => ['class' => 'w3-check']
+            ))
+            ->add('manager', CheckboxType::class, array(
+                'mapped' => false,
+                'label'    => 'Manager',
+                'required' => false,
+                'attr' => ['class' => 'w3-check']
+            ))
             ->add('icon', TextType::class, array(
                 'label'    => 'Icon',
                 'required' => false,

@@ -5,11 +5,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Table(name="menu")
- * @ORM\Entity(repositoryClass="App\Repository\MenuRepository")
+ * @ORM\Table(name="submenu")
+ * @ORM\Entity(repositoryClass="App\Repository\SubmenuRepository")
  */
 
-class Menu
+class Submenu
 {
     /**
      * @ORM\Column(type="integer")
@@ -19,7 +19,7 @@ class Menu
     private $id;
     
     /**
-     *@ORM\OneToMany(targetEntity="MenuTranslation", mappedBy="menu", cascade={"persist", "remove"})  */
+     *@ORM\OneToMany(targetEntity="SubmenuTranslation", mappedBy="menu", cascade={"persist", "remove"})  */
     private $translation;
 
     /** @ORM\Column(type="integer", name="order_by", nullable=true)*/
@@ -33,22 +33,13 @@ class Menu
 
     /** @ORM\Column(type="string", length=200, name="path")*/
     private $path;
-    
-    /** @ORM\Column(type="boolean", name="is_submenu", options={"default":0})*/
-    private $isSubmenu;
-    
-    /**
-     * @ORM\Column(type="array", name="roles")*/
-    private $roles;
 
-        /**
-    *@ORM\OneToMany(targetEntity="Submenu", mappedBy="menu", cascade={"persist", "remove"}) */
-    private $submenu;
+    /** @ORM\ManyToOne(targetEntity="Menu", inversedBy="submenu") */
+    private $menu;
 
     public function __construct()
     {       
-        $this->translation = new ArrayCollection();  
-        $this->submenu = new ArrayCollection();    
+        $this->translation = new ArrayCollection();   
     }
 
     public function getId()
@@ -96,36 +87,13 @@ class Menu
         $this->path = $path;
     }
 
-    
-
-    public function getIsSubmenu()
+    public function getMenu()
     {
-        return $this->isSubmenu;
+        return $this->menu;
     }
 
-    public function setIsSubmenu($isSubmenu)
-    {
-        $this->isSubmenu = $isSubmenu;
-    }
-
-    public function getSubmenu()
-    {
-        return $this->submenu;
-    }
-
-    public function setSubmenu($submenu)
-    {
-        $this->submenu = $submenu;
-    }
-
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
+    public function setMenu(Menu $menu) {
+        $this->menu = $menu;
     }
 
     public function getOrderBy()

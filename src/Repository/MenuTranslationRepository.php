@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\MenuTranslation;
 use App\Entity\Locales;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -14,18 +15,27 @@ class MenuTranslationRepository extends ServiceEntityRepository
         parent::__construct($registry, MenuTranslation::class);
     }
 
-    public function getMenuTranslation(Locales $locales){
-        $dql = 'SELECT  mt.name
+    public function getMenuTranslation(Locales $locales, User $user){
+
+        $roles = str_replace("ROLE_","", $user->getRoles()[0]);
+
+        $dql = 'SELECT  mt.name, m.path, m.icon, m.isSubmenu
             FROM App\Entity\MenuTranslation mt
             JOIN mt.locales l
             JOIN mt.menu m
+            JOIN App\Entity\User u
             WHERE l = :locales
-            AND m.active = true
+            AND m.active = true 
+            
+            AND m.roles LIKE :roles
+            GROUP BY m.orderBy
             ORDER BY m.orderBy ASC
             ';
         $query = $this->getEntityManager()->createQuery($dql)
-          ->setParameter('locales', $locales);
+          ->setParameter('locales', $locales)
+          ->setParameter('roles', '%'.strtolower($roles). '%');
   
+        //dd($query);
         return $query->getResult();
     }
 

@@ -34,7 +34,9 @@ class AdminController extends AbstractController
         $booking = array();//$em->getRepository(Booking::class)->dashboardValues();
         $company = $em->getRepository(Company::class)->find(1);
         $locales = $em->getRepository(Locales::class)->findOneBy(['name' =>"en_EN"]);
-        $menus = $em->getRepository(MenuTranslation::class)->getMenuTranslation($locales);
+        $menus = $em->getRepository(MenuTranslation::class)->getMenuTranslation($locales, $this->getUser());
+        
+        //dd($menus);
         $ua = $this->getBrowser();
 
         return $this->render('admin/base.html.twig',['bookings'=>$booking, 'browser' => $ua, 'company' => $company, 'menus' => $menus]);

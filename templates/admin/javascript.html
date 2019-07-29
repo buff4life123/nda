@@ -88,9 +88,13 @@ function ajaxUpload(block, userType){
         case 'photo-service-list': 
             url = '{{ path("admin_photo_service_list") }}' 
         break
+        case 'index': 
+        url = '{{ path("index") }}' 
+        break
         case 'exit': 
         url = '{{ path("logout") }}' 
-    break
+        break
+        
     }
 
     $('.w3-overlay').show() 

@@ -19,8 +19,20 @@ input, select, textarea {color: #000!important}
 
 <div class="w3-row-padding w3-margin-top w3-border-bottom">
     <div class="w3-col s12 l2 m4 w3-margin-bottom">
-      {{ form_label(form.is_active)}}<br>
-      {{ form_widget(form.is_active)}} 
+      {{ form_label(form.active)}}<br>
+      {{ form_widget(form.active)}}
+    </div>
+    <div class="w3-col s12 l2 m4 w3-margin-bottom">
+      {{ form_label(form.isSubmenu)}}<br>
+      {{ form_widget(form.isSubmenu)}}  
+    </div>
+    <div class="w3-col s12 l2 m4 w3-margin-bottom">
+      {{ form_widget(form.superuser)}}
+      {{ form_label(form.superuser)}} <br>
+      {{ form_widget(form.admin)}} 
+      {{ form_label(form.admin)}}<br> 
+      {{ form_widget(form.manager)}}    
+      {{ form_label(form.manager)}}<br>
     </div>
   </div>
   <div class="w3-row-padding w3-margin-top w3-border-bottom">
@@ -44,6 +56,18 @@ input, select, textarea {color: #000!important}
       {{ form_widget(form.submit)}}
     </div>
   </div>
+
+    <div class="w3-row-padding w3-margin-top w3-border-bottom">
+      <div class="w3-col s12 l4 m6 w3-margin-bottom">
+        {{ form_label(form.icon)}}<br>
+        {{ form_widget(form.icon)}}
+      </div>
+      <div class="w3-col s12 l4 m6 w3-margin-bottom">  
+        {{ form_label(form.path)}}<br>
+        {{ form_widget(form.path)}}  
+      </div>
+    </div>
+
     <div class="w3-row-padding w3-margin-top w3-border-bottom">
       <div class="w3-col s12 w3-margin-bottom">
         <span class="w3-btn w3-border w3-green w3-right w3-margin-top" onclick="$('#menu-form').trigger('submit')">
