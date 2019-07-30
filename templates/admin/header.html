@@ -25,148 +25,49 @@
     </div>
   </div>
 
-  {# {%for menu in menus %}
-    {% if  menu.path == "index" or menu.path == "logout" %}
-      <div class="w3-bar-block">
-        <a href="{{ path(menu.path) }}" id="{{menu.path}}" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
-          <i class="{{menu.icon}}"></i> {{menu.name}}
-        </a>
-      </div>
-    {% elseif menu.submenu == false %}
-      <div class="w3-bar-block">
-        <a href="#" onclick="ajaxUpload(this.id)" id="{{menu.path}}" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
-          <i class="{{menu.icon}}"></i> {{menu.name}}
-        </a>
-      </div>
-    {% else %}
-      <div class="w3-bar-block">
-        <a href="#" onclick="dropDownMenu('this.id')" id="{{menu.path}}" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
-          <i class="{{menu.icon}}"></i> {{menu.name}}
-        </a>
-      </div>
+  {%for menu in menus %}
+    {% if  menu.active == "true"%}
+      {% if  menu.path == "index" or menu.path == "logout" %}
+        <div class="w3-bar-block">
+          <a href="{{ path(menu.path) }}" id="{{menu.path}}" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
+            <i class="{{menu.icon}}"></i> {{menu.name}}
+          </a>
+        </div>
+      {% elseif menu.submenu == false %}
+        <div class="w3-bar-block">
+          <a href="#" onclick="ajaxUpload(this.id)" id="{{menu.path}}" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
+            <i class="{{menu.icon}}"></i> {{menu.name}}
+          </a>
+        </div>
+      {% else %}
+        <div class="w3-bar-block">
+          <div class="w3-dropdown-click">
 
-    {% endif %}
-  {% endfor %} #}
-
-  <div class="w3-bar-block">
-    <a href="#" onclick="ajaxUpload(this.id)" id="dashboard" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
-      <i class="fas fa-tachometer-alt"></i> {%trans%}dash{%endtrans%}
-    </a>
-      {% if  app.user.className != "Manager" %}
-        <div class="w3-dropdown-click">
-          <button onclick="dropDownMenu('company')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-            <i class="fa fa-home"></i> {%trans%}company{%endtrans%}
-          </button>
-          <div id="company" class="w3-dropdown-content w3-bar-block" style="position:relative">
-            <a href="#" onclick="ajaxUpload('company')" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-              <i class="far fa-edit fa-fw"></i> {%trans%}edit{%endtrans%}
-            </a>
-            <a href="#" onclick="ajaxUpload(this.id)" id="seo" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-                <i class="far fa-file-alt"></i> SEO
-              </a>
-            <a href="#" onclick="ajaxUpload(this.id)" id="about-us" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-              <i class="far fa-file-alt"></i> {%trans%}about_us{%endtrans%}
-            </a>
-            <a href="#" onclick="ajaxUpload(this.id)" id="rgpd" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-              <i class="far fa-file-alt"></i> {%trans%}gdpr{%endtrans%}
-            </a>
-            <a href="#" onclick="ajaxUpload(this.id)" id="terms" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
-              <i class="fas fa-asterisk"></i> {%trans%}terms_cond{%endtrans%}
-            </a>
+            <button onclick="dropDownMenu('{{menu.path}}')"  class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
+              <i class="{{menu.icon}}"></i> {{menu.name}}
+            </button>
+            
+            <div id="{{menu.path}}" class="w3-dropdown-content w3-bar-block" style="position:relative">
+              {%for submenu in menu.submenu %}
+                {% if  submenu.active == "true"%}
+                  {% if  submenu.path == "user-new-btn" %}
+                    <a href="#" onclick="newUserType('{{submenu.path}}')" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+                      <i class="{{submenu.icon}}"></i> {{submenu.name}}
+                    </a>
+                  {% else %}
+                    <a href="#" onclick="ajaxUpload('{{submenu.path}}')" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+                      <i class="{{submenu.icon}}"></i> {{submenu.name}}
+                    </a>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
         </div>
-        
-        <div class="w3-dropdown-click">
-          <button onclick="dropDownMenu('user')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-            <i class="fas fa-user-shield"></i> {%trans%}users{%endtrans%}
-          </button>
-          <div id="user" class="w3-dropdown-content w3-bar-block" style="position:relative">
-            <a href="#" onclick="newUserType(this.id)" id="user-new-btn" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
-              <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
-            </a>
-            <a href="#" onclick="ajaxUpload(this.id)" id="user-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
-              <i class="far fa-edit fa-fw"></i> {%trans%}list{%endtrans%}
-            </a>
-          </div>
-        </div>
+
       {% endif %}
-
-    {% if  app.user.className == "SuperUser" %}
-      <div class="w3-dropdown-click">
-        <button onclick="dropDownMenu('menu')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-          <i class="fas fa-ellipsis-v"></i> {%trans%}menu{%endtrans%}</button>
-        <div id="menu" class="w3-dropdown-content w3-bar-block" style="position:relative">
-          <a href="#" onclick="ajaxUpload(this.id)" id="menu-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
-            <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
-          </a>
-          <a href="#" onclick="ajaxUpload(this.id)" id="menu-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
-            <i class="fas fa-calendar"></i> {%trans%}list{%endtrans%}
-          </a>
-        </div>
-      </div>
-
-      <div class="w3-dropdown-click">
-        <button onclick="dropDownMenu('submenu')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-          <i class="fas fa-ellipsis-v"></i> Submenu</button>
-        <div id="submenu" class="w3-dropdown-content w3-bar-block" style="position:relative">
-          <a href="#" onclick="ajaxUpload(this.id)" id="submenu-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
-            <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
-          </a>
-          <a href="#" onclick="ajaxUpload(this.id)" id="submenu-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
-            <i class="fas fa-calendar"></i> {%trans%}list{%endtrans%}
-          </a>
-        </div>
-      </div>
     {% endif %}
-
-    <div class="w3-dropdown-click">
-      <button onclick="dropDownMenu('banner')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-        <i class="fas fa-image"></i> Banner</button>
-      <div id="banner" class="w3-dropdown-content w3-bar-block" style="position:relative">
-        <a href="#" onclick="ajaxUpload(this.id)" id="banner-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
-          <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
-        </a>
-        <a href="#" onclick="ajaxUpload(this.id)" id="banner-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
-          <i class="fas fa-calendar"></i> {%trans%}list{%endtrans%}
-        </a>
-      </div>
-    </div>
-
-
-    <div class="w3-dropdown-click">
-      <button onclick="dropDownMenu('gallery')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-        <i class="far fa-images"></i> {%trans%}showcase{%endtrans%}</button>
-      <div id="gallery" class="w3-dropdown-content w3-bar-block" style="position:relative">
-        <a href="#" onclick="ajaxUpload(this.id)" id="gallery-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
-          <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
-        </a>
-        <a href="#" onclick="ajaxUpload(this.id)" id="gallery-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
-          <i class="fas fa-calendar"></i> {%trans%}list{%endtrans%}
-        </a>
-      </div>
-    </div>
-
-    <div class="w3-dropdown-click">
-      <button onclick="dropDownMenu('photo-service')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
-        <i class="far fa-images"></i> {%trans%}photo_service{%endtrans%}</button>
-      <div id="photo-service" class="w3-dropdown-content w3-bar-block" style="position:relative">
-        <a href="#" onclick="ajaxUpload(this.id)" id="photo-service-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
-          <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
-        </a>
-        <a href="#" onclick="ajaxUpload(this.id)" id="photo-service-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
-          <i class="fas fa-calendar"></i> {%trans%}search{%endtrans%}
-        </a>
-      </div>
-    </div>
-
-    <a href="{{ path('index') }}" target="_blank" class="w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
-      <i class="fas fa-external-link-alt fa-fw"></i> {%trans%}view_home{%endtrans%}
-    </a>
-    <a href="{{ path('logout') }}" class="w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-bottom w3-border-brown">
-      <i class="fas fa-sign-out-alt fa-fw"></i> {%trans%}exit{%endtrans%}
-    </a>
-    <br><br>
-  </div>
+    {% endfor %}
 
 </nav> 
 

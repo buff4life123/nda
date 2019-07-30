@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Entity\Menu;
 use App\Entity\MenuTranslation;
+use App\Entity\Submenu;
+use App\Entity\SubmenuTranslation;
 use App\Entity\Locales;
 use App\Entity\Gallery;
 use App\Entity\Product;
@@ -34,12 +36,29 @@ class AdminController extends AbstractController
         $booking = array();//$em->getRepository(Booking::class)->dashboardValues();
         $company = $em->getRepository(Company::class)->find(1);
         $locales = $em->getRepository(Locales::class)->findOneBy(['name' =>"en_EN"]);
-        $menus = $em->getRepository(MenuTranslation::class)->getMenuTranslation($locales, $this->getUser());
+        $menus = $em->getRepository(Menu::class)->getMenusByUser($this->getUser());
         
-        //dd($menus);
+        $m = [];
+        foreach($menus as $menu){
+                $sm = [];
+                    
+                foreach($menu->getSubmenu() as $submenu){
+                    $sm [] = array('active' => $submenu->getActive(), 'icon' => $submenu->getIcon(), 
+                                'path' => $submenu->getPath(), 'name' => $submenu->getCurrentTranslation($locales)); //
+                }
+
+                $m[] = array('name'=> $menu->getCurrentTranslation($locales),
+                            'active'=> $menu->getActive(),
+                            'is_submenu'=> $menu->getIsSubmenu(),
+                            'icon'=> $menu->getIcon(),
+                            'path'=> $menu->getPath(),
+                            'submenu'=>$sm,
+                        );
+        }
+        //dd($m);
         $ua = $this->getBrowser();
 
-        return $this->render('admin/base.html.twig',['bookings'=>$booking, 'browser' => $ua, 'company' => $company, 'menus' => $menus]);
+        return $this->render('admin/base.html.twig',['bookings'=>$booking, 'browser' => $ua, 'company' => $company, 'menus' => $m]);
 
     }
 

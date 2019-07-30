@@ -19,7 +19,7 @@ class Submenu
     private $id;
     
     /**
-     *@ORM\OneToMany(targetEntity="SubmenuTranslation", mappedBy="menu", cascade={"persist", "remove"})  */
+     *@ORM\OneToMany(targetEntity="SubmenuTranslation", mappedBy="submenu", cascade={"persist", "remove"})  */
     private $translation;
 
     /** @ORM\Column(type="integer", name="order_by", nullable=true)*/
@@ -40,7 +40,7 @@ class Submenu
     public function __construct()
     {       
         $this->translation = new ArrayCollection();
-        $this->menu = new ArrayCollection();    
+        //$this->menu = new ArrayCollection();    
     }
 
     public function getId()
@@ -53,7 +53,7 @@ class Submenu
         return $this->translation;
     }
 
-    public function setTranslation(MenuTranslation $translation)
+    public function setTranslation(SubmenuTranslation $translation)
     {
         $this->translation = $translation;
     }

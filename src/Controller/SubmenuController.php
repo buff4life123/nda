@@ -318,14 +318,22 @@ class SubmenuController extends AbstractController
         $locales = $em->getRepository(Locales::class)->findAll();
 
         $b = array();
+
         
-        dd($submenus);
-        exit;
+        foreach ($submenus as $submenu) {
+           
+            if($submenu->getTranslation()){
+            foreach ($submenu->getTranslation() as $nm) {
+                $b [] = $nm->getName();
+            
+            }}
+        }
+        // dd($b);
+        // exit;
 
         foreach ($submenus as $submenu) {
 
             $t = array();
-
 
            foreach($submenu->getTranslation() as $translated){
                 $t[] = array(
