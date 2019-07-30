@@ -39,7 +39,8 @@ class Submenu
 
     public function __construct()
     {       
-        $this->translation = new ArrayCollection();   
+        $this->translation = new ArrayCollection();
+        $this->menu = new ArrayCollection();    
     }
 
     public function getId()
@@ -86,6 +87,16 @@ class Submenu
     {
         $this->path = $path;
     }
+
+    // public function addMenu(Menu $menu) {
+    //     $menu->setMenu($this);
+    //     $this->menu->add($menu);
+    // }
+
+    // public function removeMenu(Menu $menu){
+    //     $this->menu->removeElement($menu);
+    // }
+
 
     public function getMenu()
     {

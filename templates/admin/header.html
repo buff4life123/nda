@@ -104,6 +104,19 @@
           </a>
         </div>
       </div>
+
+      <div class="w3-dropdown-click">
+        <button onclick="dropDownMenu('submenu')" class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
+          <i class="fas fa-ellipsis-v"></i> Submenu</button>
+        <div id="submenu" class="w3-dropdown-content w3-bar-block" style="position:relative">
+          <a href="#" onclick="ajaxUpload(this.id)" id="submenu-new" class="w3-right-align nav w3-border-brown w3-border-bottom w3-border-top w3-bar-item w3-button w3-padding">
+            <i class="far fa-plus-square fa-fw"></i> {%trans%}new{%endtrans%}
+          </a>
+          <a href="#" onclick="ajaxUpload(this.id)" id="submenu-list" class="w3-right-align nav w3-bar-item w3-button w3-padding">
+            <i class="fas fa-calendar"></i> {%trans%}list{%endtrans%}
+          </a>
+        </div>
+      </div>
     {% endif %}
 
     <div class="w3-dropdown-click">

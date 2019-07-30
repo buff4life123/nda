@@ -82,6 +82,12 @@ function ajaxUpload(block, userType){
         case 'menu-list': 
             url = '{{ path("admin_menu_list") }}' 
         break
+        case 'submenu-new': 
+        url = '{{ path("admin_submenu_new") }}' 
+    break
+    case 'submenu-list': 
+        url = '{{ path("admin_submenu_list") }}' 
+    break
         case 'photo-service-new': 
         url = '{{ path("admin_photo_service_new") }}' 
         break

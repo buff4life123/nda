@@ -423,6 +423,40 @@ admin_menu_order:
 
 
 ##
+# SUBMENU
+##
+admin_submenu_list:
+    path: /admin-submenu-list/
+    controller: App\Controller\SubmenuController::submenuList
+
+admin_submenu_new:
+    path: /admin-submenu-new/
+    controller: App\Controller\SubmenuController::submenuNew
+
+admin_submenu_delete:
+    path: /admin-submenu-delete/
+    controller: App\Controller\SubmenuController::submenuDelete
+
+admin_submenu_add:
+    path: /admin-submenu-add/
+    controller: App\Controller\SubmenuController::SubmenuAdd
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_submenu_show_edit:
+    path: /admin-submenu-show-edit/
+    controller: App\Controller\SubmenuController::submenuShowEdit
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_submenu_edit:
+    path: /admin-submenu-edit/
+    controller: App\Controller\SubmenuController::submenuEdit
+    #condition: 'request.isXmlHttpRequest()'
+
+admin_submenu_order:
+    path: /admin-submenu-order/
+    controller: App\Controller\MenuController::submenuOrder
+
+##
 # CATEGORY
 ##
 

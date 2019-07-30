@@ -13,33 +13,48 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use App\Form\MenuType;
+use App\Form\SubmenuType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\DBAL\DBALException;
 
-class MenuController extends AbstractController
+class SubmenuController extends AbstractController
 {    
 
-    public function menuNew(Request $request)
+    public function submenuNew(Request $request)
     {
-        $menu = new Menu();
+        $submenu = new Submenu();
         $em = $this->getDoctrine()->getManager();
 
         $locales = $em->getRepository(Locales::class)->findAll();
         
-        $form = $this->createForm(MenuType::class, $menu);
+        $form = $this->createForm(SubmenuType::class, $submenu);
         
         $form->handleRequest($request);
-        
-        return $this->render('admin/menu-new.html',array(
+
+
+        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+
+        $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
+
+        if(!$locale)
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+
+        $menus = $em->getRepository(Menu::class)->findAll();
+        $m = array();
+
+        foreach ($menus as $menu)
+        $m[] = array('id' => $menu->getId(), 'name' => $menu->getCurrentTranslation($locale));
+
+        return $this->render('admin/submenu-new.html',array(
             'form' => $form->createView(),
+            'menus' => $m,
             'locales' => $locales));
     }
 
-    public function menuAdd(Request $request, ValidatorInterface $validator)
+    public function submenuAdd(Request $request)
     {
-        $menu = new Menu();
+        $submenu = new Submenu();
 
         $s = json_decode($request->request->get('locale'));
 
@@ -47,9 +62,13 @@ class MenuController extends AbstractController
 
         $locales = $em->getRepository(Locales::class)->findAll();
 
-        $totals = $em->getRepository(Menu::class)->findAll();
+        $totals = $em->getRepository(Submenu::class)->findAll();
 
-        $form = $this->createForm(MenuType::class, $menu);
+
+
+        $menu = $em->getRepository(Menu::class)->find($request->request->get('menu'));
+
+        $form = $this->createForm(SubmenuType::class, $submenu);
 
         $form->handleRequest($request);
 
@@ -63,30 +82,25 @@ class MenuController extends AbstractController
                         if ( isset($translated->id)){
                             $locales = $em->getRepository(Locales::class)->find($translated->id);
                             
-                            $menuTranslation = new MenuTranslation();
+                            $menuTranslation = new SubmenuTranslation();
                             
                             $menuTranslation->setLocales($locales);
                             $menuTranslation->setName($translated->name);
-                            $menuTranslation->setMenu($submenu);
+                            $menuTranslation->setSubmenu($submenu);
                             $em->persist($menuTranslation);
                         }
                     }
 
-                    $roles = [];
-                    array_push($roles,  isset($request->request->get('menu')['superuser']) ?"superuser":false);
-                    array_push($roles,  isset($request->request->get('menu')['admin']) ?"admin":false);
-                    array_push($roles,  isset($request->request->get('menu')['manager']) ?"manager":false);
-
-                    $menu->setRoles($roles);
-                    
-                    $menu->setOrderBy(count($totals)+1);
-                    $em->persist($menu);
+                    $submenu->setOrderBy(count($totals)+1);
+                    $submenu->setMenu($menu);
+                    // $submenu->addMenu($menu);
+                    $em->persist($submenu);
                     $em->flush();
 
                     $response = array(
                         'status' => 1,
                         'message' => 'success',
-                        'data' => $menu->getId(),
+                        'data' => $submenu->getId(),
                         'form' => $request->request->get('locale'),
                         'ff' => $s[0]->id
                     );
@@ -119,7 +133,7 @@ class MenuController extends AbstractController
     }
 
 
-    public function menuOrder(Request $request)
+    public function submenuOrder(Request $request)
     {
         $result = $request->request->get('result');
 
@@ -132,9 +146,9 @@ class MenuController extends AbstractController
         $em = $this->getDoctrine()->getManager();  
 
         foreach ($order as $orderBy) {
-            $menu = $em->getRepository(Menu::class)->find($orderBy->id);
-            $menu->setOrderBy($orderBy->to);
-            $em->persist($menu);
+            $submenu = $em->getRepository(Submenu::class)->find($orderBy->id);
+            $submenu->setOrderBy($orderBy->to);
+            $em->persist($submenu);
             $em->flush();
         }
 
@@ -144,7 +158,7 @@ class MenuController extends AbstractController
 
     }
 
-    public function menuShowEdit(Request $request, ValidatorInterface $validator)
+    public function submenuShowEdit(Request $request, ValidatorInterface $validator)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -152,24 +166,24 @@ class MenuController extends AbstractController
         
         $locales = $em->getRepository(Locales::class)->findAll();
 
-        $totals = $em->getRepository(Menu::class)->findAll();
+        $totals = $em->getRepository(Submenu::class)->findAll();
 
-        $menu = $em->getRepository(Menu::class)->find($id);
+        $submenu = $em->getRepository(Submenu::class)->find($id);
 
-        $form = $this->createForm(MenuType::class, $menu);
+        $form = $this->createForm(MenuType::class, $submenu);
 
-        // dd($menu->getRoles());
+        // dd($submenu->getRoles());
 
-        if($menu) {
+        if($submenu) {
 
             $t = array();
 
-            $superUser  = $menu->getRoles()[0] == "superuser"?"checked":false;
-            $admin      = $menu->getRoles()[1] == "admin"?"checked":false;
-            $manager    = $menu->getRoles()[2] == "manager"?"checked":false;
+            $superUser  = $submenu->getRoles()[0] == "superuser"?"checked":false;
+            $admin      = $submenu->getRoles()[1] == "admin"?"checked":false;
+            $manager    = $submenu->getRoles()[2] == "manager"?"checked":false;
 
 
-           foreach($menu->getTranslation() as $translated){
+           foreach($submenu->getTranslation() as $translated){
                 $t[] = array(
                     'local' => $translated->getLocales()->getName(),
                     'name' => $translated->getName(),
@@ -178,15 +192,15 @@ class MenuController extends AbstractController
            }
 
             $b = array(
-                'id' => $menu->getId(),
-                'active' => $menu->getActive(),
-                'order_by' => $menu->getOrderBy(),
-                'icon' => $menu->getIcon(),
-                'path' => $menu->getPath(),
+                'id' => $submenu->getId(),
+                'active' => $submenu->getActive(),
+                'order_by' => $submenu->getOrderBy(),
+                'icon' => $submenu->getIcon(),
+                'path' => $submenu->getPath(),
                 'superuser' =>  $superUser,
                 'admin' => $admin,
                 'manager' => $manager,
-                'submenu' => $menu->getIsSubmenu(),
+                'submenu' => $submenu->getIsSubmenu(),
                 'locales_translated' => $t,
             );
 
@@ -194,9 +208,9 @@ class MenuController extends AbstractController
         }
        
 
-        return $this->render('admin/menu-edit.html',array(
+        return $this->render('admin/submenu-edit.html',array(
             'form' => $form->createView(),
-            'menu' => $menu,
+            'submenu' => $submenu,
             'locales' => $locales,
             'totals' => count($totals),
             'b' => $b
@@ -205,24 +219,24 @@ class MenuController extends AbstractController
 
 
 
-    public function menuEdit(Request $request, ValidatorInterface $validator)
+    public function submenuEdit(Request $request, ValidatorInterface $validator)
     {
         $id = $request->request->get('id');
 
         $em = $this->getDoctrine()->getManager();
       
-        $menu = $em->getRepository(Menu::class)->find($id);
+        $submenu = $em->getRepository(Submenu::class)->find($id);
 
-        if(!$menu){
+        if(!$submenu){
         
             $response = array(
                 'status' => 0,
-                'message' => 'menu not found',
+                'message' => 'submenu not found',
                 'menuid' => $id);
             return new JsonResponse($response);
         }
 
-        $form = $this->createForm(MenuType::class, $menu);
+        $form = $this->createForm(MenuType::class, $submenu);
 
         $form->handleRequest($request);
             
@@ -238,7 +252,7 @@ class MenuController extends AbstractController
                     
                         $locales = $em->getRepository(Locales::class)->find($translated->locale_id);
 
-                        $menuTranslation = $em->getRepository(MenuTranslation::class)->findOneBy(['locales' => $locales, 'menu'=> $menu]);
+                        $menuTranslation = $em->getRepository(MenuTranslation::class)->findOneBy(['locales' => $locales, 'submenu'=> $submenu]);
                     
                         if(!$menuTranslation){
 
@@ -246,7 +260,7 @@ class MenuController extends AbstractController
                         
                             $menuTranslation->setLocales($locales);
                             $menuTranslation->setName($translated->name);
-                            $menuTranslation->setMenu($menu);
+                            $menuTranslation->setMenu($submenu);
                             $em->persist($menuTranslation);
                         }
                         else{
@@ -255,20 +269,20 @@ class MenuController extends AbstractController
                         }
                     }
                     $roles = [];
-                    array_push($roles,  isset($request->request->get('menu')['superuser']) ?"superuser":false);
-                    array_push($roles,  isset($request->request->get('menu')['admin']) ?"admin":false);
-                    array_push($roles,  isset($request->request->get('menu')['manager']) ?"manager":false);
+                    array_push($roles,  isset($request->request->get('submenu')['superuser']) ?"superuser":false);
+                    array_push($roles,  isset($request->request->get('submenu')['admin']) ?"admin":false);
+                    array_push($roles,  isset($request->request->get('submenu')['manager']) ?"manager":false);
 
-                    $menu->setRoles($roles);
+                    $submenu->setRoles($roles);
 
-                    $menu->setOrderBy($request->request->get('order_by'));
-                    $em->persist($menu);
+                    $submenu->setOrderBy($request->request->get('order_by'));
+                    $em->persist($submenu);
                     $em->flush();
 
                     $response = array(
                         'status' => 1,
                         'message' => 'success',
-                        'data' => $menu->getId()
+                        'data' => $submenu->getId()
                     );
                     return new JsonResponse($response);
                 } 
@@ -295,21 +309,25 @@ class MenuController extends AbstractController
     }
 
 
-    public function menuList(Request $request)
+    public function submenuList(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $menus = $em->getRepository(Menu::class)->findAll([],['orderBy' => 'ASC']);
+        $submenus = $em->getRepository(Submenu::class)->findAll([],['orderBy' => 'ASC']);
 
         $locales = $em->getRepository(Locales::class)->findAll();
 
         $b = array();
         
-        foreach ($menus as $menu) {
+        dd($submenus);
+        exit;
+
+        foreach ($submenus as $submenu) {
 
             $t = array();
 
-           foreach($menu->getTranslation() as $translated){
+
+           foreach($submenu->getTranslation() as $translated){
                 $t[] = array(
                     'local' => $translated->getLocales()->getName(),
                     'name' => $translated->getName(),
@@ -317,37 +335,37 @@ class MenuController extends AbstractController
                 );
            }
             $b[] = array(
-                'id' => $menu->getId(),
-                'active' => $menu->getActive(),
-                'order_by' => $menu->getOrderBy(),
+                'id' => $submenu->getId(),
+                'active' => $submenu->getActive(),
+                'order_by' => $submenu->getOrderBy(),
                 'locales_translated' => $t,
             );
         }
    
-        return $this->render('admin/menu-list.html', array(
-            'menus' => $b,
+        return $this->render('admin/submenu-list.html', array(
+            'submenus' => $b,
             'locales' => $locales
             ));
     }
 
 
-    public function menuDelete(Request $request)
+    public function submenuDelete(Request $request)
     {
         $deleted = 1;
         $response = array();
         $id = $request->request->get('id');
         $em = $this->getDoctrine()->getManager();
         
-        $menu = $em->getRepository(Menu::class)->find($id);
+        $submenu = $em->getRepository(Submenu::class)->find($id);
         
-        if (!$menu) {
-            return new JsonResponse(array('status'=> 0, 'message' => 'Menu #'.$id . ' não existe.'));
+        if (!$submenu) {
+            return new JsonResponse(array('status'=> 0, 'message' => 'Submenu #'.$id . ' não existe.'));
         }
 
-        $em->remove($menu);
+        $em->remove($submenu);
         $em->flush();
 
-        return new JsonResponse(array('status' => 1, 'message' => 'Menu foi apagado'));
+        return new JsonResponse(array('status' => 1, 'message' => 'Submenu foi apagado'));
     }
 
 
