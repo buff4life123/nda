@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Company;
 use App\Entity\Seo;
+use App\Entity\Banner;
 use App\Entity\PhotoService;
 use App\Entity\AboutUs;
 use App\Entity\Rgpd;
@@ -47,8 +48,8 @@ class FrontendController extends AbstractController
 		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 
 		$social_network_icons = $this-> fileFinder("../public_html/images/icons");
-		$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
-
+		//$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
+		$banner = $em->getRepository(Banner::class)->findAll();
 
 		$local = $this->langCode($this-> defaultUserLocale($request));
 
@@ -59,7 +60,8 @@ class FrontendController extends AbstractController
 			'rgpd' => $rgpd,
 			'terms_conditions' => $terms_conditions,
 			'social_network_icons' => $social_network_icons,
-			'header_slider_items'  => $header_slider_items,
+			//'header_slider_items'  => $header_slider_items,
+			'banner' => $banner,
 			'products' => $products['products'],
 			'exp_api_key' => $products['key'],
 			'url_api_key' => $products['url'],

@@ -67,7 +67,7 @@ class MenuController extends AbstractController
                             
                             $menuTranslation->setLocales($locales);
                             $menuTranslation->setName($translated->name);
-                            $menuTranslation->setMenu($submenu);
+                            $menuTranslation->setMenu($menu);
                             $em->persist($menuTranslation);
                         }
                     }

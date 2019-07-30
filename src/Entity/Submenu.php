@@ -87,17 +87,7 @@ class Submenu
     {
         $this->path = $path;
     }
-
-    // public function addMenu(Menu $menu) {
-    //     $menu->setMenu($this);
-    //     $this->menu->add($menu);
-    // }
-
-    // public function removeMenu(Menu $menu){
-    //     $this->menu->removeElement($menu);
-    // }
-
-
+    
     public function getMenu()
     {
         return $this->menu;

@@ -31,6 +31,7 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
       <th class="w3-hide">#</th>
       <th class="w3-center" style="width:102px">{%trans%}actions{%endtrans%}</th>
       <th class="w3-center">{%trans%}active{%endtrans%}</th>
+      <th class="w3-center">Menu</th>
       {% for locale in locales%}
       <th class="w3-center">
         <img class="w3-opacity-min w3-border" style="width:36px" src='{{locale.filename}}'>
@@ -39,7 +40,7 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
       </tr>
     </thead>
     <tbody>
-      {% for c in submenus%}
+      {% for c in submenus %}
       <td class="grab">{{c.order_by}}</td>
       <td class="w3-hide">{{c.id}}</td>
       <td class="w3-center">
@@ -58,6 +59,9 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
           {% else %}
             <i class="w3-text-red w3-xlarge fas fa-times-circle"></i>
           {% endif %}
+        </td>
+        <td class="w3-center">
+          {{c.menu}}
         </td>
         {% for locale in locales%}
         <td>
@@ -103,7 +107,7 @@ function editSubmenu(id){
       $('.w3-overlay').hide()
       $('#set-id').text(id)
       $('#set-submenu').html(data)
-      $('#modal-edit-menu').show()
+      $('#modal-edit-submenu').show()
       if (data.status == 1){
         $('#info-client').show()                
         $('#info-client-head').removeClass('w3-red').addClass('w3-green').html('<span onclick="$(\'#info-client\').hide()" class="w3-button w3-display-topright w3-large"><i class="fa fa-times"></i></span><h1><i class="fa fa-check"></i> {%trans%}success{%endtrans%}</h1>')
@@ -121,7 +125,7 @@ function editSubmenu(id){
 function deleteSubmenuConfirm(id,n){
   $('#delete-submenu').html('<p class="w3-center w3-large">{%trans%}sure_delete{%endtrans%} <b>'+n+'</b> ?</p>')
   $('#delete-id').val(id)
-  $('#modal-delete-menu').show()
+  $('#modal-delete-submenu').show()
 }
 
 function deleteSubmenu(id){
@@ -134,7 +138,7 @@ function deleteSubmenu(id){
       success: function(data){
         $('.w3-overlay').hide()
         if (data.status == 1){
-          $('#modal-delete-menu').hide()
+          $('#modal-delete-submenu').hide()
           ajaxUpload('submenu-list')
         }
       },

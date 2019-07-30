@@ -82,12 +82,12 @@ class SubmenuController extends AbstractController
                         if ( isset($translated->id)){
                             $locales = $em->getRepository(Locales::class)->find($translated->id);
                             
-                            $menuTranslation = new SubmenuTranslation();
+                            $submenuTranslation = new SubmenuTranslation();
                             
-                            $menuTranslation->setLocales($locales);
-                            $menuTranslation->setName($translated->name);
-                            $menuTranslation->setSubmenu($submenu);
-                            $em->persist($menuTranslation);
+                            $submenuTranslation->setLocales($locales);
+                            $submenuTranslation->setName($translated->name);
+                            $submenuTranslation->setSubmenu($submenu);
+                            $em->persist($submenuTranslation);
                         }
                     }
 
@@ -170,19 +170,40 @@ class SubmenuController extends AbstractController
 
         $submenu = $em->getRepository(Submenu::class)->find($id);
 
-        $form = $this->createForm(MenuType::class, $submenu);
+        $form = $this->createForm(SubmenuType::class, $submenu);
 
+
+        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+
+        $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
+
+        if(!$locale)
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
         // dd($submenu->getRoles());
 
         if($submenu) {
 
             $t = array();
 
-            $superUser  = $submenu->getRoles()[0] == "superuser"?"checked":false;
-            $admin      = $submenu->getRoles()[1] == "admin"?"checked":false;
-            $manager    = $submenu->getRoles()[2] == "manager"?"checked":false;
+            // $superUser  = $submenu->getRoles()[0] == "superuser"?"checked":false;
+            // $admin      = $submenu->getRoles()[1] == "admin"?"checked":false;
+            // $manager    = $submenu->getRoles()[2] == "manager"?"checked":false;
 
+            // $menus = $em->getRepository(Menu::class)->findAll();
+            // dd($menus);
 
+            // $m = array();
+            // foreach ($menus as $menu)
+            //     $m[] = array('id' => $menu->getId(), 'name' => $menu->getCurrentTranslation($locale));
+
+            $menus = $em->getRepository(Menu::class)->findAll();
+            $m = array();
+    
+            foreach ($menus as $menu){
+                $m[] = ['name'=>$menu->getCurrentTranslation($locale),'id'=>$menu->getId()];
+            }
+
+            //dd($m);
            foreach($submenu->getTranslation() as $translated){
                 $t[] = array(
                     'local' => $translated->getLocales()->getName(),
@@ -197,14 +218,13 @@ class SubmenuController extends AbstractController
                 'order_by' => $submenu->getOrderBy(),
                 'icon' => $submenu->getIcon(),
                 'path' => $submenu->getPath(),
-                'superuser' =>  $superUser,
-                'admin' => $admin,
-                'manager' => $manager,
-                'submenu' => $submenu->getIsSubmenu(),
+                // 'superuser' =>  $superUser,
+                // 'admin' => $admin,
+                // 'manager' => $manager,
                 'locales_translated' => $t,
             );
 
-            // dd($b);
+             //dd($b);
         }
        
 
@@ -213,7 +233,10 @@ class SubmenuController extends AbstractController
             'submenu' => $submenu,
             'locales' => $locales,
             'totals' => count($totals),
-            'b' => $b
+            'b' => $b,
+            'menus' => $m,
+            'menu' => $submenu->getMenu()->getCurrentTranslation($locale),
+            'menu_id' => $submenu->getId()
         ));
     }
 
@@ -236,7 +259,7 @@ class SubmenuController extends AbstractController
             return new JsonResponse($response);
         }
 
-        $form = $this->createForm(MenuType::class, $submenu);
+        $form = $this->createForm(SubmenuType::class, $submenu);
 
         $form->handleRequest($request);
             
@@ -252,28 +275,32 @@ class SubmenuController extends AbstractController
                     
                         $locales = $em->getRepository(Locales::class)->find($translated->locale_id);
 
-                        $menuTranslation = $em->getRepository(MenuTranslation::class)->findOneBy(['locales' => $locales, 'submenu'=> $submenu]);
-                    
-                        if(!$menuTranslation){
+                        $submenuTranslation = $em->getRepository(SubmenuTranslation::class)->findOneBy(['locales' => $locales, 'submenu'=> $submenu]);
 
-                            $menuTranslation = new MenuTranslation();
+                        $menu = $em->getRepository(Menu::class)->find($request->request->get('menu'));
                         
-                            $menuTranslation->setLocales($locales);
-                            $menuTranslation->setName($translated->name);
-                            $menuTranslation->setMenu($submenu);
-                            $em->persist($menuTranslation);
+                        $submenu->setMenu($menu);
+                    
+                        if(!$submenuTranslation){
+
+                            $submenuTranslation = new SubmenuTranslation();
+                        
+                            $submenuTranslation->setLocales($locales);
+                            $submenuTranslation->setName($translated->name);
+                            $submenuTranslation->setMenu($submenu);
+                            $em->persist($submenuTranslation);
                         }
                         else{
-                            $menuTranslation->setName($translated->name);
-                            $em->persist($menuTranslation);
+                            $submenuTranslation->setName($translated->name);
+                            $em->persist($submenuTranslation);
                         }
                     }
-                    $roles = [];
-                    array_push($roles,  isset($request->request->get('submenu')['superuser']) ?"superuser":false);
-                    array_push($roles,  isset($request->request->get('submenu')['admin']) ?"admin":false);
-                    array_push($roles,  isset($request->request->get('submenu')['manager']) ?"manager":false);
+                    // $roles = [];
+                    // array_push($roles,  isset($request->request->get('submenu')['superuser']) ?"superuser":false);
+                    // array_push($roles,  isset($request->request->get('submenu')['admin']) ?"admin":false);
+                    // array_push($roles,  isset($request->request->get('submenu')['manager']) ?"manager":false);
 
-                    $submenu->setRoles($roles);
+                    // $submenu->setRoles($roles);
 
                     $submenu->setOrderBy($request->request->get('order_by'));
                     $em->persist($submenu);
@@ -318,21 +345,16 @@ class SubmenuController extends AbstractController
         $locales = $em->getRepository(Locales::class)->findAll();
 
         $b = array();
-
         
+        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+
+        $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
+
+        if(!$locale)
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+
         foreach ($submenus as $submenu) {
-           
-            if($submenu->getTranslation()){
-            foreach ($submenu->getTranslation() as $nm) {
-                $b [] = $nm->getName();
             
-            }}
-        }
-        // dd($b);
-        // exit;
-
-        foreach ($submenus as $submenu) {
-
             $t = array();
 
            foreach($submenu->getTranslation() as $translated){
@@ -347,9 +369,11 @@ class SubmenuController extends AbstractController
                 'active' => $submenu->getActive(),
                 'order_by' => $submenu->getOrderBy(),
                 'locales_translated' => $t,
+                'menu' => $submenu->getMenu()->getCurrentTranslation($locale)
             );
         }
    
+
         return $this->render('admin/submenu-list.html', array(
             'submenus' => $b,
             'locales' => $locales

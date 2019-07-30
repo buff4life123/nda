@@ -30,12 +30,20 @@ use App\Service\MoneyFormatter;
 class AdminController extends AbstractController
 {
 
-    public function html()
+    public function html(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $booking = array();//$em->getRepository(Booking::class)->dashboardValues();
         $company = $em->getRepository(Company::class)->find(1);
-        $locales = $em->getRepository(Locales::class)->findOneBy(['name' =>"en_EN"]);
+        //$locales = $em->getRepository(Locales::class)->findOneBy(['name' =>"en_EN"]);
+        
+        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+
+        $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
+
+        if(!$locale)
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+
         $menus = $em->getRepository(Menu::class)->getMenusByUser($this->getUser());
         
         $m = [];
@@ -44,10 +52,10 @@ class AdminController extends AbstractController
                     
                 foreach($menu->getSubmenu() as $submenu){
                     $sm [] = array('active' => $submenu->getActive(), 'icon' => $submenu->getIcon(), 
-                                'path' => $submenu->getPath(), 'name' => $submenu->getCurrentTranslation($locales)); //
+                                'path' => $submenu->getPath(), 'name' => $submenu->getCurrentTranslation($locale)); //
                 }
 
-                $m[] = array('name'=> $menu->getCurrentTranslation($locales),
+                $m[] = array('name'=> $menu->getCurrentTranslation($locale),
                             'active'=> $menu->getActive(),
                             'is_submenu'=> $menu->getIsSubmenu(),
                             'icon'=> $menu->getIcon(),
