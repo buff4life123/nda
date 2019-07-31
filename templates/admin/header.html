@@ -1,0 +1,135 @@
+
+<!-- Top container -->
+<div class="w3-card-2 w3-bar w3-large w3-white" style="z-index:99;height:51px;position: absolute;
+    top: 0px;">
+  <span style="cursor:pointer;position:fixed" class="w3-bar-item" onclick="w3_open()">
+    <i class="fa-2x fa fa-bars"></i>
+  </span>
+  <span class="w3-bar-item w3-right" style="color: #05788D;line-height: 40px"></span>
+</div>
+
+<!-- Sidebar/menu -->
+
+<nav class="w3-sidebar w3-hide w3-collapse w3-white w3-animate-left w3-border-right" style="z-index:9;top:0px">
+  <br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s12 w3-center" style="margin-top:40px">
+      <i style="cursor:pointer" onclick="w3_open()" class="w3-right fa-2x fas fa-times fa-fw"></i>
+      <!-- <img src="{{ asset('upload/gallery/') }}" style=" z-index: -1;position: absolute;left: 0;margin-top: -60px;width: 196px;opacity: 0.15"> -->
+    </div>
+    <div class="w3-col s12 w3-center">
+      <span>{%trans%}hello{%endtrans%}, 
+        <b class="js-user-rating" style="text-transform:capitalize" data-is-authenticated="{{ app.user ? 'true' : 'false' }}">{{ app.user.username }}</b>
+    
+      </span>
+    </div>
+  </div>
+
+  {%for menu in menus %}
+    {% if  menu.active == "true"%}
+      {% if  menu.path == "index" or menu.path == "logout" %}
+        <div class="w3-bar-block">
+          <a href="{{ path(menu.path) }}" id="{{menu.path}}" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
+            <i class="{{menu.icon}}"></i> {{menu.name}}
+          </a>
+        </div>
+      {% elseif menu.submenu == false %}
+        <div class="w3-bar-block">
+          <a href="#" onclick="ajaxUpload(this.id)" id="{{menu.path}}" class="nav w3-bar-item w3-button w3-padding w3-sand w3-border-top w3-border-brown">
+            <i class="{{menu.icon}}"></i> {{menu.name}}
+          </a>
+        </div>
+      {% else %}
+        <div class="w3-bar-block">
+          <div class="w3-dropdown-click">
+
+            <button onclick="dropDownMenu('{{menu.path}}')"  class="w3-tooltip nav w3-hover-grey w3-bar-item w3-padding w3-sand w3-border-top w3-border-brown">
+              <i class="{{menu.icon}}"></i> {{menu.name}}
+            </button>
+            
+            <div id="{{menu.path}}" class="w3-dropdown-content w3-bar-block" style="position:relative">
+              {%for submenu in menu.submenu %}
+                {% if  submenu.active == "true"%}
+                  {% if  submenu.path == "user-new" %}
+                    <a href="#" onclick="newUserType('{{submenu.path}}')" id="{{submenu.path}}" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+                      <i class="{{submenu.icon}}"></i> {{submenu.name}}
+                    </a>
+                  {% else %}
+                    <a href="#" onclick="ajaxUpload('{{submenu.path}}')" id="{{submenu.path}}" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+                      <i class="{{submenu.icon}}"></i> {{submenu.name}}
+                    </a>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+
+</nav> 
+
+<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay">
+    <div class="w3-display-container" style="height:100vh">
+      <div class="w3-display-middle">
+        <i class="w3-text-white fas fa-4x fa-spinner fa-pulse"></i>
+      </div>
+    </div>
+</div>
+<div class="w3-margin-top"> 
+ <!-- Header -->
+
+ <script>
+
+  function newUserType(id)
+  {
+    //ajaxUpload(this.id)
+    $('#new-user').html('<p class="w3-center w3-large">{%trans%}new_user_type{%endtrans%} </p>  ' +
+    '<p class="w3-center w3-large"> Admin:   <input type="checkbox" value="admin" id="myCheck-admin"  onclick="checkBoxState()"> </p>' +
+    '<p class="w3-center w3-large"> Manager: <input type="checkbox" value="manager" id="myCheck-manager"  onclick="checkBoxState()"> </p>')
+    $('#new-user-id').val(id)
+    $('#action-new-user').html('<button onclick="" id="user-new-btn" class="w3-green w3-border w3-btn w3-right" disabled="true"> {%trans%}save{%endtrans%}</button>')
+    $('#modal-new-user').show()
+  }
+
+  function checkBoxState() {
+  var checkBoxAdmin = document.getElementById("myCheck-admin");
+  var checkBoxManager = document.getElementById("myCheck-manager");
+  var saveBtn = document.getElementById("user-new-btn");
+  var adminCheckedValue = $('#myCheck-admin:checked').val();
+  var managerCheckedValue = $('#myCheck-manager:checked').val();
+  var userType = "";
+
+  checkBoxAdmin.addEventListener('change', (event) => {
+    if (event.target.checked) {
+        userType = adminCheckedValue;
+        checkBoxManager.checked = false;
+        saveBtn.disabled = false;
+    } else {
+        saveBtn.disabled = true;
+    }
+  })
+
+  checkBoxManager.addEventListener('change', (event) => {
+    if (event.target.checked) {
+        userType = managerCheckedValue;
+        checkBoxAdmin.checked = false;
+        saveBtn.disabled = false;
+    } else {
+        saveBtn.disabled = true;
+    }
+  })
+
+  saveBtn.addEventListener('click', (event) => {
+    $('#modal-new-user').hide()
+    ajaxUpload("user-new", userType);
+  })
+
+
+
+
+}
+
+ </script>
