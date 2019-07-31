@@ -12,7 +12,7 @@
         {%for name in social_network_icons %}
             {% if company.getLinksActive[loop.index0] == true %}
                 <div class="social-media-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinks[loop.index0]}}')">
-                    <div class="social-media-ico" style="background-image: url(../images/icons/{{name}})"></div>
+                    <div class="social-media-ico" style="background-image: url(../images/socialMedia/{{name}})"></div>
 
                     <div class="in-txt">
                         <div class="text-block-13">{{icon_text[loop.index0]}}</div>
@@ -24,7 +24,7 @@
 
    <div class="other-link" data-ix="social-interact">
         <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('other_company')}}'">
-            <div class="social-media-ico" style="background-image: url(../images/atlanticQuest.png)"></div>
+            <div class="social-media-ico" style="background-image: url(../images/icons/atlanticQuest.png)"></div>
 
             <div class="in-txt">
                 <div class="text-block-13">Atlantic Quest </div>
@@ -81,7 +81,7 @@
         <div class="header-slider w-slider" data-animation="over" data-autoplay-limit="29000" data-autoplay="1" data-delay="10000" data-duration="1000" data-infinite="1">
             <div class="w-slider-mask">
                 {%for name in banner %}
-                    <div class="slider-item w-slide" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url(../images/headerSlider/{{name}})">
+                    <div class="slider-item w-slide" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url(../upload/banner/{{name.image}})">
                         <div class="div-block-5 w-clearfix">
                             <div class="free-transport-ini-pt"></div>
                             <div class="destaque-slogan">
@@ -313,9 +313,9 @@
                         <label class="contact_name w3-text-red w3-hide w3-right"></label>
                         <input type="text" class="text-field-2 w-input" id="contact_name" name="contact_name" placeholder="{%trans%}name{%endtrans%}">
 
-                        <label class="w3-left" style="text-transform: uppercase">{%trans%}email{%endtrans%}</label>
+                        <label class="w3-left" style="text-transform: uppercase">email</label>
                         <label class="contact_email w3-text-red w3-hide w3-right"></label>
-                        <input type="text" class="text-field-2 w-input" id="contact_email" name="contact_email" placeholder="{%trans%}Email{%endtrans%}">
+                        <input type="text" class="text-field-2 w-input" id="contact_email" name="contact_email" placeholder="Email">
 
                         <label class="w3-left" style="text-transform: uppercase">{%trans%}telephone{%endtrans%}</label>
                         <label class="contact_telephone w3-text-red w3-hide w3-right"></label>
@@ -387,7 +387,7 @@
                     <div class="footer-icons">
                         {%for name in social_network_icons %}
                             {% if company.getLinksActive[loop.index0] == true %}
-                                <div class="icone-footer w-inline-block" onclick="openWindow('{{company.getLinks[loop.index0]}}')" style="background-image: url(../images/icons/{{name}})"></div>
+                                <div class="icone-footer w-inline-block" onclick="openWindow('{{company.getLinks[loop.index0]}}')" style="background-image: url(../images/socialMedia/{{name}})"></div>
                             {%endif %}
                         {% endfor %}
                     </div>

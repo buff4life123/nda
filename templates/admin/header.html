@@ -50,12 +50,12 @@
             <div id="{{menu.path}}" class="w3-dropdown-content w3-bar-block" style="position:relative">
               {%for submenu in menu.submenu %}
                 {% if  submenu.active == "true"%}
-                  {% if  submenu.path == "user-new-btn" %}
-                    <a href="#" onclick="newUserType('{{submenu.path}}')" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+                  {% if  submenu.path == "user-new" %}
+                    <a href="#" onclick="newUserType('{{submenu.path}}')" id="{{submenu.path}}" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
                       <i class="{{submenu.icon}}"></i> {{submenu.name}}
                     </a>
                   {% else %}
-                    <a href="#" onclick="ajaxUpload('{{submenu.path}}')" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
+                    <a href="#" onclick="ajaxUpload('{{submenu.path}}')" id="{{submenu.path}}" class="w3-right-align nav w3-border-top w3-border-brown w3-bar-item w3-button w3-padding">
                       <i class="{{submenu.icon}}"></i> {{submenu.name}}
                     </a>
                   {% endif %}
@@ -90,14 +90,14 @@
     '<p class="w3-center w3-large"> Admin:   <input type="checkbox" value="admin" id="myCheck-admin"  onclick="checkBoxState()"> </p>' +
     '<p class="w3-center w3-large"> Manager: <input type="checkbox" value="manager" id="myCheck-manager"  onclick="checkBoxState()"> </p>')
     $('#new-user-id').val(id)
-    $('#action-new-user').html('<button onclick="" id="user-new" class="w3-green w3-border w3-btn w3-right" disabled="true"> {%trans%}save{%endtrans%}</button>')
+    $('#action-new-user').html('<button onclick="" id="user-new-btn" class="w3-green w3-border w3-btn w3-right" disabled="true"> {%trans%}save{%endtrans%}</button>')
     $('#modal-new-user').show()
   }
 
   function checkBoxState() {
   var checkBoxAdmin = document.getElementById("myCheck-admin");
   var checkBoxManager = document.getElementById("myCheck-manager");
-  var saveBtn = document.getElementById("user-new");
+  var saveBtn = document.getElementById("user-new-btn");
   var adminCheckedValue = $('#myCheck-admin:checked').val();
   var managerCheckedValue = $('#myCheck-manager:checked').val();
   var userType = "";

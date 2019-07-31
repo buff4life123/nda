@@ -37,7 +37,7 @@ class Locales
     }   
 
     public function getFilename() {
-        return '/images/'.$this->filename;
+        return '/images/icons/'.$this->filename;
     }
 
     public function setFilename($filename) {

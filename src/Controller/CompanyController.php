@@ -134,7 +134,7 @@ class CompanyController extends AbstractController
 
         $form = $this->createForm(CompanyType::class, $company);
         $formView = $form->createView();       
-        //var_dump("teste");
+        //var_dump($company);
         //exit;
 
         return $this->render('admin/company-edit.html',array(

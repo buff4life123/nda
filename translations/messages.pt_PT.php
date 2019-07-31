@@ -31,7 +31,6 @@ return array(
     ',
     'company_name'=> 'NAUTICDRIVE - Desportos Náuticos na Praia da Rocha Baixinha, Albufeira',
     'email' => 'email',
-    'Email' => 'Email',
     'follow_social_network' => 'Siga-nos nas nossas redes sociais ', 
     'aboutUs' => 'Sobre nós',
     'booking' => 'Reservar',

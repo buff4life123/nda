@@ -41,22 +41,23 @@ class FrontendController extends AbstractController
     {
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
-		$seo = $em->getRepository(Seo::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 		$products = $experience->getProducts($request->getLocale());
 
 		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 
-		$social_network_icons = $this-> fileFinder("../public_html/images/icons");
+		$social_network_icons = $this-> fileFinder("../public_html/images/socialMedia/");
 		//$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
 		$banner = $em->getRepository(Banner::class)->findAll();
 
 		$local = $this->langCode($this-> defaultUserLocale($request));
 
+		//dd($banner);
+		
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
 			'company' => $company,
-			'seo' => $seo,
+			'seo' => $this->getSeo($request),
 			'rgpd' => $rgpd,
 			'terms_conditions' => $terms_conditions,
 			'social_network_icons' => $social_network_icons,
@@ -84,6 +85,7 @@ class FrontendController extends AbstractController
 			// 't' => $request->getLocale(),
 			'about' => $about,
 			'local' => $local,
+			'seo' => $this->getSeo($request),
 		));
 	}
 	
@@ -100,6 +102,7 @@ class FrontendController extends AbstractController
 			// 't' => $request->getLocale(),
 			'about' => $about,
 			'local' => $local,
+			'seo' => $this->getSeo($request),
 		));
 	}
 	
@@ -139,6 +142,7 @@ class FrontendController extends AbstractController
 			'email' => $email,
 			'code' => $code,
 			'local' => $local,
+			'seo' => $this->getSeo($request),
 			// 't' => $request->getLocale(),
 			//'about' => $about,
 		));
@@ -202,18 +206,6 @@ class FrontendController extends AbstractController
 			$folder = $photoService->getFolder();
 			$id = $photoService->getId();
 			$path = "/upload/photo_service/";
-			// $path = $this->appKernel->getProjectDir().'/public_html/upload/photo_service/';
-			// $isExtracted = $fileUploader->extractTo($path,$path.$folder.'.zip');
-			// dd($isExtracted);
-			
-			// $publicResourcesFolderPath = $this->getParameter('kernel.project_dir') . '/public_html/upload/photo_service/' . $folder . '/';
-
-			// $files = $this-> fileFinder($publicResourcesFolderPath);
-
-			// $images = array();
-			// foreach ($files as $file) {	
-			// 	$images[] = "/upload/photo_service/" . $folder . "/" . $file;
-			// }
 
 			$response = array(
 				'status' => 1,
@@ -247,12 +239,10 @@ class FrontendController extends AbstractController
 			'exp_api_key' => $products['key'],
 			'url_api_key' => $products['url'],
 			'local' => $local,
+			'seo' => $this->getSeo($request),
 		));
-	
 
 	}
-
-
 
 	public function pageDetail(Request $request, $page, $pageSub, TranslatorInterface $translator)
     {
@@ -591,7 +581,10 @@ class FrontendController extends AbstractController
 		return $userLocale;
 	}
 
-	
+	private function getSeo(Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		return $seo = $em->getRepository(Seo::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
+	}
 		
 	private function langCode($locales) {
 

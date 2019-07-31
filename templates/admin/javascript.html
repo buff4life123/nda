@@ -54,7 +54,7 @@ function ajaxUpload(block, userType){
         case 'terms': 
             url = '{{ path("admin_terms") }}' 
         break
-        case 'company': 
+        case 'company-edit': 
             url = '{{ path("admin_company_show_edit") }}' 
         break
         case 'seo': 
@@ -111,6 +111,7 @@ function ajaxUpload(block, userType){
             async: true,
             cache:false,
             success: function (data){
+                //console.log(block);
                 $('.nav').removeClass('w3-blue')
                 $('#'+block).addClass('w3-blue')    
                 $('#add').html(data)

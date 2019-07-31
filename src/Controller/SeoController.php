@@ -71,6 +71,7 @@ class SeoController extends AbstractController
                     'data' => '');
                 return new JsonResponse($response);
         }
+       // dd($locales);
 
         return $this->render('admin/seo.html',array(
             'form' => $form->createView(),
@@ -78,7 +79,7 @@ class SeoController extends AbstractController
             'locales' => $locales
         ));
 
-        return $this->render('admin/seo.html');
+        //return $this->render('admin/seo.html');
     }
 
 

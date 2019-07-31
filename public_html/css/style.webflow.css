@@ -146,12 +146,13 @@ h1 {
   height: 220px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  background-image: url('../images/benagil-thumb.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/benagil-thumb.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
+  /* background-image: url('../images/benagil-thumb.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
+  background-image: url('../images/benagil-thumb.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff); */
   background-position: 50% 50%, 0px 0px;
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
 }
+
 
 .txt-destaque {
   text-decoration: none;
@@ -351,13 +352,6 @@ h1 {
   height: 500px;
 }
 
-.slide-3 {
-  background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
-  background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5));
-  background-position: 53% 54%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
 
 .all-activities-container {
   padding-top: 98px;
@@ -397,7 +391,7 @@ h1 {
 }
 
 .testemonials-algarve {
-  background-image: url('../images/testemonialBackground.jpg'); 
+  background-image: url('../images/background.jpg'); 
   background-position: 50% 50%;
   background-size: cover;
   background-attachment: fixed;
@@ -622,21 +616,6 @@ h1 {
   -ms-flex-align: start;
   align-items: flex-start;
 }
-
-/* .atl-morning {
-  width: 40%;
-  height: 50px;
-  float: left;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  background-image: url('../images/logo-branco-atlantik-morning-01.svg');
-  background-position: 0px 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-} */
-
 .info-adicional {
   width: 60%;
   height: 50px;
@@ -684,16 +663,6 @@ h1 {
   /* border-top: 1px solid #414141;  */
   line-height: 75px;
 }
-
-.info-rodape-dir {
-  height: 506px;
-  margin-top: 39px;
-  margin-bottom: 26px;
-  background-image: url('../images/embarque-03.png');
-  background-size: 723px 506px;
-  background-repeat: no-repeat;
-}
-
 .text-block-5 {
   margin-right: 0px;
   /* margin-bottom: 16px;
@@ -851,17 +820,6 @@ h1 {
   background-image: linear-gradient(180deg, #fff, #fff);
 }
 
-.img-destaque-2 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/fishing.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/fishing.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
-  background-position: 50% 50%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
 
 .titulo-tour-2 {
   margin-top: 24px;
@@ -889,17 +847,6 @@ h1 {
   background-image: linear-gradient(180deg, #fff, #fff);
 }
 
-.img-destaque-3 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/img-barco-pequeno_thumb.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/img-barco-pequeno_thumb.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
-  background-position: 50% 50%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
 
 .titulo-tour-1 {
   margin-top: 24px;
@@ -1174,7 +1121,7 @@ h1 {
   height: 50px;
   margin-right: auto;
   margin-left: auto;
-  background-image: url('../images/five-stars-01.svg');
+  background-image: url('../images/icons/five-stars-01.svg');
   background-position: 50% 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1252,78 +1199,6 @@ h1 {
   background-image: linear-gradient(180deg, #fff, #fff);
 }
 
-.imagem-tour-1 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/pano-thumb.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/pano-thumb.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
-  background-position: 50% 50%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
-
-.imagem-tour-2 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/benagil-thumb.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/benagil-thumb.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
-  background-position: 100% 0px, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
-
-.imagem-tour-3 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/snorkeling2.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/snorkeling2.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
-  background-position: 50% 50%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
-
-.imagem-tour-4 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/img-barco-pequeno_thumb.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/img-barco-pequeno_thumb.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
-  background-position: 50% 50%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
-
-.imagem-tour-5 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/fishing.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/fishing.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
-  background-position: 50% 50%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
-
-.imagem-tour-6 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/sunset-thum-3.jpg'), -webkit-gradient(linear, left top, left bottom, from(#a3b5ff), to(#a3b5ff));
-  background-image: url('../images/sunset-thum-3.jpg'), linear-gradient(180deg, #a3b5ff, #a3b5ff);
-  background-position: 50% 50%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
-}
-
 .div-block-10 {
   position: relative;
 }
@@ -1353,51 +1228,12 @@ h1 {
   margin-bottom: 3px;
 }
 
-.div-block-12 {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/tripad-02.svg');
-  background-position: 0px 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
 
 .div-block-12-copy {
   width: 60%;
   height: 100%;
   margin-left: 14px;
   float: left;
-}
-
-.fb1 {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/fb-01.svg');
-  background-position: 0px 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.intag1 {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/instag-03.svg');
-  background-position: 0px 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.linkedin {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/linkedin-04.svg');
-  background-position: 0px 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .text-block-9 {
@@ -1635,67 +1471,6 @@ position: fixed;
   background-repeat: no-repeat;
 }
 
-.fb-ico {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/fb-01.svg');
-  background-position: 50% 50%;
-  background-size: auto 85%;
-  background-repeat: no-repeat;
-}
-
-.trip-ico {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/tripad-02.svg');
-  background-position: 50% 50%;
-  background-size: auto 85%;
-  background-repeat: no-repeat;
-}
-
-.int-ico {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/instag-03.svg');
-  background-position: 50% 50%;
-  background-size: auto 85%;
-  background-repeat: no-repeat;
-}
-
-.in-ico {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/youtube-icon-01.svg');
-  background-position: 50% 50%;
-  background-size: auto 85%;
-  background-repeat: no-repeat;
-}
-
-.twitter-ico {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/twitter-logo-on-black-background.svg');
-  background-position: 50% 50%;
-  background-size: auto 75%;
-  background-repeat: no-repeat;
-}
-
-
-.linkedin-ico {
-  width: 25%;
-  height: 100%;
-  float: left;
-  background-image: url('../images/linkedin-04.svg');
-  background-position: 50% 50%;
-  background-size: auto 85%;
-  background-repeat: no-repeat;
-}
-
 .in-txt {
   height: 100%;
   float: left;
@@ -1820,18 +1595,6 @@ position: fixed;
   padding-top: 25px;
   padding-right: 13px;
   padding-left: 20px;
-}
-
-.div-block-19 {
-  width: 10%;
-  height: 103px;
-  margin-left: 17px;
-  padding-left: 0px;
-  float: left;
-  background-image: url('../images/seta-esquerda-05.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .nav-menu-2 {
@@ -2041,7 +1804,7 @@ position: fixed;
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
-  background-image: url('../images/plus.png'); 
+  background-image: url('../images/icons/plus.png'); 
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2075,13 +1838,6 @@ position: fixed;
   background-image: linear-gradient(180deg, rgba(148, 63, 63, .5), rgba(148, 63, 63, .5));
 }
 
-.section-4 {
-  height: 600px;
-  background-image: url('../images/MAPA-COSTA-01.svg');
-  background-position: 50% -162px;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 
 .list-item {
   font-family: Barlow, sans-serif;
@@ -2291,30 +2047,12 @@ position: fixed;
   text-decoration: none;
 }
 
-.div-block-27 {
-  width: 10%;
-  height: 100px;
-  float: left;
-  background-image: url('../images/seta-esquerda-05.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .right-arrow-3 {
   display: none;
 }
 
 .left-arrow-3 {
   display: none;
-}
-
-.paragraph-13 {
-  height: 506px;
-  background-image: url('../images/embarque-03.png');
-  background-position: 0px 50%;
-  background-size: 723px 506px;
-  background-repeat: no-repeat;
 }
 
 .unordered-list {
@@ -2428,52 +2166,18 @@ position: fixed;
   transform: translate(0px, -3px);
 }
 
-.icone-rodape2 {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  background-image: url('../images/tripad-02.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease;
-}
-
 .icone-rodape2:hover {
   -webkit-transform: translate(0px, -3px);
   -ms-transform: translate(0px, -3px);
   transform: translate(0px, -3px);
 }
 
-.icone-rodape3 {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  background-image: url('../images/instag-03.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease;
-}
+
 
 .icone-rodape3:hover {
   -webkit-transform: translate(0px, -3px);
   -ms-transform: translate(0px, -3px);
   transform: translate(0px, -3px);
-}
-
-.icone-rodape4 {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  background-image: url('../images/youtube-icon-01.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease;
 }
 
 .icone-rodape4:hover {
@@ -2482,35 +2186,10 @@ position: fixed;
   transform: translate(0px, -3px);
 }
 
-.icone-rodape5 {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  background-image: url('../images/twitter-logo-on-black-background.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease;
-  background-size: auto 85%;
-}
-
 .icone-rodape5:hover {
   -webkit-transform: translate(0px, -3px);
   -ms-transform: translate(0px, -3px);
   transform: translate(0px, -3px);
-}
-
-.icone-rodape6 {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  background-image: url('../images/linkedin-04.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease;
 }
 
 .icone-rodape6:hover {
@@ -2524,14 +2203,6 @@ position: fixed;
   font-family: Barlow, sans-serif;
   color: #999;
   font-size: 15px;
-}
-
-.slide-snorkling-copy {
-  /* background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(rgba(138, 132, 201, .5)), to(rgba(138, 132, 201, .5)));
-  background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5)); */
-  background-position: 53% 54%, 0px 0px;
-  background-size: cover, auto;
-  background-repeat: no-repeat, repeat;
 }
 
 
@@ -2581,35 +2252,6 @@ position: fixed;
   transition: all 400ms ease;
 }
 
-.slide-topo-3 {
-  height: 950px;
-  border-bottom: 1px none #fff;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .57)), color-stop(37%, transparent)), url('../images/action-beach-e-sports-1667781.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 37%), url('../images/action-beach-e-sports-1667781.jpg');
-  background-position: 0px 0px, 50% 50%;
-  background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
-  -webkit-transition: all 400ms ease;
-  transition: all 400ms ease;
-}
-
-.slide-5 {
-  height: 680px;
-  background-image: url('../images/ultimate-algarve-boat-tour.jpg');
-  background-position: 50% 44%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide-6 {
-  height: 680px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .62)), color-stop(34%, hsla(0, 0%, 100%, 0))), url('../images/TOUR1-SLIDE.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .62), hsla(0, 0%, 100%, 0) 34%), url('../images/TOUR1-SLIDE.jpg');
-  background-position: 0px 0px, 50% 35%;
-  background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
-}
-
 .div-block-31 {
   width: 25%;
   height: 250px;
@@ -2637,35 +2279,10 @@ position: fixed;
   padding-left: 0px;
 }
 
-.pdf-info {
-  position: relative;
-  top: -20px;
-  width: 100%;
-  height: 150px;
-  background-image: url('../images/pdf-01.svg');
-  background-position: 50% 50%;
-  background-size: auto 80%;
-  background-repeat: no-repeat;
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease;
-}
-
 .pdf-info:hover {
   -webkit-transform: translate(0px, -10px);
   -ms-transform: translate(0px, -10px);
   transform: translate(0px, -10px);
-}
-
-.seta-pdf {
-  position: relative;
-  left: 133px;
-  top: 95px;
-  width: 55px;
-  height: 75px;
-  background-image: url('../images/seta-pdf-01-01-01-01.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .slider-tour-2 {
@@ -2673,23 +2290,6 @@ position: fixed;
   z-index: 0;
   width: 100%;
   height: 995px;
-}
-
-.slide1_tour2 {
-  height: 680px;
-  background-image: url('../images/benagil-image-backg_2.jpg');
-  background-position: 50% 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide2_tour2 {
-  height: 680px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .62)), color-stop(34%, hsla(0, 0%, 100%, 0))), url('../images/TOUR1-SLIDE.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .62), hsla(0, 0%, 100%, 0) 34%), url('../images/TOUR1-SLIDE.jpg');
-  background-position: 0px 0px, 50% 35%;
-  background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
 }
 
 .paragraph-14 {
@@ -2715,23 +2315,6 @@ position: fixed;
   height: 680px;
 }
 
-.slide1_tour3 {
-  height: 680px;
-  background-image: url('../images/snorkling-image-backg_1.jpg');
-  background-position: 50% 36%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide2_tour3 {
-  height: 680px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .62)), color-stop(34%, hsla(0, 0%, 100%, 0))), url('../images/TOUR1-SLIDE.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .62), hsla(0, 0%, 100%, 0) 34%), url('../images/TOUR1-SLIDE.jpg');
-  background-position: 0px 0px, 50% 35%;
-  background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
-}
-
 .slider-tour-3-copy {
   position: absolute;
   z-index: 0;
@@ -2746,23 +2329,6 @@ position: fixed;
   height: 680px;
 }
 
-.slide1_tour4 {
-  height: 680px;
-  background-image: url('../images/benagil_marinha-image-backg_1.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide2_tour4 {
-  height: 680px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .62)), color-stop(34%, hsla(0, 0%, 100%, 0))), url('../images/TOUR1-SLIDE.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .62), hsla(0, 0%, 100%, 0) 34%), url('../images/TOUR1-SLIDE.jpg');
-  background-position: 0px 0px, 50% 35%;
-  background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
-}
-
 .slider-tour-5 {
   position: absolute;
   z-index: 0;
@@ -2770,42 +2336,11 @@ position: fixed;
   height: 680px;
 }
 
-.slide1_tour3-copy {
-  height: 680px;
-  background-image: url('../images/snorkling3.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide1_tour5 {
-  height: 680px;
-  background-image: url('../images/seafishing.jpg');
-  background-position: 50% 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide2_tour5 {
-  height: 680px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .62)), color-stop(34%, hsla(0, 0%, 100%, 0))), url('../images/TOUR1-SLIDE.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .62), hsla(0, 0%, 100%, 0) 34%), url('../images/TOUR1-SLIDE.jpg');
-  background-position: 0px 0px, 50% 35%;
-  background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
-}
 
 .slide-nav-4 {
   display: none;
 }
 
-.slide1_tour6 {
-  height: 680px;
-  background-image: url('../images/sunset-image-backg_1.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 
 .slide-nav-5 {
   display: none;
@@ -2988,21 +2523,10 @@ position: fixed;
 
 .slide-about {
   height: 650px;
-  background-image: url('../images/testemonialBackground.jpg');
+  background-image: url('../images/background.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-.bg-instagram {
-  /* height: 100%; */
-  /* background-image: url('../images/yate.png'); */
-  /* background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat; */
-  /* border-style: solid; 
-  border-color: #0047b3; */
-  /* background: #fff; */
 }
 
 .section-fill-available {
@@ -3010,14 +2534,10 @@ position: fixed;
   height: -webkit-fill-available;
   font-family: Barlow, sans-serif;
 }
-/* 
-.transparent-layer {
-  height: -webkit-fill-available;
-  background-color: rgba(0, 71, 179, 0.7);
-} */
+
 
 .bg-image {
-  background-image: url('../images/testemonialBackground.jpg'); 
+  background-image: url('../images/background.jpg'); 
   background-position: 50% 50%;
   background-size: cover;
   background-attachment: fixed;
@@ -3369,15 +2889,6 @@ position: fixed;
   text-align: center;
 }
 
-.bloco-icones-1 {
-  height: 100px;
-  margin-top: 35px;
-  background-image: url('../images/icones_preto-01.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .list-item-11 {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -3438,29 +2949,6 @@ position: fixed;
   background-image: linear-gradient(180deg, hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .5));
 }
 
-.div-block-35 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 50%;
-  height: 500px;
-  margin-right: auto;
-  margin-left: auto;
-  float: right;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-image: url('../images/foto-do-cais-de-embarque.jpg');
-  background-position: 50% 80%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 
 ._1-metade {
   display: -webkit-box;
@@ -3557,54 +3045,12 @@ position: fixed;
   background-image: linear-gradient(180deg, #fff, #fff);
 }
 
-.div-block-37 {
-  display: block;
-  width: 350px;
-  height: 350px;
-  margin-right: auto;
-  margin-left: auto;
-  background-image: url('../images/preload.gif');
-  background-position: 50% 50%;
-  background-size: cover;
-}
 
 .div-block-38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-}
-
-.slide1_tour6_2 {
-  height: 680px;
-  background-image: url('../images/sunset-image-backg_2.jpg');
-  background-position: 50% 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide1_tour3_snork2 {
-  height: 680px;
-  background-image: url('../images/snorkling-image-backg_2.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide1_tour4_bm2 {
-  height: 680px;
-  background-image: url('../images/algarve.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide1_tour2-1 {
-  height: 680px;
-  background-image: url('../images/benagil-image-backg_1.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .slide_tour{
@@ -3615,26 +3061,6 @@ position: fixed;
   /* background-image: linear-gradient(180deg, #3385ff, #0047b3); */
   /* background-color: #3385ff; */
   
-}
-
-.slide-5-1 {
-  height: 680px;
-  background-image: url('../images/algarve.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide-topo-3-entrada {
-  height: 950px;
-  border-bottom: 1px none #fff;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .57)), color-stop(37%, transparent)), url('../images/paddleboat.jpeg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 37%), url('../images/paddleboat.jpeg');
-  background-position: 0px 0px, 50% 50%;
-  background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
-  -webkit-transition: all 400ms ease;
-  transition: all 400ms ease;
 }
 
 .utility-page-wrap {
@@ -3686,20 +3112,6 @@ position: fixed;
   align-items: stretch;
 }
 
-
-
-
-.imagem-tour-8 {
-  display: block;
-  height: 220px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/kayak2.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 .skipper {
   position: relative;
   top: -10px;
@@ -3744,17 +3156,6 @@ position: fixed;
   box-shadow: 0 5px 13px 1px rgba(0, 0, 0, .32);
 }
 
-.imagem-tour-9 {
-  display: block;
-  height: 125px;
-  margin: 31px 73px 30px;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-image: url('../images/SKIPPER-01.svg');
-  background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
 
 .titulo-tour-copy {
   margin-top: 24px;
@@ -3822,40 +3223,6 @@ position: fixed;
   text-align: center;
   text-decoration: none;
 }
-
-.slide1_tour7 {
-  height: 680px;
-  background-image: url('../images/tour7.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide1_tour7_2-copy {
-  height: 680px;
-  background-image: url('../images/ECO-TOUR2.jpg');
-  background-position: 0px 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide1_tour8 {
-  height: 680px;
-  background-image: url('../images/foto-destaque_IMG_0497.jpg');
-  background-position: 50% 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.slide1_tour8_2 {
-  height: 680px;
-  background-image: url('../images/snorkling-image-backg_2.jpg');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-
 
 .euros-pt {
   padding-left: 10px;
@@ -5710,11 +5077,6 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     margin-left: auto;
   }
 
-  .slide-snorkling-copy {
-    background-image: url('../images/snorkling3.jpg'), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image: url('../images/snorkling3.jpg'), linear-gradient(180deg, transparent, transparent);
-    background-size: cover, auto;
-  }
   .slide-5 {
     height: 800px;
   }

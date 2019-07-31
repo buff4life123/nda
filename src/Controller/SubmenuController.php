@@ -226,7 +226,6 @@ class SubmenuController extends AbstractController
 
              //dd($b);
         }
-       
 
         return $this->render('admin/submenu-edit.html',array(
             'form' => $form->createView(),
@@ -236,7 +235,7 @@ class SubmenuController extends AbstractController
             'b' => $b,
             'menus' => $m,
             'menu' => $submenu->getMenu()->getCurrentTranslation($locale),
-            'menu_id' => $submenu->getId()
+            'menu_id' => $submenu->getMenu()->getId()
         ));
     }
 
