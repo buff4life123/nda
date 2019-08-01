@@ -45,7 +45,6 @@ class PhotoServiceController extends AbstractController
         $locales = $em->getRepository(Locales::class)->findAll();
     
         //$form = $this->createForm(PhotoServiceType::class, $photoService);
-        
         // $form->handleRequest($request);
 
         return $this->render('admin/photo-service-new.html',array(
@@ -63,10 +62,13 @@ class PhotoServiceController extends AbstractController
         EnjoyApi $enjoyapi, 
         Host $host, 
         TranslatorInterface $translator)
-    {
-        $photoService = new PhotoService();
-
+    { 
         $em = $this->getDoctrine()->getManager();
+        
+        $this->sendFirstEmail($request, $em);
+        exit;
+
+        $photoService = new PhotoService();
 
         $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
 
@@ -313,6 +315,39 @@ class PhotoServiceController extends AbstractController
             $mailer->send($message);
         }
 
+        private function sendFirstEmail($request, $em) {
+            $company = $em->getRepository(Company::class)->find(1);
+                $locale = $request->getlocale();
+                
+                // $userMail = array();
+    
+                // if($photoService->getContacts()){
+                //     foreach($photoService->getContacts() as $emailToUser){
+                //         array_push($userMail, $emailToUser->getEmail());
+    
+                //     }
+                // }
+    
+                $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
+                    ->setUsername($company->getEmail())
+                    ->setPassword($company->getEmailPass());       
+    
+                $mailer = new \Swift_Mailer($transport);
+    
+                $message = (new \Swift_Message('será enviado em breve'))
+                    ->setFrom([$company->getEmail() => $company->getName()])
+                    // ->setBcc($userMail)
+                    ->setTo(["vgspedro15@sapo.pt" => 'pedro']) //$company->getEmail2()
+                    //->addPart($notice["subject"], 'text/plain')
+                    ->setBody(
+                        $this->renderView(
+                            'emails/photoServiceFirst.twig'
+                        ),
+                    'text/html'
+                );
+    
+                $mailer->send($message);
+            }
 }
 
 ?>
