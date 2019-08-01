@@ -90,6 +90,12 @@ class SubmenuController extends AbstractController
                             $em->persist($submenuTranslation);
                         }
                     }
+                    $roles = [];
+                    array_push($roles,  isset($request->request->get('submenu')['superuser']) ?"superuser":false);
+                    array_push($roles,  isset($request->request->get('submenu')['admin']) ?"admin":false);
+                    array_push($roles,  isset($request->request->get('submenu')['manager']) ?"manager":false);
+
+                    $submenu->setRoles($roles);
 
                     $submenu->setOrderBy(count($totals)+1);
                     $submenu->setMenu($menu);
@@ -172,6 +178,7 @@ class SubmenuController extends AbstractController
 
         $form = $this->createForm(SubmenuType::class, $submenu);
 
+        $role = strtolower( str_replace("ROLE_","", $this->getUser()->getRoles()[0]));
 
         $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
 
@@ -185,9 +192,9 @@ class SubmenuController extends AbstractController
 
             $t = array();
 
-            // $superUser  = $submenu->getRoles()[0] == "superuser"?"checked":false;
-            // $admin      = $submenu->getRoles()[1] == "admin"?"checked":false;
-            // $manager    = $submenu->getRoles()[2] == "manager"?"checked":false;
+            $superUser  = $submenu->getRoles()[0] == "superuser"?"checked":false;
+            $admin      = $submenu->getRoles()[1] == "admin"?"checked":false;
+            $manager    = $submenu->getRoles()[2] == "manager"?"checked":false;
 
             // $menus = $em->getRepository(Menu::class)->findAll();
             // dd($menus);
@@ -218,9 +225,9 @@ class SubmenuController extends AbstractController
                 'order_by' => $submenu->getOrderBy(),
                 'icon' => $submenu->getIcon(),
                 'path' => $submenu->getPath(),
-                // 'superuser' =>  $superUser,
-                // 'admin' => $admin,
-                // 'manager' => $manager,
+                'superuser' =>  $superUser,
+                'admin' => $admin,
+                'manager' => $manager,
                 'locales_translated' => $t,
             );
 
@@ -235,7 +242,8 @@ class SubmenuController extends AbstractController
             'b' => $b,
             'menus' => $m,
             'menu' => $submenu->getMenu()->getCurrentTranslation($locale),
-            'menu_id' => $submenu->getMenu()->getId()
+            'menu_id' => $submenu->getMenu()->getId(),
+            'role' => $role
         ));
     }
 
@@ -294,12 +302,12 @@ class SubmenuController extends AbstractController
                             $em->persist($submenuTranslation);
                         }
                     }
-                    // $roles = [];
-                    // array_push($roles,  isset($request->request->get('submenu')['superuser']) ?"superuser":false);
-                    // array_push($roles,  isset($request->request->get('submenu')['admin']) ?"admin":false);
-                    // array_push($roles,  isset($request->request->get('submenu')['manager']) ?"manager":false);
+                    $roles = [];
+                    array_push($roles,  isset($request->request->get('submenu')['superuser']) ?"superuser":false);
+                    array_push($roles,  isset($request->request->get('submenu')['admin']) ?"admin":false);
+                    array_push($roles,  isset($request->request->get('submenu')['manager']) ?"manager":false);
 
-                    // $submenu->setRoles($roles);
+                    $submenu->setRoles($roles);
 
                     $submenu->setOrderBy($request->request->get('order_by'));
                     $em->persist($submenu);
@@ -352,30 +360,36 @@ class SubmenuController extends AbstractController
         if(!$locale)
             $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
 
-        foreach ($submenus as $submenu) {
-            
-            $t = array();
+        $role = strtolower( str_replace("ROLE_","", $this->getUser()->getRoles()[0]));
 
-           foreach($submenu->getTranslation() as $translated){
-                $t[] = array(
-                    'local' => $translated->getLocales()->getName(),
-                    'name' => $translated->getName(),
-                    'local_id' => $translated->getLocales()->getId(),
+        foreach ($submenus as $submenu) {
+ 
+            if (in_array($role, $submenu->getRoles())) {
+            
+                $t = array();
+
+                foreach($submenu->getTranslation() as $translated){
+                        $t[] = array(
+                            'local' => $translated->getLocales()->getName(),
+                            'name' => $translated->getName(),
+                            'local_id' => $translated->getLocales()->getId(),
+                        );
+                }
+                $b[] = array(
+                    'id' => $submenu->getId(),
+                    'active' => $submenu->getActive(),
+                    'order_by' => $submenu->getOrderBy(),
+                    'locales_translated' => $t,
+                    'menu' => $submenu->getMenu()->getCurrentTranslation($locale)
                 );
-           }
-            $b[] = array(
-                'id' => $submenu->getId(),
-                'active' => $submenu->getActive(),
-                'order_by' => $submenu->getOrderBy(),
-                'locales_translated' => $t,
-                'menu' => $submenu->getMenu()->getCurrentTranslation($locale)
-            );
+            }
         }
    
 
         return $this->render('admin/submenu-list.html', array(
             'submenus' => $b,
-            'locales' => $locales
+            'locales' => $locales,
+            'role'=> $role
             ));
     }
 

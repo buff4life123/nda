@@ -158,6 +158,8 @@ class MenuController extends AbstractController
 
         $form = $this->createForm(MenuType::class, $menu);
 
+        $role = strtolower( str_replace("ROLE_","", $this->getUser()->getRoles()[0]));
+
         // dd($menu->getRoles());
 
         if($menu) {
@@ -199,7 +201,8 @@ class MenuController extends AbstractController
             'menu' => $menu,
             'locales' => $locales,
             'totals' => count($totals),
-            'b' => $b
+            'b' => $b,
+            'role' => $role
         ));
     }
 
@@ -304,29 +307,34 @@ class MenuController extends AbstractController
         $locales = $em->getRepository(Locales::class)->findAll();
 
         $b = array();
+
+        $role = strtolower( str_replace("ROLE_","", $this->getUser()->getRoles()[0]));
         
         foreach ($menus as $menu) {
+            if (in_array($role, $menu->getRoles())) {
 
-            $t = array();
+                $t = array();
 
-           foreach($menu->getTranslation() as $translated){
-                $t[] = array(
-                    'local' => $translated->getLocales()->getName(),
-                    'name' => $translated->getName(),
-                    'local_id' => $translated->getLocales()->getId(),
-                );
-           }
-            $b[] = array(
-                'id' => $menu->getId(),
-                'active' => $menu->getActive(),
-                'order_by' => $menu->getOrderBy(),
-                'locales_translated' => $t,
-            );
+                foreach($menu->getTranslation() as $translated){
+                        $t[] = array(
+                            'local' => $translated->getLocales()->getName(),
+                            'name' => $translated->getName(),
+                            'local_id' => $translated->getLocales()->getId(),
+                        );
+                }
+                    $b[] = array(
+                        'id' => $menu->getId(),
+                        'active' => $menu->getActive(),
+                        'order_by' => $menu->getOrderBy(),
+                        'locales_translated' => $t,
+                    );
+            }
         }
    
         return $this->render('admin/menu-list.html', array(
             'menus' => $b,
-            'locales' => $locales
+            'locales' => $locales,
+            'role'=> $role
             ));
     }
 

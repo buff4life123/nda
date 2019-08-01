@@ -45,14 +45,25 @@ class AdminController extends AbstractController
             $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
 
         $menus = $em->getRepository(Menu::class)->getMenusByUser($this->getUser());
-        
+
+
+        $role = strtolower( str_replace("ROLE_","", $this->getUser()->getRoles()[0]));
+
         $m = [];
         foreach($menus as $menu){
                 $sm = [];
-                    
+                $roles = [];
+
                 foreach($menu->getSubmenu() as $submenu){
-                    $sm [] = array('active' => $submenu->getActive(), 'icon' => $submenu->getIcon(), 
-                                'path' => $submenu->getPath(), 'name' => $submenu->getCurrentTranslation($locale)); //
+
+                    $roles[] = $submenu->getRoles();
+
+                    
+                    if (in_array($role, $submenu->getRoles())) {
+                        $sm [] = array('active' => $submenu->getActive(), 'icon' => $submenu->getIcon(), 
+                                    'path' => $submenu->getPath(), 'name' => $submenu->getCurrentTranslation($locale)); //
+                    }
+
                 }
 
                 $m[] = array('name'=> $menu->getCurrentTranslation($locale),
@@ -63,7 +74,7 @@ class AdminController extends AbstractController
                             'submenu'=>$sm,
                         );
         }
-        //dd($m);
+
         $ua = $this->getBrowser();
 
         return $this->render('admin/base.html.twig',['bookings'=>$booking, 'browser' => $ua, 'company' => $company, 'menus' => $m]);

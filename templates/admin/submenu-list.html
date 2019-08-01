@@ -48,7 +48,7 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
            <button class="w3-btn w3-border w3-blue" onclick="editSubmenu({{ c.id}})">
             <i class="far fa-edit fa-fw"></i>
           </button>
-          <button class="w3-btn w3-border w3-red" style="width: 19px" onclick="deleteSubmenuConfirm({{ c.id}},'{{c.locales_translated[0].name}}')">
+          <button class="delete-submenu-confirm w3-btn w3-border w3-red" style="width: 19px" onclick="deleteSubmenuConfirm({{ c.id}},'{{c.locales_translated[0].name}}')">
             <i class="fas fa-trash-alt"></i>
           </button>
         <div>
@@ -92,7 +92,11 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
 </div>
 
 <script>
- 
+
+    if('{{role}}' != "superuser"){
+      $('.delete-submenu-confirm').addClass("w3-hide");
+    } 
+
 stored = []
 
 function editSubmenu(id){

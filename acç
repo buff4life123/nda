@@ -1,0 +1,572 @@
+[33mcommit 58e57a5cf785e9442994a6eed4fd84ceafd74854[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: 7d36107 30fb2e0
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Wed Jul 31 21:33:58 2019 +0100
+
+    merge conflict
+
+[33mcommit 7d36107ab04cebc2e1ff9d6a21435d690fbf643b[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Wed Jul 31 21:32:31 2019 +0100
+
+    conflict commit
+
+[33mcommit 30fb2e0b1cbee6e75bdcc6633b5db2d882d898a8[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 31 17:56:20 2019 +0100
+
+    Add banner upload in cms
+
+[33mcommit f60c2b758dd9cacddd51b3a4aaef0686364df6d0[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 30 23:21:12 2019 +0100
+
+    Finish dinamic menu&submenu
+
+[33mcommit bb1bf5fd311b3c3dd16f39aafb591e32f4ca7939[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 30 18:08:05 2019 +0100
+
+    Update dinamic menu & submenu
+
+[33mcommit 13a84b76f5e4b5b44fdb546fe0fd4643848618e4[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 30 01:15:40 2019 +0100
+
+    Add submenu new
+
+[33mcommit f7d4b0d076e01df735b042fe8a545a618106035b[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 29 18:09:56 2019 +0100
+
+    Add submenu entity
+
+[33mcommit 0bbd38824c9b4f92c7fcdc7760f9903f8aebf85c[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jul 26 18:18:11 2019 +0100
+
+    Add dinamic menu
+
+[33mcommit 898c29728cf901ca94db3fef591a15730c1e18b8[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Thu Jul 25 17:50:07 2019 +0100
+
+    Add SEO edit to backoffice
+
+[33mcommit 4e5d033977389d5993653a9615a8e2a51cdbce3b[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Thu Jul 25 17:34:51 2019 +0100
+
+    Add SEO edit to backoffice
+
+[33mcommit 7b682c3ccd567e4c49763a4dd2bd2a3ac80f7509[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 24 18:00:33 2019 +0100
+
+    Update PhotoService Css in frontEnd
+
+[33mcommit a4ff2df1d0bd839e34eeac0a6ebaa5457f48ad99[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 24 17:58:04 2019 +0100
+
+    Update PhotoService Css in frontEnd
+
+[33mcommit 6db3f5e07849e2187fc81442f40fbdbd02d96ad5[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 24 16:05:59 2019 +0100
+
+    Change overflow from overlay to auto
+
+[33mcommit dd08c7120683a41d002cdd7f1a630e15d6b3c555[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 24 14:45:27 2019 +0100
+
+    Add new highlighted products
+
+[33mcommit 6bdf7431a561df27b908643282fdfcd29f2d0b11[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 24 11:32:55 2019 +0100
+
+    Add new highlighted products
+
+[33mcommit 14542b96ef4f9203b5e296c60c2439684669b760[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Wed Jul 24 02:15:39 2019 +0100
+
+    Add admin multiple telephones, emails, google coords
+
+[33mcommit 713023e798a2e643c06e66d10fa7ae86edb4c8a0[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 23 22:50:43 2019 +0100
+
+    Update Dinamic html lang local extend to other pages
+
+[33mcommit d0ad60c04690fce2fe48a76c3516911f05351edb[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 23 22:07:51 2019 +0100
+
+    Dinamic html lang local
+
+[33mcommit 22ba48e5d3f402d4d90b1d1ed8b5544dc7242e81[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 23 21:56:32 2019 +0100
+
+    Dinamic html lang local
+
+[33mcommit 31bb4efc1be856eb6dfc1993f5c21673a1e5e201[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 23 20:48:00 2019 +0100
+
+    Dinamic html lang local
+
+[33mcommit 6dde645fbff94a41802db5c97b6dad3902b09246[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 22 11:34:15 2019 +0100
+
+    FE local update
+
+[33mcommit 019ac038f65ac4c995f0e34eb74218b20cb32645[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 22 10:52:03 2019 +0100
+
+    FE local update
+
+[33mcommit 65c59173a2f870bb1a195cc90942a5e69a8ceede[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 22 10:31:42 2019 +0100
+
+    FE local update
+
+[33mcommit 21f36ce3e478f94eaf05ada98a064447100fda22[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 22 10:10:57 2019 +0100
+
+    FE local update
+
+[33mcommit 742fbde44ef50dd7e941c4222b3d88e70184eddf[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 22 10:09:24 2019 +0100
+
+    FE local update
+
+[33mcommit 273801f52e7c91ddcdbef33c019591420cfea7f1[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 22 10:04:58 2019 +0100
+
+    FE local update
+
+[33mcommit b670a33ff15722e824d27f126cb6628bcef57a61[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jul 19 09:34:25 2019 +0100
+
+    Update PSExpireCommand
+
+[33mcommit 5b5839eecfe343deec042f86f04055117796a0cb[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jul 19 09:30:39 2019 +0100
+
+    Update PSExpireCommand
+
+[33mcommit c2782b6c024a6204034737319db4f149bf3bdcc4[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 17 11:57:26 2019 +0100
+
+    Replace deprecated containerAwareCommand with command component
+
+[33mcommit ce33cf297dfbb87587470efe8198cc24c53bd8ab[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 16 17:02:29 2019 +0100
+
+    Correct photoService logo width
+
+[33mcommit 0be994215b0f71bd28d1bd8473a742ef6a848434[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 16 17:00:41 2019 +0100
+
+    Correct photoService logo width
+
+[33mcommit 522ee0b9d4269b4514043086dd7d0710f2c1616a[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 16 16:44:26 2019 +0100
+
+    Update photoService command and email notice
+
+[33mcommit b88862091a3fa5d943a8b5a2b279054df31e96f5[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 15 18:15:25 2019 +0100
+
+    Edit email messages
+
+[33mcommit 10c6d6ec5b7a548906bf61e0c542f5dba4b3da8e[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 9 17:44:12 2019 +0100
+
+    Add send multiple emails in photoService
+
+[33mcommit 775e2ed284669f7bc36212915554f3fd3675fc5f[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 9 17:00:10 2019 +0100
+
+    Add send multiple emails in photoService
+
+[33mcommit e9a1cea089a4740ed015c143d6774eb2dc02b90f[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 8 17:08:48 2019 +0100
+
+    Add scroll to id
+
+[33mcommit f9c79190d3799ee3a0a920e09f5132b9e11954fe[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 8 17:05:40 2019 +0100
+
+    Add preview photos in photoService
+
+[33mcommit 701721dd8d80c1df76483f1b7fdceb3e942e3ef6[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 8 16:37:28 2019 +0100
+
+    Add preview photos in photoService
+
+[33mcommit f4bd21776b8269a127bc73fbb25318f4bc328b49[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 8 16:34:38 2019 +0100
+
+    Add preview photos in photoService
+
+[33mcommit e2cd834e093e590f26b22eda0917f71e33dadc38[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 8 11:51:54 2019 +0100
+
+    Add getOs service
+
+[33mcommit 9e2033dc4956bc45b715c3a141b928c88cd97735[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 8 11:47:45 2019 +0100
+
+    Add getOs service
+
+[33mcommit 40b58a2c7173d53532162ac31f00ae033ca3bc59[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 3 10:56:27 2019 +0100
+
+    Add prjectDir to command file
+
+[33mcommit 00bf765ead589d699d0b663c969aa48c1743935f[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Wed Jul 3 10:55:48 2019 +0100
+
+    Add prjectDir to command file
+
+[33mcommit 039731058ab4204d19f2bd37a038154b6d6835f7[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Wed Jul 3 00:28:24 2019 +0100
+
+    Edit photoServiceExpireCommand
+
+[33mcommit 7afa53e535c71f8309db7c70b70acfbb417677d2[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 18:01:27 2019 +0100
+
+    Add addFile to zip photoServi
+
+[33mcommit 89313db883ff7a96b36bb6b63e391e0500da0306[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 17:48:34 2019 +0100
+
+    Add addFile to zip photoServi
+
+[33mcommit 9160ccfbe2d40e55d746b48effbd89d818e4d94b[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 17:24:01 2019 +0100
+
+    Add addFile to zip photoServi
+
+[33mcommit deb01892fb40f6bb9c4019f603e07aa5ebe57056[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 14:56:28 2019 +0100
+
+    Add PhotoService to live
+
+[33mcommit 35731c8877b84d7c13d4f45ae53754f7d0cb8ab1[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 14:50:18 2019 +0100
+
+    Remove create sucess-msg in js
+
+[33mcommit c0fb9648709519daf58f6431533370c19bfec543[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 14:38:55 2019 +0100
+
+    Update photoService
+
+[33mcommit 55b904c8e4975913c34835b07603168bb5ad0c54[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 14:33:06 2019 +0100
+
+    Update photoService
+
+[33mcommit 32eb4789e3069017fe9f5105499e2aa2af3a7985[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 14:28:51 2019 +0100
+
+    Update photoService
+
+[33mcommit e9907480ca0dce2661120693ddce720da48d842d[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 14:06:20 2019 +0100
+
+    Update photoService
+
+[33mcommit 2c605b222f47ba81d27583ddf326ccc7b8f4705e[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 14:03:45 2019 +0100
+
+    Update photoService
+
+[33mcommit c9d618374674a91dd49c98f8b2728c06040f7d30[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 14:00:22 2019 +0100
+
+    Update photoService
+
+[33mcommit cf323e7a73db9f1def844b8c271b1964d61f04ee[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 13:48:46 2019 +0100
+
+    Update photoService
+
+[33mcommit a762e5ff69762904321be41aafd315a9b797f7a3[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 13:06:00 2019 +0100
+
+    Update photoService
+
+[33mcommit 2a8d70a872a54aca459b1e1d3215a060d0856aad[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 12:52:48 2019 +0100
+
+    Update photoService
+
+[33mcommit 7558e738486fab2f9779440d768eac11ec092798[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 11:02:45 2019 +0100
+
+    Add sucess if upload is complet
+
+[33mcommit d756e8a98c43ab9f203195fa545340b3fdfd126a[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 10:25:24 2019 +0100
+
+    Add sucess if upload is complet
+
+[33mcommit 662d30521f146663891412111f0fdf31a8d4c5a6[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Tue Jul 2 09:29:08 2019 +0100
+
+    Add ajax timeout photoService
+
+[33mcommit 0b3db26fb26b1717b79fe6a97408ddf4f2f75a5d[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 2 01:19:28 2019 +0100
+
+    Add direct zip files
+
+[33mcommit 2438d30e11a5aa7ea35d91d2cc43b80c4082132a[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 2 01:15:13 2019 +0100
+
+    Add direct zip files
+
+[33mcommit 052e4013cc20a31604ff9d0e0ac4154f2a2e060f[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 2 00:58:10 2019 +0100
+
+    Add direct zip files
+
+[33mcommit b2cefd5c4e3ad8dff4c7e16373e59734f7ae0442[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Tue Jul 2 00:30:36 2019 +0100
+
+    Add direct zip files
+
+[33mcommit 8eddfb2d51c1b5248ac1af11850f9b20cb283ec1[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Mon Jul 1 23:47:28 2019 +0100
+
+    Add direct zip files
+
+[33mcommit b9e85c5724f1fd0740fd5cbefc796b946b9805c6[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Mon Jul 1 23:46:36 2019 +0100
+
+    Add direct zip files
+
+[33mcommit ad7825cbb0305d1ac09671d1a2d4fd9356d468ad[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Mon Jul 1 23:26:44 2019 +0100
+
+    Add direct zip files
+
+[33mcommit 51684eaa247dcdb749de5d34c964e47bbefa5f9c[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Mon Jul 1 22:31:39 2019 +0100
+
+    Comment move files to folder
+
+[33mcommit 42012d8e7c798a3178eef0c6905d8b55a1be4d7d[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Mon Jul 1 22:10:12 2019 +0100
+
+    Comment move files to folder
+
+[33mcommit 9c5ae0a8c5d7b82f57a634cae9cf420d4116624c[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 1 18:09:14 2019 +0100
+
+    Add jquery file upload
+
+[33mcommit 192c11f521bd73f3041db626bfc5323f30b0ed50[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 1 15:14:04 2019 +0100
+
+    Add timeout in ajax photoService
+
+[33mcommit 01e25f7b7a0009c47041c0d1a992356acd9a13ab[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 1 14:28:49 2019 +0100
+
+    Add timeout in ajax photoService
+
+[33mcommit 7c0eee1f6a67dba1a5d212f2cfa834d14e7593b9[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 1 14:24:43 2019 +0100
+
+    Add timeout in ajax photoService
+
+[33mcommit f02adf64baca99a0d6a9bd1cb9f5bf3a2001c6bb[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 1 14:15:34 2019 +0100
+
+    Add timeout in ajax photoService
+
+[33mcommit a015526fe5ed172af38d7febe5d41a93a9f201b3[m
+Merge: 395fc68 6569c63
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 1 12:10:18 2019 +0100
+
+    Add html form for photoService
+
+[33mcommit 395fc68976fe2b89ee08c5db029ed6b015d35eb4[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Mon Jul 1 12:07:20 2019 +0100
+
+    Add html form for photoService
+
+[33mcommit 6569c639d32436ed4c9a3a06829f0a62c9947a39[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Mon Jul 1 01:10:39 2019 +0100
+
+    COmment phone,email validations
+
+[33mcommit 861b3fcd104afde8fd0c18e58eda572efbde51f1[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Sun Jun 30 20:46:44 2019 +0100
+
+    Activate send email,sms
+
+[33mcommit b22e4f13cf7e897768ea187b19aa59c72f2b1e20[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Sun Jun 30 20:44:48 2019 +0100
+
+    Activate send email,sms
+
+[33mcommit bac71caede04952bcc3888c206b7e9443837247b[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Sun Jun 30 20:22:03 2019 +0100
+
+    Activate send email,sms
+
+[33mcommit fdcf2a1ef9b60f1ffffbb3ca46e382b3a1f03420[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Sun Jun 30 15:50:44 2019 +0100
+
+    Comment phone and email validation
+
+[33mcommit 2a219d615a5389a0955b7a2c7d4e2d61b885e0ef[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Sun Jun 30 14:26:51 2019 +0100
+
+    Add count execution time form getData
+
+[33mcommit 97d2945e0b4ac336df4524e33190251a703ed60a[m
+Author: buff4life123 <romanmsn.com@hotmail.com>
+Date:   Sun Jun 30 12:58:06 2019 +0100
+
+    Remove uploads return
+
+[33mcommit d173687ea6db521b58fc75aa06e4e0aa8ccd3069[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 18:18:54 2019 +0100
+
+    Add separated zip process
+
+[33mcommit c31c8c2548ee5ec6913c67aa1a9b055b85ef2de8[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 17:28:58 2019 +0100
+
+    Add separated zip process
+
+[33mcommit 2d49279cec35be0e03d9dff86e2956e417f888c8[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 15:54:04 2019 +0100
+
+    Update max selected images warning
+
+[33mcommit 990bb4a8ac1b388a794c43a9099d2af8755ee44a[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 15:52:28 2019 +0100
+
+    Add max selected images warning
+
+[33mcommit 844ac4e35a3b2649e2a00ae7d23cd7d0309c5f17[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 15:11:12 2019 +0100
+
+    Comment photoService remove folder
+
+[33mcommit aa2d4979250d4baac1847a7caf7442103d980eb7[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 14:43:47 2019 +0100
+
+    Update addImage in photoService
+
+[33mcommit f9d18e537229a4c0cd8b7c9eaa2f96862c34b6ec[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 13:03:47 2019 +0100
+
+    uncomment send sms,email
+
+[33mcommit 24a1b7cc2f1b48e343d0168174c5a37140cabda4[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 12:56:16 2019 +0100
+
+    Add zip folder in photoService
+
+[33mcommit 1dfbb685c55c19cf87ae6773d190c0afd79d0c52[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 09:28:57 2019 +0100
+
+    Remove resizeMultiple
+
+[33mcommit cac8b5583a6f12b5fca8a249bbb5d77fe2ba1da6[m
+Merge: 7c592d1 7d7c3ce
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 09:28:00 2019 +0100
+
+    Merge branch 'master' of https://github.com/buff4life123/cms
+
+[33mcommit 7c592d1fd95b1a13f402caba2da3b0c8e9b98970[m
+Author: roman <romanbajireanu@gmail.com>
+Date:   Fri Jun 28 09:27:39 2019 +0100
+
+    Remove resizeMultiple

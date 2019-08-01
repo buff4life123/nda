@@ -21,14 +21,19 @@
     <div class="w3-col s12 l2 m4">
       <label>&nbsp;</label><br>
       {{ form_widget(form.active)}} {{ form_label(form.active)}}
+      <span id="confirm-submenu">
       <label>&nbsp;</label>
        {{ form_widget(form.isSubmenu)}} {{ form_label(form.isSubmenu)}}
+       </span>
     </div>
 
-    <div class="w3-col s12 l2 m4">  
-      {{ form_widget(form.superuser, { 'attr': b.superuser?{checked:""}:{}})}} {{ form_label(form.superuser)}}
-      <label>&nbsp;</label><br>
-      {{ form_widget(form.admin,     { 'attr': b.admin?{checked:""}:{}})}} {{ form_label(form.admin)}}
+    <div class="w3-col s12 l2 m4"> 
+      <span id="role-superuser-menu">
+        {{ form_widget(form.superuser, { 'attr': b.superuser?{checked:""}:{}})}} {{ form_label(form.superuser)}}
+
+        <label>&nbsp;</label><br>
+        {{ form_widget(form.admin,     { 'attr': b.admin?{checked:""}:{}})}} {{ form_label(form.admin)}}
+      </span>
       <label>&nbsp;</label><br>
       {{ form_widget(form.manager,   { 'attr': b.manager?{checked:""}:{}})}} {{ form_label(form.manager)}}
     </div>
@@ -82,11 +87,11 @@
     </div>
 
     <div class="w3-row-padding w3-border w3-sand w3-padding-16">
-      <div class="w3-col s12 m4">
+      <div id="menu-icon" class="w3-col s12 m4">
         {{ form_label(form.icon)}} {{ form_widget(form.icon)}} 
       </div>
 
-      <div class="w3-col s12 m4">
+      <div id="menu-path" class="w3-col s12 m4">
         {{ form_label(form.path)}} {{ form_widget(form.path)}} 
       </div>
     </div>
@@ -94,6 +99,21 @@
   </div>
 
 <script>
+
+
+    if('{{role}}' != "superuser"){
+
+      if(!$('#role-superuser-menu').hasClass( "w3-hide" )) 
+      {
+        $('#role-superuser-menu').addClass("w3-hide");
+        $('#menu-path').addClass("w3-hide");
+        $('#menu-icon').addClass("w3-hide");
+        $('#confirm-submenu').addClass("w3-hide");
+      }
+   
+    } /* else if ('{{role}}' == "manager") {
+      $('#role-admin').addClass("w3-hide");
+    } */
 
   var loadFile = function(event) {
     $('.set-image-container').html('<img id="output" class="w3-image w3-animate-zoom">')

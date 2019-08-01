@@ -37,6 +37,10 @@ class Submenu
     /** @ORM\ManyToOne(targetEntity="Menu", inversedBy="submenu") */
     private $menu;
 
+    /**
+     * @ORM\Column(type="array", name="roles")*/
+    private $roles;
+
     public function __construct()
     {       
         $this->translation = new ArrayCollection();
@@ -122,4 +126,13 @@ class Submenu
     }
     
 
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
 }
