@@ -52,12 +52,11 @@ class AdminController extends AbstractController
         $m = [];
         foreach($menus as $menu){
                 $sm = [];
-                $roles = [];
+                //$roles = [];
 
                 foreach($menu->getSubmenu() as $submenu){
 
-                    $roles[] = $submenu->getRoles();
-
+                    //$roles[] = $submenu->getRoles();
                     
                     if (in_array($role, $submenu->getRoles())) {
                         $sm [] = array('active' => $submenu->getActive(), 'icon' => $submenu->getIcon(), 
@@ -74,6 +73,8 @@ class AdminController extends AbstractController
                             'submenu'=>$sm,
                         );
         }
+
+     
 
         $ua = $this->getBrowser();
 
