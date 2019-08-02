@@ -63,14 +63,15 @@ class PhotoServiceController extends AbstractController
         Host $host, 
         TranslatorInterface $translator)
     { 
+        $locale = $request->getlocale();
+        $host = $host->getHost($request);
+
         $em = $this->getDoctrine()->getManager();
-        
-        $this->sendFirstEmail($request, $em);
-        exit;
+
+        $company = $em->getRepository(Company::class)->find(1);
+        $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
 
         $photoService = new PhotoService();
-
-        $locales = $em->getRepository(Locales::class)->find($request->request->get("locales"));
 
         $today = new \Datetime('now');
         $dechex = dechex($today->format('U'));
@@ -83,7 +84,8 @@ class PhotoServiceController extends AbstractController
         $photoService->setEmail($request->request->get("email"));
         $photoService->setTelephone($request->request->get("telephone"));
 
-        $contacts = $request->request->get("contacts");
+        $contacts = json_decode($request->request->get("contacts"));
+
         if($contacts){
             foreach ($contacts as $contact) {
                 $photoServiceContacts = new PhotoServiceContacts();
@@ -96,6 +98,9 @@ class PhotoServiceController extends AbstractController
 
         $photoService->setLocales($locales);
 
+        $em->persist($photoService);
+        $em->flush();
+
         $filesystem = new Filesystem();
         $filesystem->mkdir($this->photo_service_directory.'/'.$photoService->getFolder());
 
@@ -105,14 +110,12 @@ class PhotoServiceController extends AbstractController
         $zipResult = $fileUploader->createZip($uploadedFiles, $folderPath, false, $dechex);
         $fileName = $fileUploader->uploads($uploadedFiles, $photoService->getFolder()); 
         
-
-        $em->persist($photoService);
-        $em->flush();
+        $translations = $this->noticeTranslation($translator, $photoService->getLocales()->getName());
 
         if($zipResult){
-            $notice = $this->personalizedNotice($photoService->getFolder(), $photoService->getEmail(), $photoService->getLocales(), $translator);
-            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $notice["sms"]);
-            $this->sendEmail($request, $em, $photoService, $notice, $host);
+            $notice = $this->personalizedNotice('photoServiceAdd', $company, $photoService, $translations, $host);
+            //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $notice["sms"]);
+            $this->sendEmail($locale, $company, $photoService, $notice["email"]);
         }
 
         $response = array(
@@ -139,8 +142,12 @@ class PhotoServiceController extends AbstractController
 
     public function photoServiceResendEmail(Request $request, Host $host, TranslatorInterface $translator)
     {
+        $locale = $request->getlocale();
+        $host = $host->getHost($request);
+
         $em = $this->getDoctrine()->getManager();
         $photoService = $em->getRepository(photoService::class)->find($request->request->get("id"));
+        $company = $em->getRepository(Company::class)->find(1);
 
         if(!$photoService){
 
@@ -152,9 +159,11 @@ class PhotoServiceController extends AbstractController
 
             return new JsonResponse($response);
         }
+        $translations = $this->noticeTranslation($translator, $photoService->getLocales()->getName());
+        $notice = $this->personalizedNotice('photoServiceResendEmail',$company, $photoService, $translations, $host);
         
-        $notice = $this->personalizedNotice($photoService->getFolder(), $photoService->getEmail(), $photoService->getLocales(), $translator);
-        $this->sendEmail($request, $em, $photoService, $notice, $host);
+        
+        $this->sendEmail($locale, $company, $photoService, $notice);
 
         $response = array(
             'status' => 1,
@@ -164,6 +173,35 @@ class PhotoServiceController extends AbstractController
 
         return new JsonResponse($response);
     }
+
+    public function photoServiceConfirmation(Request $request, Host $host, EnjoyApi $enjoyapi, TranslatorInterface $translator){
+
+        $locale = $request->getlocale();
+        $host = $host->getHost($request);
+        
+        $em = $this->getDoctrine()->getManager();
+        $company = $em->getRepository(Company::class)->find(1);
+
+        $photoService = array("name"=> $request->request->get("name"),
+                                "email"=> $request->request->get("email"),
+                                "telephone"=> $request->request->get("telephone"),
+                                "locales"=> $request->request->get("locales"),
+                                "contacts"=> json_decode($request->request->get("contacts")),       
+                                );
+                                
+        $translations = $this->noticeTranslation($translator, $photoService["locales"]);
+        $notice = $this->personalizedNotice('photoServiceConfirmation', $company, $photoService, $translations, $host);
+        //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $notice["sms"]);
+        $this->sendEmail($locale, $company, $photoService, $notice);
+
+        $response = array(
+            'status' => 1,
+            'message' => 'success',
+        );
+        return new JsonResponse($response);
+        
+    }
+
 
     public function photoServiceList(Request $request, ValidatorInterface $validator)
     {
@@ -244,40 +282,77 @@ class PhotoServiceController extends AbstractController
         return $err;
     }
 
-    private function personalizedNotice($folder, $email, $local, $translator)
+    private function personalizedNotice($action, $company, $photoService, $translations, $host)
     {
-        if ($local->getName() == "en_EN"){
-            $subject = "Photos";
-            $message = "to download your photos, please tap";
-            $domain = ".com";
-        } else {
-            $subject = "Fotografias";
-            $message = "para baixar suas fotos, por favor clique";
-            $domain = ".pt";
+        if ($action == "photoServiceConfirmation"){
+
+            $subject = $translations["confirm_photos"];
+ 
+            $emailMessage = '<h4>'.$translations["hello"] .'&ensp;' 
+                            . $photoService["name"] . '<br><br>'
+                            .$translations["photos_coming_soon"]. '.<br><br>'
+                            .$translations["team"] .'&ensp;' 
+                            . $company->getName() .'.<br>
+                            <img src='. $host.'/upload/gallery/'.$company->getLogo() .'  style=" width:80px;">
+                            </h4>';
+            $sms    = str_replace(" ","+", $translations["hello"] .',' .$translations["photos_coming_soon"]."." 
+            . $company->getName());
         }
-        $tripAdvisorUrl = "https://www.tripadvisor".$domain."/UserReviewEdit-g189112-d13795619-Nauticdrive-Albufeira_Faro_District_Algarve.html";
-        $PhotoServiceUrl = "https://www.nauticdrive-algarve.com/photo_service?c=".$folder."e=".$email."&local=".$local->getName()."";
+        else {
 
-        $photoServiceUrl ='<a target="_blank" href="'.$PhotoServiceUrl.'">'
-        .$translator->trans('here',array(), 'messages', $local->getName()).'</a>';
+            $now = new \Date('now');
+            $interval = new \DateInterval('P8D');
+            $now->sub($interval);
+            $expirationDate = \Date::createFromFormat('U', ($now->format('U') ));
+            $expirationDate->format("d/m/Y");
 
-        $notice = $message." ".$photoServiceUrl;
-        $sms    = str_replace(" ","+", $message." ".$PhotoServiceUrl);
+            $domain  = $translations["domain"];
+            $message = $translations["sms_download"];
+            $subject = $translations["photos"];
+            $tripAdvisorUrl = "https://www.tripadvisor".$domain."/UserReviewEdit-g189112-d13795619-Nauticdrive-Albufeira_Faro_District_Algarve.html";
+            $PhotoServiceUrl = "https://www.nauticdrive-algarve.com/photo_service?c="
+                                .$photoService->getFolder()."e=".$photoService->getEmail()."&local=".$photoService->getLocales()->getName()."";
+            $emailDownloadUrl ='<a target="_blank" href="'.$PhotoServiceUrl.'">'.$translations["here"] .'</a>'; //$translator->trans('here',array(), 'messages', $local)
+            
+            $sms    = str_replace(" ","+", $message." ".$PhotoServiceUrl);
+            $emailMessage =    '<h4>'.$translations["hello"] . $username . '<br><br>'
+                        .$translations["we_send_photos"] . $expirationDate. '<br>
+                        '.$emailDownloadUrl.'<br><br><br>'
+                        .$translations["make_comment"].
+                        '<a target="_blank" href="https://www.tripadvisor.com/UserReviewEdit-g189112-d13795619-Nauticdrive-Albufeira_Faro_District_Algarve.html">tripadvisor</a>.<br>
+                        '.$translations["at_your_disposal"].'<br>'
+                        .$translations["visit"].'<a target="_blank" href="https://www.nauticdrive-algarve.com">nauticdrive-algarve.com</a>.<br>
+                        '.$translations["team"] . $company->getName() .'.<br>
+                        <img src='. $host->getHost($request).'/upload/gallery/'.$company->getLogo() .'  style=" width:80px;">
+                        </h4>';
+        }
+
+        $notice = []; 
+        $notice [] = array($emailMessage,  $subject);
 
         return $notice = array(
-                        'subject' => $subject,
-                        'notice'  => $notice,
-                        'sms'     => $sms,
-                        'photoServiceUrl'=> $photoServiceUrl,
-                        'tripAdvisorUrl' => $tripAdvisorUrl,
-                        );
+            'sms'     => $sms,
+            'email'   => $notice,
+        );
     }
 
+    private function noticeTranslation($translator, $locale)
+    {   
+        return array('hello' => $translator->trans('hello',array(), 'messages', $locale),
+                     'we_send_photos' => $translator->trans('we_send_photos',array(), 'messages', $locale),
+                     'make_comment' => $translator->trans('make_comment'),
+                     'at_your_disposal' => $translator->trans('at_your_disposal',array(), 'messages', $locale),
+                     'visit' => $translator->trans('visit',array(), 'messages', $locale),
+                     'team' => $translator->trans('team',array(), 'messages', $locale),
+                     'here' => $translator->trans('here',array(), 'messages', $locale),
+                     'sms_download' => $translator->trans('sms_download',array(), 'messages', $locale),
+                     'confirm_photos' => $translator->trans('confirm_photos',array(), 'messages', $locale),
+                     'photos_coming_soon' => $translator->trans('photos_coming_soon',array(), 'messages', $locale),
+            );
+    }
     
-    private function sendEmail($request, $em, $photoService, $notice, $host) {
-        $company = $em->getRepository(Company::class)->find(1);
-            $locale = $request->getlocale();
-            
+    private function sendEmail($locale, $company, $photoService, $notice) {
+
             $userMail = array();
 
             if($photoService->getContacts()){
@@ -293,21 +368,14 @@ class PhotoServiceController extends AbstractController
 
             $mailer = new \Swift_Mailer($transport);
 
-            $message = (new \Swift_Message($notice["subject"]))
+            $message = (new \Swift_Message($notice["email"][0][1]))
                 ->setFrom([$company->getEmail() => $company->getName()])
                 ->setBcc($userMail)
-                ->setTo([$photoService->getEmail() => $photoService->getName(), "nauticdrive.fotos@gmail.com" => $company->getName()]) //$company->getEmail2()
-                ->addPart($notice["subject"], 'text/plain')
+                ->setTo([$photoService->getEmail() => $photoService->getName(), "roman.bajireanu@intouchbiz.com" => $company->getName()]) //$company->getEmail2() nauticdrive.fotos@gmail.com
+                ->addPart($notice["email"][0][1], 'text/plain')
                 ->setBody(
                     $this->renderView(
-                        'emails/photoService-'.$photoService->getLocales()->getName().'.twig',
-                        array(
-                            'link' => $notice["photoServiceUrl"],
-                            'username' => $photoService->getName(),
-                            'logo' => $host->getHost($request).'/upload/gallery/'.$company->getLogo(),
-                            'company_name' => $company->getName(),
-                            'tripAdvisorUrl' => $notice["tripAdvisorUrl"]
-                        )
+                        'emails/photoService-email.twig',array('email' => $notice["email"][0][0])
                     ),
                 'text/html'
             );
@@ -315,39 +383,6 @@ class PhotoServiceController extends AbstractController
             $mailer->send($message);
         }
 
-        private function sendFirstEmail($request, $em) {
-            $company = $em->getRepository(Company::class)->find(1);
-                $locale = $request->getlocale();
-                
-                // $userMail = array();
-    
-                // if($photoService->getContacts()){
-                //     foreach($photoService->getContacts() as $emailToUser){
-                //         array_push($userMail, $emailToUser->getEmail());
-    
-                //     }
-                // }
-    
-                $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
-                    ->setUsername($company->getEmail())
-                    ->setPassword($company->getEmailPass());       
-    
-                $mailer = new \Swift_Mailer($transport);
-    
-                $message = (new \Swift_Message('será enviado em breve'))
-                    ->setFrom([$company->getEmail() => $company->getName()])
-                    // ->setBcc($userMail)
-                    ->setTo(["vgspedro15@sapo.pt" => 'pedro']) //$company->getEmail2()
-                    //->addPart($notice["subject"], 'text/plain')
-                    ->setBody(
-                        $this->renderView(
-                            'emails/photoServiceFirst.twig'
-                        ),
-                    'text/html'
-                );
-    
-                $mailer->send($message);
-            }
 }
 
 ?>

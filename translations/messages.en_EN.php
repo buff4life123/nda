@@ -1,6 +1,17 @@
 <?php
 
 return array(
+    "we_send_photos" => "Welcome to NauticDrive, we send you the photos of your experience.The photos will be available until",
+    "make_comment" => "Make your comment on",
+    "at_your_disposal" => "We are at your disposal for new experiences.",
+    "visit" => "Visit us at",
+    "team" => "Team",
+    "photos"=> "Photos",
+    "confirm_photos"=> "Photos Confirmation",
+    "photos_coming_soon"=> "your photos will be sent soon",
+    "sms_download"=> "to download your photos, please tap",
+    "domain" => ".com",
+
     'here' => "Click here",
     'addresses' => 'Addresses',
     'send_email' => "Send Email",

@@ -130,7 +130,7 @@ input, select, textarea {color: #000!important}
   var fileInput = document.querySelector('input[type="file"]');  
 
   fileInput.addEventListener('change', function(e) {
-
+                                     
     $imgSelectedTranslate = e.target.files.length > 1 ? (e.target.files.length + " " + '{%trans%}selected_images{%endtrans%}') : e.target.files[0].name;
     $("#previews").html($imgSelectedTranslate);
      
@@ -146,6 +146,9 @@ input, select, textarea {color: #000!important}
   $("#photo-service-form").parsley()
   
   $('#photo-service-form').on('submit',function(e){
+
+    sendEmail();
+
     $('.w3-overlay').show()
 
     obj=''
@@ -155,27 +158,68 @@ input, select, textarea {color: #000!important}
     e.preventDefault()
     $('#progressBar,#status,#loaded_n_total').removeClass("w3-hide");
 
-      $.ajax({  
-        url:'{{ path('admin_photo_service_add') }}',
-        type: "POST",
-        data: form,
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 0,
-        xhr: function(){
-        // get the native XmlHttpRequest object
-        var xhr = $.ajaxSettings.xhr() ;
-        xhr.upload.addEventListener("progress", progressHandler, false);//onprogress = function(evt){ progressHandler(evt) } ;
-        xhr.addEventListener("load", completeHandler, false);
-        xhr.addEventListener("error", errorHandler, false);
-        xhr.addEventListener("abort", abortHandler, false);
-       
-        return xhr;
-        }
-      }) 
-
+    $.ajax({  
+      url:'{{ path('admin_photo_service_add') }}',
+      type: "POST",
+      data: form,
+      processData: false,
+      contentType: false,
+      cache: false,
+      timeout: 0,
+      xhr: function(){
+      // get the native XmlHttpRequest object
+      var xhr = $.ajaxSettings.xhr() ;
+      xhr.upload.addEventListener("progress", progressHandler, false);//onprogress = function(evt){ progressHandler(evt) } ;
+      xhr.addEventListener("load", completeHandler, false);
+      xhr.addEventListener("error", errorHandler, false);
+      xhr.addEventListener("abort", abortHandler, false);
+      
+      return xhr;
+      }
+    }) 
+  
   }) 
+
+  function sendEmail(){
+    
+    const name = $('#photo-service-form').find('input[name="name"]').val();
+    const email = $('#photo-service-form').find('input[name="email"]').val();
+    const telephone = $('#photo-service-form').find('input[name="telephone"]').val();
+    const locales = $('#photo-service-form').find('select[name="locales"]').val();
+    //const contacts = $('#photo-service-form').find
+
+    contacts = [];
+    // The .each() method is unnecessary here:
+      $('input[name="contacts[]"]').each(function() {
+        contacts.push($( this ).val());
+      });
+
+    $.ajax({  
+      url:'{{ path('photo_service_confirmation') }}',
+      type: "POST", 
+      data:'name='+name+'&email='+email+'&telephone='+telephone+'&locales='+locales+'&contacts='+JSON.stringify(contacts),
+      success: function(data){  
+        $('.w3-overlay').hide()
+        console.log(data)
+        if (data.status == 1){
+            //alert("email sent");
+        }
+        else{
+          for(i=0;i<data.data.length;i++)
+            obj += data.data[i]+'<br>'
+          $('#set-fields').html(obj)
+
+          $('#modal-fields').show()
+        }
+      },
+      error:function(data){
+        $('.w3-overlay').hide()
+        $('#modal-error').show()
+      }
+    })
+
+  }
+
 
   function progressHandler(event) {
     $("#loaded_n_total").html("Uploaded " + parseFloat(event.loaded * Math.pow(10,-6)).toFixed(1) 

@@ -1,6 +1,17 @@
 <?php
 
 return array(
+    "we_send_photos" => "Bem-Vindo ao NauticDrive, enviamos por este meio as fotos da sua experiência.As fotos estarão disponíveis até dia",
+    "make_comment" => "Faça o seu comentário no",
+    "at_your_disposal" => "Estamos a sua disposição para novas experiências.",
+    "visit" => "Visite-nos em",
+    "team" => "Equipa",
+    "photos"=> "Fotografias",
+    "confirm_photos"=> "Confirmação Fotografias",
+    "photos_coming_soon"=> "as tuas fotografias serão enviadas em breve",
+    "sms_download"=> "para baixar suas fotos, por favor clique",
+    "domain" => ".pt",
+
     'here' => "Clique aqui",
     'addresses' => 'Moradas',
     'send_email' => "Enviar Email",
