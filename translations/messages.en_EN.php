@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    "we_send_photos" => "Welcome to NauticDrive, we send you the photos of your experience.The photos will be available until",
+    "we_send_photos" => "Welcome to NauticDrive, we send you the photos of your experience. The photos will be available until",
     "make_comment" => "Make your comment on",
     "at_your_disposal" => "We are at your disposal for new experiences.",
     "visit" => "Visit us at",

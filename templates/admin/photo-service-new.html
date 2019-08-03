@@ -157,7 +157,7 @@ input, select, textarea {color: #000!important}
 
     e.preventDefault()
     $('#progressBar,#status,#loaded_n_total').removeClass("w3-hide");
-
+  
     $.ajax({  
       url:'{{ path('admin_photo_service_add') }}',
       type: "POST",
@@ -190,17 +190,16 @@ input, select, textarea {color: #000!important}
 
     contacts = [];
     // The .each() method is unnecessary here:
-      $('input[name="contacts[]"]').each(function() {
-        contacts.push($( this ).val());
-      });
+    $('input[name="contacts[]"]').each(function() {
+      contacts.push($( this ).val());
+    });
 
     $.ajax({  
       url:'{{ path('photo_service_confirmation') }}',
       type: "POST", 
       data:'name='+name+'&email='+email+'&telephone='+telephone+'&locales='+locales+'&contacts='+JSON.stringify(contacts),
       success: function(data){  
-        $('.w3-overlay').hide()
-        console.log(data)
+        //console.log(data)
         if (data.status == 1){
             //alert("email sent");
         }
