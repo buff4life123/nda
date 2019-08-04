@@ -181,6 +181,7 @@ input, select, textarea {color: #000!important}
   }) 
   
   function uploadTryAgain () {
+    $("#try-again-btn").addClass("w3-hide");
 
     form = new FormData($("#photo-service-form")[0]);
     
@@ -282,14 +283,15 @@ input, select, textarea {color: #000!important}
     $("#status").html("Upload Failed");
     $('.w3-overlay').hide()
 
-    var uploadRetry = $('<input type="button" class="w3-red" onclick="uploadTryAgain()" value="{%trans%}try_again{%endtrans%}" />');
-    $("#try-again").html(uploadRetry);
+    var uploadRetry = $('<input id="try-again-btn" type="button" class="w3-red" onclick="uploadTryAgain()" value="{%trans%}try_again{%endtrans%}" />');
+    $("#modal-error").html(uploadRetry);
     $("#submit-button").addClass("w3-hide");
-   /* setTimeout(
+   
+    setTimeout(
             function() 
             {
               ajaxUpload('photo-service-new')
-            }, 4000); */
+            }, 4000); 
   }
 
   function abortHandler(event) {
