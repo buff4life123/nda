@@ -280,14 +280,13 @@ input, select, textarea {color: #000!important}
     progressBar.value = 0; //wil clear progress bar after successful upload
   }
 
-  console.log($("#try-again-btn").length);
   function errorHandler(event) {
     $("#status").html("Upload Failed");
     $('.w3-overlay').hide()
 
     var uploadRetry = $('<input id="try-again-btn" type="button" class="w3-red" onclick="uploadTryAgain()" value="{%trans%}try_again{%endtrans%}" />');
 
-    if($("#try-again-btn").length != 0)
+    if($("#try-again-btn").length == 0)
       $("#try-again-container").append(uploadRetry);
 
     $("#submit-button").addClass("w3-hide");
