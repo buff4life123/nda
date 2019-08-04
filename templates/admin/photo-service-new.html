@@ -160,12 +160,11 @@ input, select, textarea {color: #000!important}
   
     $.ajax({  
       url:'{{ path('admin_photo_service_add') }}',
+      method: "POST",
       type: "POST",
       data: form,
       processData: false,
       contentType: false,
-      cache: false,
-      timeout: 0,
       xhr: function(){
       // get the native XmlHttpRequest object
       var xhr = $.ajaxSettings.xhr() ;
@@ -250,7 +249,6 @@ input, select, textarea {color: #000!important}
   }
 
   function completeHandler(event) {
-    //console.log(event)
     $("#status").html(event.target.responseText.message);
     progressBar.value = 0; //wil clear progress bar after successful upload
   }

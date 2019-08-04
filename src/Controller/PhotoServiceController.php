@@ -115,7 +115,7 @@ class PhotoServiceController extends AbstractController
         if($zipResult){
             $notice = $this->personalizedNotice('photoServiceAdd', $company, $photoService, $translations, $host);
             //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $notice["sms"]);
-            $this->sendEmail("photoServiceAdd", $locale, $company, $photoService, $notice["email"]);
+            //$this->sendEmail("photoServiceAdd", $locale, $company, $photoService, $notice["email"]);
         }
 
         $response = array(
@@ -163,7 +163,7 @@ class PhotoServiceController extends AbstractController
         $notice = $this->personalizedNotice('photoServiceResendEmail',$company, $photoService, $translations, $host);
         
         
-        $this->sendEmail("photoServiceResendEmail", $locale, $company, $photoService, $notice["email"]);
+        //$this->sendEmail("photoServiceResendEmail", $locale, $company, $photoService, $notice["email"]);
 
         $response = array(
             'status' => 1,
@@ -193,7 +193,7 @@ class PhotoServiceController extends AbstractController
         $translations = $this->noticeTranslation($translator, $local);
         $notice = $this->personalizedNotice('photoServiceConfirmation', $company, $photoService, $translations, $host);
         //$smsXML = $enjoyapi -> sendSMS($photoService["telephone"], $notice["sms"]);
-        $this->sendEmail("photoServiceConfirmation", $locale, $company, $photoService, $notice["email"]);
+        //$this->sendEmail("photoServiceConfirmation", $locale, $company, $photoService, $notice["email"]);
 
         $response = array(
             'status' => 1,
