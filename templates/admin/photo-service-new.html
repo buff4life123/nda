@@ -245,6 +245,9 @@ input, select, textarea {color: #000!important}
 
   }
 
+  $("#submit-button" ).click(function() {
+    $(".sucess-msg").addClass("w3-hide");
+  });
 
   function progressHandler(event) {
     $("#loaded_n_total").html("Uploaded " + parseFloat(event.loaded * Math.pow(10,-6)).toFixed(1) 
