@@ -178,6 +178,30 @@ input, select, textarea {color: #000!important}
     }) 
   
   }) 
+  
+  function uploadTryAgain () {
+
+    form = new FormData($("#photo-service-form")[0]);
+    
+    $.ajax({  
+      url:'{{ path('admin_photo_service_add') }}',
+      method: "POST",
+      type: "POST",
+      data: form,
+      processData: false,
+      contentType: false,
+      xhr: function(){
+      // get the native XmlHttpRequest object
+      var xhr = $.ajaxSettings.xhr() ;
+      xhr.upload.addEventListener("progress", progressHandler, false);//onprogress = function(evt){ progressHandler(evt) } ;
+      xhr.addEventListener("load", completeHandler, false);
+      xhr.addEventListener("error", errorHandler, false);
+      xhr.addEventListener("abort", abortHandler, false);
+      
+      return xhr;
+      }
+    }) 
+  }
 
   function sendEmail(){
     
@@ -212,7 +236,7 @@ input, select, textarea {color: #000!important}
       },
       error:function(data){
         $('.w3-overlay').hide()
-        //$('#modal-error').show()
+        $('#modal-error').show()
       }
     })
 
@@ -256,21 +280,24 @@ input, select, textarea {color: #000!important}
   function errorHandler(event) {
     $("#status").html("Upload Failed");
     $('.w3-overlay').hide()
-    setTimeout(
+
+    var uploadRetry = $('<input type="button" onclick="uploadTryAgain()" value="{%trans%}try_again{%endtrans%}" />');
+    $("#modal-error").append(uploadRetry);
+   /* setTimeout(
             function() 
             {
               ajaxUpload('photo-service-new')
-            }, 4000);
+            }, 4000); */
   }
 
   function abortHandler(event) {
     $("#status").html("Upload Aborted");
     $('.w3-overlay').hide()
-    setTimeout(
+  /*  setTimeout(
             function() 
             {
               ajaxUpload('photo-service-new')
-            }, 4000);
+            }, 4000); */
   }
 
 
