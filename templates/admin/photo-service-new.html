@@ -285,7 +285,7 @@ input, select, textarea {color: #000!important}
     $('.w3-overlay').hide()
 
     var uploadRetry = $('<input id="try-again-btn" type="button" class="w3-red" onclick="uploadTryAgain()" value="{%trans%}try_again{%endtrans%}" />');
-    $("#modal-error").children(':first-child').append(uploadRetry);
+    $("#try-again-container").children(':first-child').html(uploadRetry);
     $("#submit-button").addClass("w3-hide");
    
     setTimeout(
