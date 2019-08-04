@@ -114,8 +114,9 @@ class PhotoServiceController extends AbstractController
 
         if($zipResult){
             $notice = $this->personalizedNotice('photoServiceAdd', $company, $photoService, $translations, $host);
-            //$smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $notice["sms"]);
-            //$this->sendEmail("photoServiceAdd", $locale, $company, $photoService, $notice["email"]);
+            
+            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $notice["sms"]);
+            $this->sendEmail("photoServiceAdd", $locale, $company, $photoService, $notice["email"]);
         }
 
         $response = array(
@@ -163,7 +164,7 @@ class PhotoServiceController extends AbstractController
         $notice = $this->personalizedNotice('photoServiceResendEmail',$company, $photoService, $translations, $host);
         
         
-        //$this->sendEmail("photoServiceResendEmail", $locale, $company, $photoService, $notice["email"]);
+        $this->sendEmail("photoServiceResendEmail", $locale, $company, $photoService, $notice["email"]);
 
         $response = array(
             'status' => 1,
@@ -192,8 +193,9 @@ class PhotoServiceController extends AbstractController
         $local  = $photoService["locales"] == 1? "en_EN":"pt_PT";
         $translations = $this->noticeTranslation($translator, $local);
         $notice = $this->personalizedNotice('photoServiceConfirmation', $company, $photoService, $translations, $host);
-        //$smsXML = $enjoyapi -> sendSMS($photoService["telephone"], $notice["sms"]);
-        //$this->sendEmail("photoServiceConfirmation", $locale, $company, $photoService, $notice["email"]);
+        
+        $smsXML = $enjoyapi -> sendSMS($photoService["telephone"], $notice["sms"]);
+        $this->sendEmail("photoServiceConfirmation", $locale, $company, $photoService, $notice["email"]);
 
         $response = array(
             'status' => 1,
@@ -378,7 +380,7 @@ class PhotoServiceController extends AbstractController
             $message = (new \Swift_Message($notice[1]))
                 ->setFrom([$company->getEmail() => $company->getName()])
                 ->setBcc($userMail)
-                ->setTo([$userEmail => $userName, "roman.bajireanu@intouchbiz.com" => $company->getName()]) //$company->getEmail2() nauticdrive.fotos@gmail.com
+                ->setTo([$userEmail => $userName, "nauticdrive.fotos@gmail.com" => $company->getName()]) //$company->getEmail2() nauticdrive.fotos@gmail.com
                 ->addPart($notice[1], 'text/plain')
                 ->setBody(
                     $this->renderView(
