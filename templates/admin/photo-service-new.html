@@ -280,6 +280,7 @@ input, select, textarea {color: #000!important}
     progressBar.value = 0; //wil clear progress bar after successful upload
   }
 
+  console.log($("#try-again-btn").length);
   function errorHandler(event) {
     $("#status").html("Upload Failed");
     $('.w3-overlay').hide()
