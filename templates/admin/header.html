@@ -71,11 +71,13 @@
 
 </nav> 
 
-<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay">
+<div class="w3-overlay w3-animate-opacity" onclick="" style="cursor:pointer" title="close side menu" id="myOverlay">
     <div class="w3-display-container" style="height:100vh">
       <div class="w3-display-middle">
-        <i class="w3-text-white fas fa-4x fa-spinner fa-pulse"></i>
+        <i class="w3-text-white fas fa-4x fa-spinner fa-pulse w3-show"></i>
+        <input id="upload-cancel" type="button" class="w3-hide w3-btn w3-border w3-blue w3-right w3-margin-top" onclick="abortUpload()" value="{%trans%}cancel{%endtrans%}" />
       </div>
+    
     </div>
 </div>
 <div class="w3-margin-top"> 

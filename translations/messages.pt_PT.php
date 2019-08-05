@@ -231,6 +231,7 @@ return array(
     'edit' => 'Editar',
     'pending' => 'Pendente',
     'canceled' => 'Cancelada',
+    'cancel' => 'Cancelar',
     'confirmed' => 'Confirmada',
     'today' => 'Hoje',
     'tomorrow' => 'Amanhã',
