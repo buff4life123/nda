@@ -281,6 +281,7 @@ input, select, textarea {color: #000!important}
     
     if(Math.round(percent) == 100) {
       //$("#status").html("compressing images... please wait");
+      $("#upload-cancel").addClass("w3-hide");
       $('.w3-overlay').hide()
 
       $('#photo-service-form')[0].reset();
