@@ -228,11 +228,14 @@ class FrontendController extends AbstractController
 
 	function activity($id, $text, Request $request,  ExperienceApi $experience)
 	{
+
+
+
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$products = $experience->getProduct($request->getLocale(), $id);
 		$langCode = $this->langCode($this-> defaultUserLocale($request));
-
+		//dd($request->getLocale(), $products);
     	return $this->render('index/activity.html.twig', array(
 			'page'=> 'activity',
 			'company' => $company,
@@ -447,7 +450,7 @@ class FrontendController extends AbstractController
     {    
         $this->session->set('_locale', $lang);
 		
-		return $this->redirectToRoute($page);
+		return $this->redirectToRoute($page,array('_locale' => $lang));
     }
 	
 	public function sendEmail(Request $request, \Swift_Mailer $mailer, TranslatorInterface $translator)

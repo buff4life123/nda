@@ -1,7 +1,6 @@
 index:
-    path: /
+    path: /{_locale}
     controller: App\Controller\FrontendController::home
-    prefix: /{_locale}
     requirements:
         _locale: '%app_locales%'
     defaults:
@@ -29,6 +28,10 @@ index_info:
 translation:
     path: /translation/{lang}/{page}
     controller: App\Controller\FrontendController::userTranslation
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
 
 set_booking:
     path: /booking
@@ -536,8 +539,12 @@ user_create:
 ###
 
 other_company:
-    path: /other_company
+    path: /{_locale}/atlantic-quest
     controller: App\Controller\FrontendController::otherCompany
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
 
 photo_service:
     path: /photo_service
@@ -552,12 +559,21 @@ photo_service_preview:
     controller: App\Controller\FrontendController::photoServicePreview
 
 about_us:
-    path: /about-us
+    path: /{_locale}/about-us
     controller: App\Controller\FrontendController::aboutUs
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
+
 
 activity:
-    path: /activity/{id}/{text}
+    path: /{_locale}/activity/{id}/{text}
     controller: App\Controller\FrontendController::activity
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
 
 
 page_detail:
