@@ -237,7 +237,7 @@ class HomeController extends AbstractController
 
         else{
         
-        $locale = $this->session->get('_locale')->getName() ? $this->session->get('_locale')->getName() : 'pt_PT';
+        $locale = $this->session->get('_locale')->getName() ? $this->session->get('_locale')->getName() : 'pt';
 
         $locales = $em->getRepository(Locales::class)->findOneBy(['name' => $locale]);
         
@@ -381,7 +381,7 @@ class HomeController extends AbstractController
             ->setUsername($company->getEmail())
             ->setPassword($company->getEmailPass());       
 
-        $locale->getName() == 'pt_PT' ? $product->getNamePt() : $product->getNameEn();
+        $locale->getName() == 'pt' ? $product->getNamePt() : $product->getNameEn();
 
         $mailer = new \Swift_Mailer($transport);
                     
@@ -399,7 +399,7 @@ class HomeController extends AbstractController
                         'username' => $client->getUsername(),
                         'email' => $client->getEmail(),
                         'status' => $this->translateStatus('PENDING', $locale ->getName()),
-                        'tour' => $locale->getName() == 'pt_PT' ? $product->getNamePt() : $product->getNameEn(),
+                        'tour' => $locale->getName() == 'pt' ? $product->getNamePt() : $product->getNameEn(),
                         'date' => $booking->getAvailable()->getDatetimeStart()->format('d/m/Y'),
                         'hour' =>  $booking->getAvailable()->getDatetimeStart()->format('H:i'),
                         'adult' => $booking->getAdult(),
@@ -577,7 +577,7 @@ class HomeController extends AbstractController
         $locale = str_replace("-","_",$lang[0]);
 
         if($locale == 'en_US')
-            $locale = 'en_EN';
+            $locale = 'en';
         else
             $locale;
 

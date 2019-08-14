@@ -41,12 +41,12 @@ class ProductController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+        $l = $request->getLocale() ? $request->getLocale() : 'pt';
 
         $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
 
         if(!$locale)
-            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt']);
 
         $locales = $em->getRepository(Locales::class)->findAll();
 
@@ -140,12 +140,12 @@ class ProductController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+        $l = $request->getLocale() ? $request->getLocale() : 'pt';
 
         $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
 
         if(!$locale)
-            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt']);
 
         $products = $em->getRepository(Product::class)->findBy([],['orderBy' => 'ASC']);
 

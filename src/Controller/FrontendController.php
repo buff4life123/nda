@@ -39,6 +39,9 @@ class FrontendController extends AbstractController
 
     public function home(Request $request, ExperienceApi $experience)
     {
+		// dd($request->getLocale(),$this-> defaultUserLocale($request));
+
+
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$products = $experience->getProducts($request->getLocale());
@@ -50,9 +53,7 @@ class FrontendController extends AbstractController
 		//$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
 		$banner = $em->getRepository(Banner::class)->findAll();
 
-		$local = $this->langCode($this-> defaultUserLocale($request));
-
-		//dd($banner);
+		$langCode = $this->langCode($this-> defaultUserLocale($request));
 		
 		return $this->render('index/index.html.twig',  array(
 			'page' => 'index', 
@@ -66,7 +67,7 @@ class FrontendController extends AbstractController
 			'products' => $products['products'],
 			'exp_api_key' => $products['key'],
 			'url_api_key' => $products['url'],
-			'local' => $local,
+			'langCode' => $langCode,
 		
 		));
 			
@@ -77,14 +78,14 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
-		$local = $this->langCode($this-> defaultUserLocale($request));
+		$langCode = $this->langCode($this-> defaultUserLocale($request));
 
 		return $this->render('index/about_us.html.twig',  array(
 			'page' => 'about_us',
 			'company' => $company,
 			// 't' => $request->getLocale(),
 			'about' => $about,
-			'local' => $local,
+			'langCode' => $langCode,
 			'seo' => $this->getSeo($request),
 		));
 	}
@@ -94,14 +95,14 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$about = $em->getRepository(AboutUs::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
-		$local = $this->langCode($this-> defaultUserLocale($request));
+		$langCode = $this->langCode($this-> defaultUserLocale($request));
 
 		return $this->render('index/other_company.twig',  array(
 			'page' => 'about_us',
 			'company' => $company,
 			// 't' => $request->getLocale(),
 			'about' => $about,
-			'local' => $local,
+			'langCode' => $langCode,
 			'seo' => $this->getSeo($request),
 		));
 	}
@@ -113,7 +114,7 @@ class FrontendController extends AbstractController
 
 		$rgpd = $em->getRepository(Rgpd::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
-		$local = $this->langCode($this-> defaultUserLocale($request));
+		$langCode = $this->langCode($this-> defaultUserLocale($request));
 
 		$code = null;
 		$email= null;
@@ -125,7 +126,7 @@ class FrontendController extends AbstractController
 			if (count($param) > 1){
 				$code = $param[0];
 				$email = $param[1];
-				$local = $request->query->get("local") ? $request->query->get("local") :'pt_PT';
+				$local = $request->query->get("local") ? $request->query->get("local") :'pt';
 
 				if($this-> defaultUserLocale($request)->getName() != $local){
 					$this->session->set('_locale', $local);
@@ -141,7 +142,7 @@ class FrontendController extends AbstractController
 			'terms_conditions' => $terms_conditions,
 			'email' => $email,
 			'code' => $code,
-			'local' => $local,
+			'langCode' => $langCode,
 			'seo' => $this->getSeo($request),
 			// 't' => $request->getLocale(),
 			//'about' => $about,
@@ -230,7 +231,7 @@ class FrontendController extends AbstractController
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$products = $experience->getProduct($request->getLocale(), $id);
-		$local = $this->langCode($this-> defaultUserLocale($request));
+		$langCode = $this->langCode($this-> defaultUserLocale($request));
 
     	return $this->render('index/activity.html.twig', array(
 			'page'=> 'activity',
@@ -238,7 +239,7 @@ class FrontendController extends AbstractController
 			'products' => $products['products'],
 			'exp_api_key' => $products['key'],
 			'url_api_key' => $products['url'],
-			'local' => $local,
+			'langCode' => $langCode,
 			'seo' => $this->getSeo($request),
 		));
 
@@ -576,7 +577,7 @@ class FrontendController extends AbstractController
 
 	private function defaultUserLocale(Request $request) {
 		$em = $this->getDoctrine()->getManager();
-		$defaultUserLocale = $request->getLocale() == "en" || $request->getLocale() == "en_EN" ? 'en_EN':'pt_PT';
+		$defaultUserLocale = $request->getLocale() == "en" || $request->getLocale() == "en" ? 'en':'pt';
 		$userLocale = $em->getRepository(Locales::class)->findOneBy(['name'=> $defaultUserLocale]);
 		return $userLocale;
 	}
@@ -590,9 +591,9 @@ class FrontendController extends AbstractController
 
 		switch($locales->getName()){
 
-			case "pt_PT": return "pt-pt";
+			case "pt": return "pt-pt";
 			break;
-			case "en_EN":return "en-pt";
+			case "en":return "en-pt";
 			break;
 			default:
 			 			return "x-default";

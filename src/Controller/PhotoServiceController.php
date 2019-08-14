@@ -189,7 +189,7 @@ class PhotoServiceController extends AbstractController
                                 "contacts"=> json_decode($request->request->get("contacts")),       
                                 );
                                 
-        $local  = $photoService["locales"] == 1? "en_EN":"pt_PT";
+        $local  = $photoService["locales"] == 1? "en":"pt";
         $translations = $this->noticeTranslation($translator, $local);
         $notice = $this->personalizedNotice('photoServiceConfirmation', $company, $photoService, $translations, $host);
         $smsXML = $enjoyapi -> sendSMS($photoService["telephone"], $notice["sms"]);

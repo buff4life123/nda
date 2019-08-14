@@ -190,7 +190,7 @@ return array(
     'focus_text' => 'Service provided and with permanent concern for your well being and safety.',
     'ambition_title' => 'Ambition',
     'ambition_text' => 'Reference and preference in the activity sector with a new dynamic, a new vision and responsibility.',
-    'lang' => "en_EN",
+    'lang' => "en",
     'openGoogleMaps' =>  "Open on Google Maps",
 
     'cookies' => array(

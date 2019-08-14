@@ -50,12 +50,12 @@
         <div class="navbar w-nav" data-animation="default" data-collapse="medium" data-duration="400">
             <div class="container-nav w-clearfix">
 
-                {% if app.request.getLocale() == 'pt_PT' %}
-                    <a href="{{path('translation',{lang:'en_EN',page:page}) }}" class="language w-inline-block">
+                {% if app.request.getLocale() == 'pt' %}
+                    <a href="{{path('translation',{lang:'en',page:page}) }}" class="language w-inline-block">
                         <div class="text-block">EN</div>
                     </a>
                 {% else %}
-                    <a href="{{path('translation',{lang:'pt_PT',page:page}) }}" class="language w-inline-block">
+                    <a href="{{path('translation',{lang:'pt',page:page}) }}" class="language w-inline-block">
                         <div class="text-block">PT</div>
                     </a>
                 {% endif %}
@@ -114,7 +114,7 @@
 
                     {%for product in products %}
                         {# {% if  loop.index0 < 3 %} #}
-                        {% if  (product.id == 41) or (product.title == "BENAGIL TOUR") or (product.title == "DOLPHINS TOURS") %}
+                        {% if  (product.id == 41) or (product.id == 101) or (product.id == 102) %}
 
                             <div class="w3-col l4 m12 s12" data-ix="new-interaction" style="padding-bottom:24px">
 

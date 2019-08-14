@@ -35,14 +35,14 @@ class AdminController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $booking = array();//$em->getRepository(Booking::class)->dashboardValues();
         $company = $em->getRepository(Company::class)->find(1);
-        //$locales = $em->getRepository(Locales::class)->findOneBy(['name' =>"en_EN"]);
+        //$locales = $em->getRepository(Locales::class)->findOneBy(['name' =>"en"]);
         
-        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+        $l = $request->getLocale() ? $request->getLocale() : 'pt';
 
         $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
 
         if(!$locale)
-            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt']);
 
         $menus = $em->getRepository(Menu::class)->getMenusByUser($this->getUser());
 

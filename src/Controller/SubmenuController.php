@@ -33,12 +33,12 @@ class SubmenuController extends AbstractController
         $form->handleRequest($request);
 
 
-        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+        $l = $request->getLocale() ? $request->getLocale() : 'pt';
 
         $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
 
         if(!$locale)
-            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt']);
 
         $menus = $em->getRepository(Menu::class)->findAll();
         $m = array();
@@ -180,12 +180,12 @@ class SubmenuController extends AbstractController
 
         $role = strtolower( str_replace("ROLE_","", $this->getUser()->getRoles()[0]));
 
-        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+        $l = $request->getLocale() ? $request->getLocale() : 'pt';
 
         $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
 
         if(!$locale)
-            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt']);
         // dd($submenu->getRoles());
 
         if($submenu) {
@@ -353,12 +353,12 @@ class SubmenuController extends AbstractController
 
         $b = array();
         
-        $l = $request->getLocale() ? $request->getLocale() : 'pt_PT';
+        $l = $request->getLocale() ? $request->getLocale() : 'pt';
 
         $locale = $em->getRepository(Locales::class)->findOneBy(['name' => $l]);
 
         if(!$locale)
-            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+            $locale = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt']);
 
         $role = strtolower( str_replace("ROLE_","", $this->getUser()->getRoles()[0]));
 

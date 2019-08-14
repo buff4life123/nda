@@ -258,7 +258,7 @@ return array(
     'focus_text' => 'Serviço proporcionado e com a permanente preocupação no seu bem estar e segurança.',
      'ambition_title' => 'Ambição',
     'ambition_text' => 'Referência e preferência no sector da atividade com uma nova dinâmica, uma nova visão e responsabilidade',
-    'lang' => "pt_PT",
+    'lang' => "pt",
     'openGoogleMaps' =>  "Abrir no Google Maps",
 
     'cookies' => array(

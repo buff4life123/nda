@@ -22,8 +22,16 @@ class ExperienceApi
 	 $local String accepts('EN_en','PT_pt','ES_es','FR_fr')
 	*/
 	public function getProducts($local = null){
-        
-        $url = $this->url_api_key.'api/'.$this->exp_api_key.'/products/'.$local;
+        //$l= "PT-pt";
+        switch($local) {
+            case "en": $l="En_en";
+            break;
+            case "pt": $l="PT_pt";
+            break;
+            default: "erro";
+        }
+
+        $url = $this->url_api_key.'api/'.$this->exp_api_key.'/products/'.$l;
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);

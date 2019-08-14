@@ -9,10 +9,10 @@ class RequestInfo
     public function getBrownserLocale($request) 
     { 
         $u_agent = $request->headers->get('accept-language');
-        $locale = 'pt_PT';
+        $locale = 'pt';
 
         if (!preg_match('/pt-/i', $u_agent))
-            $locale = "en_EN";
+            $locale = "en";
         return $locale; 
 
     }

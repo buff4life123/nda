@@ -23,7 +23,7 @@ class TranslationController extends AbstractController
         $locales = $em->getRepository(Locales::class)->findOneBy(['name' => $local]);
         
         if(!$locales)
-            $locales = $em->getRepository(Locales::class)->findOneBy(['name' => 'pt_PT']);
+            $locales = $em->getRepository(Locales::class)->findOneBy(['name' => 'en']);
 
             $this->session->set('_locale', $locales->getName());
 
