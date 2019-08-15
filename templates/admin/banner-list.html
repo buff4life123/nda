@@ -47,10 +47,10 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
       <td class="w3-hide">{{banner.id}}</td>
        <td class="w3-center">
         <div style="width:110px;max-width:110px">
-           <button class="w3-btn w3-border w3-blue" onclick="editBanner({{ banner.id}})">
+           <button class="w3-btn w3-border w3-blue" onclick="editBanner('{{ banner.id}}')">
             <i class="far fa-edit fa-fw"></i>
           </button>
-          <button class="w3-btn w3-border w3-red" style="width: 19px" onclick="deleteBannerConfirm({{ banner.id}},'{{banner.locales_translated[0].name}}')">
+          <button class="w3-btn w3-border w3-red" style="width: 19px" onclick="deleteBannerConfirm('{{ banner.id}}','{{banner.locales_translated[0].name}}')">
             <i class="fas fa-trash-alt"></i>
           </button>
         <div>

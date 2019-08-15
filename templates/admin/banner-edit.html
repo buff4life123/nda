@@ -63,11 +63,11 @@
 
   <div class="w3-row-padding w3-border w3-sand w3-padding-16">
 
-   {% for locale in locales%}
+   {% for locale in locales %}
 
     <div class="w3-col s12 l4 m6">
 
-      <label>{% trans %}text{% endtrans %} {% set k = locale.name|split('_') %} {{ k[1] }}</label>
+      <label>{% trans %}text{% endtrans %} {{ locale.name }}</label>
       <div class="w3-row">
         <div class="w3-col" style="width:45px">
           <img src="{{locale.filename}}" style="height:45px" class="w3-border" title="{{locale.name}}">

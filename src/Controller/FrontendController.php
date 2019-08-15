@@ -41,7 +41,6 @@ class FrontendController extends AbstractController
     {
 		// dd($request->getLocale(),$this-> defaultUserLocale($request));
 
-
 		$em = $this->getDoctrine()->getManager();
 		$company = $em->getRepository(Company::class)->find(1);
 		$products = $experience->getProducts($request->getLocale());
@@ -51,8 +50,15 @@ class FrontendController extends AbstractController
 
 		$social_network_icons = $this-> fileFinder("../public_html/images/socialMedia/");
 		//$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
-		$banner = $em->getRepository(Banner::class)->findAll();
+		$banners = $em->getRepository(Banner::class)->findAll();
 
+		foreach($banners as $banner) {
+			$bs[]  = ['image'=>$banner->getImage(),
+							'isActive'=>$banner->getIsActive(), 
+							'textIsActive'=>$banner->getIsActive(), 
+							'translation'=>$banner->getCurrentTranslation($this-> defaultUserLocale($request))];
+		}
+		
 		$langCode = $this->langCode($this-> defaultUserLocale($request));
 		
 		return $this->render('index/index.html.twig',  array(
@@ -63,7 +69,7 @@ class FrontendController extends AbstractController
 			'terms_conditions' => $terms_conditions,
 			'social_network_icons' => $social_network_icons,
 			//'header_slider_items'  => $header_slider_items,
-			'banner' => $banner,
+			'banners' => $bs,
 			'products' => $products['products'],
 			'exp_api_key' => $products['key'],
 			'url_api_key' => $products['url'],
