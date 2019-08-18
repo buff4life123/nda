@@ -121,32 +121,38 @@
 
                                 <div class="w3-white w3-card w3-border w3-round-large">
                                     {% set text = product.title|replace({' ': '-'}) %}
-                                    <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
-                                        {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
-                                        <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div>
+                                    {# <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none" > #}
+                                    {# <div onclick="getActivity({{product.id}},'{{text}}')"> #}
+                                        <form action="{{ path('activity', {text:text})}}" method="POST" style="text-decoration:none">
+                                            <input type="hidden" id="id" name="id" value="{{product.id}}"/>
+     
+                                            {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
+                                            <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div>
 
-                                        <div>
-                                            <div class="w3-row-padding" style="height:142px!important">
-                                                <div class="w3-col s12 txt-destaque">
-                                                    <div class="titulo-tour-1" style="padding: 0px">{{product.title}}</div>
-                                                </div>
-                                                <div class="w3-col s12 w3-padding-small paragraph block-with-text">{{product.to_do}}</div>
+                                            <div>
+                                                <div class="w3-row-padding" style="height:142px!important">
+                                                    <div class="w3-col s12 txt-destaque">
+                                                        <div class="titulo-tour-1" style="padding: 0px">{{product.title}}</div>
+                                                    </div>
+                                                    <div class="w3-col s12 w3-padding-small paragraph block-with-text">{{product.to_do}}</div>
 
-                                            </div>
-                                            <div class="w3-row w3-padding-small">
-                                                <div class="w3-col l6 m6 book-now-novo w3-margin-bottom">
-                                                    <div class="text-block-8">{% trans %}more_info{%endtrans%}</div>
                                                 </div>
-                                                <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}&locale={{app.request.getLocale}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
-                                                    <div class="text-block-8">{% trans %}book_now{%endtrans%}</div>
-                                                </a>
-                                                <div class="w3-col l6 m6 s5 desdept w3-right-align">{% trans %}from{%endtrans%}</div>
-                                                {% set price = product.price|length > 0 ? "%.2f"|format(product.price[0].price.amount/100) : '-/-' %}
-                                                <div class="w3-col l6 m6 s7 euros-pt w3-left-align">€
-                                                    {{price}}</div>
+                                                <div class="w3-row w3-padding-small">
+                                                    <div class="w3-col l6 m6 book-now-novo w3-margin-bottom">
+                                                        <button role="submit" class="btn-link text-block-8">{% trans %}more_info{%endtrans%}</button>
+                                                    </div>
+                                                    <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}&locale={{app.request.getLocale}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
+                                                        <div class="text-block-8">{% trans %}book_now{%endtrans%}</div>
+                                                    </a>
+                                                    <div class="w3-col l6 m6 s5 desdept w3-right-align">{% trans %}from{%endtrans%}</div>
+                                                    {% set price = product.price|length > 0 ? "%.2f"|format(product.price[0].price.amount/100) : '-/-' %}
+                                                    <div class="w3-col l6 m6 s7 euros-pt w3-left-align">€
+                                                        {{price}}</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </form>
+                                    {# </div> #}
+                                    {# </a> #}
                                 </div>
                             </div>
                         {% endif %}
@@ -220,7 +226,9 @@
                             <div class="w3-col l4 m6 s12" data-ix="new-interaction" style="padding-bottom:24px">
                                 <div class="w3-white w3-card w3-border w3-round-large">
                                     {% set text = product.title|replace({' ': '-'}) %}
-                                    <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
+                                    {# <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none"> #}
+                                    <form action="{{ path('activity', {text:text})}}" method="POST" style="text-decoration:none">
+                                        <input type="hidden" id="id" name="id" value="{{product.id}}"/>
                                         {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
                                         <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div>
                                         <div class="w3-row-padding" style="height:142px!important">
@@ -233,7 +241,8 @@
                                         </div>
                                         <div class="w3-row w3-padding-small">
                                             <div class="w3-col l6 m6 book-now-novo w3-margin-bottom">
-                                                <div class="text-block-8">{% trans %}more_info{%endtrans%}</div>
+                                                <button role="submit" class="btn-link text-block-8">{% trans %}more_info{%endtrans%}</button>
+                                                {# <div class="text-block-8">{% trans %}more_info{%endtrans%}</div> #}
                                             </div>
                                             <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}&locale={{app.request.getLocale}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
                                                 <div class="text-block-8">{% trans %}book_now{%endtrans%}</div>
@@ -243,7 +252,8 @@
                                             <div class="w3-col l6 m6 s7 euros-pt w3-left-align">€
                                                 {{price}}</div>
                                         </div>
-                                    </a>
+                                    </form>
+                                    {# </a> #}
                                 </div>
                             </div>
                         {# {% endif %} #}
