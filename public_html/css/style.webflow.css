@@ -24,6 +24,16 @@ h1 {
   background-image: linear-gradient(180deg, rgba(97, 57, 57, .5), rgba(97, 57, 57, .5));
 }
 
+.div-block-27 {
+  width: 10%;
+  height: 100px;
+  float: left;
+  background-image: url('../images/icons/seta-esquerda-05.svg');
+  background-position: 50% 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .section {
   height: 850px;
 }
