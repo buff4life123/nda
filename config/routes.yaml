@@ -574,7 +574,7 @@ activity:
         _locale: '%app_locales%'
     defaults:
         _locale: '%locale%'
-    methods:  [POST]
+    methods:  [POST,GET]
 
 
 page_detail:
