@@ -232,9 +232,9 @@ class FrontendController extends AbstractController
 		return new JsonResponse($response);	
     }
 
-	function activity(Request $request,  ExperienceApi $experience)
+	function activity($id, $text, Request $request,  ExperienceApi $experience)
 	{
-		$id = $request->request->get('id');
+
 
 
 		$em = $this->getDoctrine()->getManager();

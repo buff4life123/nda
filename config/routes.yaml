@@ -568,13 +568,12 @@ about_us:
 
 
 activity:
-    path: /{_locale}/activity/{text}
+    path: /{_locale}/activity/{id}/{text}
     controller: App\Controller\FrontendController::activity
     requirements:
         _locale: '%app_locales%'
     defaults:
         _locale: '%locale%'
-    methods:  [POST,GET]
 
 
 page_detail:
