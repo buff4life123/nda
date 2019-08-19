@@ -24,7 +24,7 @@ h1 {
   background-image: linear-gradient(180deg, rgba(97, 57, 57, .5), rgba(97, 57, 57, .5));
 }
 
-.btn-link {
+/* .btn-link {
   border: none;
   outline: none;
   background: none;
@@ -35,7 +35,7 @@ h1 {
   font-size: inherit;
   text-align: center;
   margin-top: 0px !important;
-}
+} */
 
 .div-block-27 {
   width: 10%;
