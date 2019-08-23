@@ -1,6 +1,8 @@
 <?php
 
 return array(
+    "water_sports"=>"Water Sports",
+    "at"=>"at",
     "try_again"=> "Try again",
     "we_send_photos" => "Welcome to NauticDrive, we send you the photos of your experience. The photos will be available until",
     "make_comment" => "Make your comment on",

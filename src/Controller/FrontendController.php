@@ -250,6 +250,7 @@ class FrontendController extends AbstractController
 			'url_api_key' => $products['url'],
 			'langCode' => $langCode,
 			'seo' => $this->getSeo($request),
+			'activity' => $text,
 		));
 
 	}

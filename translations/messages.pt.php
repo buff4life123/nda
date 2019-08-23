@@ -1,6 +1,8 @@
 <?php
 
 return array(
+    "water_sports"=>"Desportos Náuticos",
+    "at"=>"em",
     "try_again"=> "Tenta novamente",
     "we_send_photos" => "Bem-Vindo ao NauticDrive, enviamos por este meio as fotos da sua experiência. As fotos estarão disponíveis até dia",
     "make_comment" => "Faça o seu comentário no",

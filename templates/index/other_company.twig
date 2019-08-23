@@ -1,5 +1,21 @@
 {% extends 'index/base.html.twig' %}
 
+{% block meta %}
+   <meta name="description" content="{{seo.description}}">
+   <!-- Google / Search Engine Tags -->
+   <meta itemprop="name" content="{{seo.title}}">
+   <meta itemprop="description" content="{{seo.description}}">
+   <!-- Facebook Meta Tags -->
+   <meta property="og:url" content="{{company.getLinkMyDomain}}">
+   <meta property="og:title" content="{{seo.title}}">
+   <meta property="og:description" content="{{seo.description}}">
+   <!-- Twitter Meta Tags -->
+   <meta name="twitter:title" content="{{seo.title}}">
+   <meta name="twitter:description" content="{{seo.description}}">
+{% endblock %}
+
+{% block title %}Atlantic Quest & {{seo.title}}{% endblock %}
+
 {% block body %}
     {# WTFKKKKK SE REMOVER O INDEX NAO FUNCIONA #}
     {% include '/page/javascript.html' %}

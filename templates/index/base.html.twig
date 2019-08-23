@@ -11,20 +11,15 @@
           gtag('config', 'UA-141915434-1');
         </script>
 
+  {% block meta %}
         <meta charset="UTF-8">
         <meta content="summary" name="twitter:card">
         <meta content="width=device-width, initial-scale=1" name="viewport">
         <meta content="Webflow" name="generator">
         <meta name="keywords" content="{{seo.keywords}}">
-        <link rel="canonical" href="{{company.getLinkMyDomain}}/pt">
-        <link rel="alternate" hreflang="{{langCode}}" href="{{company.getLinkMyDomain}}">
-        <meta name="description" content="{{seo.description}}">
-        
         <meta name="robots" content="index,nofollow">
  		
  		<!-- Google / Search Engine Tags -->
-        <meta itemprop="name" content="{{seo.title}}">
-        <meta itemprop="description" content="{{seo.description}}">
         <meta itemprop="image" content="{{company.getLinkMyDomain}}/upload/gallery/f210acf07c12fc46a7457dbec347270c.png">
         
         <!-- Facebook Meta Tags -->
@@ -39,6 +34,11 @@
         <meta name="twitter:title" content="{{seo.title}}">
         <meta name="twitter:description" content="{{seo.description}}">
         <meta name="twitter:image" content="{{company.getLinkMyDomain}}/upload/gallery/f210acf07c12fc46a7457dbec347270c.png">
+  {% endblock %}
+        <link rel="canonical" href="{{company.getLinkMyDomain}}/pt">
+        <link rel="alternate" hreflang="{{langCode}}" href="{{company.getLinkMyDomain}}">
+        
+
         
         <title>{% block title %}{{seo.title}}{% endblock %}</title>
         
