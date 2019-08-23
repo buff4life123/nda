@@ -83,9 +83,6 @@
     "evenement/evenement": {
         "version": "v3.0.1"
     },
-    "eventviva/php-image-resize": {
-        "version": "1.6.8"
-    },
     "fig/link-util": {
         "version": "1.0.0"
     },
@@ -308,9 +305,6 @@
     "symfony/lock": {
         "version": "v4.2.3"
     },
-    "symfony/lts": {
-        "version": "4-dev"
-    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -486,15 +480,6 @@
             "branch": "master",
             "version": "3.3",
             "ref": "c72d107d077f1654428edaed69415d0228c1aefe"
-        }
-    },
-    "symfony/webpack-encore-pack": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "a2f276eff6e95ca94be135d2d3e5c1247c6f8807"
         }
     },
     "symfony/yaml": {
