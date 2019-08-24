@@ -19,6 +19,11 @@ class Seo
     private $id;
     /**
     * @ORM\Column(type="string", length=200)
+    * @Assert\NotBlank(message="page")
+    */
+    private $page;
+    /**
+    * @ORM\Column(type="string", length=200)
     * @Assert\NotBlank(message="title")
     */
     private $title;
@@ -76,6 +81,16 @@ class Seo
     public function setLocales(Locales $locales)
     {
         $this->locales = $locales;
+    }
+
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    public function setPage($page)
+    {
+        $this->page = $page;
     }
 
 }

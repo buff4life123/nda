@@ -12,6 +12,35 @@
         </script>
 
   {% block meta %}
+
+        {% if page == "activity" %}
+            <meta name="description" content='{{products[0].to_do}}'>
+            <!-- Google / Search Engine Tags -->
+            <meta itemprop="name" content="{{text}}">
+            <meta itemprop="description" content="{{products[0].to_do}}}}">
+            <!-- Facebook Meta Tags -->
+            <meta property="og:url" content="{{company.getLinkMyDomain}}/{{app.request.getLocale}}/activity/{{products[0].id}}/{{activity}}">
+            <meta property="og:title" content="{{text}}">
+            <meta property="og:description" content="{{products[0].to_do}}">
+            <!-- Twitter Meta Tags -->
+            <meta name="twitter:title" content="{{text}}">
+            <meta name="twitter:description" content="{{products[0].to_do}}">
+        
+        {% else %}
+            <meta name="description" content="{{seo.description}}">
+            <!-- Google / Search Engine Tags -->
+            <meta itemprop="name" content="{{seo.title}}">
+            <meta itemprop="description" content="{{seo.description}}">
+            <!-- Facebook Meta Tags -->
+            <meta property="og:url" content="{{company.getLinkMyDomain}}">
+            <meta property="og:title" content="{{seo.title}}">
+            <meta property="og:description" content="{{seo.description}}">
+            <!-- Twitter Meta Tags -->
+            <meta name="twitter:title" content="{{seo.title}}">
+            <meta name="twitter:description" content="{{seo.description}}">
+        {% endif %}
+
+
         <meta charset="UTF-8">
         <meta content="summary" name="twitter:card">
         <meta content="width=device-width, initial-scale=1" name="viewport">
