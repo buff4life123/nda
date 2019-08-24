@@ -457,13 +457,33 @@
                 limit: 12,
                 links: false,
                 after: function () {
-                    $('.multiple-item').slick({ 
+
+                    // 1- Get window width 
+                    var windowWidth = $(window).width();
+
+                    // 2- For all devices under or at 768px, use horizontal orientation
+                    if(windowWidth <= 768) {
+                    $('.multiple-item').slick({
+                        vertical: true,
+                        verticalSwiping:true,
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        autoplay: false,
+                        autoplaySpeed: 3000,
+                        arrows:false,
+                    });
+                    } 
+                    // 3- For all devices over 768px, use vertical orientation
+                    else {
+                    $('.multiple-item').slick({
                         slidesToShow: 3,
                         slidesToScroll: 3,
                         autoplay: false,
                         autoplaySpeed: 3000,
                         arrows:false,
                     });
+                    }
+
                 }
                 });
                 userFeed.run();

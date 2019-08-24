@@ -622,6 +622,7 @@ h1 {
 #atlantic-quest {
   height: 100%;
   width: 100%;
+  
   /* margin: 10px; */
   /* margin-bottom: 10px; */
   background-color: #000b3b;
@@ -5454,6 +5455,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   display: flex;
   flex-wrap: wrap;
   /* height: -webkit-fill-available; */
+
 }
 
 #instafeed a {
@@ -5472,6 +5474,8 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   object-fit: cover;
   position: absolute;
   width: 100%; */
+  /* width: 100% !important;
+  height: 100% !important; */
 }
 
 
@@ -5545,6 +5549,17 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
 }
 
 @media only screen and (max-width: 768px)  {
+
+  #instafeed img {
+    /* display: inline; */
+  
+    /* height: 100%;
+    object-fit: cover;
+    position: absolute;
+    width: 100%; */
+    width: 100% !important;
+    height: 100% !important;
+  }
 
   .section-5{
     display:none;
