@@ -1,8 +1,3 @@
-html, body { 
-
-  width: 100vw;
-}
-
 body {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   color: #333;
@@ -5873,4 +5868,9 @@ card-container.card {
   font-size: 30px;
   border-radius: 4px;
   text-transform: uppercase;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
