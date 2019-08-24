@@ -5549,11 +5549,11 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
 
 @media only screen and (max-width: 768px)  {
 
-  html, body, .navbar {
+  html, body, .container-nav {
     max-width: 100vw;
     overflow-x: hidden;
   }
-  
+
   .caption {
     opacity: 1 !important;
     height: auto !important;
