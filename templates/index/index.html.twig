@@ -29,13 +29,13 @@
     <div class="socialmedia-links" data-ix="social-interact">
         {%for name in social_network_icons %}
             {% if company.getLinksActive[loop.index0] == true %}
-                <div class="social-media-link w-inline-block w-clearfix" onclick="openWindow('{{company.getLinks[loop.index0]}}')">
+                <a class="social-media-link w-inline-block w-clearfix" href="{{company.getLinks[loop.index0]}}">
                     <div class="social-media-ico" style="background-image: url(../images/socialMedia/{{name}})"></div>
 
                     <div class="in-txt">
                         <div class="text-block-13">{{icon_text[loop.index0]}}</div>
                     </div>
-                </div>
+                </a>
             {%endif %}
         {% endfor %}
     </div>
@@ -411,7 +411,7 @@
                     <div class="footer-icons">
                         {%for name in social_network_icons %}
                             {% if company.getLinksActive[loop.index0] == true %}
-                                <div class="icone-footer w-inline-block" onclick="openWindow('{{company.getLinks[loop.index0]}}')" style="background-image: url(../images/socialMedia/{{name}})"></div>
+                                <a class="icone-footer w-inline-block" href="{{company.getLinks[loop.index0]}}" style="background-image: url(../images/socialMedia/{{name}})"></a>
                             {%endif %}
                         {% endfor %}
                     </div>
