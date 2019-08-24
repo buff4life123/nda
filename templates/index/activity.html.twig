@@ -2,7 +2,7 @@
 
 {% set text = activity|replace({'-': ' '}) %}
 
-{% block meta %}
+{# {% block meta %}
     <meta name="description" content='{{products[0].to_do}}'>
     <!-- Google / Search Engine Tags -->
     <meta itemprop="name" content="{{text}}">
@@ -14,7 +14,7 @@
     <!-- Twitter Meta Tags -->
    <meta name="twitter:title" content="{{text}}">
    <meta name="twitter:description" content="{{products[0].to_do}}">
-{% endblock %}
+{% endblock %} #}
 
 {% block title %} 
     {{text}} {% trans %}at{% endtrans %} {{company.name}} - Rocha Baixinha {% trans %}water_sports{% endtrans %}, Albufeira
