@@ -5484,6 +5484,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
   width: 500px !important;
   height: 354px !important;
   object-fit: cover !important;
+  margin: 0 27px;
 }
 
 #instafeed a div.footer {
