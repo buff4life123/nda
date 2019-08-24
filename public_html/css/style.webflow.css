@@ -5557,8 +5557,9 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     object-fit: cover;
     position: absolute;
     width: 100%; */
-    width: 100% !important;
-    height: 100% !important;
+    width: 394px !important;
+    height: 395px !important;
+    /* margin: 0px  10px !important; */
   }
 
   .section-5{
