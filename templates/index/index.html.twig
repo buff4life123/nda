@@ -22,7 +22,7 @@
         {% endfor %}
     </div>
 
-   <div class="other-link" data-ix="social-interact">
+   {# <div class="other-link" data-ix="social-interact">
         <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('other_company')}}'">
             <div class="social-media-ico" style="background-image: url(../images/icons/atlanticQuest.png)"></div>
 
@@ -30,7 +30,7 @@
                 <div class="text-block-13">Atlantic Quest </div>
             </div>
         </div> 
-   </div>
+   </div> #}
 
    {# <div class="photo-service-link" data-ix="social-interact">
         <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('photo_service')}}'">
@@ -254,6 +254,11 @@
             </div>
         </div>
 
+        <div id="atlantic-quest" onclick="window.location.href='{{path('other_company')}}'">
+            {# <div class="" style="background-image: url(../images/icons/atlanticQuest.png)"><h1> ATLANTIC QUEST<h1></div> #}
+            <div class="w3-center w3-margin"> <img src="../images/icons/atlanticQuest.png" alt="Atlantic Quest logo" width="auto" height="auto"> <h1 class="w3-show-inline-block">ATLANTIC QUEST</h1> </div>
+        </div> 
+
         {#TESTEMONIALS________________________________________________________________________________________________________________________________________________________________#}
         <div class="testemonials-algarve">
             <div class="algarve-tours w-slider" data-animation="slide" data-autoplay="1" data-delay="7000" data-duration="900" data-infinite="1">
@@ -341,13 +346,13 @@
             </div>
         </div>
 
-        <div>
-            <div class="inst-head">{%trans%}follow_us{%endtrans%}</div>
+        <div>  
             <!-- InstaWidget -->
-            <div class="bg-instagram"> <div class="instagram">
-                <div id="instafeed" class="multiple-item"></div>
-                
+            <div class="instagram">
+                <div class="inst-head">{%trans%}follow_us{%endtrans%}</div>
+                <div id="instafeed" class="multiple-item">
             </div>
+            
             </div>
             {#FOOTER________________________________________________________________________________________________________________________________________________________________#}
             <div class="footer">
@@ -453,8 +458,8 @@
                 links: false,
                 after: function () {
                     $('.multiple-item').slick({ 
-                        slidesToShow: 5,
-                        slidesToScroll: 1,
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
                         autoplay: false,
                         autoplaySpeed: 3000,
                         arrows:false,
