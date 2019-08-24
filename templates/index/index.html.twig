@@ -452,13 +452,13 @@
                     '<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img src="{% verbatim %}{{image}}{% endverbatim %}" /></a>' */
                     
                     sortBy: 'most-recent',
-                    limit: 12,
+                    limit: 10,
                     links: false,
                     after: function () {
 
                         $('.multiple-item').slick({
                             accessibility: false,
-                            arrow:false,
+                            arrows:false,
                             slidesToShow: 3,
                             slidesToScroll: 3,
                             autoplay: true,
