@@ -4812,6 +4812,7 @@ html.w-mod-js *[data-ix="dropdown-highlights"] {
     margin-top: 9px;
     font-size: 30px;
     line-height: 35px;
+    min-height: 70px;
   }
   .destaque-slogan {
     top: 0px;
