@@ -150,7 +150,7 @@
                                     <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
                                         {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
                                         {# <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div> #}
-                                        <img class="img-destaque" class="w3-round-top-large" style="height: auto;min-height:245px;" src="{{image}}" alt="{{product.title}}"> </img>  
+                                        <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> </img>  
 
                                         <div>
                                             <div class="w3-row-padding" style="height:142px!important">
@@ -249,7 +249,8 @@
                                     {% set text = product.title|replace({' ': '-'}) %}
                                     <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
                                         {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
-                                        <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div>
+                                        {# <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div> #}
+                                        <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> </img>  
                                         <div class="w3-row-padding" style="height:142px!important">
                                             <div class="w3-col s12 txt-destaque">
                                                 <div class="titulo-tour-1" style="padding: 0px">{{product.title}}</div>
