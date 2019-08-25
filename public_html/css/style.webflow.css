@@ -4555,8 +4555,14 @@ html.w-mod-js [data-ix=dropdown-highlights] {
     }
     .container-nav {
         width: 100%;
-        min-height: 70px
+        min-height: 93.75px;
+        background-image: linear-gradient(180deg, #000, transparent);
     }
+
+    .logo {
+        background-image: none !important;
+    }
+
     .brand {
         display: block;
         width: 100%;
@@ -5655,5 +5661,10 @@ card-container.card {
 }
 
 .img-activity  {
+    width: 100vw; object-fit: cover;
+}
+
+.logo {
+    background-image: linear-gradient(180deg, #000, transparent);
     width: 100vw; object-fit: cover;
 }

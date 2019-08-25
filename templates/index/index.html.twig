@@ -84,7 +84,10 @@
                     </a>
                 {% endif %}
                 {% set path = asset('/upload/gallery/')  %}
-                <a class="brand w-nav-brand" href="#" style="background-image: url({{path}}{{company.getLogo}})"></a>
+                <a class="brand w-nav-brand" href="#" >
+                {# style="background-image: url({{path}}{{company.getLogo}}) #}
+                    <img class="logo" alt="nauticdrive logo" src="{{path}}{{company.getLogo}}"></img>
+                </a>
 
                 <nav class="nav-menu w-nav-menu" role="navigation">
                     <a class="nav-link w-nav-link" href="#activities">{% trans %}activities{% endtrans %}</a>
@@ -150,7 +153,7 @@
                                     <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
                                         {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
                                         {# <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div> #}
-                                        <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> </img>  
+                                        <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}">
 
                                         <div>
                                             <div class="w3-row-padding" style="height:142px!important">
@@ -250,11 +253,11 @@
                                     <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
                                         {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
                                         {# <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div> #}
-                                        <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> </img>
+                                        <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> 
                                         {# <picture>
                                             {% set webp = image|replace({'jpeg': 'webp'}) %}
                                             <source srcset="{{webp}}" type="image/webp">
-                                            <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> </img>  
+                                            <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> 
                                         </picture> #}
                                         <div class="w3-row-padding" style="height:142px!important">
                                             <div class="w3-col s12 txt-destaque">
