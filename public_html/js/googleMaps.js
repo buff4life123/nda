@@ -73,3 +73,11 @@ function myMap() {
 
 myMap();
 
+
+$( window ).on( "load", function() { 
+
+  var images =  $( "#themap" ).find('img').attr("alt", "google maps api icon");
+  // var allListElements = $( ".gm-fullscreen-control" );
+  // console.log(allListElements);
+})
+
