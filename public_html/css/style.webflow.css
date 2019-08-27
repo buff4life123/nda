@@ -5369,6 +5369,11 @@ html.w-mod-js [data-ix=dropdown-highlights] {
 }
 
 @media only screen and (max-width:768px) {
+
+    .photo-service-header{
+        display: none;
+    }
+
     .section-5 {
         display: none
     }
@@ -5667,4 +5672,8 @@ card-container.card {
 .logo {
     background-image: linear-gradient(180deg, #000, transparent);
     width: 100vw; object-fit: cover;
+}
+
+.photo-service-header {
+    width: 100%;
 }

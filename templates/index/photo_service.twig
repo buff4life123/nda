@@ -1,7 +1,7 @@
 {% extends 'index/base.html.twig' %}
 {% block body %}
       <div class="section-fill-available bg-image flex-container">
-         <div class="topo-pag-tour w-clearfix ">
+         <div class="topo-pag-tour w-clearfix photo-service-header">
             <a href="{{path('index')}}">
                {% set path = asset('/upload/gallery/')  %}
                <div class="logo-e-gradiente" style="background-image: url({{path}}{{company.getLogo}}), linear-gradient(180deg,  #1a1a1a, transparent)"></div>
@@ -14,7 +14,7 @@
 
          <div class="photo-service-container">
             <div class="card card-container text-center"> 
-               <h1 class="text-uppercase"><strong>{% trans %}photo_service{% endtrans %}</strong></h1>
+               <h1 class="text-uppercase w3-text-blue"><strong>{% trans %}photo_service{% endtrans %}</strong></h1>
                <form id="photo-service">
                   <input type="text"  id="photo-service-code"  name="photo-service-code"  class="form-control" placeholder="{%trans%}insert_code{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="" value="{{code}}" autofocus="false">
                   <input type="text" id="photo-service-email" name="photo-service-email" class="form-control" placeholder="{%trans%}insert_email{%endtrans%}" pattern=".{5,}" required="" title="5 characters minimum" autofocus="" value="{{email}}" autofocus="false">
