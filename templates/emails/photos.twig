@@ -4,7 +4,7 @@
 <div style="padding:12px 8px">	
     <h4>{{translations["hello"]}} {{photoService.getName}}<br><br>
         {% set experationDate = 'now'|date_modify("+8 day") %}
-        {{translations["we_send_photos"]}}   {{ experationDate|date('d/m/Y') }}<br> 
+        {{translations["we_send_photos"]}}   {{ experationDate|date('d/m/Y') }}.<br> 
         <a target="_blank" href="https://www.nauticdrive-algarve.com/photo_service?c={{photoService.getFolder}}e={{photoService.getEmail}}&local={{photoService.getLocales.getName}}">
             {{translations["here"]}}
         </a><br><br><br>
