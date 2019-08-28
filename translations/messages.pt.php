@@ -2,7 +2,7 @@
 
 return array(
     "asking_info"=>"veio por este meio pedir informação.",  
-    "request_information"=>"Pedido de Informação:",  
+    "request_information"=>"Pedido de Informação",  
     "water_sports"=>"Desportos Náuticos",
     "at"=>"em",
     "try_again"=> "Tenta novamente",
