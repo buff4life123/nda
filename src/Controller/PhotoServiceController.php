@@ -287,52 +287,6 @@ class PhotoServiceController extends AbstractController
         return $err;
     }
 
-    private function personalizedNotice($action, $company, $photoService, $translations, $host)
-    {
-        if ($action == "photoServiceConfirmation"){
-
-            $subject = $translations["confirm_photos"];
- 
-            $emailMessage = '<h4>'.$translations["hello"] .'&ensp;' 
-                            . $photoService["name"] . ',<br>'
-                            .$translations["photos_coming_soon"]. '.<br><br>'
-                            .$translations["team"] .'&ensp;' 
-                            . $company->getName() .'.<br>
-                            <img src='. $host.'/upload/gallery/'.$company->getLogo() .'  style=" width:80px;">
-                            </h4>';
-            $sms    = str_replace(" ","+", $translations["photos_coming_soon"]);
-        }
-        else {
-            $expirationDate = date('d/m/Y', strtotime("+8 days"));
-            $domain  = $translations["domain"];
-            $message = $translations["sms_download"];
-            $subject = $translations["photos"];
-            $tripAdvisorUrl = "https://www.tripadvisor".$domain."/UserReviewEdit-g189112-d13795619-Nauticdrive-Albufeira_Faro_District_Algarve.html";
-            $PhotoServiceUrl = "https://www.nauticdrive-algarve.com/photo_service?c="
-                                .$photoService->getFolder()."e=".$photoService->getEmail()."&local=".$photoService->getLocales()->getName()."";
-            $emailDownloadUrl ='<a target="_blank" href="'.$PhotoServiceUrl.'">'.$translations["here"] .'</a>'; //$translator->trans('here',array(), 'messages', $local)
-            
-            $sms    = str_replace(" ","+", $message." ".$PhotoServiceUrl);
-            $emailMessage =    '<h4>'.$translations["hello"] .'&ensp;' . $photoService->getName() . '<br><br>'
-                        .$translations["we_send_photos"] .'&ensp;' . $expirationDate. '.<br>
-                        '.$emailDownloadUrl.'<br><br><br>'
-                        .$translations["make_comment"].'&ensp;' .
-                        '<a target="_blank" href="https://www.tripadvisor.com/UserReviewEdit-g189112-d13795619-Nauticdrive-Albufeira_Faro_District_Algarve.html">tripadvisor</a>.<br>
-                        '.$translations["at_your_disposal"].'<br>'
-                        .$translations["visit"].'&ensp;' .'<a target="_blank" href="https://www.nauticdrive-algarve.com">nauticdrive-algarve.com</a>.<br>
-                        '.$translations["team"] .'&ensp;' . $company->getName() .'.<br>
-                        <img src='. $host.'/upload/gallery/'.$company->getLogo() .'  style=" width:80px;">
-                        </h4>';
-        }
-
-        $notice = array($emailMessage,  $subject);
-
-        return $notice = array(
-            'sms'     => $sms,
-            'email'   => $notice,
-        );
-    }
-
     private function photosTranslation($translator, $locale)
     {   
         return array('hello' => $translator->trans('hello',array(), 'messages', $locale),

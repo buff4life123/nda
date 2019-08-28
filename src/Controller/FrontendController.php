@@ -502,6 +502,11 @@ class FrontendController extends AbstractController
         }
         else
 		{
+			$fields = ["name"=>$name,"email"=>$email,"telephone"=>$telephone,
+			"local"=> $request->request->get('your-local'),"message"=>$information];
+		
+			$translations = $this->emailTranslation($translator, $locale);
+
 			$transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
             ->setUsername($company->getEmail())
             ->setPassword($company->getEmailPass());
@@ -514,20 +519,14 @@ class FrontendController extends AbstractController
             ->setFrom([$company->getEmail() => $company->getName()])
             ->setTo([$request->request->get('contact_email') => $request->request->get('contact_name'), $company->getEmail() => $company->getName() ])
             ->addPart($subject, 'text/plain')
-            ->setBody(
-                $this->renderView(
-                    'emails/emailContact-'.$locale.'.html.twig',
-                    array(
-                        'name' => $name,
-                        'email' => $email,
-                        'telephone' => $telephone,
-                        'message' => $information,
-                        'logo' => $this->getHost($request).'/upload/gallery/'.$company->getLogo(),
-                    )
-                ),
-                'text/html'
-            );
-            $send = $mailer->send($message);
+			->setBody(
+				$this->renderView(
+					'emails/contact.twig',array('company' => $company, 'fields' => $fields, 'translations' => $translations,
+					'logo' => $request->getHost().'/upload/gallery/'.$company->getLogo(),)
+				),
+				'text/html'
+			);
+			$send = $mailer->send($message);
         }
         
         
@@ -542,6 +541,20 @@ class FrontendController extends AbstractController
         return new JsonResponse($response);
         
     }
+
+	private function emailTranslation($translator, $locale)
+	{   
+		return array('hello' => $translator->trans('hello',array(), 'messages', $locale),
+				  'name' => $translator->trans('name',array(), 'messages', $locale),
+				  'email' => $translator->trans('email',array(), 'messages', $locale),
+				  'telephone' => $translator->trans('telephone',array(), 'messages', $locale),
+				  'message' => $translator->trans('message',array(), 'messages', $locale),
+				  'team' => $translator->trans('team',array(), 'messages', $locale),
+				  'asking_info' => $translator->trans('asking_info',array(), 'messages', $locale),
+				  'info_details' => $translator->trans('info_details',array(), 'messages', $locale),
+				  'info_request' => $translator->trans('info_request',array(), 'messages', $locale),                  
+		);
+	}
 
     private function noFakeEmails($email)
 	{

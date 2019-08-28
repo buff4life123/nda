@@ -1,6 +1,8 @@
 <?php
 
 return array(
+    "asking_info"=>"veio por este meio pedir informação.",  
+    "info_details"=>"Detalhes Pedido de Informação:",  
     "water_sports"=>"Desportos Náuticos",
     "at"=>"em",
     "try_again"=> "Tenta novamente",
