@@ -142,7 +142,7 @@ class FrontendController extends AbstractController
 		}
 
 		return $this->render('index/photo_service.twig',  array(
-			//'page' => 'about_us',
+			'page' => 'photo_service',
 			'company' => $company,
 			'rgpd' => $rgpd,
 			'terms_conditions' => $terms_conditions,
