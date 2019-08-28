@@ -2,7 +2,7 @@
 
 return array(
     "asking_info"=>"came here to ask for information.",
-    "info_details"=>"Details Request for Information:",  
+    "info_details"=>"Request for Information Details:",  
     "water_sports"=>"Water Sports",
     "at"=>"at",
     "try_again"=> "Try again",
@@ -46,7 +46,7 @@ return array(
     </ul>
     ',
     'company_name'=> 'NAUTICDRIVE - Watersports Activities at Rocha Baixinha Beach, Albufeira',
-    'email' => 'email',
+    'email' => 'Email',
     'follow_social_network' => 'Follow us on our social network ', 
      'prices' => 'Prices ', 
     'dependent' => 'Dependent ',
