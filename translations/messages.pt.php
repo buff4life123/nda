@@ -6,7 +6,7 @@ return array(
     "try_again"=> "Tenta novamente",
     "we_send_photos" => "Bem-Vindo ao NauticDrive, enviamos por este meio as fotos da sua experiência. As fotos estarão disponíveis até dia",
     "make_comment" => "Faça o seu comentário no",
-    "at_your_disposal" => "Estamos a sua disposição para novas experiências.",
+    "at_your_disposal" => "Estamos a sua disposição para novas experiências",
     "visit" => "Visite-nos em",
     "team" => "Equipa",
     "photos"=> "Fotografias",

@@ -28,7 +28,6 @@ class FileUploader
 	public function uploads($files, $folder)
 	{	
 		foreach($files as $file) {
-
 			// generate a unique name for the file before saving it
 			$fileName = md5(uniqid()) . '.' .$file->guessExtension();
 			

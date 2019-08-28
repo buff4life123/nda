@@ -108,14 +108,18 @@ class PhotoServiceController extends AbstractController
         $uploadedFiles = $request->files->get("files");
 
         $zipResult = $fileUploader->createZip($uploadedFiles, $folderPath, false, $dechex);
-        $fileName = $fileUploader->uploads($uploadedFiles, $photoService->getFolder()); 
-        
-        $translations = $this->noticeTranslation($translator, $photoService->getLocales()->getName());
 
+       $fileUploader->uploads($uploadedFiles, $photoService->getFolder()); 
+        
+        $photosTranslation = $this->photosTranslation($translator, $photoService->getLocales()->getName());
+
+        $PhotoServiceUrl = "https://www.nauticdrive-algarve.com/photo_service?c=".$photoService->getFolder()."e=".$photoService->getEmail()."&local=".$photoService->getLocales()->getName();
+        
         if($zipResult){
-            $notice = $this->personalizedNotice('photoServiceAdd', $company, $photoService, $translations, $host);
-            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $notice["sms"]);
-            $this->sendEmail("photoServiceAdd", $locale, $company, $photoService, $notice["email"]);
+            $sms    = str_replace(" ","+", $photosTranslation["sms_download"]." ".$PhotoServiceUrl);
+            $smsXML = $enjoyapi -> sendSMS($photoService->getTelephone(), $sms);
+
+            $this->sendEmail("photoServiceAdd", $locale, $company, $photoService, $photosTranslation, $host, $request);
         }
 
         $response = array(
@@ -159,11 +163,9 @@ class PhotoServiceController extends AbstractController
 
             return new JsonResponse($response);
         }
-        $translations = $this->noticeTranslation($translator, $photoService->getLocales()->getName());
-        $notice = $this->personalizedNotice('photoServiceResendEmail',$company, $photoService, $translations, $host);
+        $photosTranslation = $this->photosTranslation($translator, $photoService->getLocales()->getName());
         
-        
-        $this->sendEmail("photoServiceResendEmail", $locale, $company, $photoService, $notice["email"]);
+        $this->sendEmail("photoServiceResendEmail", $locale, $company, $photoService, $photosTranslation, $host, $request);
 
         $response = array(
             'status' => 1,
@@ -190,10 +192,12 @@ class PhotoServiceController extends AbstractController
                                 );
                                 
         $local  = $photoService["locales"] == 1? "en":"pt";
-        $translations = $this->noticeTranslation($translator, $local);
-        $notice = $this->personalizedNotice('photoServiceConfirmation', $company, $photoService, $translations, $host);
-        $smsXML = $enjoyapi -> sendSMS($photoService["telephone"], $notice["sms"]);
-        $this->sendEmail("photoServiceConfirmation", $locale, $company, $photoService, $notice["email"]);
+        $photosTranslation = $this->photosTranslation($translator, $local);
+    
+        $sms    = str_replace(" ","+", $photosTranslation["photos_coming_soon"]);
+        $smsXML = $enjoyapi -> sendSMS($photoService["telephone"], $sms);
+
+        $this->sendEmail("photoServiceConfirmation", $locale, $company, $photoService, $photosTranslation, $host, $request);
 
         $response = array(
             'status' => 1,
@@ -329,7 +333,7 @@ class PhotoServiceController extends AbstractController
         );
     }
 
-    private function noticeTranslation($translator, $locale)
+    private function photosTranslation($translator, $locale)
     {   
         return array('hello' => $translator->trans('hello',array(), 'messages', $locale),
                      'we_send_photos' => $translator->trans('we_send_photos',array(), 'messages', $locale),
@@ -346,26 +350,25 @@ class PhotoServiceController extends AbstractController
             );
     }
     
-    private function sendEmail($action, $locale, $company, $photoService, $notice) {
-
+    private function sendEmail($action, $locale, $company, $photoService, $translations, $host, $request) {
             $userMail = array();
+            $template = "";
 
             $contacts = $action == "photoServiceConfirmation"?$photoService["contacts"]:$photoService->getContacts();
             $userEmail = $action == "photoServiceConfirmation"?$photoService["email"]:$photoService->getEmail();
             $userName = $action == "photoServiceConfirmation"?$photoService["name"]:$photoService->getName();
 
-            if($contacts){
+            if ($action == "photoServiceConfirmation") {
+                $template = "photosConfirmation";
+                $userMail = $contacts;
 
-                if ($action == "photoServiceConfirmation") {
-                    $userMail = $contacts;
-                } else {
+            } else {
+                $template = "photos";
+                foreach($contacts as $emailToUser){
+                    array_push($userMail, $emailToUser->getEmail());
 
-                    foreach($contacts as $emailToUser){
-                        array_push($userMail, $emailToUser->getEmail());
-    
-                    }
                 }
-
+                
             }
 
             $transport = (new \Swift_SmtpTransport($company->getEmailSmtp(), $company->getEmailPort(), $company->getEmailCertificade()))
@@ -374,15 +377,14 @@ class PhotoServiceController extends AbstractController
 
             $mailer = new \Swift_Mailer($transport);
 
-            //dd($notice);
-            $message = (new \Swift_Message($notice[1]))
+            $message = (new \Swift_Message($translations["photos"]))
                 ->setFrom([$company->getEmail() => $company->getName()])
                 ->setBcc($userMail)
-                ->setTo([$userEmail => $userName, "nauticdrive.fotos@gmail.com" => $company->getName()]) //$company->getEmail2() nauticdrive.fotos@gmail.com
-                ->addPart($notice[1], 'text/plain')
+                ->setTo([$userEmail => $userName, "roman.bajireanu@intouchbiz.com" => $company->getName()]) //$company->getEmail2() nauticdrive.fotos@gmail.com roman.bajireanu@intouchbiz.com
+                ->addPart( $translations["photos"], 'text/plain')
                 ->setBody(
                     $this->renderView(
-                        'emails/photoService-email.twig',array('email' => $notice[0])
+                        'emails/'.$template.'.twig',array('company' => $company,'photoService' => $photoService,'translations' =>  $translations,'logo' => $request->getHost().'/upload/gallery/'.$company->getLogo())
                     ),
                 'text/html'
             );
