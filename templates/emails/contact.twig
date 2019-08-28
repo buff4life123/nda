@@ -4,7 +4,6 @@
 <div style="padding:12px 8px">	
     <img src="{{logo}}" style="margin-top: -52px; width:80;">
     <h4>{{translations["hello"]}}, {{fields["name"]}} {{translations["asking_info"]}}</h4>
-    {{translations["info_details"]}}<br>
     <hr>
     <p>
     <b>{{translations["name"]}}</b>:{{fields["name"]}}<br>
@@ -13,8 +12,8 @@
     <b>{{translations["message"]}}</b>: {{fields["message"]}}<br>
     <hr>
     </p>
-    <p style=" text-transform: capitalize;">
-    {{translations["team"]}}, {{company.getName}}.
+    <p>
+    {{translations["team"]}}, {{company.getName|capitalize}}.
     </p>
 </div>
 </div>

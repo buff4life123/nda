@@ -2,7 +2,7 @@
 
 return array(
     "asking_info"=>"came here to ask for information.",
-    "info_details"=>"Request for Information Details:",  
+    "info_details"=>"Details:",  
     "water_sports"=>"Water Sports",
     "at"=>"at",
     "try_again"=> "Try again",
