@@ -380,7 +380,7 @@ class PhotoServiceController extends AbstractController
             $message = (new \Swift_Message($translations["photos"]))
                 ->setFrom([$company->getEmail() => $company->getName()])
                 ->setBcc($userMail)
-                ->setTo([$userEmail => $userName, "roman.bajireanu@intouchbiz.com" => $company->getName()]) //$company->getEmail2() nauticdrive.fotos@gmail.com roman.bajireanu@intouchbiz.com
+                ->setTo([$userEmail => $userName, "nauticdrive.fotos@gmail.com" => $company->getName()]) //$company->getEmail2() nauticdrive.fotos@gmail.com roman.bajireanu@intouchbiz.com
                 ->addPart( $translations["photos"], 'text/plain')
                 ->setBody(
                     $this->renderView(
