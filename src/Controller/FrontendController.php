@@ -551,7 +551,7 @@ class FrontendController extends AbstractController
 				  'message' => $translator->trans('message',array(), 'messages', $locale),
 				  'team' => $translator->trans('team',array(), 'messages', $locale),
 				  'asking_info' => $translator->trans('asking_info',array(), 'messages', $locale),
-				  'info_details' => $translator->trans('info_details',array(), 'messages', $locale),
+				  'request_information' => $translator->trans('request_information',array(), 'messages', $locale),
 				  'info_request' => $translator->trans('info_request',array(), 'messages', $locale),                  
 		);
 	}
