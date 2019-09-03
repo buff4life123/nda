@@ -1,0 +1,564 @@
+{% extends 'index/base.html.twig' %}
+
+{% block title %}{{seo.title}}{% endblock %}
+
+{% block body %}
+
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "nauticdrive",
+        "url": "https://nauticdrive-algarve.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Water Sports Center - Nautic Drive",
+            "addressRegion": "Albufeira",
+            "postalCode": "8200",
+            "addressCountry": "PT"
+        },
+        "sameAs": [
+        "https://facebook.com/nauticdrive",
+        "https://twitter.com/Nauticdrive",
+        "https://linkedin.com/in/nauticdrive-fal%C3%A9sia-07a91730",
+        "https://instagram.com/nauticdrive",
+        "https://tripadvisor.pt/Attraction_Review-g189112-d13795619-Reviews-Nauticdrive-Albufeira_Faro_District_Algarve.html",
+        "https://youtube.com/channel/UCw87Qfs70kiFdgH3f7Ovapw"
+        ]
+    }
+    </script>
+
+    {% set icon_text   = ['facebook', 'tripadvisor', 'twitter', 'instagram', 'linkedin', 'youtube', 'behance', 'snapchat', 'pinterest'] %}
+
+    {#SOCIAL MEDIA________________________________________________________________________________________________________________________________________________________________#}
+    {# <div class="w3-overlay"></div> #}
+    <div class="socialmedia-links" data-ix="social-interact">
+        {%for name in social_network_icons %}
+            {% if company.getLinksActive[loop.index0] == true %}
+                <a class="social-media-link w-inline-block w-clearfix" href="{{company.getLinks[loop.index0]}}">
+                    <div class="social-media-ico" style="background-image: url(../images/socialMedia/{{name}})"></div>
+
+                    <div class="in-txt">
+                        <div class="text-block-13">{{icon_text[loop.index0]}}</div>
+                    </div>
+                </a>
+            {%endif %}
+        {% endfor %}
+    </div>
+
+   {# <div class="other-link" data-ix="social-interact">
+        <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('other_company')}}'">
+            <div class="social-media-ico" style="background-image: url(../images/icons/atlanticQuest.png)"></div>
+
+            <div class="in-txt">
+                <div class="text-block-13">Atlantic Quest </div>
+            </div>
+        </div> 
+   </div> #}
+
+   {# <div class="photo-service-link" data-ix="social-interact">
+        <div class="social-media-link w-inline-block w-clearfix" onclick="window.location.href='{{path('photo_service')}}'">
+            <div class="social-media-ico" style="background-image: url(../images/photoService.png)"></div>
+
+            <div class="in-txt">
+                <div class="text-block-13 w3-hide txt-hover">{% trans %}photo_service{% endtrans %} </div>
+            </div>
+        </div> 
+    </div> #}
+
+   
+    {#NAV AND SLIDER AND HIGHLIGHTS________________________________________________________________________________________________________________________________________________________________#}
+    <div
+        class="header">
+        {#nav________________________________________________________________________________________________________________________________________________________________#}
+        <div class="navbar w-nav" data-animation="default" data-collapse="medium" data-duration="400">
+            <div class="container-nav w-clearfix">
+
+                {% if app.request.getLocale() == 'pt' %}
+                    <a href="{{path('translation',{lang:'en',page:page}) }}" class="language w-inline-block">
+                        <div class="text-block">EN</div>
+                    </a>
+                {% else %}
+                    <a href="{{path('translation',{lang:'pt',page:page}) }}" class="language w-inline-block">
+                        <div class="text-block">PT</div>
+                    </a>
+                {% endif %}
+                {% set path = asset('/upload/gallery/')  %}
+                <a class="brand w-nav-brand" href="#" >
+                {# style="background-image: url({{path}}{{company.getLogo}}) #}
+                    <img class="logo" alt="nauticdrive logo" src="{{path}}{{company.getLogo}}"></img>
+                </a>
+
+                <nav class="nav-menu w-nav-menu" role="navigation">
+                    <a class="nav-link w-nav-link" href="#activities">{% trans %}activities{% endtrans %}</a>
+
+                    <a class="nav-link w-nav-link" href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0&locale={{app.request.getLocale}}" target="_blank">{% trans %}booking{% endtrans %}</a>
+
+                    <a class="nav-link w-nav-link" href="{{path('about_us')}}" >{% trans %}aboutUs{% endtrans %}</a>
+
+                    <a class="nav-link w-nav-link" href="#contact">{% trans %}contact{% endtrans %}</a>
+                </nav>
+                <div class="menu-button w-nav-button">
+                    <div class="icon w-icon-nav-menu"></div>
+                </div>
+            </div>
+        </div>
+       {# {{dump(banner)}} #}
+        {#slider________________________________________________________________________________________________________________________________________________________________#}
+        <div class="header-slider w-slider" data-animation="over" data-autoplay-limit="29000" data-autoplay="1" data-delay="10000" data-duration="1000" data-infinite="1">
+            <div class="w-slider-mask">
+     
+                {%for banner in banners %}
+                    {% if banner.isActive %}
+                        {# {% set webp = banner.image|replace({'jpeg': 'webp'}) %} #}
+                        <div class="slider-item w-slide" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), transparent 33%), url(../upload/banner/{{banner.image}})">
+                            <div class="div-block-5 w-clearfix">
+                                <div class="free-transport-ini-pt"></div>
+                                <div class="destaque-slogan">
+                                    {% if banner.textIsActive %}
+                                        <h1 class="heading-6">{{banner.translation}}</h1>
+                                    {% endif %}
+                                    {# <h1 class="heading-7">{% trans %}h3_2_sub_head{%endtrans%}</h1> #}
+                                    {# <p class="paragraph-5">{% trans %}h3_3_txt{%endtrans%}</p> #}
+                                    <a href="{{url_api_key}}shop?api_key={{exp_api_key}}&product=0&locale={{app.request.getLocale}}" target="_blank" class="boto-destaque-1 w-button">{% trans %}book_now{%endtrans%}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="left-arrow-2 w-slider-arrow-left">
+                <div class="w-icon-slider-left"></div>
+            </div>
+            <div class="right-arrow-2 w-slider-arrow-right">
+                <div class="w-icon-slider-right"></div>
+            </div>
+            <div class="slide-nav-2 w-slider-nav w-round"></div>
+        </div>
+
+        {#highlights________________________________________________________________________________________________________________________________________________________________#}
+        <div class="activities-highlights">
+
+            <div class="activities-highlights-content">
+                <div class="w3-row-padding" style="margin-top:-48px">
+
+                    {%for product in products %}
+                        {# {% if  loop.index0 < 3 %} #}
+                        {% if  (product.id == 41) or (product.id == 101) or (product.id == 102) %}
+
+                            <div class="w3-col l4 m12 s12" data-ix="new-interaction" style="padding-bottom:24px">
+
+                                <div class="w3-white w3-card w3-border w3-round-large">
+                                    {% set text = product.title|replace({' ': '-'}) %}
+                                    <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
+                                        {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
+                                        {# <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div> #}
+                                        <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}">
+
+                                        <div>
+                                            <div class="w3-row-padding" style="height:142px!important">
+                                                <div class="w3-col s12 txt-destaque">
+                                                    <div class="titulo-tour-1" style="padding: 0px">{{product.title}}</div>
+                                                </div>
+                                                <div class="w3-col s12 w3-padding-small paragraph block-with-text">{{product.to_do}}</div>
+
+                                            </div>
+
+                                            <div class="w3-row w3-padding-small">
+                                                <div class="w3-col l6 m6 book-now-novo w3-margin-bottom">
+                                                    <div class="text-block-8">{% trans %}more_info{%endtrans%}</div>
+                                                </div>
+                                                <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}&locale={{app.request.getLocale}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
+                                                    <div class="text-block-8">{% trans %}book_now{%endtrans%}</div>
+                                                </a>
+                                                <div class="w3-col l6 m6 s5 desdept w3-right-align">{% trans %}from{%endtrans%}</div>
+                                                {% set price = product.price|length > 0 ? "%.2f"|format(product.price[0].price.amount/100) : '-/-' %}
+                                                <div class="w3-col l6 m6 s7 euros-pt w3-left-align">€{{price}}</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {#ACTIVITIES SLIDER________________________________________________________________________________________________________________________________________________________________#}
+    <div class="slideshowtours">
+        <div class="slider-2 w-slider" data-animation="over" data-duration="1000" data-infinite="1">
+            <div class="mask w-slider-mask">
+
+                {% set imagelooper = 1 %}
+
+                {%for product in products %}
+
+                    {% set imagelooper = imagelooper +1 %}
+
+                    {% set imagelooper = loop.index >= 7 ?  0 : false %}
+
+                    {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
+                    <div class="slide-tour-{{loop.index}}-home slider-activities w-slide" style="background-image:url({{image}}), linear-gradient(180deg, rgba(138, 132, 201, .5), rgba(138, 132, 201, .5))">
+                        <div class="activities-layer">
+                            <div class="div-block-7">
+                                <h2 class="heading-8">{{product.title}}</h2>
+                                <p class="paragraph-6 block-with-text">{{product.to_do}}</p>
+                                {% set text = product.title|replace({' ': '-'}) %}
+                                <a href="{{path('activity', {id:product.id, text:text}) }}" class="button-slider-1 w-button">{%trans%}more_info{%endtrans%}</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+            <div class="left-arrow w-slider-arrow-left">
+                <div class="w-icon-slider-left"></div>
+            </div>
+            <div class="right-arrow w-slider-arrow-right">
+                <div class="icon-2 w-icon-slider-right"></div>
+            </div>
+            <div class="w-slider-nav w-round"></div>
+        </div>
+    </div>
+    {#ABOUT AND PRODUCTS________________________________________________________________________________________________________________________________________________________________#}
+    <div
+        class="all-activities-container" id="activities">
+
+        {#aboutus________________________________________________________________________________________________________________________________________________________________#}
+        <div class="txt-intro-tours">
+            <h1 class="heading-4">{% trans %}activities{%endtrans%}</h1>
+            <h3 class="heading-5">{% trans %}about_activities{%endtrans%}</h3>
+
+        </div>
+
+        {#all activities________________________________________________________________________________________________________________________________________________________________#}
+        <div class="pag-tours">
+
+            <div class="all-activities-items">
+
+                <div class="w3-row-padding">
+
+                    {%for product in products %}
+                   {#   {% if  loop.index0 > 2 and loop.index0 < 13 %} #}
+
+                            <div class="w3-col l4 m6 s12" data-ix="new-interaction" style="padding-bottom:24px">
+                                <div class="w3-white w3-card w3-border w3-round-large">
+                                    {% set text = product.title|replace({' ': '-'}) %}
+                                    <a href="{{path('activity', {id:product.id, text:text}) }}" style="text-decoration:none">
+                                        {% set image = product.image|length > 0 ? product.image[0].images : 'https://experienceware.eu/uploads/products/no_prod.jpeg' %}
+                                        {# <div class="img-destaque" class="w3-round-top-large" style="background-image:url({{image}})"></div> #}
+                                        <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> 
+                                        {# <picture>
+                                            {% set webp = image|replace({'jpeg': 'webp'}) %}
+                                            <source srcset="{{webp}}" type="image/webp">
+                                            <img class="img-destaque img-activity" src="{{image}}" alt="{{product.title}}"> 
+                                        </picture> #}
+                                        <div class="w3-row-padding" style="height:142px!important">
+                                            <div class="w3-col s12 txt-destaque">
+                                                <div class="titulo-tour-1" style="padding: 0px">{{product.title}}</div>
+                                            </div>
+                                            <div class="w3-col s12 w3-padding-small paragraph block-with-text ">
+                                                    {{product.to_do}}
+                                            </div>
+                                        </div>
+                                        <div class="w3-row w3-padding-small">
+                                            <div class="w3-col l6 m6 book-now-novo w3-margin-bottom">
+                                                <div class="text-block-8">{% trans %}more_info{%endtrans%}</div>
+                                            </div>
+                                            <a href="{{url_api_key}}product?api_key={{exp_api_key}}&product={{product.id}}&locale={{app.request.getLocale}}" target="_blank" class="w3-col l6 m6 book-now-novo w3-margin-bottom" style="text-decoration:none">
+                                                <div class="text-block-8">{% trans %}book_now{%endtrans%}</div>
+                                            </a>
+                                            <div class="w3-col l6 m6 s5 desdept w3-right-align">{% trans %}from{%endtrans%}</div>
+                                            {% set price = product.price|length > 0 ? "%.2f"|format(product.price[0].price.amount/100) : '-/-' %}
+                                            <div class="w3-col l6 m6 s7 euros-pt w3-left-align">€
+                                                {{price}}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        {# {% endif %} #}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div id="atlantic-quest" onclick="window.location.href='{{path('other_company')}}'">
+            <div class="w3-center w3-margin w3-card w3-border w3-round-large" style="background-color: #000b3b;"> <img class="w3-margin" src="../images/icons/atlanticQuest.png" alt="Atlantic Quest logo" width="auto" height="auto"> <h1 class="w3-margin w3-show-inline-block">ATLANTIC QUEST</h1> </div>
+        </div> 
+
+        {#TESTEMONIALS________________________________________________________________________________________________________________________________________________________________#}
+        <div class="testemonials-algarve">
+            <div class="algarve-tours w-slider" data-animation="slide" data-autoplay="1" data-delay="7000" data-duration="900" data-infinite="1">
+                <div class="w-slider-mask">
+                    <div class="algarve-tours w-slide">
+                        <div class="div-block-8">
+
+                            <br><br><h3 class="heading-10">&quot;{% trans %}key_title{%endtrans%}&quot;</h3><br>
+                            <p class="paragraph-7"><br>{% trans %}key_text{%endtrans%}</p>
+
+                            <div class="div-block-9"></div>
+                        </div>
+                    </div>
+                    <div class="algarve-tours w-slide">
+                        <div class="div-block-8">
+
+                            <br><br><h3 class="heading-10">&quot;{% trans %}focus_title{%endtrans%}&quot;</h3><br>
+                            <p class="paragraph-7">{% trans %}focus_text{%endtrans%}</p>
+
+                            <div class="div-block-9"></div>
+                        </div>
+                    </div>
+                    <div class="algarve-tours w-slide">
+                        <div class="div-block-8">
+
+                            <br><br><h3 class="heading-10">&quot;{% trans %}ambition_title{%endtrans%}&quot;</h3><br>
+                            <p class="paragraph-7"><br>{% trans %}ambition_text{%endtrans%}</p>
+
+                            <div class="div-block-9"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-slider-arrow-left">
+                    <div class="w-icon-slider-left"></div>
+                </div>
+                <div class="w-slider-arrow-right">
+                    <div class="w-icon-slider-right"></div>
+                </div>
+                <div class="slide-nav-3 w-slider-nav w-round"></div>
+            </div>
+        </div>
+
+        {#GOOGLE MAPS________________________________________________________________________________________________________________________________________________________________#}
+        {% set getCoordsGoogleMaps = company.getCoordsGoogleMaps|split('\n') %}
+        <div id="themap" class="map" data-company-name='{{company.name}}' data-coords="{{getCoordsGoogleMaps[0]}}" data-coords2="{{getCoordsGoogleMaps[1]}}"></div>
+
+        {#CONTACT FORM________________________________________________________________________________________________________________________________________________________________#}
+        <div class="form-contact" id="contact">
+            <div class="activities-wrapper-form w-clearfix">
+
+                <div class="txt-contacto">
+                    <h4 class="heading-2">{%trans%}contact_us{%endtrans%}</h4>
+                    <h4 class="heading-3">{%trans%}here_to_help{%endtrans%}</h4>
+                    <p class="paragraph-3">{%trans%}any_doubts{%endtrans%}</p>
+                </div>
+
+                <div class="form">
+                    <form id="formContact">
+                        <label class="w3-left" style="text-transform:uppercase">{%trans%}name{%endtrans%}</label>
+                        <label class="contact_name w3-text-red w3-hide w3-right"></label>
+                        <input type="text" class="text-field-2 w-input" id="contact_name" name="contact_name" placeholder="{%trans%}name{%endtrans%}">
+
+                        <label class="w3-left" style="text-transform: uppercase">email</label>
+                        <label class="contact_email w3-text-red w3-hide w3-right"></label>
+                        <input type="text" class="text-field-2 w-input" id="contact_email" name="contact_email" placeholder="Email">
+
+                        <label class="w3-left" style="text-transform: uppercase">{%trans%}telephone{%endtrans%}</label>
+                        <label class="contact_telephone w3-text-red w3-hide w3-right"></label>
+                        <input type="text" class="text-field-2 w-input" id="contact_telephone" name="contact_telephone" placeholder="{%trans%}telephone{%endtrans%}">
+
+                        <label class="w3-left" for="contact_message" style="text-transform: capitalize">{%trans%}message{%endtrans%}</label>
+                        <label class="contact_message w3-text-red w3-hide w3-right"></label>
+                        <textarea class="w3-large w3-input w3-round w3-border" rows="5" id="contact_message" name="contact_message" placeholder="{%trans%}message{%endtrans%}"></textarea>
+
+                        <div class="w3-col l6 m6 book-now-novo w3-margin-bottom" onclick="formContact()">
+                            <div class="text-block-8" id="">{%trans%}submit{%endtrans%}</div>
+                        </div>
+
+                        <div class="w3-padding-large pull-left">
+                            <label class="contact_success w3-text-green w3-hide w3-left"></label>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            <!-- InstaWidget -->
+            <div class="instagram">
+                <div class="heading-2 w3-center">{%trans%}follow_us{%endtrans%}</div>
+                <div id="instafeed" class="multiple-item ">
+            </div>
+            
+            </div>
+            {#FOOTER________________________________________________________________________________________________________________________________________________________________#}
+            <div class="footer">
+
+                <div class="footer-info">
+                    <div class="footer-esq w-clearfix">
+                        <div class="logo-footer" style="background-image: url(../upload/gallery/{{company.getLogo}})"></div>
+                        <div class="txt-info-footer">
+                            <div class="text-block-2">{{company.getAddresses|nl2br}}</div>
+                            
+                            <div class="text-block-3">
+                                {{company.getTelephones | replace({"\n":"|"})}}
+                            </div>
+                            <div class="text-block-4">
+                                {{company.getEmails|nl2br}} 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-dir">
+                        <div class="info-boarding">
+
+                                <div id="TA_selfserveprop952" class="TA_selfserveprop">
+                                    <ul id="vLAhCUW6Ibc" class="TA_links Om9iRT830ZC">
+                                        <li id="QZ1KBMJm4ISR" class="w2c1O9S">
+                                            <a target="_blank" href="https://tripadvisor.pt/">
+                                                <img src="https://tripadvisor.pt/img/cdsi/img2/branding/150_logo-11900-2.png" alt="TripAdvisor"/>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <script async src="https://jscache.com/wejs?wtype=selfserveprop&amp;uniq=952&amp;locationId=13795619&amp;lang={{app.request.getLocale()}}&amp;rating=true&amp;nreviews=4&amp;writereviewlink=true&amp;popIdx=false&amp;iswide=true&amp;border=false&amp;display_version=2;" data-loadtrk onload="this.loadtrk=true"></script>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="icones-social">
+                    <div class="text-block-19">{%trans%}follow_social_network{%endtrans%}</div>
+                    <div class="footer-icons">
+                        {%for name in social_network_icons %}
+                            {% if company.getLinksActive[loop.index0] == true %}
+                                <a class="icone-footer w-inline-block" href="{{company.getLinks[loop.index0]}}" style="background-image: url(../images/socialMedia/{{name}})"></a>
+                            {%endif %}
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+
+                <div class="icones-social">
+                    <div class="footer-sponsors">
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/rnt.png)"> </div>
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/supalbufeira.png)"> </div>
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/patrocinadorAlbufeira.jpg)"> </div>
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/turismoDePortugal.jpg)"> </div>
+                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/atlanticquest.png)"> </div>
+                        {# <div class="sponsor-footer w-inline-block" style="background-image: url(../images/turismoDePortugal.jpg)"> </div> #}
+                    </div>
+                </div>
+             
+                <div class="footer-dir-local w-clearfix">
+                    {# <div class="text-block-5 more-info">
+                        <div class="logo-footer-sub logo-pad" style="background-image: url(../images/rnt.png)"> </div>
+                        <div class="logo-footer-sub logo-pad" style="background-image: url(../images/supalbufeira.png)"> </div>
+                        <div class="logo-footer-sub logo-pad" style="background-image: url(../images/patrocinadorAlbufeira.jpg)"> </div>
+                        <div class="logo-footer-sub logo-pad" style="background-image: url(../images/turismoDePortugal.jpg)"> </div>
+                        
+                    </div> #}
+                    <div class="footer-conditions text-block-5">
+                    <a class="w-inline-block more-info" href="#" onclick="modalGDPR('{{rgpd.getName}}','{{rgpd.getRgpdHtml}}')">  {%trans%}gdpr{%endtrans%}</a>
+                    <a class="w-inline-block more-info" href="#" onclick="modalTermosCondicoes('{{terms_conditions.getName}}','{{terms_conditions.getTermsHtml}}')">  {%trans%}terms_cond{%endtrans%}</a>
+                    </div>
+                    {# <div class="text-block-5"></div> #}
+
+                    <div class="text-block-7" id="footer-fullyear">{{company.name}}</div>
+                </div>
+
+            </div>
+
+            <script>
+
+                {# $( ".photo-service-link").hover(
+                function() {
+                    $(".txt-hover").removeClass("w3-hide");
+                    
+                },
+                function () {
+                    $(".txt-hover").addClass("w3-hide");
+                }
+                ); #}
+
+                var userFeed = new Instafeed({
+                    get: 'user',
+                    userId: '2098052822',
+                    clientId: 'a8b951370a7a47cb89bfda0236df6e56',
+                    accessToken: '2098052822.1677ed0.d5a6d493401c48e6aa9c6e0a517bfd60',
+                    resolution: 'standard_resolution',
+                    template: '<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img alt="instagram publication" src="{% verbatim %}{{image}}{% endverbatim %}"/> <div class="footer"><div class="caption">{% verbatim %}{{caption}}{% endverbatim %}</div></div></a>',
+                    /*'<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img src="{% verbatim %}{{image}}{% endverbatim %}"/><div class="footer"><div class="caption">{% verbatim %}{{caption}}{% endverbatim %}</div><div class="user"><img src="{% verbatim %}{{model.user.profile_picture}}{% endverbatim %}"/><span>{% verbatim %}{{model.user.username}}{% endverbatim %}</span></div></div></a>',
+                    '<a href="{% verbatim %}{{link}}{% endverbatim %}" target="_blank" id="{% verbatim %}{{id}}{% endverbatim %}"><img src="{% verbatim %}{{image}}{% endverbatim %}" /></a>' */
+                    
+                    sortBy: 'most-recent',
+                    limit: 10,
+                    links: false,
+                    after: function () {
+
+                        $('.multiple-item').slick({
+                            accessibility: false,
+                            arrows:false,
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            autoplay: true,
+                            autoplaySpeed: 3000,
+                            dots: true,
+                            responsive: [{
+                                breakpoint: 479,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    autoplaySpeed: 6000,
+                                }
+                            }]
+                        });
+                    }
+                });
+                userFeed.run();
+                    
+                function formContact() {
+                    $('.w3-text-red.w3-right').addClass('w3-hide');
+                    $('.w3-overlay').show()
+                    setTimeout(function () {
+                        $.ajax({
+                            url: "{{ path('send_email') }}",
+                            type: "POST",
+                            data: $('#formContact').serialize(),
+                            success: function (data) {
+                                $('.w3-overlay').hide()
+                                if (data.status == 1) {
+                                    $('.contact_success').removeClass('w3-hide').html('{% trans %}page_detail.contacts.form.success{% endtrans %}');
+                                    setTimeout(function () {
+                                        $('.contact_success').addClass('w3-hide')
+                                    }, 10000);
+                                } else if (data.status == 0) {
+                                    for (var k in data.data) 
+                                        $('.' + data.data[k]).removeClass('w3-hide').html('{% trans %}page_detail.contacts.form.required{% endtrans %}');
+                                    
+
+
+                                } else {
+                                    for (var k in data.data) 
+                                        $('.' + data.data[k]).removeClass('w3-hide').html('{% trans %}page_detail.contacts.form.invalid{% endtrans %}');
+                                    
+
+
+                                }
+                            },
+                            error: function (data) {
+                                $('.w3-overlay').hide()
+                                $('#modal-error').removeClass('w3-hide')
+                            }
+                        })
+                    }, 500)
+                }
+            </script>
+
+        {% endblock body %}
+
+        {% block javascripts %}
+            <script src="https://maps.googleapis.com/maps/api/js?key={{company.GoogleMapsApiKey}}"></script>
+            <script src='js/googleMaps.js'></script>
+            <script src='js/main.js'></script>
+            <script src="js/webflow.js" type="text/javascript"></script>
+        {% endblock %}
+
+
+        
