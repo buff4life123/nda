@@ -32,6 +32,11 @@ class ProductDescriptionTranslationType extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'title']
             ))
+            // ->add('seo_description', TextareaType::class,array(
+            //     'label'=> 'SEO Description',
+            //     'required' => false,
+            //     'attr' => ['class' => 'w3-input w3-border w3-white','placeholder'=>'text...']
+            // ))
         ;
     }
     

@@ -27,6 +27,11 @@ class ProductDescriptionTranslation
     */
     private $name;
     /**
+     * @ORM\Column(type="text")
+     */
+    private $seo_description;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="product_description_translation") 
      */
     private $product;
@@ -66,6 +71,17 @@ class ProductDescriptionTranslation
     {
         $this->html = $html;
     }
+
+    public function getSeoDescription()
+    {
+        return $this->seo_description;
+    }
+
+    public function setSeoDescription($seo_description)
+    {
+        $this->seo_description = $seo_description;
+    }
+
     public function getLocales()
     {
         return $this->locales;
