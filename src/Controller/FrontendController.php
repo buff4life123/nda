@@ -529,7 +529,6 @@ class FrontendController extends AbstractController
 			$send = $mailer->send($message);
         }
         
-        
         $response = array(
             'status' => 1,
             'message' => 'all valid',
@@ -539,7 +538,6 @@ class FrontendController extends AbstractController
 		);
         
         return new JsonResponse($response);
-        
     }
 
 	private function emailTranslation($translator, $locale)

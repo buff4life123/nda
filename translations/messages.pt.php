@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    "cookies_message"=>"Este site utiliza cookies. Ao navegar no site estará a consentir a sua utilização.",
+    "cookies_link"=>"Saiba mais sobre o uso de cookies.",
+    "cookies_dismiss"=>"Aceitar",
+    
     "asking_info"=>"veio por este meio pedir informação.",  
     "request_information"=>"Pedido de Informação",  
     "water_sports"=>"Desportos Náuticos",

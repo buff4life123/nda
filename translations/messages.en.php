@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    "cookies_message"=>"This website uses cookies to ensure you get the best experience on our website.",
+    "cookies_link"=>"Know more about cookies.",
+    "cookies_dismiss"=>"Got it !",
+
     "asking_info"=>"came here to ask for information.",
     "request_information"=>"Request for Information",  
     "water_sports"=>"Water Sports",

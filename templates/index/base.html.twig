@@ -78,6 +78,7 @@
             <link href="{{ asset('css/style.webflow.css') }}" rel="stylesheet" type="text/css">
             <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet"/>
             <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
+            <link href="{{ asset('css/cookieconsent.min.css') }}" rel="stylesheet"/>
 
 
         {% endblock %}
@@ -92,6 +93,19 @@
                     families: ["Varela:400", "Montserrat Subrayada:regular,700", "Barlow:200,200italic,300,300italic,regular,italic,500,600,700,800,900"]
                 }
             });
+
+            window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+            "palette": {
+                "popup":{"background":"rgba(214,209,156,0.85)","text":"#333"},
+                "button":{"background":"#3f51b5","text":"#FFF"}},
+                "content": {"message": "{% trans %}cookies_message{% endtrans %}",
+                "dismiss": "{% trans %}cookies_dismiss{% endtrans %}",
+                "link": "{% trans %}cookies_link{% endtrans %}",
+                "href": "https://cookiesandyou.com/"
+            }
+            })
+            })
         </script>
 
 
@@ -101,6 +115,7 @@
         <script src="{{ asset('js/instafeed.min.js') }}"></script>
         <script src="{{ asset('assets/js/parsley/highlight.min.js') }}"></script>
         <script src="{{ asset('assets/js/parsley/parsley.min.js') }}"></script>
+        <script src="{{ asset('js/cookieconsent.min.js') }}"></script>
     </head>
     
     {% include 'index/modals.html' %}
