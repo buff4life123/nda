@@ -49,6 +49,7 @@ class FrontendController extends AbstractController
 		$terms_conditions = $em->getRepository(TermsConditions::class)->findOneBy(['locales' => $this-> defaultUserLocale($request)]);
 
 		$social_network_icons = $this-> fileFinder("../public_html/images/socialMedia/");
+		$partners = $this-> fileFinder("../public_html/images/company/sponsors/");
 		//$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
 		$banners = $em->getRepository(Banner::class)->findAll();
 
@@ -74,7 +75,8 @@ class FrontendController extends AbstractController
 			'exp_api_key' => $products['key'],
 			'url_api_key' => $products['url'],
 			'langCode' => $langCode,
-		
+			'partners' => $partners,
+			
 		));
 			
 	}

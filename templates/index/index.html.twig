@@ -437,12 +437,9 @@
 
                 <div class="icones-social">
                     <div class="footer-sponsors">
-                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/rnt.png)"> </div>
-                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/supalbufeira.png)"> </div>
-                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/patrocinadorAlbufeira.jpg)"> </div>
-                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/turismoDePortugal.jpg)"> </div>
-                        <div class="sponsor-footer w-inline-block" style="background-image: url(../images/sponsors/atlanticquest.png)"> </div>
-                        {# <div class="sponsor-footer w-inline-block" style="background-image: url(../images/turismoDePortugal.jpg)"> </div> #}
+                        {% for name in partners %}
+                            <div class="sponsor-footer w-inline-block" style="background-image: url({{asset ('images/company/sponsors/' ~ name ~ '') }})"> </div>
+                        {% endfor %}  
                     </div>
                 </div>
              
