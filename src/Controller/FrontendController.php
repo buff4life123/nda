@@ -51,7 +51,7 @@ class FrontendController extends AbstractController
 		$social_network_icons = $this-> fileFinder("../public_html/images/socialMedia/");
 		$partners = $this-> fileFinder("../public_html/images/company/sponsors/");
 		//$header_slider_items  = $this-> fileFinder("../public_html/images/headerSlider");
-		$banners = $em->getRepository(Banner::class)->findAll();
+		$banners = $em->getRepository(Banner::class)->findBy(array(), array('orderBy' => 'ASC'));
 
 		foreach($banners as $banner) {
 			$bs[]  = ['image'=>$banner->getImage(),
