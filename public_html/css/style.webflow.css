@@ -5674,5 +5674,4 @@ card-container.card {
     width: 100vw; object-fit: cover;
 }
 
-.photo-service-header {
-}
+.cc-btn,.cc-link{height:48px!important}
