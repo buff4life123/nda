@@ -8,6 +8,11 @@ use Money\Money;
 class MoneyType extends Type
 {
 	const MONEY = 'money';
+
+	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+	{
+		return true;
+	}
 	
 	public function getName()
 	{
