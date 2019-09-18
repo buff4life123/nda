@@ -380,7 +380,8 @@ class SubmenuController extends AbstractController
                     'active' => $submenu->getActive(),
                     'order_by' => $submenu->getOrderBy(),
                     'locales_translated' => $t,
-                    'menu' => $submenu->getMenu()->getCurrentTranslation($locale)
+                    'menu' => $submenu->getMenu()->getCurrentTranslation($locale),
+                    'menu_is_active' => $submenu->getMenu()->getActive()
                 );
             }
         }

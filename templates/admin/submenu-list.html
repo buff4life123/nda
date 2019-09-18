@@ -41,6 +41,7 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
     </thead>
     <tbody>
       {% for c in submenus %}
+      {% if c.menu_is_active == true %}
       <td class="grab">{{c.order_by}}</td>
       <td class="w3-hide">{{c.id}}</td>
       <td class="w3-center">
@@ -63,7 +64,7 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
         <td class="w3-center">
           {{c.menu}}
         </td>
-        {% for locale in locales%}
+        {% for locale in locales %}
         <td>
           {% for translated in c.locales_translated %}
             {% if locale.id == translated.local_id %}
@@ -73,6 +74,7 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
         </td>
         {% endfor %}
       </tr>
+    {% endif %}
     {% endfor %}
     </tbody>
     <tfoot class="w3-sand">
@@ -80,9 +82,9 @@ table.dataTable thead > tr > th {padding-left: 8px!important}
         <td></td>
         <td class="w3-hide"></td>
         <td></td>
-        {% for locale in locales%}
+        {% for locale in locales %}
         <td></td>
-        {% endfor%}
+        {% endfor %}
         <td></td>
       </tr>
     </tfoot>
