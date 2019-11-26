@@ -107,6 +107,7 @@ class PhotoServiceController extends AbstractController
         $folderPath = $this->photo_service_directory.'/'.$photoService->getFolder().'.zip';
         $uploadedFiles = $request->files->get("files");
 
+
         $zipResult = $fileUploader->createZip($uploadedFiles, $folderPath, false, $dechex);
 
        $fileUploader->uploads($uploadedFiles, $photoService->getFolder()); 
@@ -338,7 +339,7 @@ class PhotoServiceController extends AbstractController
                 ->addPart( $translations["photos"], 'text/plain')
                 ->setBody(
                     $this->renderView(
-                        'emails/'.$template.'.twig',array('company' => $company,'photoService' => $photoService,'translations' =>  $translations,'logo' => $request->getHost().'/upload/gallery/'.$company->getLogo())
+                        'emails/'.$template.'.twig',array('company' => $company,'photoService' => $photoService,'translations' => $translations,'logo' => $request->getHost().'/upload/gallery/'.$company->getLogo())
                     ),
                 'text/html'
             );
